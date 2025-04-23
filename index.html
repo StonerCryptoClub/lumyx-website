@@ -3,13 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agency</title>
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://assets.calendly.com https://cdn.jsdelivr.net https://code.jquery.com https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    frame-src 'self' https://calendly.com;
+    connect-src 'self' https://ctvmeagzyszekbljtuwm.supabase.co wss://ctvmeagzyszekbljtuwm.supabase.co;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    img-src 'self' data: https:;
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), bluetooth=(), midi=(), notifications=()">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+  
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1361608738369835');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1361608738369835&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Required Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Configuration -->
+  <script src="js/config.js"></script>
+  <!-- Database Client -->
+  <script src="js/supabase-client.js"></script>
+  
+  <!-- Primary Meta Tags -->
+  <title>Lumyx Agency - Digital Marketing & Web Development Services</title>
+  <meta name="title" content="Lumyx Agency - Digital Marketing & Web Development Services">
+  <meta name="description" content="Transform your digital presence with Lumyx Agency. Expert web development, digital marketing, and SEO services to help your business grow online.">
+  <meta name="keywords" content="digital marketing, web development, SEO services, digital agency, web design, content marketing, social media marketing">
+  <meta name="author" content="Lumyx Agency">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lumyxagency.com/">
+  <meta property="og:title" content="Lumyx Agency - Digital Marketing & Web Development Services">
+  <meta property="og:description" content="Transform your digital presence with Lumyx Agency. Expert web development, digital marketing, and SEO services to help your business grow online.">
+  <meta property="og:image" content="https://lumyxagency.com/images/og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lumyxagency.com/">
+  <meta property="twitter:title" content="Lumyx Agency - Digital Marketing & Web Development Services">
+  <meta property="twitter:description" content="Transform your digital presence with Lumyx Agency. Expert web development, digital marketing, and SEO services to help your business grow online.">
+  <meta property="twitter:image" content="https://lumyxagency.com/images/og-image.jpg">
+
+  <!-- Additional SEO Meta Tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="generator" content="Lumyx Agency">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://lumyxagency.com/">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Lumyx Agency",
+      "url": "https://lumyxagency.com",
+      "logo": "https://lumyxagency.com/images/logo.png",
+      "description": "Digital marketing and web development agency specializing in creating powerful online presence for businesses.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-XXX-XXX-XXXX",
+        "contactType": "customer service"
+      },
+      "sameAs": [
+        "https://www.facebook.com/lumyxagency",
+        "https://www.twitter.com/lumyxagency",
+        "https://www.linkedin.com/company/lumyxagency"
+      ]
+    }
+  </script>
+
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <!-- FullCalendar CSS -->
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet' />
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Configuration -->
+  <script src="js/config.js"></script>
+  <!-- Database Client -->
+  <script src="js/supabase-client.js"></script>
   <style>
     /* Base color variables */
     :root {
@@ -206,7 +315,7 @@
       position: fixed;
       width: 100%;
       background: rgba(0, 0, 0, 0.95);
-      padding: 20px;
+      padding: 8px 10px 8px 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
@@ -214,51 +323,29 @@
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      will-change: background-color, padding;
-      transform: translateZ(0);
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, 
-        rgba(255,165,0,0.2) 0%,
-        rgba(255,215,0,0.2) 50%,
-        rgba(255,165,0,0.2) 100%);
-      background-size: 200% 100%;
-      animation: gradientMove 3s ease infinite;
-      z-index: -1;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
     header.scrolled {
-      background: rgba(0,0,0,0.98);
-      padding: 15px;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
     header .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      position: relative;
+      margin-left: -5px;
     }
-    header .logo::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: linear-gradient(45deg, #FFA500, #FFD700);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
+    header .logo img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      margin-right: -50px;
+      position: relative;
+      z-index: 2;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 1; }
+    header .logo:hover img {
+      transform: scale(1.05);
     }
     header .logo h1 {
       font-size: 1.8rem;
@@ -266,32 +353,27 @@
       color: #ffffff;
       position: relative;
       letter-spacing: 0.5px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    header .logo h1::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary-orange), transparent);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-    header .logo:hover h1::after {
-      transform: scaleX(1);
+      z-index: 1;
     }
     header nav {
       display: flex;
       gap: 30px;
+      padding-right: 30px;
     }
     header nav a {
       color: #ffffff;
+      text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
       position: relative;
-      padding: 5px 0;
+      padding: 3px 0;
       transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    header nav a.active {
+      color: #ffffff;
     }
     header nav a::before {
       content: '';
@@ -302,9 +384,6 @@
       height: 2px;
       background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
       transition: width 0.3s ease;
-    }
-    header nav a:hover {
-      color: var(--primary-orange);
     }
     header nav a:hover::before {
       width: 100%;
@@ -320,6 +399,8 @@
       justify-content: center;
       text-align: center;
       padding: 0 20px;
+      will-change: transform;
+      transform: translateZ(0);
     }
     #home::before {
       content: '';
@@ -486,8 +567,32 @@
       padding: 100px 20px 60px;
     }
     section {
-      padding: 80px 0;
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .section-divider {
+      display: none;
+    }
+    .section-title {
+      font-size: 3rem;
       text-align: center;
+      margin-bottom: 50px;
+      color: #ffffff;
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--complementary-blue), var(--complementary-blue-light));
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(47, 69, 255, 0.3);
     }
     h2 {
       margin-bottom: 60px;
@@ -500,16 +605,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 100%;
     }
     h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: var(--primary-orange);
+      display: none;
     }
 
     /* About Us Section Styles */
@@ -610,110 +710,132 @@
     }
 
     /* Services Section */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 30px;
-      padding: 20px;
-    }
-    .service-item {
-      background: rgba(30, 30, 30, 0.8);
+    .services-section {
+        padding: 80px 40px;
+        background: rgba(32, 32, 32, 0.85);
+        border-radius: 30px;
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 165, 0, 0.2);
+        margin: 60px auto;
+        max-width: 1400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                    0 0 30px rgba(47, 69, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-card {
+        background: rgba(45, 45, 45, 0.7);
+        border-radius: 25px;
       padding: 40px;
-      border-radius: 15px;
+        margin: 20px;
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+                    0 0 20px rgba(47, 69, 255, 0.05);
     }
-    .service-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(47, 69, 255,0.1), rgba(255, 107, 47,0.1));
-      opacity: 0;
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        background: rgba(50, 50, 50, 0.8);
+        border: 1px solid rgba(255, 165, 0, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
+                    0 0 30px rgba(255, 165, 0, 0.2);
+    }
+
+    .process-container {
+        background: rgba(41, 46, 66, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        margin-top: 30px;
+        border: 1px solid rgba(47, 69, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+                    0 0 20px rgba(47, 69, 255, 0.05);
       transition: all 0.3s ease;
     }
-    .service-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      border-color: var(--primary-orange);
+
+    .process-container:hover {
+        border-color: rgba(47, 69, 255, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15),
+                    0 0 25px rgba(47, 69, 255, 0.15);
     }
-    .service-item:hover::before {
-      opacity: 1;
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 20px;
     }
+
     .service-icon {
-      width: 80px;
-      height: 80px;
-      background: rgba(47, 69, 255,0.1);
+        width: 60px;
+        height: 60px;
+        background: rgba(47, 69, 255, 0.1);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 25px;
+        border: 2px solid var(--complementary-blue);
+        box-shadow: 0 0 15px rgba(47, 69, 255, 0.3);
       transition: all 0.3s ease;
     }
-    .service-item:hover .service-icon {
-      transform: scale(1.1);
-      background: var(--primary-orange);
+
+    .service-icon:hover {
+        box-shadow: 0 0 25px rgba(47, 69, 255, 0.5);
+        transform: scale(1.05);
     }
+
     .service-icon i {
-      font-size: 2rem;
-      color: var(--primary-orange);
-      transition: all 0.3s ease;
-    }
-    .service-item:hover .service-icon i {
+        font-size: 24px;
       color: var(--complementary-blue);
     }
-    .service-item h3 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      color: #fff;
+
+    .service-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
     }
-    .service-item p {
-      color: rgba(255,255,255,0.8);
+
+    .service-description {
+        color: rgba(255, 255, 255, 0.8);
       margin-bottom: 25px;
       line-height: 1.6;
     }
-    .service-details {
-      margin-top: auto;
-    }
-    .service-details ul {
+
+    .service-features {
       list-style: none;
-      margin-bottom: 25px;
+        padding: 0;
     }
-    .service-details ul li {
+
+    .service-features li {
+        margin: 12px 0;
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      color: rgba(255,255,255,0.8);
+        color: rgba(255, 255, 255, 0.9);
     }
-    .service-details ul li i {
+
+    .service-features li i {
       color: var(--complementary-blue);
+        margin-right: 10px;
+        font-size: 16px;
+        text-shadow: 0 0 8px rgba(47, 69, 255, 0.3);
     }
-    .service-process {
-      background: rgba(47, 69, 255,0.1);
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-    .service-process h4 {
-      color: var(--primary-orange);
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-    }
-    .service-process ol {
-      list-style-position: inside;
-      color: rgba(255,255,255,0.8);
-    }
-    .service-process ol li {
-      margin-bottom: 8px;
+
+    @media (max-width: 768px) {
+        .services-section {
+            padding: 40px 20px;
+            margin: 30px 15px;
+        }
+        
+        .service-card {
+            padding: 30px;
+            margin: 15px;
+        }
+        
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 10px;
+        }
     }
 
     /* Portfolio Section */
@@ -1111,14 +1233,42 @@
       color: var(--primary-orange);
     }
     .calendar-container {
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
-      background: rgba(255,255,255,0.03);
-      padding: 40px;
-      border-radius: 15px;
-      border: 1px solid rgba(255, 165, 0, 0.2);
       width: 100%;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+    }
+
+    #calendly-container {
+      background: var(--bg-dark);
+      transition: all 0.3s ease;
+      width: 100%;
+      height: 750px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .calendar-container {
+        padding: 10px;
+        margin: 1rem auto;
+      }
+      
+      #calendly-container {
+        height: 650px;
+      }
+    }
+
+    /* Add custom styles for the Calendly iframe */
+    .calendly-inline-widget {
+      height: 100% !important;
+      min-width: 320px;
     }
     .day-selection {
       flex: 1;
@@ -1196,8 +1346,9 @@
       transition: all 0.3s ease;
       text-align: center;
       font-size: 1.1rem;
+      opacity: 1;
     }
-    .time-slot:hover {
+    .time-slot:hover:not(.booked) {
       background: rgba(47, 69, 255,0.2);
       border-color: var(--primary-orange);
     }
@@ -1206,10 +1357,10 @@
       border-color: transparent;
     }
     .time-slot.booked {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.1);
-      cursor: not-allowed;
       opacity: 0.5;
+      cursor: not-allowed;
+      background: rgba(42, 42, 42, 0.8);
+      border: 1px solid rgba(255, 165, 0, 0.2);
     }
     .booking-confirmation {
       margin-top: 40px;
@@ -1664,6 +1815,7 @@
         transition: right 0.3s ease;
         backdrop-filter: blur(10px);
         z-index: 99;
+        will-change: right;
       }
       
       header nav.active {
@@ -1907,9 +2059,467 @@
       background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.05));
       pointer-events: none;
     }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      color: var(--primary-orange);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .modal-content .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .modal-content input {
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .modal-content input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .modal-content button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
+      color: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    }
+
+    .modal-content .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-content .close-modal:hover {
+      color: var(--primary-orange);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Admin Panel Styles */
+    .admin-panel {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .admin-panel h3 {
+      color: #1E90FF;
+      border-bottom: 2px solid #1E90FF;
+      padding-bottom: 10px;
+    }
+    .admin-panel button {
+      background: #1E90FF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px 0;
+      width: 100%;
+    }
+    .admin-panel button:hover {
+      background: #00CED1;
+    }
+    .subscriber-list {
+      margin-top: 20px;
+    }
+    .subscriber-item {
+      background: #f9f9f9;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+    .stats-box {
+      background: #E5F3FF;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+
+    /* Add this to your existing styles section */
+    .contact-btn {
+      background: linear-gradient(45deg, var(--primary-orange), var(--primary-orange-light));
+      color: var(--text-light);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+    }
+
+    .contact-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--complementary-blue), var(--complementary-blue-light));
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    .contact-btn:hover::before {
+      left: 0;
+    }
+
+    .contact-btn span {
+      position: relative;
+      z-index: 2;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-btn:hover span {
+      transform: scale(1.05);
+    }
+
+    .contact-btn:active {
+      transform: translateY(2px);
+    }
+
+    /* Calendly Container Styles */
+    .scheduling-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .scheduling-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .scheduling-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, var(--primary-orange), var(--primary-orange-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .scheduling-header p {
+        font-size: 1.2rem;
+        color: #ffffff;
+        opacity: 0.9;
+    }
+
+    #calendly-container {
+        background: var(--bg-dark);
+        transition: all 0.3s ease;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .scheduling-container {
+            padding: 20px 10px;
+        }
+
+        .scheduling-header h2 {
+            font-size: 2rem;
+        }
+
+        .scheduling-header p {
+            font-size: 1rem;
+        }
+
+        #calendly-container {
+            height: 600px;
+        }
+    }
+
+    /* Add these styles to your existing CSS */
+    .scheduling-section #calendly-container {
+        margin-top: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .scheduling-section #calendly-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 768px) {
+        .scheduling-section #calendly-container {
+            height: 600px !important;
+            margin: 20px -10px;
+            border-radius: 10px;
+        }
+    }
+
+    .process-title {
+        color: var(--complementary-blue);
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(47, 69, 255, 0.3);
+    }
+
+    .process-container ol {
+        list-style-position: inside;
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0;
+    }
+
+    .process-container ol li {
+        margin: 10px 0;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-section {
+        padding: 80px 40px;
+        background: rgba(32, 32, 32, 0.85);
+        border-radius: 30px;
+        backdrop-filter: blur(10px);
+        margin: 60px auto;
+        max-width: 1400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                    0 0 30px rgba(47, 69, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
   </style>
+  <!-- Add these in the head section -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+    import { addSubscriber, addBooking, getSubscribers, exportSubscribersToCSV, getBookedTimes } from './js/database.js'
+    
+    // Make functions available globally
+    window.addBooking = addBooking;
+    window.addSubscriber = addSubscriber;
+    window.getSubscribers = getSubscribers;
+    window.exportSubscribersToCSV = exportSubscribersToCSV;
+    window.getBookedTimes = getBookedTimes;
+  </script>
+  <!-- Add these in the head section -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+  <!-- Initialize Supabase -->
+  <script>
+      // Initialize Supabase client
+      const supabaseUrl = 'https://ctvmeagzyszekbljtuwm.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0dm1lYWd6eXN6ZWtibGp0dXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5NTQ5NzcsImV4cCI6MjAyNjUzMDk3N30.2jvxMxPPbvPHqyxDmXX6GbRz_JJVGaB2FK1YAS5N9Ow';
+  
+      window.supabaseJs = supabaseJs;
+  </script>
+
+  <!-- Initialize Calendly -->
+  <script>
+      window.onload = function() {
+          console.log('Initializing Calendly widget...');
+          Calendly.initInlineWidget({
+              url: 'https://calendly.com/cadenbuiting6/30min',
+              parentElement: document.getElementById('calendly-container'),
+              prefill: {},
+              utm: {},
+              styles: {
+                  height: '100%'
+              }
+          });
+          console.log('Calendly widget initialized');
+      }
+
+      // Handle Calendly booking events
+      window.addEventListener('calendly.event_scheduled', async function(e) {
+          console.log('Calendly event scheduled:', e.data);
+          const event = e.data.payload.event;
+          const invitee = e.data.payload.invitee;
+          
+          // Format date and time
+          const eventDate = new Date(event.start_time);
+          const bookingData = {
+              email: invitee.email,
+              name: invitee.name,
+              phone: invitee.phone || null,
+              date: eventDate.toISOString().split('T')[0],
+              time: eventDate.toLocaleTimeString('en-US', { hour12: false }),
+              callType: 'zoom',
+              eventId: event.uuid
+          };
+
+          console.log('Processing booking:', bookingData);
+          
+          try {
+              // Import the database functions
+              const { addBooking } = await import('./js/database.js');
+              
+              // Store the booking
+              const result = await addBooking(bookingData);
+              console.log('Booking result:', result);
+              
+              if (!result.success) {
+                  console.error('Failed to store booking:', result.error);
+              }
+          } catch (error) {
+              console.error('Error processing booking:', error);
+          }
+      });
+  </script>
 </head>
 <body>
+  <!-- Admin Panel Button -->
+  <div style="position: fixed; bottom: 20px; left: 20px; z-index: 1000;">
+    <button 
+        onclick="toggleAdminPanel()" 
+        style="
+            background: #1E90FF; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        "
+    >
+        <i class="fas fa-lock"></i> Admin Panel
+    </button>
+  </div>
+
+  <!-- Admin Panel Container -->
+  <div id="adminPanel" class="admin-panel" style="display: none; position: fixed; top: 0; right: 0; width: 300px; background: white; height: 100vh; padding: 20px; box-shadow: -2px 0 5px rgba(0,0,0,0.1); overflow-y: auto; z-index: 1001;">
+    <style>
+        .admin-panel {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .admin-panel h3 {
+            color: #1E90FF;
+            border-bottom: 2px solid #1E90FF;
+            padding-bottom: 10px;
+        }
+        .admin-panel button {
+            background: #1E90FF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+            width: 100%;
+        }
+        .admin-panel button:hover {
+            background: #00CED1;
+        }
+        .subscriber-list {
+            margin-top: 20px;
+        }
+        .subscriber-item {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .stats-box {
+            background: #E5F3FF;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+
+    <h3>Email List Management</h3>
+    <div class="stats-box">
+        <p>Total Subscribers: <span id="subscriberCount">0</span></p>
+        <p>Newsletter Subscribers: <span id="newsletterCount">0</span></p>
+        <p>Booking Clients: <span id="bookingCount">0</span></p>
+    </div>
+
+    <button onclick="emailListManager.exportToCSV()">Export Email List</button>
+    <button onclick="toggleSubscriberList()">Toggle Subscriber List</button>
+    <button onclick="closeAdminPanel()">Close Panel</button>
+
+    <div id="subscriberList" class="subscriber-list" style="display: none;"></div>
+  </div>
+
+  <!-- Add this right after the opening body tag -->
+  <div class="modal" id="comingSoonModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Coming Soon!</h3>
+      <p>We're working hard to bring you our social media presence. In the meantime, sign up for our newsletter to stay updated!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Sign Up Now</button>
+      </form>
+    </div>
+  </div>
   <div class="animated-bg"></div>
   <div class="stars-container">
     <!-- Floating circles -->
@@ -1923,6 +2533,7 @@
   <!-- Header -->
   <header>
     <div class="logo">
+      <img src="Logo.png.png" alt="Lumyx Agency Logo">
       <h1>Lumyx Agency</h1>
     </div>
     <button class="mobile-menu-btn">
@@ -1983,7 +2594,7 @@
             <div class="about-stat">
               <i class="fas fa-users"></i>
               <span class="stat-number">100+</span>
-              <span class="stat-label">Happy Clients</span>
+              <span class="stat-label">Projects Delivered</span>
             </div>
             <div class="about-stat">
               <i class="fas fa-globe"></i>
@@ -1992,8 +2603,8 @@
             </div>
             <div class="about-stat">
               <i class="fas fa-trophy"></i>
-              <span class="stat-number">25+</span>
-              <span class="stat-label">Industry Awards</span>
+              <span class="stat-number">10+</span>
+              <span class="stat-label">Industry Specializations</span>
             </div>
           </div>
         </div>
@@ -2026,25 +2637,25 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services-section">
-        <h2>Our Services</h2>
-      <div class="services">
-        <div class="service-item">
+    <section class="services-section" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <!-- Copywriting Service -->
+            <div class="service-card">
           <div class="service-icon">
-            <i class="fas fa-pen-fancy"></i>
+                    <i class="fas fa-pen"></i>
           </div>
-          <h3>Copywriting</h3>
-          <p>Transform your message into compelling content that resonates with your audience.</p>
-          <div class="service-details">
-            <ul>
-              <li><i class="fas fa-check"></i> Brand Voice Development</li>
-              <li><i class="fas fa-check"></i> Website Copy</li>
-              <li><i class="fas fa-check"></i> Social Media Content</li>
-              <li><i class="fas fa-check"></i> Email Marketing</li>
-              <li><i class="fas fa-check"></i> Product Descriptions</li>
+                <h3 class="service-title">Copywriting</h3>
+                <p class="service-description">Transform your message into compelling content that resonates with your audience.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i>Brand Voice Development</li>
+                    <li><i class="fas fa-check"></i>Website Copy</li>
+                    <li><i class="fas fa-check"></i>Social Media Content</li>
+                    <li><i class="fas fa-check"></i>Email Marketing</li>
+                    <li><i class="fas fa-check"></i>Product Descriptions</li>
             </ul>
-            <div class="service-process">
-              <h4>Our Process</h4>
+                <div class="process-container">
+                    <h4 class="process-title">Our Process</h4>
               <ol>
                 <li>Discovery & Research</li>
                 <li>Strategy Development</li>
@@ -2054,23 +2665,23 @@
               </ol>
             </div>
           </div>
-        </div>
-        <div class="service-item">
+
+            <!-- Ad Scaling Service -->
+            <div class="service-card">
           <div class="service-icon">
             <i class="fas fa-chart-line"></i>
           </div>
-          <h3>Ad Scaling</h3>
-          <p>Maximize your ROI with data-driven advertising campaigns that scale your business.</p>
-          <div class="service-details">
-            <ul>
-              <li><i class="fas fa-check"></i> Campaign Strategy</li>
-              <li><i class="fas fa-check"></i> Audience Targeting</li>
-              <li><i class="fas fa-check"></i> Budget Optimization</li>
-              <li><i class="fas fa-check"></i> Performance Tracking</li>
-              <li><i class="fas fa-check"></i> A/B Testing</li>
+                <h3 class="service-title">Ad Scaling</h3>
+                <p class="service-description">Maximize your ROI with data-driven advertising campaigns that scale your business.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i>Campaign Strategy</li>
+                    <li><i class="fas fa-check"></i>Audience Targeting</li>
+                    <li><i class="fas fa-check"></i>Budget Optimization</li>
+                    <li><i class="fas fa-check"></i>Performance Tracking</li>
+                    <li><i class="fas fa-check"></i>A/B Testing</li>
             </ul>
-            <div class="service-process">
-              <h4>Our Process</h4>
+                <div class="process-container">
+                    <h4 class="process-title">Our Process</h4>
               <ol>
                 <li>Market Analysis</li>
                 <li>Campaign Setup</li>
@@ -2080,23 +2691,23 @@
               </ol>
             </div>
           </div>
-        </div>
-        <div class="service-item">
+
+            <!-- Brand Strategy Service -->
+            <div class="service-card">
           <div class="service-icon">
             <i class="fas fa-lightbulb"></i>
           </div>
-          <h3>Brand Strategy</h3>
-          <p>Develop a comprehensive strategy that aligns with your business goals and drives growth.</p>
-          <div class="service-details">
-            <ul>
-              <li><i class="fas fa-check"></i> Brand Positioning</li>
-              <li><i class="fas fa-check"></i> Market Research</li>
-              <li><i class="fas fa-check"></i> Competitor Analysis</li>
-              <li><i class="fas fa-check"></i> Growth Planning</li>
-              <li><i class="fas fa-check"></i> Brand Guidelines</li>
+                <h3 class="service-title">Brand Strategy</h3>
+                <p class="service-description">Develop a comprehensive strategy that aligns with your business goals and drives growth.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i>Brand Positioning</li>
+                    <li><i class="fas fa-check"></i>Market Research</li>
+                    <li><i class="fas fa-check"></i>Competitor Analysis</li>
+                    <li><i class="fas fa-check"></i>Growth Planning</li>
+                    <li><i class="fas fa-check"></i>Brand Guidelines</li>
             </ul>
-            <div class="service-process">
-              <h4>Our Process</h4>
+                <div class="process-container">
+                    <h4 class="process-title">Our Process</h4>
               <ol>
                 <li>Brand Audit</li>
                 <li>Strategy Development</li>
@@ -2104,7 +2715,6 @@
                 <li>Execution</li>
                 <li>Performance Review</li>
               </ol>
-        </div>
           </div>
         </div>
       </div>
@@ -2245,23 +2855,24 @@
     <section class="newsletter">
       <div class="newsletter-content">
         <h2>Stay Updated</h2>
-        <p>Subscribe to our newsletter for the latest insights, strategies, and success stories. Join our community of forward-thinking businesses.</p>
-        <form>
-          <input type="email" placeholder="Enter your email address">
-          <button type="submit">Subscribe Now</button>
+        <p>Subscribe to our newsletter for the latest insights, strategies, and success stories.</p>
+        <form id="newsletterForm" class="newsletter-form">
+          <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+          <input type="text" id="newsletterName" placeholder="Your name (optional)">
+          <button type="submit">Subscribe</button>
         </form>
         <div class="newsletter-features">
           <div class="newsletter-feature">
-            <i class="fas fa-check-circle"></i>
-            <span>Weekly Insights</span>
+            <i class="fas fa-newspaper"></i>
+            <span>Weekly Updates</span>
           </div>
           <div class="newsletter-feature">
-            <i class="fas fa-check-circle"></i>
-            <span>Exclusive Tips</span>
+            <i class="fas fa-lightbulb"></i>
+            <span>Expert Insights</span>
           </div>
           <div class="newsletter-feature">
-            <i class="fas fa-check-circle"></i>
-            <span>Industry Updates</span>
+            <i class="fas fa-chart-line"></i>
+            <span>Growth Tips</span>
           </div>
         </div>
       </div>
@@ -2277,16 +2888,19 @@
           <div class="contact-details">
             <div class="contact-item">
               <i class="fas fa-map-marker-alt"></i>
-              <span>123 Business Street, Suite 100<br>New York, NY 10001</span>
+              <span>Coming Soon</span>
             </div>
+            
             <div class="contact-item">
               <i class="fas fa-phone"></i>
-              <span>+1 (555) 123-4567</span>
+                <a href="tel:+12482382704">(248) 238-2704</a>
             </div>
+            
             <div class="contact-item">
               <i class="fas fa-envelope"></i>
-              <span>hello@agency.com</span>
+                <a href="mailto:Lumyxagency@gmail.com">Lumyxagency@gmail.com</a>
             </div>
+            
             <div class="contact-item">
               <i class="fas fa-clock"></i>
               <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
@@ -2294,11 +2908,12 @@
           </div>
         </div>
         <form id="contactForm">
-          <input type="text" placeholder="Your Name" required>
-          <input type="email" placeholder="Your Email" required>
-          <input type="tel" placeholder="Your Phone (Optional)">
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn">Send Message</button>
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="email" id="email" placeholder="Your Email" required>
+          <textarea id="message" placeholder="Your Message" required></textarea>
+          <button type="submit" class="contact-btn">
+              <span>Send Message</span>
+          </button>
         </form>
       </div>
     </section>
@@ -2328,53 +2943,12 @@
             </div>
           </div>
           <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6);">
-            <i class="fas fa-info-circle"></i> Available Monday through Friday, 9 AM to 6 PM EST
+            <i class="fas fa-info-circle"></i> Available Monday through Saturday, 9 AM to 6 PM EST
           </p>
         </div>
         <div class="calendar-container">
-          <div class="day-selection">
-            <h3>Select a Day</h3>
-            <div class="day-grid">
-              <!-- Days will be populated by JavaScript -->
-            </div>
-          </div>
-          <div class="time-slots-container">
-            <h3>Available Time Slots</h3>
-            <div class="time-slot-grid">
-              <div class="time-slot" data-time="09:00">9:00 AM</div>
-              <div class="time-slot" data-time="09:30">9:30 AM</div>
-              <div class="time-slot" data-time="10:00">10:00 AM</div>
-              <div class="time-slot" data-time="10:30">10:30 AM</div>
-              <div class="time-slot" data-time="11:00">11:00 AM</div>
-              <div class="time-slot" data-time="11:30">11:30 AM</div>
-              <div class="time-slot" data-time="12:00">12:00 PM</div>
-              <div class="time-slot" data-time="12:30">12:30 PM</div>
-              <div class="time-slot" data-time="13:00">1:00 PM</div>
-              <div class="time-slot" data-time="13:30">1:30 PM</div>
-              <div class="time-slot" data-time="14:00">2:00 PM</div>
-              <div class="time-slot" data-time="14:30">2:30 PM</div>
-              <div class="time-slot" data-time="15:00">3:00 PM</div>
-              <div class="time-slot" data-time="15:30">3:30 PM</div>
-              <div class="time-slot" data-time="16:00">4:00 PM</div>
-              <div class="time-slot" data-time="16:30">4:30 PM</div>
-              <div class="time-slot" data-time="17:00">5:00 PM</div>
-              <div class="time-slot" data-time="17:30">5:30 PM</div>
-            </div>
-            <div class="booking-confirmation">
-              <h4>Confirm Your Booking</h4>
-              <div class="contact-form">
-                <input type="text" id="clientName" placeholder="Your Name" required>
-                <input type="email" id="clientEmail" placeholder="Your Email" required>
-                <input type="tel" id="clientPhone" placeholder="Your Phone Number" required>
-              </div>
-              <p>Selected Date: <span class="selected-date"></span></p>
-              <p>Selected Time: <span class="selected-time"></span></p>
-              <div class="booking-confirmation-buttons">
-                <button onclick="confirmBooking()" class="btn">Confirm Booking</button>
-                <button onclick="cancelBooking()" class="btn" style="background: rgba(255,255,255,0.1);">Cancel</button>
-              </div>
-            </div>
-          </div>
+          <!-- Replace time slots with Calendly widget -->
+          <div id="calendly-container"></div>
         </div>
       </div>
     </section>
@@ -2407,10 +2981,10 @@
       <div class="footer-section">
         <h3>Connect With Us</h3>
         <div class="social-links">
-          <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.instagram.com/lumyxgrowth" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/lumyx-agency" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="coming-soon" title="Coming Soon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="coming-soon" title="Coming Soon"><i class="fab fa-facebook"></i></a>
         </div>
       </div>
     </div>
@@ -2419,12 +2993,253 @@
     </div>
   </footer>
 
-  <!-- FullCalendar CSS -->
-  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet' />
-  <!-- FullCalendar JS -->
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="contentful-loader.js"></script>
+  <script src="case-studies-loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="js/meta-pixel-events.js"></script>
+  
+  <!-- Add Calendly Widget Script -->
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script type="text/javascript">
+      window.onload = function() {
+          console.log('Initializing Calendly widget...');
+          Calendly.initInlineWidget({
+              url: 'https://calendly.com/cadenbuiting6/30min',
+              parentElement: document.getElementById('calendly-container'),
+              prefill: {},
+              utm: {},
+              styles: {
+                  height: '100%'
+              }
+          });
+          console.log('Calendly widget initialized');
+      }
+
+      // Handle Calendly booking events
+      window.addEventListener('calendly.event_scheduled', function(e) {
+          console.log('Calendly event scheduled:', e.data);
+          const event = e.data.event;
+          const invitee = e.data.payload.event.invitee;
+          
+          // Format date and time
+          const eventDate = new Date(event.start_time);
+          const formattedDate = eventDate.toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+          });
+          const formattedTime = eventDate.toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true
+          });
+
+          console.log('Processing booking for:', invitee.email);
+
+          // Send confirmation email to client
+          const clientEmailParams = {
+              to_email: invitee.email,
+              from_name: "Lumyx Agency",
+              to_name: invitee.name,
+              subject: "Your Strategy Call Confirmation",
+              message: `Your strategy call has been scheduled for ${formattedDate} at ${formattedTime}.`,
+              meeting_type: "Strategy Call",
+              meeting_details: event.location || "We'll send you the meeting details shortly.",
+              date: formattedDate,
+              time: formattedTime
+          };
+          
+          emailjs.send('service_qe8dgoh', 'template_jrwx295', clientEmailParams)
+              .then(() => console.log('Client confirmation email sent'))
+              .catch(error => console.error('Error sending client email:', error));
+
+          // Send notification email to team
+          const teamEmailParams = {
+              to_email: 'cadenbuiting6@gmail.com',
+              from_name: "Booking System",
+              client_name: invitee.name,
+              client_email: invitee.email,
+              client_phone: invitee.phone || 'Not provided',
+              subject: "New Strategy Call Booking",
+              message: `New strategy call booked for ${formattedDate} at ${formattedTime}`,
+              meeting_type: "Strategy Call",
+              meeting_details: event.location || "Location to be determined",
+              date: formattedDate,
+              time: formattedTime
+          };
+          
+          emailjs.send('service_qe8dgoh', 'template_t5xs49r', teamEmailParams)
+              .then(() => console.log('Team notification email sent'))
+              .catch(error => console.error('Error sending team email:', error));
+
+          // Store booking in database
+          const bookingData = {
+              email: invitee.email,
+              name: invitee.name,
+              phone: invitee.phone || null,
+              date: eventDate.toISOString().split('T')[0],
+              time: eventDate.toLocaleTimeString('en-US', { hour12: false }),
+              callType: "Strategy Call",
+              eventId: event.uuid,
+              notes: invitee.questions_and_responses || null
+          };
+
+          console.log('Attempting to store booking:', bookingData);
+          if (window.addBooking) {
+              window.addBooking(bookingData)
+                  .then(result => console.log('Booking stored:', result))
+                  .catch(error => console.error('Error storing booking:', error));
+          } else {
+              console.error('addBooking function not found!');
+          }
+      });
+  </script>
   <script>
+    // Optimize star creation with a more efficient approach
+    function createStars() {
+      const starsContainer = document.querySelector('.stars-container');
+      const numberOfStars = 100; // Increased number of stars
+      
+      // Create stars in batches for better performance
+      const batchSize = 20;
+      let currentBatch = 0;
+      
+      function createStarBatch() {
+        const start = currentBatch * batchSize;
+        const end = Math.min(start + batchSize, numberOfStars);
+        
+        for (let i = start; i < end; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          // Random position across the entire viewport
+          star.style.left = `${Math.random() * 100}%`;
+          star.style.top = `${Math.random() * 100}%`;
+          // Random size between 1px and 3px
+          const size = 1 + Math.random() * 2;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          // Random animation delay and duration
+          star.style.animationDelay = `${Math.random() * 3}s`;
+          star.style.animationDuration = `${2 + Math.random() * 3}s`;
+          starsContainer.appendChild(star);
+        }
+        
+        currentBatch++;
+        if (currentBatch * batchSize < numberOfStars) {
+          requestAnimationFrame(createStarBatch);
+        }
+      }
+      
+      // Clear existing stars
+      starsContainer.innerHTML = '';
+      createStarBatch();
+    }
+
+    // Update star styles
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+      .star {
+        position: absolute;
+        background: #ffffff;
+        border-radius: 50%;
+        opacity: 0;
+        will-change: opacity, transform;
+        animation: twinkle var(--duration, 2s) ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes twinkle {
+        0%, 100% { 
+          opacity: 0.2; 
+          transform: scale(1);
+        }
+        50% { 
+          opacity: 1;
+          transform: scale(1.5);
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // Initialize stars and recreate them on window resize
+    document.addEventListener('DOMContentLoaded', createStars);
+    window.addEventListener('resize', createStars);
+
+    // Optimize scroll handling with throttling
+    function throttle(func, limit) {
+      let inThrottle;
+      return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      }
+    }
+
+    const handleScroll = throttle(function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Optimize mobile menu with better event handling
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+
+    function toggleMenu() {
+      const isActive = nav.classList.toggle('active');
+      document.body.style.overflow = isActive ? 'hidden' : '';
+      
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !mobileMenuBtn.contains(e.target) && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        document.body.style.overflow = '';
+        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+      }
+    });
+
+    // Initialize stars after DOM is loaded
+    document.addEventListener('DOMContentLoaded', createStars);
+
+    // Optimize animations with Intersection Observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.service-item, .portfolio-item, .testimonial-item').forEach(el => {
+      observer.observe(el);
+    });
+
     // Initialize all animations and observers
     document.addEventListener('DOMContentLoaded', function() {
       // Fade-in animation and section transitions
@@ -2445,42 +3260,6 @@
       document.querySelectorAll('.fade-in, .services-section, .process-section, .team-section, .clients-section, .contact-section, .portfolio-section').forEach((element) => {
         observer.observe(element);
       });
-
-      // Create stars dynamically with optimized performance
-      const starsContainer = document.querySelector('.stars-container');
-      const numberOfStars = 60;
-
-      // Create stars in batches
-      const createStars = (start, end) => {
-        const fragment = document.createDocumentFragment();
-        
-        for (let i = start; i < end; i++) {
-          const star = document.createElement('div');
-          star.className = 'star';
-          
-          const x = Math.random() * 100;
-          const y = Math.random() * 100;
-          star.style.transform = `translate(${x}vw, ${y}vh)`;
-          
-          const size = 1 + Math.random() * 2;
-          star.style.width = `${size}px`;
-          star.style.height = `${size}px`;
-          
-          star.style.animationDelay = `${Math.random() * 2}s`;
-          
-          fragment.appendChild(star);
-        }
-        
-        starsContainer.appendChild(fragment);
-      };
-
-      // Create stars in smaller batches for better performance
-      const batchSize = 15;
-      for (let i = 0; i < numberOfStars; i += batchSize) {
-        setTimeout(() => {
-          createStars(i, Math.min(i + batchSize, numberOfStars));
-        }, i * 50);
-      }
 
       // Smooth scroll for navigation links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2548,72 +3327,133 @@
         }
       });
 
-      // Header scroll effect
-      let ticking = false;
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          window.requestAnimationFrame(function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-              header.classList.add('scrolled');
-            } else {
-              header.classList.remove('scrolled');
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
-
       // Scheduling functionality
       const dayGrid = document.querySelector('.day-grid');
       const today = new Date();
-      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       
-      // Create day options for current and next week
-      for (let week = 0; week < 2; week++) {
-        for (let i = 0; i < 5; i++) {
-          const date = new Date(today);
-          date.setDate(today.getDate() + (week * 7) + ((i + 7 - today.getDay()) % 7));
+      // Clear existing day options
+      dayGrid.innerHTML = '';
+      
+      // Function to get all available dates for the next 2 weeks
+      function getAvailableDates() {
+        const dates = [];
+        const date = new Date();
+        
+        // Get next 14 days
+        for (let i = 0; i < 14; i++) {
+          const nextDate = new Date(date);
+          nextDate.setDate(date.getDate() + i);
           
+          // Only include Monday-Saturday (skip Sunday)
+          if (nextDate.getDay() !== 0) {
+            dates.push({
+              date: nextDate,
+              dayName: days[nextDate.getDay()],
+              dayNumber: nextDate.getDate()
+            });
+          }
+        }
+        
+        // Sort dates chronologically
+        return dates.sort((a, b) => a.date - b.date);
+      }
+      
+      // Create day options
+      const availableDates = getAvailableDates();
+      
+      // Take only the first 12 slots (2 weeks of Mon-Sat)
+      availableDates.slice(0, 12).forEach(dateInfo => {
           const dayOption = document.createElement('div');
           dayOption.className = 'day-option';
-          dayOption.textContent = `${days[i]} ${date.getDate()}`;
-          dayOption.dataset.date = date.toISOString().split('T')[0];
-          
-          if (date < today) {
-            dayOption.classList.add('past');
-            dayOption.style.cursor = 'not-allowed';
-          } else {
+        
+        // Format the date
+        dayOption.textContent = `${dateInfo.dayName} ${dateInfo.dayNumber}`;
+        dayOption.dataset.date = dateInfo.date.toISOString().split('T')[0];
+        
+        // Add click handler
             dayOption.addEventListener('click', function() {
               document.querySelectorAll('.day-option').forEach(opt => opt.classList.remove('selected'));
               this.classList.add('selected');
               selectedDate = this.dataset.date;
               showTimeSlots();
             });
-          }
           
           dayGrid.appendChild(dayOption);
-        }
+      });
+
+      // Function to update dates - call this daily or when needed
+      function updateAvailableDates() {
+        const dayOptions = document.querySelectorAll('.day-option');
+        const newDates = getAvailableDates().slice(0, 12);
+        
+        dayOptions.forEach((option, index) => {
+          const dateInfo = newDates[index];
+          option.textContent = `${dateInfo.dayName} ${dateInfo.dayNumber}`;
+          option.dataset.date = dateInfo.date.toISOString().split('T')[0];
+        });
       }
+
+      // Update dates every day at midnight
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      const timeUntilMidnight = tomorrow - now;
+      setTimeout(() => {
+        updateAvailableDates();
+        // After first update, run daily
+        setInterval(updateAvailableDates, 24 * 60 * 60 * 1000);
+      }, timeUntilMidnight);
     });
 
     let selectedDate = null;
     let selectedTime = null;
 
-    function showTimeSlots() {
+    async function showTimeSlots() {
       const timeSlotsContainer = document.querySelector('.time-slots-container');
       timeSlotsContainer.classList.add('show');
-      updateTimeSlots();
+        
+        try {
+            const timeSlotGrid = document.querySelector('.time-slot-grid');
+            
+            // Fetch booked times from Supabase
+            const { data: bookedTimes, error } = await getBookedTimes(selectedDate);
+            
+            if (error) {
+                console.error('Error fetching booked times:', error);
+                return;
+            }
+            
+            // Reset all time slots to default state
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                // First remove all classes and restore full opacity
+                slot.classList.remove('selected', 'booked');
+                slot.style.removeProperty('opacity');
+                
+                // Then check if this time slot is booked
+                if (bookedTimes && bookedTimes.includes(slot.dataset.time)) {
+                    slot.classList.add('booked');
+                }
+            });
+            
+            document.querySelector('.booking-confirmation').classList.remove('show');
+            selectedTime = null;
+            
+        } catch (error) {
+            console.error('Error updating time slots:', error);
+        }
     }
 
+    // Remove the separate event listeners since we're handling them in showTimeSlots
     document.querySelectorAll('.time-slot').forEach(slot => {
       slot.addEventListener('click', function() {
         if (!selectedDate) {
           alert('Please select a date first');
           return;
         }
-        if (this.classList.contains('booked')) return;
+        if (this.classList.contains('booked')) {
+          alert('This time slot is already booked. Please choose another time.');
+          return;
+        }
         
         document.querySelectorAll('.time-slot').forEach(s => {
           s.classList.remove('selected');
@@ -2672,45 +3512,51 @@
       });
     }
 
-    window.confirmBooking = function() {
+    window.confirmBooking = async function() {
       if (!selectedDate || !selectedTime) return;
       
       const name = document.getElementById('clientName').value;
       const email = document.getElementById('clientEmail').value;
       const phone = document.getElementById('clientPhone').value;
+        const callType = document.querySelector('input[name="callType"]:checked').value;
 
       if (!name || !email || !phone) {
         alert('Please fill in all contact information');
         return;
       }
 
-      const appointment = {
-        name,
-        email,
-        phone,
+        try {
+            const result = await addBooking({
+                name: name,
+                email: email,
+                phone: phone,
         date: selectedDate,
         time: selectedTime,
-        id: Date.now()
-      };
+                callType: callType
+            });
 
-      saveAppointment(appointment);
-      
-      const selectedDay = document.querySelector('.day-option.selected');
-      selectedDay.classList.add('booked');
-      document.querySelector('.booking-confirmation').classList.remove('show');
-      
+            if (result.success) {
       // Clear the form
       document.getElementById('clientName').value = '';
       document.getElementById('clientEmail').value = '';
       document.getElementById('clientPhone').value = '';
       
+                // Hide confirmation
+                document.querySelector('.booking-confirmation').classList.remove('show');
+                
+                // Show success message
       alert('Call scheduled successfully! We will send you a confirmation email shortly.');
       
-      document.querySelectorAll('.time-slot').forEach(slot => {
-        if (slot.dataset.time === selectedTime) {
-          slot.classList.add('booked');
+                // Refresh the time slots to show updated availability
+                await showTimeSlots();
+                
+            } else {
+                throw new Error('Failed to schedule call');
+            }
+        } catch (error) {
+            console.error('Booking error:', error);
+            alert('There was an error scheduling your call. Please try again or contact us directly.');
         }
-      });
     };
 
     window.cancelBooking = function() {
@@ -2724,6 +3570,223 @@
     // Initialize appointments list when the page loads
     document.addEventListener('DOMContentLoaded', function() {
     });
+
+    // Add this to your existing script section
+    const modal = document.getElementById('comingSoonModal');
+    const closeModal = document.querySelector('.close-modal');
+    const comingSoonLinks = document.querySelectorAll('.coming-soon');
+
+    comingSoonLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Newsletter form submission in modal
+    const modalNewsletterForm = modal.querySelector('.newsletter-form');
+    if (modalNewsletterForm) {
+      modalNewsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for subscribing to our newsletter!');
+      this.reset();
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Admin Panel Functions
+    function toggleAdminPanel() {
+      const password = prompt("Please enter admin password:");
+      if (password === config.adminPassword) {
+        const panel = document.getElementById('adminPanel');
+        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        if (panel.style.display === 'block') {
+          updateAdminPanelStats();
+        }
+      } else if (password !== null) {
+        alert("Incorrect password");
+      }
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('adminPanel').style.display = 'none';
+    }
+
+    function toggleSubscriberList() {
+      const list = document.getElementById('subscriberList');
+      list.style.display = list.style.display === 'none' ? 'block' : 'none';
+      if (list.style.display === 'block') {
+        updateSubscriberList();
+      }
+    }
+
+    function updateAdminPanelStats() {
+      const emailList = JSON.parse(localStorage.getItem('emailList')) || [];
+      document.getElementById('subscriberCount').textContent = emailList.length;
+      document.getElementById('newsletterCount').textContent = 
+        emailList.filter(sub => sub.source === 'newsletter').length;
+      document.getElementById('bookingCount').textContent = 
+        emailList.filter(sub => sub.source === 'booking').length;
+    }
+
+    function updateSubscriberList() {
+      const list = document.getElementById('subscriberList');
+      list.innerHTML = '';
+      
+      emailListManager.emailList.forEach(subscriber => {
+        const item = document.createElement('div');
+        item.className = 'subscriber-item';
+        item.innerHTML = `
+          <strong>${subscriber.email}</strong><br>
+          ${subscriber.name ? `Name: ${subscriber.name}<br>` : ''}
+          ${subscriber.phone ? `Phone: ${subscriber.phone}<br>` : ''}
+          Source: ${subscriber.source}<br>
+          ${subscriber.bookings && subscriber.bookings.length > 0 
+            ? `Latest Booking: ${subscriber.bookings[subscriber.bookings.length - 1].date} at ${subscriber.bookings[subscriber.bookings.length - 1].time}<br>` 
+            : ''}
+          Added: ${new Date(subscriber.subscriptionDate).toLocaleDateString()}
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    // Email List Manager Class
+    class EmailListManager {
+      constructor() {
+        const encryptedData = localStorage.getItem('emailList');
+        this.emailList = encryptedData 
+          ? decryptData(encryptedData, encryptionKey) 
+          : [];
+      }
+
+      addSubscriber(data) {
+        const existingSubscriber = this.emailList.find(sub => sub.email === data.email);
+        if (existingSubscriber) {
+          Object.assign(existingSubscriber, data);
+          if (data.source === 'booking') {
+            if (!existingSubscriber.bookings) existingSubscriber.bookings = [];
+            existingSubscriber.bookings.push({
+              date: data.bookingDate,
+              time: data.bookingTime,
+              callType: data.callType
+            });
+          }
+        } else {
+          const newSubscriber = {
+            ...data,
+            bookings: data.source === 'booking' ? [{
+              date: data.bookingDate,
+              time: data.bookingTime,
+              callType: data.callType
+            }] : []
+          };
+          this.emailList.push(newSubscriber);
+        }
+        
+        // Encrypt data before storing
+        localStorage.setItem('emailList', encryptData(this.emailList, encryptionKey));
+        updateAdminPanelStats();
+      }
+
+      exportToCSV() {
+        const headers = ['Email', 'Name', 'Phone', 'Source', 'Subscription Date', 'Latest Booking'];
+        const csvContent = [
+          headers.join(','),
+          ...this.emailList.map(sub => [
+            sub.email,
+            sub.name || '',
+            sub.phone || '',
+            sub.source,
+            new Date(sub.subscriptionDate).toLocaleDateString(),
+            sub.bookings && sub.bookings.length > 0 
+              ? `${sub.bookings[sub.bookings.length - 1].date} ${sub.bookings[sub.bookings.length - 1].time}`
+              : ''
+          ].join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'email_list.csv';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      }
+    }
+
+    // Initialize email list manager
+    const emailListManager = new EmailListManager();
+
+    // Initialize EmailJS with config
+    (function() {
+      emailjs.init(config.emailjs.publicKey);
+    })();
+  </script>
+  <!-- Add these script tags before the closing body tag -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+    import { addSubscriber, addBooking, getSubscribers, exportSubscribersToCSV, getBookedTimes } from './js/database.js'
+    
+    // Make functions available globally
+    window.addBooking = addBooking;
+    window.addSubscriber = addSubscriber;
+    window.getSubscribers = getSubscribers;
+    window.exportSubscribersToCSV = exportSubscribersToCSV;
+    window.getBookedTimes = getBookedTimes;
+  </script>
+  <script type="module">
+    import { addSubscriber } from './js/database.js';
+
+    // Newsletter form submission
+    document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('newsletterEmail').value;
+        const name = document.getElementById('newsletterName').value;
+        
+        try {
+            const result = await addSubscriber({
+                email: email,
+                name: name || null,
+                source: 'newsletter'
+            });
+
+            if (result.success) {
+                // Track subscription with Meta Pixel
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Subscribe', {
+                        content_name: 'Newsletter'
+                    });
+                }
+
+                // Show success message
+                alert('Thank you for subscribing to our newsletter!');
+                this.reset();
+            } else {
+                throw new Error(result.error);
+            }
+        } catch (error) {
+            console.error('Newsletter subscription error:', error);
+            alert('There was an error subscribing. Please try again.');
+        }
+    });
   </script>
 </body>
 </html>
+

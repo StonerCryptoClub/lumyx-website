@@ -3,11 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blog - Lumyx Agency</title>
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+  
+  <!-- Primary Meta Tags -->
+  <title>Digital Marketing & Web Development Blog | Lumyx Agency Insights</title>
+  <meta name="title" content="Digital Marketing & Web Development Blog | Lumyx Agency Insights">
+  <meta name="description" content="Stay updated with the latest insights in digital marketing, web development, and SEO strategies. Expert tips and industry trends from Lumyx Agency.">
+  <meta name="keywords" content="digital marketing blog, web development tips, SEO strategies, content marketing, social media marketing, web design trends">
+  <meta name="author" content="Lumyx Agency">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="https://lumyxagency.com/blog">
+  <meta property="og:title" content="Digital Marketing & Web Development Blog | Lumyx Agency Insights">
+  <meta property="og:description" content="Stay updated with the latest insights in digital marketing, web development, and SEO strategies. Expert tips and industry trends from Lumyx Agency.">
+  <meta property="og:image" content="https://lumyxagency.com/images/blog-og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lumyxagency.com/blog">
+  <meta property="twitter:title" content="Digital Marketing & Web Development Blog | Lumyx Agency Insights">
+  <meta property="twitter:description" content="Stay updated with the latest insights in digital marketing, web development, and SEO strategies. Expert tips and industry trends from Lumyx Agency.">
+  <meta property="twitter:image" content="https://lumyxagency.com/images/blog-og-image.jpg">
+
+  <!-- Additional SEO Meta Tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="generator" content="Lumyx Agency">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://lumyxagency.com/blog">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Lumyx Agency Blog",
+      "description": "Expert insights on digital marketing, web development, and SEO strategies",
+      "url": "https://lumyxagency.com/blog",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lumyx Agency",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lumyxagency.com/images/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://lumyxagency.com/blog"
+      }
+    }
+  </script>
+
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Configuration -->
+  <script src="js/config.js"></script>
+  <!-- Database Client -->
+  <script src="js/supabase-client.js"></script>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
   <style>
     /* Base color variables */
     :root {
@@ -62,7 +133,7 @@
       position: fixed;
       width: 100%;
       background: rgba(0, 0, 0, 0.95);
-      padding: 20px;
+      padding: 8px 10px 8px 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
@@ -71,43 +142,57 @@
       transition: all 0.3s ease;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-
+    header.scrolled {
+      background: rgba(0, 0, 0, 0.98);
+      padding: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
     header .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      position: relative;
+      margin-left: -5px;
     }
-
-    header .logo::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: linear-gradient(45deg, #FFA500, #FFD700);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
+    header .logo img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      margin-right: -50px;
+      position: relative;
+      z-index: 2;
     }
-
+    header .logo:hover img {
+      transform: scale(1.05);
+    }
     header .logo h1 {
       font-size: 1.8rem;
       font-weight: 700;
       color: #ffffff;
       position: relative;
       letter-spacing: 0.5px;
+      z-index: 1;
     }
-
     header nav {
       display: flex;
       gap: 30px;
+      padding-right: 30px;
     }
-
     header nav a {
       color: #ffffff;
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
       position: relative;
-      padding: 5px 0;
+      padding: 3px 0;
+      transition: color 0.3s ease;
     }
-
+    header nav a:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    header nav a.active {
+      color: #ffffff;
+    }
     header nav a::before {
       content: '';
       position: absolute;
@@ -115,26 +200,16 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #FFA500, #FFD700);
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
       transition: width 0.3s ease;
     }
-
     header nav a:hover::before {
       width: 100%;
     }
 
-    header nav a.active {
-      color: var(--primary-orange);
-    }
-
-    header nav a.active::before {
-      width: 100%;
-      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
-    }
-
     /* Blog Section Styles */
     .blog-section {
-      padding: 120px 20px 80px;
+      padding: 100px 20px 60px;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -251,8 +326,7 @@
       background: linear-gradient(135deg, var(--complementary-blue), var(--complementary-blue-light));
       box-shadow: 0 20px 40px rgba(30, 144, 255, 0.2);
       padding: 80px 0;
-      margin: 60px 0;
-      border-radius: 20px;
+      margin: 0;
       position: relative;
       overflow: hidden;
     }
@@ -367,7 +441,6 @@
     footer {
       background: rgba(14, 14, 14, 0.8);
       backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
       padding: 40px 0;
       text-align: center;
     }
@@ -605,17 +678,123 @@
         transform: scale(0.98);
       }
     }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      color: var(--primary-orange);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .modal-content .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .modal-content input {
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .modal-content input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .modal-content button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
+      color: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    }
+
+    .modal-content .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-content .close-modal:hover {
+      color: var(--primary-orange);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 <body>
+  <div class="modal" id="comingSoonModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Coming Soon!</h3>
+      <p>We're working hard to bring you our social media presence. In the meantime, sign up for our newsletter to stay updated!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Sign Up Now</button>
+      </form>
+    </div>
+  </div>
+
   <header>
     <div class="logo">
+      <img src="Logo.png.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" loading="lazy">
       <h1>Lumyx Agency</h1>
     </div>
-    <button class="mobile-menu-btn">
+    <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
       <i class="fas fa-bars"></i>
     </button>
-    <nav>
+    <nav aria-label="Main Navigation">
       <a href="index.html">Home</a>
       <a href="index.html#about">About</a>
       <a href="index.html#services">Services</a>
@@ -625,100 +804,121 @@
     </nav>
   </header>
 
-  <section class="blog-section">
-    <div class="blog-header">
-      <h1>Our Blog</h1>
-      <p>Insights, tips, and industry updates to help your business grow</p>
-    </div>
+  <main>
+    <section class="blog-section">
+      <div class="blog-header">
+        <h1>Digital Marketing Insights & Strategies</h1>
+        <p>Expert tips, industry updates, and proven strategies to accelerate your business growth</p>
+      </div>
 
-    <div class="blog-grid">
-      <!-- Blog Card 1 -->
-      <article class="blog-card">
-        <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Social Media Marketing">
-        <div class="blog-content">
-          <span class="blog-category">Digital Marketing</span>
-          <h3>10 Strategies to Boost Your Social Media Engagement</h3>
-          <p>Learn proven techniques to increase your social media following and engagement rates.</p>
-          <div class="blog-meta">
-            <span><i class="far fa-calendar"></i> March 15, 2024</span>
-            <span><i class="far fa-clock"></i> 5 min read</span>
+      <div class="blog-grid">
+        <!-- Blog Card 1 -->
+        <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+          <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="Social Media Marketing Strategies - Person analyzing social media metrics on a laptop" 
+               width="800" height="450" loading="lazy" itemprop="image">
+          <div class="blog-content">
+            <span class="blog-category">Digital Marketing</span>
+            <h2 itemprop="headline">10 Proven Strategies to Boost Your Social Media Engagement in 2024</h2>
+            <p itemprop="description">Learn data-driven techniques to increase your social media following, improve engagement rates, and convert followers into customers.</p>
+            <div class="blog-meta">
+              <span itemprop="datePublished"><i class="far fa-calendar"></i> March 15, 2024</span>
+              <span><i class="far fa-clock"></i> 5 min read</span>
+              <span itemprop="author" itemscope itemtype="https://schema.org/Organization"><i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span></span>
+            </div>
+            <a href="blog/social-media-engagement-strategies.html" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
-          <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </article>
+        </article>
 
-      <!-- Blog Card 2 -->
-      <article class="blog-card">
-        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Brand Identity">
-        <div class="blog-content">
-          <span class="blog-category">Brand Strategy</span>
-          <h3>Building a Strong Brand Identity in 2024</h3>
-          <p>Discover the key elements of creating a memorable and impactful brand identity.</p>
-          <div class="blog-meta">
-            <span><i class="far fa-calendar"></i> March 10, 2024</span>
-            <span><i class="far fa-clock"></i> 7 min read</span>
+        <!-- Blog Card 2 -->
+        <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="Brand Identity Development - Team collaborating on brand strategy with sticky notes" 
+               width="800" height="450" loading="lazy" itemprop="image">
+          <div class="blog-content">
+            <span class="blog-category">Brand Strategy</span>
+            <h2 itemprop="headline">Building a Memorable Brand Identity That Drives Growth in 2024</h2>
+            <p itemprop="description">Discover the essential elements of creating a powerful brand identity that resonates with your target audience and drives business growth.</p>
+            <div class="blog-meta">
+              <span itemprop="datePublished"><i class="far fa-calendar"></i> March 10, 2024</span>
+              <span><i class="far fa-clock"></i> 7 min read</span>
+              <span itemprop="author" itemscope itemtype="https://schema.org/Organization"><i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span></span>
+            </div>
+            <a href="blog/brand-identity-development.html" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
-          <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </article>
+        </article>
 
-      <!-- Blog Card 3 -->
-      <article class="blog-card">
-        <img src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="SEO Optimization">
-        <div class="blog-content">
-          <span class="blog-category">SEO</span>
-          <h3>SEO Best Practices for 2024</h3>
-          <p>Stay ahead of the curve with the latest SEO techniques and strategies.</p>
-          <div class="blog-meta">
-            <span><i class="far fa-calendar"></i> March 5, 2024</span>
-            <span><i class="far fa-clock"></i> 6 min read</span>
+        <!-- Blog Card 3 -->
+        <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
+          <img src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               alt="SEO Optimization - Person analyzing website analytics and search rankings" 
+               width="800" height="450" loading="lazy" itemprop="image">
+          <div class="blog-content">
+            <span class="blog-category">SEO</span>
+            <h2 itemprop="headline">Advanced SEO Techniques to Dominate Search Rankings in 2024</h2>
+            <p itemprop="description">Implement these cutting-edge SEO strategies to improve your website visibility, drive organic traffic, and outrank your competitors.</p>
+            <div class="blog-meta">
+              <span itemprop="datePublished"><i class="far fa-calendar"></i> March 5, 2024</span>
+              <span><i class="far fa-clock"></i> 6 min read</span>
+              <span itemprop="author" itemscope itemtype="https://schema.org/Organization"><i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span></span>
+            </div>
+            <a href="blog/advanced-seo-techniques.html" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
           </div>
-          <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </article>
-    </div>
-  </section>
+        </article>
+      </div>
+    </section>
 
-  <section class="newsletter">
-    <div class="container">
-      <h2>Stay Updated</h2>
-      <p>Subscribe to our newsletter for the latest insights and updates</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email address">
-        <button type="submit">Subscribe</button>
-      </form>
-      <div class="feature-grid">
-        <div class="feature-item">
-          <i class="fas fa-newspaper"></i>
-          <h4>Weekly Insights</h4>
-          <p>Get the latest industry news and trends</p>
-        </div>
-        <div class="feature-item">
-          <i class="fas fa-lightbulb"></i>
-          <h4>Exclusive Tips</h4>
-          <p>Receive expert advice and strategies</p>
-        </div>
-        <div class="feature-item">
-          <i class="fas fa-chart-line"></i>
-          <h4>Industry Updates</h4>
-          <p>Stay ahead of the competition</p>
+    <section class="newsletter" aria-labelledby="newsletter-heading">
+      <div class="container">
+        <h2 id="newsletter-heading">Stay Updated with Industry Insights</h2>
+        <p>Subscribe to our newsletter for exclusive digital marketing tips and strategies delivered to your inbox</p>
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
+          <button type="submit">Subscribe Now</button>
+        </form>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fas fa-newspaper"></i>
+            <h3>Weekly Insights</h3>
+            <p>Get the latest industry news and actionable marketing trends</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Exclusive Tips</h3>
+            <p>Receive expert advice and proven growth strategies</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-chart-line"></i>
+            <h3>Industry Updates</h3>
+            <p>Stay ahead of the competition with cutting-edge tactics</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
       <div class="footer-section">
         <h3>Lumyx Agency</h3>
-        <p style="color: rgba(255,255,255,0.6);">Lumyx.co</p>
+        <p style="color: rgba(255,255,255,0.6);">Your Growth Partner</p>
+        <address style="font-style: normal; margin-top: 10px; color: rgba(255,255,255,0.6);">
+          <p>Email: <a href="mailto:contact@lumyx.co" style="color: var(--primary-orange);">contact@lumyx.co</a></p>
+          <p>Phone: <a href="tel:+12345678900" style="color: var(--primary-orange);">+1 (234) 567-8900</a></p>
+        </address>
       </div>
       <div class="social-links">
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.instagram.com/lumyxgrowth" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/lumyx-agency" target="_blank" rel="noopener noreferrer" aria-label="Connect with us on LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="coming-soon" title="Coming Soon" aria-label="Twitter - Coming Soon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="coming-soon" title="Coming Soon" aria-label="Facebook - Coming Soon"><i class="fab fa-facebook"></i></a>
       </div>
-      <p>&copy; 2025 Lumyx Agency. All rights reserved.</p>
+      <p>&copy; 2024 Lumyx Agency. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <a href="privacy-policy.html">Privacy Policy</a> | 
+        <a href="terms-of-service.html">Terms of Service</a> | 
+        <a href="sitemap.xml">Sitemap</a>
+      </nav>
     </div>
   </footer>
 
@@ -769,12 +969,97 @@
     // Newsletter form submission
     const newsletterForm = document.querySelector('.newsletter-form');
     if (newsletterForm) {
-      newsletterForm.addEventListener('submit', function(e) {
+      newsletterForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        alert('Thank you for subscribing to our newsletter!');
-        this.reset();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        try {
+          const result = await addSubscriber(email, null, null, 'newsletter');
+          if (result.success) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+          } else {
+            throw new Error(result.error);
+          }
+        } catch (error) {
+          console.error('Newsletter subscription error:', error);
+          alert('There was an error subscribing to the newsletter. Please try again.');
+        }
       });
     }
+
+    const modal = document.getElementById('comingSoonModal');
+    const closeModal = document.querySelector('.close-modal');
+    const comingSoonLinks = document.querySelectorAll('.coming-soon');
+
+    comingSoonLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Modal newsletter form submission
+    const modalNewsletterForm = modal.querySelector('.newsletter-form');
+    if (modalNewsletterForm) {
+      modalNewsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        try {
+          const result = await addSubscriber(email, null, null, 'newsletter');
+          if (result.success) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          } else {
+            throw new Error(result.error);
+          }
+        } catch (error) {
+          console.error('Newsletter subscription error:', error);
+          alert('There was an error subscribing to the newsletter. Please try again.');
+        }
+      });
+    }
+
+    // Add structured data dynamically
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add page view tracking (if you have analytics)
+      console.log('Page loaded and ready for tracking');
+      
+      // Lazy load images that come into viewport
+      if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src || img.src;
+              observer.unobserve(img);
+            }
+          });
+        });
+        
+        lazyImages.forEach(img => {
+          imageObserver.observe(img);
+        });
+      }
+    });
   </script>
+  <script src="contentful-loader.js"></script>
 </body>
 </html> 

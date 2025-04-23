@@ -1,0 +1,15 @@
+{
+  "name": "lumyx-website",
+  "version": "1.0.0",
+  "description": "Lumyx Website with Supabase Integration",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.7",
+    "dotenv": "^16.4.5"
+  }
+}
