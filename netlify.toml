@@ -2,70 +2,22 @@
   publish = "dist"
   command = "node scripts/optimize-for-production.js"
 
-# Static site build - not Next.js
+# Disable Next.js auto-detection by setting environment variables
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NETLIFY_SKIP_NEXT_PLUGIN = "true"
 
 # Production context
 [context.production]
   command = "node scripts/optimize-for-production.js"
 
-# Asset optimization
+# Disable automatic framework detection
 [build.processing]
   skip_processing = false
 
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.images]
-  compress = true
-
-# Headers to improve security and performance
+# Headers for static assets
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self' https:; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'; style-src 'self' https: 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https:;"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), bluetooth=(), midi=(), notifications=()"
-
-# Cache control for static assets
-[[headers]]
-  for = "*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Redirects
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
