@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study | Lumyx Digital</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .case-study-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .case-study-hero {
+            position: relative;
+            padding: 8rem 2rem 6rem;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95), #0a0a0a), 
+                        var(--hero-image, none) center/cover no-repeat;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: #ff6b00;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #ff9500;
+        }
+
+        .category {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.25rem;
+            background: rgba(255, 107, 0, 0.15);
+            color: #ff6b00;
+            border-radius: 30px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .case-study-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin: 0 0 2rem 0;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            background: linear-gradient(45deg, #ffffff 30%, rgba(255, 255, 255, 0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .case-study-meta {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .meta-item i {
+            color: #ff6b00;
+            font-size: 1.25rem;
+        }
+
+        .case-study-excerpt {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0;
+            font-weight: 400;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid rgba(255, 107, 0, 0.3);
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 107, 0, 0.1),
+                transparent
+            );
+        }
+
+        .rich-text-content {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        .rich-text-content h2 {
+            font-size: 2.5rem;
+            margin: 4rem 0 1.5rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .rich-text-content h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg,
+                rgba(255, 107, 0, 0.3),
+                transparent
+            );
+        }
+
+        .rich-text-content h3 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: #ffffff;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .rich-text-content p {
+            margin-bottom: 1.5rem;
+            max-width: 70ch;
+        }
+
+        .rich-text-content ul,
+        .rich-text-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            max-width: 65ch;
+        }
+
+        .rich-text-content li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .rich-text-content li::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+            background: #ff6b00;
+            border-radius: 50%;
+        }
+
+        .results-section {
+            background: linear-gradient(180deg, rgba(15, 15, 15, 0.95), rgba(10, 10, 10, 0.95));
+            padding: 8rem 2rem;
+            margin: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 107, 0, 0.3), 
+                transparent
+            );
+        }
+
+        .results-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 107, 0, 0.3), 
+                transparent
+            );
+        }
+
+        .results-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-section h2 {
+            font-size: 3.5rem;
+            margin: 0 0 4rem 0;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .result-card {
+            background: rgba(20, 20, 23, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 107, 0, 0.3),
+                transparent
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(25, 25, 28, 0.5);
+        }
+
+        .result-card:hover::before {
+            opacity: 1;
+        }
+
+        .result-value {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b00, #ff9500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 1.25rem;
+            color: #ffffff;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0;
+            text-align: center;
+        }
+
+        .loading-state, 
+        .error-state {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .loading-state i, 
+        .error-state i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ff6b00;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: #ff6b00;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background: #ff9500;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 1024px) {
+            .case-study-title {
+                font-size: 3.5rem;
+            }
+
+            .case-study-excerpt {
+                font-size: 1.25rem;
+            }
+
+            .results-section {
+                padding: 6rem 2rem;
+                margin: 6rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .case-study-hero {
+                padding: 6rem 1.5rem 4rem;
+                min-height: 60vh;
+            }
+
+            .case-study-title {
+                font-size: 2.75rem;
+            }
+
+            .case-study-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .content-section {
+                margin: 4rem auto;
+                padding: 0 1.5rem;
+            }
+
+            .rich-text-content h2 {
+                font-size: 2rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .rich-text-content h2::after {
+                width: 100%;
+                height: 1px;
+            }
+
+            .rich-text-content p,
+            .rich-text-content ul,
+            .rich-text-content ol {
+                max-width: 100%;
+            }
+
+            .results-section {
+                padding: 4rem 1.5rem;
+                margin: 4rem 0;
+            }
+
+            .results-section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 3rem;
+            }
+
+            .result-card {
+                padding: 2rem;
+                min-height: 180px;
+            }
+
+            .result-value {
+                font-size: 3rem;
+            }
+
+            .result-label {
+                font-size: 1.125rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="case-study-container">
+        <div class="case-study-hero">
+            <div class="hero-content">
+                <div class="breadcrumb">
+                    <a href="./index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="./index.html#portfolio">Case Studies</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span id="case-study-title-breadcrumb">Case Study</span>
+                </div>
+                <div class="category" id="case-study-category"></div>
+                <h1 class="case-study-title" id="case-study-title"></h1>
+                <div class="case-study-meta" id="case-study-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span id="case-study-client"></span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span id="case-study-date"></span>
+                    </div>
+                </div>
+                <p class="case-study-excerpt" id="case-study-excerpt"></p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="rich-text-content" id="case-study-content">
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="cta-container">
+                <a href="./index.html#portfolio" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="./js/contentful-client.js"></script>
+    <script src="./js/generate-placeholders.js"></script>
+    <script src="./js/content-loader-init.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Get the slug from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (!slug) {
+                showError('No case study specified');
+                return;
+            }
+            
+            try {
+                // Wait for contentful client to be ready
+                await waitForContentful();
+                
+                // Get the case study data
+                const caseStudy = await window.contentfulHelpers.getCaseStudyBySlug(slug);
+                
+                if (!caseStudy) {
+                    showError('Case study not found');
+                    return;
+                }
+                
+                // Display the case study data
+                displayCaseStudy(caseStudy);
+                
+            } catch (error) {
+                console.error('Error loading case study:', error);
+                showError('Failed to load case study');
+            }
+        });
+        
+        // Function to wait for contentful client to be ready
+        async function waitForContentful(maxAttempts = 10) {
+            for (let i = 0; i < maxAttempts; i++) {
+                if (window.contentfulHelpers?.isReady()) {
+                    return true;
+                }
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            throw new Error('Contentful client not available');
+        }
+        
+        // Function to display case study data
+        function displayCaseStudy(caseStudy) {
+            const fields = caseStudy.fields || {};
+            
+            // Update breadcrumb
+            document.getElementById('case-study-title-breadcrumb').textContent = fields.title || 'Case Study';
+            
+            // Update category
+            document.getElementById('case-study-category').textContent = fields.category || 'Case Study';
+            
+            // Update title
+            document.getElementById('case-study-title').textContent = fields.title || 'Untitled Case Study';
+            
+            // Update meta information
+            document.getElementById('case-study-client').textContent = `Client: ${fields.clientName || 'Unknown'}`;
+            document.getElementById('case-study-date').textContent = `Date: ${formatDate(fields.date) || 'Unknown'}`;
+            
+            // Update excerpt
+            document.getElementById('case-study-excerpt').textContent = fields.excerpt || fields.description || '';
+            
+            // Update content
+            const contentElement = document.getElementById('case-study-content');
+            if (fields.content) {
+                contentElement.innerHTML = renderRichText(fields.content);
+            } else {
+                // Fallback content if no rich text is available
+                contentElement.innerHTML = `
+                    <h2>Overview</h2>
+                    <p>${fields.description || 'No detailed description available.'}</p>
+                    
+                    ${fields.results ? `
+                    <h2>Results</h2>
+                    <ul>
+                        ${fields.results.mainMetric ? `
+                        <li><strong>${fields.results.mainMetric.value}</strong> ${fields.results.mainMetric.label}</li>
+                        ` : ''}
+                        ${fields.results.supportingMetrics ? fields.results.supportingMetrics.map(metric => `
+                        <li>${metric}</li>
+                        `).join('') : ''}
+                    </ul>
+                    ` : ''}
+                `;
+            }
+            
+            // Set hero image if available
+            if (fields.featuredImage?.fields?.file?.url) {
+                const imageUrl = `https:${fields.featuredImage.fields.file.url}`;
+                document.querySelector('.case-study-hero').style.setProperty('--hero-image', `url(${imageUrl})`);
+            }
+            
+            // Update page title
+            document.title = `${fields.title || 'Case Study'} | Lumyx Digital`;
+        }
+        
+        // Function to show error message
+        function showError(message) {
+            document.getElementById('case-study-category').textContent = 'Error';
+            document.getElementById('case-study-title').textContent = message || 'An error occurred';
+            document.getElementById('case-study-excerpt').textContent = 'Please try again or contact us for assistance.';
+            document.getElementById('case-study-content').innerHTML = `
+                <p>We couldn't load the requested case study. Please try one of these options:</p>
+                <ul>
+                    <li>Go back to the <a href="./index.html#portfolio">portfolio page</a></li>
+                    <li>Try refreshing the page</li>
+                    <li><a href="./contact.html">Contact us</a> for assistance</li>
+                </ul>
+            `;
+        }
+        
+        // Function to format date
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            if (isNaN(date)) return '';
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        // Function to render rich text content
+        function renderRichText(content) {
+            if (!content || !content.content) return '';
+            
+            return content.content.map(node => {
+                if (node.nodeType === 'paragraph') {
+                    return `<p>${node.content.map(text => text.value).join('')}</p>`;
+                }
+                if (node.nodeType === 'heading-1') {
+                    return `<h1>${node.content.map(text => text.value).join('')}</h1>`;
+                }
+                if (node.nodeType === 'heading-2') {
+                    return `<h2>${node.content.map(text => text.value).join('')}</h2>`;
+                }
+                if (node.nodeType === 'heading-3') {
+                    return `<h3>${node.content.map(text => text.value).join('')}</h3>`;
+                }
+                if (node.nodeType === 'unordered-list') {
+                    return `<ul>${node.content.map(item => `<li>${item.content.map(p => p.content.map(text => text.value).join('')).join('')}</li>`).join('')}</ul>`;
+                }
+                if (node.nodeType === 'ordered-list') {
+                    return `<ol>${node.content.map(item => `<li>${item.content.map(p => p.content.map(text => text.value).join('')).join('')}</li>`).join('')}</ol>`;
+                }
+                if (node.nodeType === 'hyperlink') {
+                    return `<a href="${node.data.uri}">${node.content.map(text => text.value).join('')}</a>`;
+                }
+                if (node.nodeType === 'hr') {
+                    return '<hr>';
+                }
+                return '';
+            }).join('');
+        }
+    </script>
+</body>
+</html> 

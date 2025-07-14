@@ -1,3 +1,5 @@
+import security from './security-middleware.js';
+
 // Input validation and sanitization
 function sanitizeInput(input) {
     return input.replace(/[<>]/g, '').trim();
@@ -50,74 +52,82 @@ const rateLimiter = {
     }
 };
 
-// Contact form handler
-async function handleContactForm(event) {
-    event.preventDefault();
+// Form validation schema
+const contactFormSchema = {
+  name: (value) => typeof value === 'string' && value.length >= 2,
+  email: (value) => security.validateEmail(value),
+  message: (value) => typeof value === 'string' && value.length >= 10,
+  phone: (value) => !value || /^\+?[\d\s-]{10,}$/.test(value)
+};
+
+async function handleContactForm(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const formData = new FormData(form);
+  
+  // Sanitize and validate input
+  const sanitizedData = {};
+  for (const [key, value] of formData.entries()) {
+    sanitizedData[key] = security.sanitizeInput(value);
+  }
+  
+  // Validate request
+  const validationErrors = security.validateRequest(sanitizedData, contactFormSchema);
+  if (validationErrors) {
+    alert('Please check your input: ' + validationErrors.join(', '));
+    return;
+  }
+  
+  // Check rate limiting
+  const userIdentifier = sanitizedData.email || 'anonymous';
+  if (security.isRateLimited(userIdentifier)) {
+    alert('Too many attempts. Please try again later.');
+    return;
+  }
+  
+  // Disable submit button
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
+  
+  try {
+    // Send form data to your backend
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      },
+      body: JSON.stringify(sanitizedData)
+    });
     
-    const form = event.target;
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalText = submitButton.innerHTML;
-    
-    try {
-        // Get and validate form data
-        const name = sanitizeInput(form.querySelector('#name').value);
-        const email = sanitizeInput(form.querySelector('#email').value);
-        const message = sanitizeInput(form.querySelector('#message').value);
-
-        // Validate inputs
-        if (!validateName(name)) {
-            throw new Error('Please enter a valid name (2-50 characters, letters only)');
-        }
-        if (!validateEmail(email)) {
-            throw new Error('Please enter a valid email address');
-        }
-        if (!validateMessage(message)) {
-            throw new Error('Message must be between 10 and 1000 characters');
-        }
-
-        // Check rate limiting
-        if (!rateLimiter.isAllowed(email)) {
-            throw new Error('Too many attempts. Please try again later.');
-        }
-
-        // Show loading state
-        submitButton.innerHTML = '<span>Sending...</span>';
-        submitButton.disabled = true;
-
-        // Send email using EmailJS
-        const templateParams = {
-            from_name: name,
-            from_email: email,
-            message: message,
-            to_email: process.env.ADMIN_EMAIL
-        };
-
-        await emailjs.send(
-            process.env.EMAILJS_SERVICE_ID,
-            process.env.EMAILJS_CONTACT_TEMPLATE_ID,
-            templateParams
-        );
-
-        // Clear form and show success message
-        form.reset();
-        alert('Message sent successfully! We will get back to you soon.');
-        
-    } catch (error) {
-        console.error('Contact form error:', error);
-        alert(error.message || 'There was an error sending your message. Please try again.');
-    } finally {
-        // Reset button state
-        submitButton.innerHTML = originalText;
-        submitButton.disabled = false;
+    if (!response.ok) {
+      throw new Error('Failed to send message');
     }
+    
+    // Show success message
+    form.reset();
+    alert('Message sent successfully!');
+    
+  } catch (error) {
+    // Handle error securely
+    const errorResponse = security.handleError(error, 'contact form submission');
+    alert(errorResponse.error);
+    
+  } finally {
+    // Re-enable submit button
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send Message';
+  }
 }
 
-// Initialize contact form
+// Initialize form
 document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactForm);
-    }
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleContactForm);
+  }
 });
 
 // Rate limiting implementation

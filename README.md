@@ -1,6 +1,6 @@
 # Lumyx Agency Website
 
-A modern, responsive website for Lumyx Agency featuring a beautiful design with interactive elements and a booking system.
+This repository contains the Lumyx Agency website, a modern digital marketing agency site built with HTML, CSS, and JavaScript.
 
 ## Features
 
@@ -136,4 +136,91 @@ npm run dev
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Local Development
+
+To run the site locally:
+
+```bash
+# Install dependencies
+npm install
+
+# Start local development server
+npm start
+```
+
+The site will be available at http://localhost:3000.
+
+## Optimization & Deployment
+
+### Optimization
+
+The site includes a production optimization script that:
+- Combines and minifies JavaScript files
+- Minifies CSS files
+- Optimizes images
+- Creates a production-ready build in the `dist` directory
+
+To run the optimization:
+
+```bash
+# Install required global tools
+npm install -g terser clean-css-cli imagemin-cli
+
+# Run the optimization script
+npm run optimize
+```
+
+### Testing the Optimized Build
+
+To test the optimized build locally:
+
+```bash
+npm run test
+```
+
+### Deployment to Netlify
+
+The site is configured for deployment to Netlify. You can deploy using one of these methods:
+
+1. **Automatic Deployment**: Connect your GitHub repository to Netlify for automatic deployments.
+
+2. **Netlify CLI**:
+   ```bash
+   # Install Netlify CLI if not already installed
+   npm install -g netlify-cli
+   
+   # Deploy to Netlify
+   npm run deploy
+   ```
+
+3. **Manual Upload**: Drag and drop the `dist` folder to Netlify's manual deploy area.
+
+## Performance Optimization
+
+The site includes several performance optimizations:
+- Resource preloading for critical assets
+- Lazy loading of images
+- Deferred loading of non-critical scripts
+- Minification of CSS and JavaScript
+- Image optimization
+
+## Additional Resources
+
+For more detailed information, check these files:
+- `deployment-checklist.md`: Complete pre-deployment checklist
+- `scripts/optimize-for-production.js`: Production build script
+- `netlify.toml`: Netlify configuration
+
+## Browser Support
+
+The site supports all modern browsers:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile Chrome (Android)
+- Mobile Safari (iOS)
+
+Internet Explorer is not supported. 

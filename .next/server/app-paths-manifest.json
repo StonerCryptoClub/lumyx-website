@@ -1,0 +1,13 @@
+{
+  "/api/newsletter/subscribe/route": "app/api/newsletter/subscribe/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/case-studies/[slug]/page": "app/case-studies/[slug]/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/page": "app/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/case-studies/page": "app/case-studies/page.js",
+  "/services/page": "app/services/page.js",
+  "/about/page": "app/about/page.js"
+}

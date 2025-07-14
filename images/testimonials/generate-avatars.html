@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Letter Avatars</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #1a1a1a;
+      color: white;
+      padding: 20px;
+    }
+    .avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+      font-weight: bold;
+      margin: 20px;
+      color: white;
+    }
+    .avatar-a {
+      background: linear-gradient(135deg, #FFA500, #FF6B00);
+    }
+    .avatar-m {
+      background: linear-gradient(135deg, #1E90FF, #00CED1);
+    }
+    .avatar-j {
+      background: linear-gradient(135deg, #FFA500, #1E90FF);
+    }
+    .controls {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      background: #FFA500;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .preview {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Testimonial Avatar Generator</h1>
+  <div class="controls">
+    <button onclick="downloadAll()">Download All Images</button>
+  </div>
+  <div class="preview">
+    <div>
+      <div class="avatar avatar-a" id="avatar-alex">A</div>
+      <p>Alex (alex.jpg)</p>
+    </div>
+    <div>
+      <div class="avatar avatar-m" id="avatar-maria">M</div>
+      <p>Maria (maria.jpg)</p>
+    </div>
+    <div>
+      <div class="avatar avatar-j" id="avatar-james">J</div>
+      <p>James (james.jpg)</p>
+    </div>
+  </div>
+
+  <script>
+    // Function to convert HTML element to canvas
+    function htmlToCanvas(element) {
+      return new Promise(resolve => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = element.offsetWidth;
+        canvas.height = element.offsetHeight;
+        
+        // Draw background gradient
+        const style = getComputedStyle(element);
+        const background = style.background;
+        
+        ctx.fillStyle = background;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw text
+        ctx.font = style.font;
+        ctx.fillStyle = style.color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(element.innerText, canvas.width / 2, canvas.height / 2);
+        
+        resolve(canvas);
+      });
+    }
+
+    // Function to download canvas as image
+    function downloadCanvas(canvas, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/jpeg', 0.9);
+      link.click();
+    }
+
+    // Function to download all avatars
+    async function downloadAll() {
+      const avatars = [
+        { element: document.getElementById('avatar-alex'), filename: 'alex.jpg' },
+        { element: document.getElementById('avatar-maria'), filename: 'maria.jpg' },
+        { element: document.getElementById('avatar-james'), filename: 'james.jpg' }
+      ];
+      
+      for (const avatar of avatars) {
+        const canvas = await htmlToCanvas(avatar.element);
+        downloadCanvas(canvas, avatar.filename);
+      }
+    }
+  </script>
+</body>
+</html> 

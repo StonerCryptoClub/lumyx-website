@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/blog.html", "destination": "/blog.html" },
+    { "source": "/mailchimp-form-custom.html", "destination": "/mailchimp-form-custom.html" },
+    { "source": "/case-study.html", "destination": "/case-study.html" },
+    { "source": "/case-studies/*", "destination": "/case-study.html" }
+  ],
+  "cleanUrls": false,
+  "trailingSlash": false
+} 

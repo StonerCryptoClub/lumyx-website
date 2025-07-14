@@ -71,4 +71,50 @@ async function getSubscriberBookings(email) {
         console.error('Error fetching bookings:', error);
         return { success: false, error: error.message };
     }
+}
+
+// Case Studies management
+async function getCaseStudies() {
+    try {
+        const { data, error } = await supabase
+            .from('case_studies')
+            .select(`
+                *,
+                results (
+                    metric,
+                    value,
+                    description
+                )
+            `)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return { success: true, data };
+    } catch (error) {
+        console.error('Error fetching case studies:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+async function getCaseStudyById(id) {
+    try {
+        const { data, error } = await supabase
+            .from('case_studies')
+            .select(`
+                *,
+                results (
+                    metric,
+                    value,
+                    description
+                )
+            `)
+            .eq('id', id)
+            .single();
+
+        if (error) throw error;
+        return { success: true, data };
+    } catch (error) {
+        console.error('Error fetching case study:', error);
+        return { success: false, error: error.message };
+    }
 } 

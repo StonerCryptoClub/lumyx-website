@@ -76,4 +76,4 @@ Disallow: /*.xml$
 Disallow: /*.yaml$
 Disallow: /*.yml$
 
-Sitemap: https://lumyx.co/sitemap.xml 
+Sitemap: https://lumyx.agency/sitemap.xml 

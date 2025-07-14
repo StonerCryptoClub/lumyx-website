@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 17, 24, 39;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white;
+  }
+}
+
+@layer components {
+  .blog-grid, .portfolio-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4;
+  }
+
+  .blog-post, .portfolio-item {
+    @apply bg-[var(--bg-dark)] rounded-lg overflow-hidden shadow-lg transform transition-transform hover:scale-105;
+  }
+
+  .blog-content, .portfolio-content {
+    @apply p-6;
+  }
+
+  .category {
+    @apply text-[var(--primary-orange)] text-sm uppercase tracking-wider;
+  }
+
+  .read-more, .view-project {
+    @apply inline-flex items-center text-[var(--complementary-blue)] hover:text-[var(--complementary-blue-light)];
+  }
+} 

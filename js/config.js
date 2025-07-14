@@ -9,6 +9,10 @@ window.config = {
         serviceId: 'service_qe8dgoh',
         clientTemplateId: 'template_jrwx295',
         teamTemplateId: 'template_t5xs49r'
+    },
+    contentful: {
+        spaceId: '74kxarv2y1kp',
+        accessToken: 'yJszWN6sgnfaKhUmjvl02S-T1UTq9TVBKLUH5xb5H8c'
     }
 };
 

@@ -1,0 +1,250 @@
+/* Case Study Page Styles */
+.case-study-article {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.case-study-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.breadcrumb {
+    margin-bottom: 1.5rem;
+    color: #666;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: var(--secondary-color);
+}
+
+.case-study-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.case-study-header .lead {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+}
+
+.case-study-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: #666;
+}
+
+.case-study-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.case-study-meta i {
+    color: var(--primary-color);
+}
+
+.case-study-hero {
+    margin: -2rem -2rem 2rem;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.results-section {
+    background: var(--gradient-bg);
+    margin: 2rem -2rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: #fff;
+}
+
+.results-section h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+}
+
+.result-item i {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.case-study-content {
+    max-width: 800px;
+    margin: 3rem auto;
+    line-height: 1.8;
+}
+
+.case-study-content h2 {
+    color: var(--primary-color);
+    margin: 2rem 0 1rem;
+    font-size: 1.8rem;
+}
+
+.case-study-content h3 {
+    color: var(--secondary-color);
+    margin: 1.5rem 0 1rem;
+    font-size: 1.5rem;
+}
+
+.case-study-content p {
+    margin-bottom: 1.5rem;
+    color: #444;
+}
+
+.case-study-content ul,
+.case-study-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.case-study-content li {
+    margin-bottom: 0.5rem;
+}
+
+.case-study-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.case-study-content a:hover {
+    border-color: var(--primary-color);
+}
+
+.embedded-asset {
+    margin: 2rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.embedded-asset img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.case-study-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--secondary-color);
+}
+
+.error-message {
+    text-align: center;
+    padding: 3rem;
+}
+
+.error-message h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.error-message p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.error-message a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.error-message a:hover {
+    border-color: var(--primary-color);
+}
+
+.error-details {
+    font-size: 0.9rem;
+    color: #999;
+    margin-top: 2rem;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .case-study-article {
+        padding: 1rem;
+    }
+
+    .case-study-header h1 {
+        font-size: 2rem;
+    }
+
+    .case-study-meta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .results-section {
+        margin: 1rem -1rem;
+        padding: 2rem 1rem;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+} 

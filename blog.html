@@ -68,16 +68,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Mobile Fixes -->
+  <link rel="stylesheet" href="css/mobile-fixes.css">
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Contentful -->
+  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   <!-- Configuration -->
   <script src="js/config.js"></script>
   <!-- Database Client -->
   <script src="js/supabase-client.js"></script>
+  <!-- Contentful Client -->
+  <script src="js/contentful-client.js"></script>
+  <!-- Placeholder Generator -->
+  <script src="js/generate-placeholders.js"></script>
+  <!-- Content Loader Initialization -->
+  <script src="js/content-loader-init.js"></script>
   
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/newsletter.css">
   
   <style>
     /* Base color variables */
@@ -238,6 +251,7 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
       margin-top: 40px;
+      justify-items: center;
     }
 
     .blog-card {
@@ -246,6 +260,8 @@
       border-radius: 15px;
       overflow: hidden;
       transition: all 0.3s ease;
+      width: 100%;
+      max-width: 350px;
     }
 
     .blog-card:hover {
@@ -274,7 +290,7 @@
       margin-bottom: 15px;
     }
 
-    .blog-content h3 {
+    .blog-content h2 {
       font-size: 1.5rem;
       margin-bottom: 15px;
       color: #ffffff;
@@ -284,6 +300,14 @@
       color: rgba(255, 255, 255, 0.7);
       margin-bottom: 20px;
       line-height: 1.6;
+      font-size: 0.95rem;
+      max-height: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
 
     .blog-meta {
@@ -350,40 +374,45 @@
 
     .newsletter-form {
       display: flex;
+      flex-wrap: wrap;
       gap: 15px;
-      max-width: 500px;
-      margin: 0 auto 50px;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
     }
 
-    .newsletter input {
+    .newsletter-form input {
       flex: 1;
-      padding: 15px 20px;
-      border: none;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      color: rgba(0, 0, 0, 0.5);
+      min-width: 250px;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
       font-size: 1rem;
     }
-
-    .newsletter input::placeholder {
-      color: rgba(0, 0, 0, 0.5);
+    
+    .newsletter-form input::placeholder {
+      color: rgba(255,255,255,0.6);
     }
-
-    .newsletter button {
+    
+    .newsletter-form button {
+      margin-top: 10px;
       padding: 15px 30px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
       border: none;
-      border-radius: 10px;
-      background: #ffffff;
-      color: var(--complementary-blue);
+      border-radius: 8px;
+      color: #fff;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
+      width: 100%;
+      max-width: 250px;
     }
-
-    .newsletter button:hover {
-      background: var(--complementary-blue-light);
-      color: #ffffff;
+    
+    .newsletter-form button:hover {
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
     }
 
     .feature-grid {
@@ -426,10 +455,16 @@
     @media (max-width: 768px) {
       .newsletter-form {
         flex-direction: column;
+        padding: 0 20px;
       }
-
-      .newsletter button {
+      
+      .newsletter-form input {
         width: 100%;
+      }
+      
+      .newsletter-form button {
+        width: 100%;
+        max-width: none;
       }
 
       .feature-grid {
@@ -584,7 +619,7 @@
         padding: 20px;
       }
 
-      .blog-content h3 {
+      .blog-content h2 {
         font-size: 1.3rem;
       }
 
@@ -642,7 +677,7 @@
         font-size: 0.8rem;
       }
 
-      .blog-content h3 {
+      .blog-content h2 {
         font-size: 1.2rem;
       }
 
@@ -788,10 +823,11 @@
 
   <header>
     <div class="logo">
-      <img src="Logo.png.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" loading="lazy">
+              <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" loading="lazy">
       <h1>Lumyx Agency</h1>
     </div>
-    <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
+    <a href="/index.html" class="mobile-home-btn">Home</a>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
       <i class="fas fa-bars"></i>
     </button>
     <nav aria-label="Main Navigation">
@@ -804,6 +840,25 @@
     </nav>
   </header>
 
+  <!-- Mobile Navigation Sidebar -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="mobile-nav-sidebar" id="mobile-nav-sidebar">
+    <div class="mobile-nav-header">
+      <h3>Menu</h3>
+      <button class="mobile-nav-close" id="mobile-nav-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="mobile-nav-menu">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="index.html#about" class="mobile-nav-link">About</a>
+      <a href="index.html#services" class="mobile-nav-link">Services</a>
+      <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+      <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+      <a href="blog.html" class="mobile-nav-link active">Blog</a>
+    </div>
+  </div>
+
   <main>
     <section class="blog-section">
       <div class="blog-header">
@@ -812,92 +867,13 @@
       </div>
 
       <div class="blog-grid">
-        <!-- Blog Card 1 -->
-        <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
-          <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-               alt="Social Media Marketing Strategies - Person analyzing social media metrics on a laptop" 
-               width="800" height="450" loading="lazy" itemprop="image">
-          <div class="blog-content">
-            <span class="blog-category">Digital Marketing</span>
-            <h2 itemprop="headline">10 Proven Strategies to Boost Your Social Media Engagement in 2024</h2>
-            <p itemprop="description">Learn data-driven techniques to increase your social media following, improve engagement rates, and convert followers into customers.</p>
-            <div class="blog-meta">
-              <span itemprop="datePublished"><i class="far fa-calendar"></i> March 15, 2024</span>
-              <span><i class="far fa-clock"></i> 5 min read</span>
-              <span itemprop="author" itemscope itemtype="https://schema.org/Organization"><i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span></span>
-            </div>
-            <a href="blog/social-media-engagement-strategies.html" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </article>
-
-        <!-- Blog Card 2 -->
-        <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-               alt="Brand Identity Development - Team collaborating on brand strategy with sticky notes" 
-               width="800" height="450" loading="lazy" itemprop="image">
-          <div class="blog-content">
-            <span class="blog-category">Brand Strategy</span>
-            <h2 itemprop="headline">Building a Memorable Brand Identity That Drives Growth in 2024</h2>
-            <p itemprop="description">Discover the essential elements of creating a powerful brand identity that resonates with your target audience and drives business growth.</p>
-            <div class="blog-meta">
-              <span itemprop="datePublished"><i class="far fa-calendar"></i> March 10, 2024</span>
-              <span><i class="far fa-clock"></i> 7 min read</span>
-              <span itemprop="author" itemscope itemtype="https://schema.org/Organization"><i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span></span>
-            </div>
-            <a href="blog/brand-identity-development.html" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </article>
-
-        <!-- Blog Card 3 -->
-        <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
-          <img src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-               alt="SEO Optimization - Person analyzing website analytics and search rankings" 
-               width="800" height="450" loading="lazy" itemprop="image">
-          <div class="blog-content">
-            <span class="blog-category">SEO</span>
-            <h2 itemprop="headline">Advanced SEO Techniques to Dominate Search Rankings in 2024</h2>
-            <p itemprop="description">Implement these cutting-edge SEO strategies to improve your website visibility, drive organic traffic, and outrank your competitors.</p>
-            <div class="blog-meta">
-              <span itemprop="datePublished"><i class="far fa-calendar"></i> March 5, 2024</span>
-              <span><i class="far fa-clock"></i> 6 min read</span>
-              <span itemprop="author" itemscope itemtype="https://schema.org/Organization"><i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span></span>
-            </div>
-            <a href="blog/advanced-seo-techniques.html" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </article>
+        <!-- Blog posts will be loaded dynamically here -->
       </div>
     </section>
 
-    <section class="newsletter" aria-labelledby="newsletter-heading">
-      <div class="container">
-        <h2 id="newsletter-heading">Stay Updated with Industry Insights</h2>
-        <p>Subscribe to our newsletter for exclusive digital marketing tips and strategies delivered to your inbox</p>
-        <form class="newsletter-form" id="newsletter-form">
-          <input type="email" placeholder="Enter your email address" aria-label="Email address" required>
-          <button type="submit">Subscribe Now</button>
-        </form>
-        <div class="feature-grid">
-          <div class="feature-item">
-            <i class="fas fa-newspaper"></i>
-            <h3>Weekly Insights</h3>
-            <p>Get the latest industry news and actionable marketing trends</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-lightbulb"></i>
-            <h3>Exclusive Tips</h3>
-            <p>Receive expert advice and proven growth strategies</p>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-chart-line"></i>
-            <h3>Industry Updates</h3>
-            <p>Stay ahead of the competition with cutting-edge tactics</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+      </main>
 
-  <footer>
+<footer>
     <div class="container">
       <div class="footer-section">
         <h3>Lumyx Agency</h3>
@@ -923,36 +899,55 @@
   </footer>
 
   <script>
-    // Mobile Menu Functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelectorAll('nav a');
+    // Mobile Navigation Sidebar Functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+    const mobileNavSidebar = document.getElementById('mobile-nav-sidebar');
+    const mobileNavClose = document.getElementById('mobile-nav-close');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-    mobileMenuBtn.addEventListener('click', function() {
-      nav.classList.toggle('active');
-      document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+    function openMobileMenu() {
+      mobileNavOverlay.classList.add('active');
+      mobileNavSidebar.classList.add('active');
+      document.body.style.overflow = 'hidden';
       
-      // Toggle menu icon
-      const icon = this.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
-    });
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.replace('fa-bars', 'fa-times');
+    }
+
+    function closeMobileMenu() {
+      mobileNavOverlay.classList.remove('active');
+      mobileNavSidebar.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.replace('fa-times', 'fa-bars');
+    }
+
+    // Open mobile menu
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+
+    // Close mobile menu
+    mobileNavClose.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking overlay
+    mobileNavOverlay.addEventListener('click', closeMobileMenu);
 
     // Close menu when clicking nav links
-    navLinks.forEach(link => {
+    mobileNavLinks.forEach(link => {
       link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        document.body.style.overflow = '';
-        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        closeMobileMenu();
+        
+        // Add active state to clicked link
+        mobileNavLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
       });
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!nav.contains(e.target) && !mobileMenuBtn.contains(e.target) && nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        document.body.style.overflow = '';
-        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+    // Close menu when pressing escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNavSidebar.classList.contains('active')) {
+        closeMobileMenu();
       }
     });
 
@@ -1060,6 +1055,8 @@
       }
     });
   </script>
-  <script src="contentful-loader.js"></script>
+  <script src="js/contentful-loader.js"></script>
+  <script src="js/newsletter.js"></script>
+  <script src="js/form-fix.js"></script>
 </body>
 </html> 

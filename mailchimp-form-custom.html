@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter Signup - Lumyx Agency</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>    /* Base styles */
+    :root {
+      --primary-color: #1E3A8A;
+      --primary-gradient: linear-gradient(135deg, #1E3A8A 0%, #0EA5E9 100%);
+      --accent-color: #F59E0B;
+      --text-color: #333333;
+      --light-text: #FFFFFF;
+      --border-radius: 8px;
+      --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #F0F4F8;
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+    }
+    
+    /* Form container */
+    .signup-container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      background-color: #FFFFFF;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+    }
+    
+    /* Header section */
+    .signup-header {
+      background: var(--primary-gradient);
+      color: var(--light-text);
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .signup-header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .signup-header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+    
+    .logo {
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    /* Content section */
+    .signup-content {
+      display: flex;
+      flex-direction: row;
+    }
+    
+    /* Form section */
+    .form-section {
+      flex: 1;
+      padding: 30px;
+    }
+    
+    .form-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .form-row {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .required:after {
+      content: "*";
+      color: #E11D48;
+      margin-left: 4px;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #D1D5DB;
+      border-radius: var(--border-radius);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+    }
+    
+    /* Phone field */
+    .phone-field {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    
+    .phone-area {
+      width: 60px;
+    }
+    
+    .phone-detail1 {
+      width: 60px;
+    }
+    
+    .phone-detail2 {
+      width: 80px;
+    }
+    
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent-color);
+      color: var(--light-text);
+      border: none;
+      border-radius: var(--border-radius);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+    
+    .submit-btn:hover {
+      background: #E89D0B;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+    }
+    
+    /* Benefits section */
+    .benefits-section {
+      flex: 1;
+      background-color: #F9FAFB;
+      padding: 30px;
+      border-left: 1px solid #E5E7EB;
+    }
+    
+    .benefits-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      color: var(--light-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+    
+    .benefit-text h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+    
+    .benefit-text p {
+      font-size: 14px;
+      color: #4B5563;
+    }
+    
+    /* Privacy policy */
+    .privacy-policy {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #6B7280;
+      text-align: center;
+      padding: 0 30px 30px;
+    }
+    
+    /* Error messages */
+    .error-message {
+      color: #E11D48;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .signup-content {
+        flex-direction: column;
+      }
+      
+      .benefits-section {
+        border-left: none;
+        border-top: 1px solid #E5E7EB;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <!-- Header section -->
+    <div class="signup-header">
+      <div class="logo">LumyxAgency</div>
+      <h1>Join Our Newsletter</h1>
+      <p>Subscribe to receive expert insights, industry updates, and exclusive content delivered right to your inbox.</p>
+    </div>
+    
+    <!-- Content section with form and benefits -->
+    <div class="signup-content">
+      <!-- Form section -->
+      <div class="form-section">
+        <h2 class="form-title">Sign up today</h2>
+        <form action="https://gmail.us10.list-manage.com/subscribe/post" method="post">
+          <input type="hidden" name="u" value="658c23db9ba64ab753d154574">
+          <input type="hidden" name="id" value="3291b75520">
+          
+          <div class="form-row">
+            <label for="MERGE0" class="form-label required">Email Address</label>
+            <input type="email" class="form-input" name="MERGE0" id="MERGE0" autocapitalize="off" autocorrect="off" required>
+            <div class="error-message"></div>
+          </div>
+          
+          <div class="form-row">
+            <label for="MERGE1" class="form-label">First Name</label>
+            <input type="text" class="form-input" name="MERGE1" id="MERGE1">
+            <div class="error-message"></div>
+          </div>
+          
+          <div class="form-row">
+            <label for="MERGE2" class="form-label">Last Name</label>
+            <input type="text" class="form-input" name="MERGE2" id="MERGE2">
+            <div class="error-message"></div>
+          </div>
+          
+          <div class="form-row">
+            <label for="MERGE4" class="form-label">Phone Number</label>
+            <div class="phone-field">
+              (<input type="text" pattern="[0-9]*" class="form-input phone-area" id="MERGE4-area" name="MERGE4[area]" maxlength="3" placeholder="###">)
+              <input type="text" pattern="[0-9]*" class="form-input phone-detail1" id="MERGE4-detail1" name="MERGE4[detail1]" maxlength="3" placeholder="###">
+              -
+              <input type="text" pattern="[0-9]*" class="form-input phone-detail2" id="MERGE4-detail2" name="MERGE4[detail2]" maxlength="4" placeholder="####">
+            </div>
+            <div class="error-message"></div>
+          </div>
+          
+          <div class="form-row">
+            <label for="MERGE6" class="form-label">Company</label>
+            <input type="text" class="form-input" name="MERGE6" id="MERGE6">
+            <div class="error-message"></div>
+          </div>
+          
+          <!-- Bot protection field -->
+          <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_658c23db9ba64ab753d154574_3291b75520" tabindex="-1" value="">
+          </div>
+          
+          <button type="submit" class="submit-btn" name="submit">
+            <i class="fas fa-paper-plane"></i> Subscribe Now
+          </button>
+        </form>
+      </div>
+      
+      <!-- Benefits section -->
+      <div class="benefits-section">
+        <h2 class="benefits-title">Why Subscribe?</h2>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <div class="benefit-text">
+            <h3>Expert Insights</h3>
+            <p>Get exclusive industry insights and strategies from our experienced team of digital marketers.</p>
+          </div>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="benefit-text">
+            <h3>Growth Tips & Tricks</h3>
+            <p>Learn actionable tips to grow your online presence and boost your business revenue.</p>
+          </div>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="benefit-text">
+            <h3>Exclusive Updates</h3>
+            <p>Be the first to know about new digital marketing trends and algorithm changes.</p>
+          </div>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-gift"></i>
+          </div>
+          <div class="benefit-text">
+            <h3>Special Offers</h3>
+            <p>Get access to exclusive offers, discounts and early-bird rates on our services.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Privacy policy -->
+    <div class="privacy-policy">
+      <p>We respect your privacy. Your information will never be shared with third parties. You can unsubscribe at any time.</p>
+    </div>
+  </div>
+  
+  <!-- jQuery required for Mailchimp validation -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Mailchimp Form Javascript -->
+  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+  <script type='text/javascript'>
+    (function($) {
+      window.fnames = new Array(); 
+      window.ftypes = new Array();
+      fnames[0]='EMAIL';
+      ftypes[0]='email';
+      fnames[1]='FNAME';
+      ftypes[1]='text';
+      fnames[2]='LNAME';
+      ftypes[2]='text';
+      fnames[4]='PHONE';
+      ftypes[4]='phone';
+      fnames[6]='COMPANY';
+      ftypes[6]='text';
+    }(jQuery));
+    var $mcj = jQuery.noConflict(true);
+  </script>
+</body>
+</html> 

@@ -102,56 +102,143 @@ function createBlogModal(post) {
 
 // Function to load blog posts
 async function loadBlogPosts() {
+    // Blog posts placeholders in case the API fails
+    const placeholderPosts = window.PLACEHOLDER_BLOG_POSTS || [
+        {
+            fields: {
+                title: "10 Proven Strategies to Boost Your Social Media Engagement in 2024",
+                slug: "social-media-engagement-strategies",
+                category: "Digital Marketing",
+                excerpt: "Learn data-driven techniques to increase your social media following, improve engagement rates, and convert followers into customers.",
+                publishdate: "2024-03-15",
+                readtime: "5",
+                featuredImage: { 
+                    fields: { 
+                        file: { url: "//images.ctfassets.net/74kxarv2y1kp/5JYfE6NbpfG0hQyCIxCcQZ/3d48b312c258d0cd403fb19455f0ad29/social-media-image.jpg" } 
+                    } 
+                }
+            }
+        },
+        {
+            fields: {
+                title: "Building a Memorable Brand Identity That Drives Growth in 2024",
+                slug: "brand-identity-growth",
+                category: "Brand Strategy",
+                excerpt: "Discover the essential elements of creating a powerful brand identity that resonates with your target audience and drives business growth.",
+                publishdate: "2024-03-10",
+                readtime: "7",
+                featuredImage: { 
+                    fields: { 
+                        file: { url: "//images.ctfassets.net/74kxarv2y1kp/2MRfG7YFiP3q3vfbVLZcge/a4e34f0c5f89fa14e4b0f1a2ccc33e45/brand-identity-image.jpg" } 
+                    } 
+                }
+            }
+        },
+        {
+            fields: {
+                title: "Advanced SEO Techniques to Dominate Search Rankings in 2024",
+                slug: "advanced-seo-techniques",
+                category: "SEO",
+                excerpt: "Implement these cutting-edge SEO strategies to improve your website visibility, drive organic traffic, and outrank your competitors.",
+                publishdate: "2024-03-05",
+                readtime: "6",
+                featuredImage: { 
+                    fields: { 
+                        file: { url: "//images.ctfassets.net/74kxarv2y1kp/3V0i8YrZDQ28LCGVmJPRg0/63c5b426b5e8902d12af622928119dc4/seo-image.jpg" } 
+                    } 
+                }
+            }
+        }
+    ];
+
+    console.log('Loading blog posts...');
+    
+    // Get blog container
+    const blogContainer = document.querySelector('.blog-grid');
+    if (!blogContainer) {
+        console.error('Blog container not found');
+        return;
+    }
+    
     try {
+        // Try to fetch from Contentful
         const response = await fetch(
-            `https://cdn.contentful.com/spaces/${contentfulClient.spaceId}/entries?content_type=blogPost&access_token=${contentfulClient.accessToken}`
+            `https://cdn.contentful.com/spaces/${contentfulClient.spaceId}/entries?content_type=blogPost&access_token=${contentfulClient.accessToken}`,
+            { method: 'GET', timeout: 3000 }
         );
+        
+        if (!response.ok) {
+            throw new Error(`Contentful API responded with status: ${response.status}`);
+        }
+        
         const data = await response.json();
         
-        const blogContainer = document.querySelector('.blog-grid');
-        if (!blogContainer) return;
+        // If we got posts from Contentful and they have items
+        if (data && data.items && data.items.length > 0) {
+            console.log('Successfully loaded blog posts from Contentful:', data.items.length);
         
-        // Store existing placeholder cards
-        const existingCards = blogContainer.querySelectorAll('.blog-card');
+            // Clear blog container
+            blogContainer.innerHTML = '';
         
-        // Only proceed if we got posts from Contentful
-        if (data.items && data.items.length > 0) {
-            data.items.forEach((post, index) => {
-                if (index < existingCards.length) { // Only replace existing cards
+            // Render posts from Contentful
+            data.items.forEach((post) => {
                     // Get the image URL from the linked assets
                     const imageId = post.fields.featuredImage?.sys?.id;
-                    const imageUrl = data.includes?.Asset?.find(asset => asset.sys.id === imageId)?.fields?.file?.url;
+                const imageAsset = data.includes?.Asset?.find(asset => asset.sys.id === imageId);
+                const imageUrl = imageAsset?.fields?.file?.url || 
+                                '//images.ctfassets.net/74kxarv2y1kp/default-blog-image/default-image.jpg';
                     
-                    const postHTML = `
+                const postHTML = createBlogPostHTML(post, imageUrl);
+                blogContainer.innerHTML += postHTML;
+            });
+        } else {
+            // No posts from Contentful, use placeholders
+            console.log('No blog posts found in Contentful, using placeholders');
+            renderPlaceholderPosts(blogContainer, placeholderPosts);
+        }
+    } catch (error) {
+        console.error('Error loading blog posts from Contentful:', error);
+        renderPlaceholderPosts(blogContainer, placeholderPosts);
+    }
+}
+
+// Helper function to create blog post HTML
+function createBlogPostHTML(post, imageUrl) {
+    return `
                         <article class="blog-card" itemscope itemtype="https://schema.org/BlogPosting">
-                            <div class="blog-image">
-                                <img src="${imageUrl ? 'https:' + imageUrl : 'placeholder-image.jpg'}" 
+            <img src="${imageUrl ? 'https:' + imageUrl : 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'}" 
                                      alt="${post.fields.title}" 
                                      width="800" height="450" loading="lazy" itemprop="image">
-                            </div>
                             <div class="blog-content">
-                                <span class="blog-category">${post.fields.category || 'General'}</span>
+                <span class="blog-category">${post.fields.category || 'Digital Marketing'}</span>
                                 <h2 itemprop="headline">${post.fields.title}</h2>
-                                <p itemprop="description">${post.fields.excerpt}</p>
+                <p itemprop="description">${post.fields.excerpt || 'No description available'}</p>
                                 <div class="blog-meta">
-                                    <span itemprop="datePublished"><i class="far fa-calendar"></i> ${formatDate(post.fields.publishdate)}</span>
-                                    <span><i class="far fa-clock"></i> ${post.fields.readtime} min read</span>
+                    <span itemprop="datePublished"><i class="far fa-calendar"></i> ${formatDate(post.fields.publishdate || new Date())}</span>
+                    <span><i class="far fa-clock"></i> ${post.fields.readtime || '5'} min read</span>
                                     <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
                                         <i class="far fa-user"></i> <span itemprop="name">Lumyx Team</span>
                                     </span>
                                 </div>
-                                <a href="blog-post.html?slug=${post.fields.slug}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                <a href="./blog-post.html?slug=${post.fields.slug}" class="read-more" itemprop="url">Read More <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </article>
                     `;
-                    existingCards[index].outerHTML = postHTML;
-                }
-            });
-        }
-    } catch (error) {
-        console.error('Error loading blog posts:', error);
-        // On error, keep the existing content visible
-    }
+}
+
+// Helper function to render placeholder posts
+function renderPlaceholderPosts(container, posts) {
+    // Clear container first
+    container.innerHTML = '';
+    
+    // Render placeholder posts
+    posts.forEach((post) => {
+        const imageUrl = post.fields.featuredImage?.fields?.file?.url || 
+                        '//images.unsplash.com/photo-1611926653458-09294b3142bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+        
+        const postHTML = createBlogPostHTML(post, imageUrl);
+        container.innerHTML += postHTML;
+    });
 }
 
 // Load content when page loads
