@@ -2,7 +2,14 @@
 
 /* Hide mobile blog button by default (desktop) */
 .mobile-blog-btn {
-  display: none;
+  display: none !important;
+}
+
+/* Only show mobile blog button on mobile screens */
+@media screen and (max-width: 992px) {
+  .mobile-blog-btn {
+    display: inline-block !important;
+  }
 }
 
 /* Hide mobile menu button by default */
