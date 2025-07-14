@@ -1,7 +1,7 @@
 [build]
   publish = "dist"
-  command = "node scripts/optimize-for-production.js"
+  command = "node scripts/optimize-for-production-simple.js"
 
 # Production context
 [context.production]
-  command = "node scripts/optimize-for-production.js"
+  command = "node scripts/optimize-for-production-simple.js"
