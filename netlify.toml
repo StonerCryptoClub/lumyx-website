@@ -2,15 +2,7 @@
   publish = "dist"
   command = "node scripts/optimize-for-production.js"
 
-# Disable Next.js plugin for static site
-[build.environment]
-  NEXT_JS_PLUGIN = "false"
-
-# Disable plugins
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    disable = true
+# Static site build - not Next.js
 
 # Production context
 [context.production]
