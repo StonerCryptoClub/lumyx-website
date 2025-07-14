@@ -21,22 +21,7 @@
   "author": "Lumyx Agency",
   "license": "UNLICENSED",
   "dependencies": {
-    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-    "@types/csrf": "^1.3.2",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "autoprefixer": "^10.4.21",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "contentful": "^10.6.16",
-    "csrf": "^3.1.0",
-    "cssnano": "^7.1.0",
-    "next": "^15.4.1",
-    "postcss": "^8.5.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3"
+    "contentful": "^10.6.16"
   },
   "devDependencies": {
     "clean-css-cli": "^5.6.2",

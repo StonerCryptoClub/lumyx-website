@@ -2,22 +2,6 @@
   publish = "dist"
   command = "node scripts/optimize-for-production.js"
 
-# Disable Next.js auto-detection by setting environment variables
-[build.environment]
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
-  NETLIFY_SKIP_NEXT_PLUGIN = "true"
-
 # Production context
 [context.production]
   command = "node scripts/optimize-for-production.js"
-
-# Disable automatic framework detection
-[build.processing]
-  skip_processing = false
-
-# Headers for static assets
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
