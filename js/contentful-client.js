@@ -71,7 +71,7 @@ window.contentfulHelpers = {
     getCaseStudies: async () => {
         try {
             const response = await client.getEntries({
-                content_type: 'caseStudies',
+                content_type: 'caseStudy',
                 order: '-sys.createdAt'
             });
             
@@ -95,7 +95,7 @@ window.contentfulHelpers = {
         try {
             // First try to get from Contentful
             const response = await client.getEntries({
-                content_type: 'caseStudies',
+                content_type: 'caseStudy',
                 'fields.slug': slug,
                 include: 2
             });
