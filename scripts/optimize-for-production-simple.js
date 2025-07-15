@@ -83,6 +83,40 @@ function copyFiles() {
     console.log('Copied images');
   }
 
+  // Ensure testimonial images are copied
+  const testimonialImages = [
+    'images/testimonials/alex.svg',
+    'images/testimonials/maria.svg', 
+    'images/testimonials/james.svg'
+  ];
+  
+  fs.mkdirSync(path.join(config.outputDir, 'images', 'testimonials'), { recursive: true });
+  
+  testimonialImages.forEach(imgPath => {
+    if (fs.existsSync(imgPath)) {
+      const fileName = path.basename(imgPath);
+      fs.copyFileSync(imgPath, path.join(config.outputDir, 'images', 'testimonials', fileName));
+      console.log(`Copied testimonial image: ${fileName}`);
+    }
+  });
+
+  // Ensure portfolio images are copied
+  const portfolioImages = [
+    'images/portfolio/marketing-placeholder.svg',
+    'images/portfolio/web-dev-placeholder.svg',
+    'images/portfolio/social-placeholder.svg'
+  ];
+  
+  fs.mkdirSync(path.join(config.outputDir, 'images', 'portfolio'), { recursive: true });
+  
+  portfolioImages.forEach(imgPath => {
+    if (fs.existsSync(imgPath)) {
+      const fileName = path.basename(imgPath);
+      fs.copyFileSync(imgPath, path.join(config.outputDir, 'images', 'portfolio', fileName));
+      console.log(`Copied portfolio image: ${fileName}`);
+    }
+  });
+
   // Copy HTML files
   config.htmlFiles.forEach(file => {
     if (fs.existsSync(file)) {
