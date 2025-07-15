@@ -12,11 +12,21 @@
   }
 }
 
-/* Override any conflicting rules */
+/* Override any conflicting rules - FORCE HIDE ON DESKTOP */
 @media screen and (min-width: 993px) {
   .mobile-blog-btn,
   .mobile-home-btn {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+/* Force hide mobile blog button on all desktop screens */
+@media screen and (min-width: 769px) {
+  .mobile-blog-btn {
+    display: none !important;
+    visibility: hidden !important;
   }
 }
 
