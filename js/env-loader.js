@@ -1,79 +1,73 @@
-// Environment Variable Loader for Client-Side
-// This loads environment variables safely for production use
-
-class EnvLoader {
+// Environment configuration loader
+class EnvironmentLoader {
     constructor() {
-        this.config = {};
-        this.loadEnvironmentVariables();
+        this.config = null;
+        this.isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     }
 
-    loadEnvironmentVariables() {
-        // In production, these should be set via build process or server-side injection
-        // For development, we'll use a fallback method
-        
-        if (typeof process !== 'undefined' && process.env) {
-            // Node.js environment (build time)
+    // Load configuration from environment variables or fallback to defaults
+    loadConfig() {
+        // Try to load from injected ENV_CONFIG first
+        if (window.ENV_CONFIG) {
             this.config = {
-                supabase: {
-                    url: process.env.SUPABASE_URL,
-                    anonKey: process.env.SUPABASE_ANON_KEY
-                },
                 contentful: {
-                    spaceId: process.env.CONTENTFUL_SPACE_ID,
-                    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+                    spaceId: window.ENV_CONFIG.CONTENTFUL_SPACE_ID,
+                    accessToken: window.ENV_CONFIG.CONTENTFUL_ACCESS_TOKEN
                 },
                 emailjs: {
-                    publicKey: process.env.EMAILJS_PUBLIC_KEY,
-                    serviceId: process.env.EMAILJS_SERVICE_ID,
-                    clientTemplateId: process.env.EMAILJS_CLIENT_TEMPLATE_ID,
-                    teamTemplateId: process.env.EMAILJS_TEAM_TEMPLATE_ID
+                    publicKey: window.ENV_CONFIG.EMAILJS_PUBLIC_KEY,
+                    serviceId: window.ENV_CONFIG.EMAILJS_SERVICE_ID,
+                    clientTemplateId: window.ENV_CONFIG.EMAILJS_CLIENT_TEMPLATE_ID,
+                    teamTemplateId: window.ENV_CONFIG.EMAILJS_TEAM_TEMPLATE_ID
                 }
             };
         } else {
-            // Browser environment - use injected variables
-            this.config = window.ENV_CONFIG || this.getDefaultConfig();
+            // Fallback to hardcoded values for development
+            console.warn('ENV_CONFIG not found, using fallback configuration');
+            this.config = {
+                contentful: {
+                    spaceId: '74kxarv2y1kp',
+                    accessToken: 'yJszWN6sgnfaKhUmjvl02S-T1UTq9TVBKLUH5xb5H8c'
+                },
+                emailjs: {
+                    publicKey: 'kroz7yxsw1nMzB7br',
+                    serviceId: 'service_qe8dgoh',
+                    clientTemplateId: 'template_jrwx295',
+                    teamTemplateId: 'template_t5xs49r'
+                }
+            };
         }
-    }
 
-    getDefaultConfig() {
-        // Fallback configuration for development
-        // In production, this should be replaced with proper env var injection
-        return {
-            supabase: {
-                url: 'SUPABASE_URL_PLACEHOLDER',
-                anonKey: 'SUPABASE_ANON_KEY_PLACEHOLDER'
-            },
-            contentful: {
-                spaceId: 'CONTENTFUL_SPACE_ID_PLACEHOLDER',
-                accessToken: 'CONTENTFUL_ACCESS_TOKEN_PLACEHOLDER'
-            },
-            emailjs: {
-                publicKey: 'EMAILJS_PUBLIC_KEY_PLACEHOLDER',
-                serviceId: 'EMAILJS_SERVICE_ID_PLACEHOLDER',
-                clientTemplateId: 'EMAILJS_CLIENT_TEMPLATE_ID_PLACEHOLDER',
-                teamTemplateId: 'EMAILJS_TEAM_TEMPLATE_ID_PLACEHOLDER'
-            }
-        };
-    }
-
-    getConfig() {
+        // Make config globally available
+        window.config = this.config;
+        Object.freeze(window.config);
+        
         return this.config;
     }
 
-    isConfigured() {
-        return this.config.supabase.url && 
-               this.config.supabase.url !== 'SUPABASE_URL_PLACEHOLDER' &&
-               this.config.contentful.spaceId && 
-               this.config.contentful.spaceId !== 'CONTENTFUL_SPACE_ID_PLACEHOLDER';
+    // Check if configuration is valid
+    isConfigValid() {
+        return this.config.contentful.spaceId &&
+               this.config.contentful.spaceId !== 'CONTENTFUL_SPACE_ID_PLACEHOLDER' &&
+               this.config.contentful.accessToken &&
+               this.config.contentful.accessToken !== 'CONTENTFUL_ACCESS_TOKEN_PLACEHOLDER';
+    }
+
+    // Get configuration
+    getConfig() {
+        if (!this.config) {
+            this.loadConfig();
+        }
+        return this.config;
     }
 }
 
 // Initialize environment loader
-window.envLoader = new EnvLoader();
-window.config = window.envLoader.getConfig();
+const envLoader = new EnvironmentLoader();
+envLoader.loadConfig();
 
-// Prevent modification of configuration
-Object.freeze(window.config);
+// Export for use in other scripts
+window.envLoader = envLoader;
 
 // Encryption functions for data security (keeping existing functionality)
 window.encryptData = function(data, key) {

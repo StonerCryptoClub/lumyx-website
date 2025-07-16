@@ -1,4 +1,1 @@
-/* Override for value-expanded class to center align text */
-.value-card .value-expanded {
-    text-align: center !important;
-} 
+.value-card .value-expanded{text-align: center !important}

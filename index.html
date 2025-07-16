@@ -83,7 +83,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   
   <!-- Configuration -->
@@ -94,8 +94,7 @@
   <script src="js/html-sanitizer.js"></script>
   <!-- Input Validator -->
   <script src="js/input-validator.js"></script>
-  <!-- Database Client -->
-  <script src="js/supabase-client.js"></script>
+
   <!-- Contentful Client -->
   <script src="js/contentful-client.js?v=20250116c"></script>
   <!-- Portfolio Manager -->
@@ -219,8 +218,7 @@
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet' />
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <!-- Configuration -->
   <script src="js/env-loader.js"></script>
   <!-- HTML Sanitizer -->
@@ -228,7 +226,7 @@
   <!-- Input Validator -->
   <script src="js/input-validator.js"></script>
   <!-- Database Client -->
-  <script src="js/supabase-client.js"></script>
+
   <!-- Newsletter Popup Integration -->
   <script src="js/mailchimp-integration.js"></script>
   <style>
@@ -5735,7 +5733,7 @@
     }
   </style>
   <!-- Add these in the head section -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -5754,14 +5752,7 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://lumyx.co/">
 
-  <!-- Initialize Supabase -->
-  <script>
-      // Initialize Supabase client
-      const supabaseUrl = 'https://ctvmeagzyszekbljtuwm.supabase.co';
-      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0dm1lYWd6eXN6ZWtibGp0dXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5NTQ5NzcsImV4cCI6MjAyNjUzMDk3N30.2jvxMxPPbvPHqyxDmXX6GbRz_JJVGaB2FK1YAS5N9Ow';
-  
-      window.supabaseJs = supabaseJs;
-  </script>
+
 
   <!-- Initialize Calendly -->
   <script>
@@ -6888,7 +6879,7 @@
         try {
             const timeSlotGrid = document.querySelector('.time-slot-grid');
             
-            // Fetch booked times from Supabase
+            // Fetch booked times
             const { data: bookedTimes, error } = await getBookedTimes(selectedDate);
             
             if (error) {
