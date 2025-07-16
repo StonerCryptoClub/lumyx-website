@@ -9,6 +9,17 @@
 const PLACEHOLDER_CASE_STUDIES = [
     {
         fields: {
+            title: "Test Project - Website Redesign",
+            category: "Web Development",
+            excerpt: "A complete website overhaul that improved user experience and conversion rates by 150%. This is a test case study to verify our integration.",
+            slug: "test-project-website-redesign",
+            clientName: "Test Client Inc.",
+            projectDate: "2024-01-15",
+            results: "150% increase in conversions<br>40% faster load times<br>95% user satisfaction rate<br>6-month project"
+        }
+    },
+    {
+        fields: {
             title: "Meta Ads Scaling Success",
             category: "Ad Campaigns",
             excerpt: "Scaled ad campaigns across Meta platforms achieving 350% ROAS and 2.5x customer acquisition rate.",

@@ -8,59 +8,35 @@ const client = contentful.createClient({
 const placeholders = [
     {
         fields: {
-            title: "Website Redesign & Development",
+            title: "Test Project - Website Redesign",
             category: "Web Development",
-            description: "A complete website overhaul that improved user experience and conversion rates by 150%. This is a test case study to verify our integration.",
+            excerpt: "A complete website overhaul that improved user experience and conversion rates by 150%. This is a test case study to verify our integration.",
+            slug: "test-project-website-redesign",
             clientName: "Test Client Inc.",
-            results: {
-                mainMetric: {
-                    value: "150%",
-                    label: "increase in conversions"
-                },
-                supportingMetrics: [
-                    "40% faster load times",
-                    "95% user satisfaction rate"
-                ]
-            },
-            slug: "website-redesign"
+            projectDate: "2024-01-15",
+            results: "150% increase in conversions<br>40% faster load times<br>95% user satisfaction rate<br>6-month project"
         }
     },
     {
         fields: {
             title: "Meta Ads Performance Scaling",
             category: "Digital Marketing",
-            description: "Strategic scaling of Meta ad campaigns resulting in 3x ROAS improvement and 150% increase in qualified leads for an e-commerce brand.",
+            excerpt: "Strategic scaling of Meta ad campaigns resulting in 3x ROAS improvement and 150% increase in qualified leads for an e-commerce brand.",
+            slug: "meta-ads-scaling",
             clientName: "E-commerce Brand",
-            results: {
-                mainMetric: {
-                    value: "3x",
-                    label: "ROAS improvement"
-                },
-                supportingMetrics: [
-                    "150% increase in qualified leads",
-                    "60% lower cost per acquisition"
-                ]
-            },
-            slug: "meta-ads-scaling"
+            projectDate: "2024-01-15",
+            results: "350% ROAS improvement<br>150% increase in qualified leads<br>60% lower cost per acquisition<br>6-month campaign"
         }
     },
     {
         fields: {
             title: "TikTok Growth Strategy",
             category: "Social Media",
-            description: "Innovative TikTok content strategy that grew account from 0 to 100K followers in 60 days with 2.5M organic views.",
+            excerpt: "Innovative TikTok content strategy that grew account from 0 to 100K followers in 60 days with 2.5M organic views.",
+            slug: "tiktok-growth",
             clientName: "Lifestyle Brand",
-            results: {
-                mainMetric: {
-                    value: "100K",
-                    label: "followers in 60 days"
-                },
-                supportingMetrics: [
-                    "2.5M organic views",
-                    "45% engagement rate"
-                ]
-            },
-            slug: "tiktok-growth"
+            projectDate: "2024-01-15",
+            results: "100K followers in 60 days<br>2.5M organic views<br>45% engagement rate<br>3-month campaign"
         }
     }
 ];
@@ -142,6 +118,72 @@ window.contentfulHelpers = {
             
             // On error, try placeholders as fallback
             const placeholder = placeholders.find(p => p.fields.slug === slug);
+            return placeholder || null;
+        }
+    },
+
+    // Get blog posts from Contentful
+    getBlogPosts: async () => {
+        console.log('🔍 Loading blog posts from Contentful...');
+        try {
+            const response = await client.getEntries({
+                content_type: 'blogPost',
+                order: '-sys.createdAt'
+            });
+            
+            console.log('📊 Blog posts response:', response);
+            
+            if (response && response.items && response.items.length > 0) {
+                console.log('✅ Found', response.items.length, 'blog posts');
+                return response.items;
+            } else {
+                console.log('⚠️ No blog posts found in Contentful, using placeholders');
+                return window.PLACEHOLDER_BLOG_POSTS || [];
+            }
+            
+        } catch (error) {
+            console.error('❌ Error fetching blog posts:', error);
+            return window.PLACEHOLDER_BLOG_POSTS || [];
+        }
+    },
+
+    // Get a specific blog post by slug
+    getBlogPostBySlug: async (slug) => {
+        console.log('🔍 Fetching blog post by slug:', slug);
+        try {
+            // First try to get from Contentful
+            const response = await client.getEntries({
+                content_type: 'blogPost',
+                'fields.slug': slug,
+                include: 2
+            });
+
+            console.log('Blog post response:', response);
+
+            if (response.items.length) {
+                const post = response.items[0];
+                console.log('Found blog post in Contentful:', post);
+                return post;
+            }
+
+            // If not found in Contentful, check placeholders
+            console.log('Looking for placeholder blog post with slug:', slug);
+            const placeholderPosts = window.PLACEHOLDER_BLOG_POSTS || [];
+            const placeholder = placeholderPosts.find(p => p.fields.slug === slug);
+            if (placeholder) {
+                console.log('Found placeholder blog post:', placeholder);
+                return placeholder;
+            }
+
+            // If not found anywhere, return null
+            console.error('No blog post found with slug:', slug);
+            return null;
+        } catch (error) {
+            console.error('Error fetching blog post:', error);
+            
+            // On error, try placeholders as fallback
+            const placeholderPosts = window.PLACEHOLDER_BLOG_POSTS || [];
+            const placeholder = placeholderPosts.find(p => p.fields.slug === slug);
             return placeholder || null;
         }
     },

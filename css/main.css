@@ -269,9 +269,6 @@ header nav a:hover::before {
 header nav a:visited {
   color: #ffffff;
 }
-header nav a[href="/blog.html"] {
-  display: none !important;
-}
 @media screen and (max-width: 992px) {
   header nav {
     display: none !important;
