@@ -14,6 +14,9 @@ class ProductionLogger {
     }
     
     detectEnvironment() {
+        // TEMPORARY: Disable production mode to debug issues
+        return false;
+        
         // Check various indicators of production environment
         return (
             window.location.hostname !== 'localhost' &&
