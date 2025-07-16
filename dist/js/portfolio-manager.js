@@ -152,55 +152,19 @@ class PortfolioManager {
             // Wait for contentful helpers to be ready
             await this.waitForContentful(10);
             
-            // Use placeholder fallback if Contentful API fails
-            let studies = [];
-            try {
-                studies = await this.contentfulHelpers.getCaseStudies();
-                console.log('Successfully loaded case studies:', studies.length);
-            } catch (error) {
-                console.error('Error loading case studies from Contentful:', error);
-                // Fall back to placeholders
-                studies = window.PLACEHOLDER_CASE_STUDIES || [];
-                console.log('Using placeholder case studies instead:', studies.length);
+            // Get case studies from Contentful
+            console.log('Loading case studies...');
+            const studies = await this.contentfulHelpers.getCaseStudies();
+            console.log('Got studies:', studies);
+            
+            if (studies && studies.length > 0) {
+                console.log('Rendering', studies.length, 'case studies');
+                this.renderCaseStudies(studies);
+            } else {
+                console.log('No studies found, showing error');
+                this.showErrorMessage();
             }
             
-            if (!studies || studies.length === 0) {
-                // If still no studies, use hardcoded fallback
-                studies = [
-                    {
-                        fields: {
-                            title: "Meta Ads Scaling Success",
-                            category: "Digital Marketing",
-                            excerpt: "Scaled ad campaigns across Meta platforms achieving 350% ROAS and 2.5x customer acquisition rate.",
-                            slug: "meta-ads-scaling",
-                            clientName: "E-commerce Brand",
-                            projectDate: "2024-01-15"
-                        }
-                    },
-                    {
-                        fields: {
-                            title: "E-commerce Conversion Rate Optimization",
-                            category: "CRO & Funnel",
-                            excerpt: "Complete funnel optimization resulting in 85% higher conversion rates and 40% lower cart abandonment.",
-                            slug: "ecommerce-cro",
-                            clientName: "Fashion Retailer",
-                            projectDate: "2023-11-10"
-                        }
-                    },
-                    {
-                        fields: {
-                            title: "SaaS Content Strategy",
-                            category: "SEO & Content",
-                            excerpt: "Comprehensive SEO and content strategy that grew organic traffic by 200% in 6 months.",
-                            slug: "saas-content-strategy",
-                            clientName: "B2B SaaS Platform",
-                            projectDate: "2023-09-22"
-                        }
-                    }
-                ];
-            }
-            
-            this.renderCaseStudies(studies);
         } catch (error) {
             console.error('Error loading case studies:', error);
             this.showErrorMessage();

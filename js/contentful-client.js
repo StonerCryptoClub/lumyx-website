@@ -69,33 +69,51 @@ const placeholders = [
 window.contentfulHelpers = {
     // Get case studies from Contentful
     getCaseStudies: async () => {
+        console.log('🔍 Loading case studies from Contentful...');
         try {
             const response = await client.getEntries({
-                content_type: 'caseStudy',
+                content_type: 'caseStudies',
                 order: '-sys.createdAt'
             });
             
-            // Check if we got any actual entries back
+            console.log('📊 Contentful response:', response);
+            console.log('📈 Total items found:', response.total);
+            
+            // Start with empty array
+            let finalStudies = [];
+            
+            // Add real case studies first
             if (response && response.items && response.items.length > 0) {
-                console.log('Successfully loaded case studies from Contentful:', response.items.length);
-            return response.items;
-            } else {
-                console.log('No case studies found in Contentful, using placeholders');
-                return placeholders; // Use placeholders if no entries
+                console.log('✅ Found', response.items.length, 'real case studies');
+                finalStudies = [...response.items];
             }
+            
+            // Fill remaining slots with placeholders (up to 3 total)
+            const neededPlaceholders = Math.max(0, 3 - finalStudies.length);
+            if (neededPlaceholders > 0) {
+                console.log('📝 Adding', neededPlaceholders, 'placeholders');
+                finalStudies = [...finalStudies, ...placeholders.slice(0, neededPlaceholders)];
+            }
+            
+            console.log('🎯 Final studies to display:', finalStudies.length);
+            console.log('🔄 Studies:', finalStudies.map(s => s.fields?.title || 'No title'));
+            
+            return finalStudies;
+            
         } catch (error) {
-            console.error('Error fetching case studies from Contentful:', error);
-            console.log('Falling back to placeholder case studies');
-            return placeholders; // Use placeholders on error
+            console.error('❌ Error fetching case studies:', error);
+            console.log('🔄 Falling back to placeholders only');
+            return placeholders;
         }
     },
 
     // Get a specific case study by slug
     getCaseStudyBySlug: async (slug) => {
+        console.log('🔍 Fetching case study by slug:', slug);
         try {
             // First try to get from Contentful
             const response = await client.getEntries({
-                content_type: 'caseStudy',
+                content_type: 'caseStudies',
                 'fields.slug': slug,
                 include: 2
             });
@@ -135,99 +153,6 @@ window.contentfulHelpers = {
     isReady: () => !!client
 };
 
-// Error handler for Contentful requests
-function handleContentfulError(error) {
-    console.error('Contentful Error:', error);
-    
-    if (error.sys) {
-        switch (error.sys.id) {
-            case 'NotFound':
-                return { notFound: true, message: 'Resource not found' };
-            case 'AccessDenied':
-                return { error: { statusCode: 403, message: 'Access denied - check your credentials' } };
-            case 'RateLimitExceeded':
-                return { error: { statusCode: 429, message: 'Rate limit exceeded - please try again later' } };
-        }
-    }
-    
-    return {
-        error: {
-            statusCode: error.status || 500,
-            message: error.message || 'An unexpected error occurred'
-        }
-    };
-}
-
-// Function to get blog posts
-async function getBlogPosts(options = {}) {
-    try {
-        const query = {
-            content_type: 'blogPost',
-            include: 2,
-            order: options.order || '-sys.createdAt',
-            limit: options.limit || 100,
-            ...options.filters
-        };
-
-        const response = await client.getEntries(query);
-        return validateResponse(response, 'blog posts');
-    } catch (error) {
-        return handleContentfulError(error);
-    }
-}
-
-// Function to get a single blog post by slug
-async function getBlogPostBySlug(slug) {
-    if (!slug) {
-        return handleContentfulError(new Error('Slug is required'));
-    }
-
-    try {
-        const response = await client.getEntries({
-            content_type: 'blogPost',
-            'fields.slug': slug,
-            include: 2
-        });
-        
-        if (!response.items.length) {
-            return handleContentfulError({ sys: { id: 'NotFound' } });
-        }
-        
-        return response.items[0];
-    } catch (error) {
-        return handleContentfulError(error);
-    }
-}
-
-// Initialize all helpers
-Object.assign(window.contentfulHelpers, {
-    getBlogPosts,
-    getBlogPostBySlug,
-    // Add placeholder HTML function
-    getPlaceholderHTML: () => {
-        return `
-            <div class="portfolio-item" data-category="Digital Marketing">
-                <img src="images/portfolio/digital-marketing.jpg" 
-                     alt="Meta Ads Scaling Success" loading="lazy">
-                <div class="portfolio-content">
-                    <span class="category">Digital Marketing</span>
-                    <h3>Meta Ads Scaling Success</h3>
-                    <p class="client">Client: E-commerce Brand</p>
-                    <p class="description">Strategic scaling of Meta ad campaigns resulting in 3x ROAS improvement and 150% increase in qualified leads.</p>
-                    <div class="result-tags">
-                        <span class="result-tag">📈 3x ROAS Improvement</span>
-                        <span class="result-tag">👥 150% Lead Increase</span>
-                        <span class="result-tag">⏱️ 6 Month Campaign</span>
-                    </div>
-                    <a href="./case-study.html?slug=meta-ads-scaling" class="view-project">
-                        View Case Study <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        `;
-    }
-});
-
 // Log initialization status
-console.log('Contentful client initialized:', window.contentfulHelpers.isReady());
-console.log('Contentful helpers initialized:', Object.keys(window.contentfulHelpers)); 
+console.log('🚀 Contentful client initialized:', window.contentfulHelpers.isReady());
+console.log('📋 Contentful helpers available:', Object.keys(window.contentfulHelpers)); 
