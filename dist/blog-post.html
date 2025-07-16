@@ -234,6 +234,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/content-loader-init.js"></script>
     <script src="./js/contentful-client.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
@@ -283,6 +285,9 @@
         function displayBlogPost(post) {
             const fields = post.fields;
             
+            console.log('Displaying blog post:', fields.title);
+            console.log('Post fields:', fields);
+            
             // Get featured image URL if available
             const imageUrl = fields.featuredImage?.fields?.file?.url
                 ? 'https:' + fields.featuredImage.fields.file.url
@@ -291,6 +296,25 @@
             // Format date
             const publishDate = fields.publishDate || fields.publishdate || '';
             const formattedDate = formatDate(publishDate);
+            
+            // Try to render content, fallback to excerpt if content fails
+            let contentHtml = '';
+            if (fields.content) {
+                try {
+                    contentHtml = renderRichText(fields.content);
+                    console.log('Rich text rendered successfully');
+                } catch (error) {
+                    console.error('Error rendering rich text:', error);
+                    contentHtml = `<p>${fields.excerpt || 'Content could not be loaded.'}</p>`;
+                }
+            } else {
+                contentHtml = `<p>${fields.excerpt || 'No content available.'}</p>`;
+            }
+            
+            // If content is empty, use excerpt
+            if (!contentHtml || contentHtml.trim() === '') {
+                contentHtml = `<p>${fields.excerpt || 'No content available.'}</p>`;
+            }
             
             // Create HTML
             const html = `
@@ -309,7 +333,7 @@
                 ` : ''}
                 
                 <div class="blog-post-content">
-                    ${fields.content ? renderRichText(fields.content) : fields.excerpt || ''}
+                    ${contentHtml}
                 </div>
                 
                 <div class="blog-post-footer">
@@ -319,11 +343,8 @@
                 </div>
             `;
             
-            // Update content
             document.getElementById('blog-post-content').innerHTML = html;
-            
-            // Update page title
-            document.title = `${fields.title || 'Blog Post'} - Lumyx Agency`;
+            console.log('Blog post displayed successfully');
         }
         
         // Function to show error message
@@ -353,34 +374,101 @@
         
         // Function to render rich text content
         function renderRichText(content) {
-            if (!content || !content.content) return '';
+            if (!content || !content.content) {
+                console.warn('No content or content.content found');
+                return '';
+            }
+            
+            console.log('Rendering rich text content:', content);
             
             return content.content.map(node => {
-                if (node.nodeType === 'paragraph') {
-                    return `<p>${node.content.map(text => text.value).join('')}</p>`;
+                if (!node || !node.nodeType) {
+                    console.warn('Invalid node:', node);
+                    return '';
                 }
-                if (node.nodeType === 'heading-1') {
-                    return `<h1>${node.content.map(text => text.value).join('')}</h1>`;
+                
+                try {
+                    switch (node.nodeType) {
+                        case 'paragraph':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<p>${node.content.map(text => {
+                                if (text.nodeType === 'text') {
+                                    return text.value || '';
+                                }
+                                if (text.nodeType === 'hyperlink') {
+                                    return `<a href="${text.data?.uri || '#'}">${text.content?.map(c => c.value || '').join('') || ''}</a>`;
+                                }
+                                return text.value || '';
+                            }).join('')}</p>`;
+                            
+                        case 'heading-1':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<h1>${node.content.map(text => text.value || '').join('')}</h1>`;
+                            
+                        case 'heading-2':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<h2>${node.content.map(text => text.value || '').join('')}</h2>`;
+                            
+                        case 'heading-3':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<h3>${node.content.map(text => text.value || '').join('')}</h3>`;
+                            
+                        case 'unordered-list':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<ul>${node.content.map(item => {
+                                if (item.nodeType === 'list-item' && item.content) {
+                                    return `<li>${item.content.map(p => {
+                                        if (p.nodeType === 'paragraph' && p.content) {
+                                            return p.content.map(text => text.value || '').join('');
+                                        }
+                                        return '';
+                                    }).join('')}</li>`;
+                                }
+                                return '';
+                            }).join('')}</ul>`;
+                            
+                        case 'ordered-list':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<ol>${node.content.map(item => {
+                                if (item.nodeType === 'list-item' && item.content) {
+                                    return `<li>${item.content.map(p => {
+                                        if (p.nodeType === 'paragraph' && p.content) {
+                                            return p.content.map(text => text.value || '').join('');
+                                        }
+                                        return '';
+                                    }).join('')}</li>`;
+                                }
+                                return '';
+                            }).join('')}</ol>`;
+                            
+                        case 'hyperlink':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<a href="${node.data?.uri || '#'}">${node.content.map(text => text.value || '').join('')}</a>`;
+                            
+                        case 'hr':
+                            return '<hr>';
+                            
+                        case 'blockquote':
+                            if (!node.content || !Array.isArray(node.content)) return '';
+                            return `<blockquote>${node.content.map(p => {
+                                if (p.nodeType === 'paragraph' && p.content) {
+                                    return `<p>${p.content.map(text => text.value || '').join('')}</p>`;
+                                }
+                                return '';
+                            }).join('')}</blockquote>`;
+                            
+                        default:
+                            console.warn('Unknown node type:', node.nodeType);
+                            // Try to extract text content as fallback
+                            if (node.content && Array.isArray(node.content)) {
+                                return `<p>${node.content.map(text => text.value || '').join('')}</p>`;
+                            }
+                            return '';
+                    }
+                } catch (error) {
+                    console.error('Error rendering node:', node, error);
+                    return '';
                 }
-                if (node.nodeType === 'heading-2') {
-                    return `<h2>${node.content.map(text => text.value).join('')}</h2>`;
-                }
-                if (node.nodeType === 'heading-3') {
-                    return `<h3>${node.content.map(text => text.value).join('')}</h3>`;
-                }
-                if (node.nodeType === 'unordered-list') {
-                    return `<ul>${node.content.map(item => `<li>${item.content.map(p => p.content.map(text => text.value).join('')).join('')}</li>`).join('')}</ul>`;
-                }
-                if (node.nodeType === 'ordered-list') {
-                    return `<ol>${node.content.map(item => `<li>${item.content.map(p => p.content.map(text => text.value).join('')).join('')}</li>`).join('')}</ol>`;
-                }
-                if (node.nodeType === 'hyperlink') {
-                    return `<a href="${node.data.uri}">${node.content.map(text => text.value).join('')}</a>`;
-                }
-                if (node.nodeType === 'hr') {
-                    return '<hr>';
-                }
-                return '';
             }).join('');
         }
     </script>
