@@ -9,18 +9,18 @@
   <meta name="csrf-token" content="{{csrf_token}}">
   
   <!-- SEO Meta Tags -->
-  <title>Lumyx Agency | Digital Marketing & Web Development Services</title>
-  <meta name="description" content="Expert digital marketing and web development agency helping businesses grow online. Specializing in SEO, web design, and digital strategy." />
-  <meta name="keywords" content="digital marketing, web development, SEO, web design, digital strategy, business growth" />
+  <title>Lumyx Agency | Digital Marketing & Web Development</title>
+  <meta name="description" content="Lumyx Agency helps businesses grow online through expert digital marketing, web development, and conversion optimization. Proven results with personalized strategies." />
+  <meta name="keywords" content="digital marketing, web development, conversion optimization, business growth, online marketing" />
   <meta name="author" content="Lumyx Agency" />
   <meta name="robots" content="index, follow" />
   
   <!-- Open Graph / Social Media Meta Tags -->
-  <meta property="og:site_name" content="Lumyx Digital Marketing" />
+  <meta property="og:site_name" content="Lumyx Agency" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lumyx.co/" />
-  <meta property="og:title" content="Lumyx Digital Marketing | Expert Marketing & Web Development" />
-  <meta property="og:description" content="Expert digital marketing and web development agency helping businesses grow online. Specializing in SEO, web design, and digital strategy." />
+  <meta property="og:title" content="Lumyx Agency | Digital Marketing & Web Development" />
+  <meta property="og:description" content="Lumyx Agency helps businesses grow online through expert digital marketing, web development, and conversion optimization. Proven results with personalized strategies." />
   <meta property="og:image" content="https://lumyx.co/images/og-image.jpg" />
   <meta property="og:image:alt" content="Lumyx Digital Marketing Agency" />
   <meta property="og:locale" content="en_US" />
@@ -29,8 +29,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@lumyxagency" />
   <meta name="twitter:url" content="https://lumyx.co/" />
-  <meta name="twitter:title" content="Lumyx Digital Marketing | Expert Marketing & Web Development" />
-  <meta name="twitter:description" content="Expert digital marketing and web development agency helping businesses grow online. Specializing in SEO, web design, and digital strategy." />
+  <meta name="twitter:title" content="Lumyx Agency | Digital Marketing & Web Development" />
+  <meta name="twitter:description" content="Lumyx Agency helps businesses grow online through expert digital marketing, web development, and conversion optimization. Proven results with personalized strategies." />
   <meta name="twitter:image" content="https://lumyx.co/images/og-image.jpg" />
   <meta name="twitter:image:alt" content="Lumyx Digital Marketing Agency" />
   
@@ -58,6 +58,26 @@
   src="https://www.facebook.com/tr?id=1361608738369835&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "YOUR_CLARITY_PROJECT_ID");
+  </script>
+  <!-- End Microsoft Clarity -->
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_ACTUAL_GA4_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YOUR_ACTUAL_GA4_ID');
+  </script>
+  <!-- End Google Analytics 4 -->
 
   <!-- Required Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
@@ -98,24 +118,70 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Lumyx Digital Marketing",
+      "name": "Lumyx Agency",
+      "alternateName": "Lumyx Digital Marketing",
       "url": "https://lumyx.co",
-      "logo": "https://lumyx.co/images/Logo.png",
-      "description": "Digital marketing and web development agency specializing in creating powerful online presence for businesses.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lumyx.co/Logo.png",
+        "width": 400,
+        "height": 400
+      },
+      "image": "https://lumyx.co/Logo.png",
+      "description": "Lumyx Agency provides digital marketing and web development services to help businesses grow their online presence and achieve measurable results.",
+      "slogan": "Data-Driven Marketing Solutions",
+      "foundingDate": "2023",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "US"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+1-248-238-2704",
-        "contactType": "customer service",
-        "email": "Lumyxagency@gmail.com"
-      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+1-248-238-2704",
+          "contactType": "customer service",
+          "email": "Lumyxagency@gmail.com",
+          "availableLanguage": "English"
+        }
+      ],
       "sameAs": [
         "https://www.instagram.com/lumyxgrowth",
         "https://www.linkedin.com/company/lumyx-agency"
-      ]
+      ],
+      "serviceArea": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Digital Marketing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PPC Management",
+              "description": "Expert pay-per-click advertising management"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "SEO Services",
+              "description": "Search engine optimization to improve rankings"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Web Development",
+              "description": "Custom website development and design"
+            }
+          }
+        ]
+      }
     }
   </script>
 
