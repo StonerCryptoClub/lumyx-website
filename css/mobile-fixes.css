@@ -639,68 +639,68 @@
 /* Mobile case study cards - make them shorter and more compact */
 @media screen and (max-width: 768px) {
     .portfolio-item {
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem; /* Increased from 0.75rem */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         overflow: hidden;
-        max-height: 280px; /* Limit total card height */
+        max-height: 350px; /* Increased from 280px */
     }
     
     .portfolio-image-wrapper {
         position: relative;
         overflow: hidden;
-        height: 120px !important; /* Much shorter image area */
+        height: 150px !important; /* Increased from 120px */
         padding-top: 0 !important; /* Remove aspect ratio padding */
     }
     
     .portfolio-image {
         width: 100%;
-        height: 120px !important; /* Fixed shorter height */
+        height: 150px !important; /* Increased from 120px */
         object-fit: cover;
         transition: transform 0.3s ease;
     }
     
     .portfolio-content {
-        padding: 0.75rem !important;
-        height: 160px !important; /* Fixed content height */
+        padding: 1rem !important; /* Increased from 0.75rem */
+        height: 200px !important; /* Increased from 160px */
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
     }
     
     .category {
-        font-size: 0.75rem !important;
+        font-size: 0.8rem !important; /* Increased from 0.75rem */
         color: #ff6b00;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-bottom: 0.25rem !important;
+        margin-bottom: 0.5rem !important; /* Increased from 0.25rem */
     }
     
     .title {
-        font-size: 1rem !important;
+        font-size: 1.1rem !important; /* Increased from 1rem */
         font-weight: 700;
         color: #333;
-        margin: 0.25rem 0 !important;
-        line-height: 1.2 !important;
+        margin: 0.5rem 0 !important; /* Increased from 0.25rem */
+        line-height: 1.3 !important; /* Increased from 1.2 */
         overflow: hidden;
         display: -webkit-box;
-        -webkit-line-clamp: 2; /* Limit to 2 lines */
+        -webkit-line-clamp: 2; /* Keep at 2 lines */
         -webkit-box-orient: vertical;
-        max-height: 2.4rem;
+        max-height: 2.8rem; /* Increased from 2.4rem */
     }
     
     .description {
-        font-size: 0.85rem !important;
+        font-size: 0.9rem !important; /* Increased from 0.85rem */
         color: #666;
-        line-height: 1.3 !important;
-        margin-bottom: 0.5rem !important;
+        line-height: 1.4 !important; /* Increased from 1.3 */
+        margin-bottom: 0.75rem !important; /* Increased from 0.5rem */
         display: -webkit-box;
-        -webkit-line-clamp: 2; /* Limit to 2 lines only */
+        -webkit-line-clamp: 3; /* Increased from 2 lines to 3 lines */
         -webkit-box-orient: vertical;
         overflow: hidden;
         flex-grow: 1;
-        max-height: 2.6rem;
+        max-height: 4rem; /* Increased from 2.6rem */
     }
     
     .view-project {
@@ -710,7 +710,7 @@
         color: #ff6b00;
         text-decoration: none;
         font-weight: 600;
-        font-size: 0.85rem !important;
+        font-size: 0.9rem !important; /* Increased from 0.85rem */
         transition: color 0.3s ease;
         margin-top: auto; /* Push to bottom */
     }
@@ -720,7 +720,7 @@
     }
     
     .view-project i {
-        font-size: 0.75rem !important;
+        font-size: 0.8rem !important; /* Increased from 0.75rem */
         transition: transform 0.3s ease;
     }
     
@@ -732,12 +732,12 @@
 /* Make portfolio grid more compact on mobile */
 @media screen and (max-width: 768px) {
     .portfolio-grid {
-        padding: 0.5rem 0 !important;
+        padding: 1rem 0 !important; /* Increased from 0.5rem */
     }
     
     .portfolio-grid-inner {
         flex-direction: column;
-        gap: 0.75rem !important; /* Reduced gap between cards */
+        gap: 1rem !important; /* Increased from 0.75rem */
         width: 100%;
     }
 }
@@ -745,7 +745,7 @@
 /* Placeholder image optimization for mobile - make shorter */
 @media screen and (max-width: 768px) {
     .placeholder-image {
-        height: 120px !important; /* Match image height */
+        height: 150px !important; /* Increased to match image height */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -753,7 +753,7 @@
     }
     
     .placeholder-image i {
-        font-size: 2rem !important;
+        font-size: 2.5rem !important; /* Increased from 2rem */
         color: rgba(255, 255, 255, 0.3);
     }
 }
@@ -762,29 +762,29 @@
 @media screen and (max-width: 768px) {
     .portfolio-section .portfolio-item {
         height: auto !important;
-        max-height: 280px !important;
+        max-height: 350px !important; /* Increased from 280px */
         min-height: auto !important;
     }
     
     .portfolio-item .portfolio-image-wrapper {
         padding-top: 0 !important; /* Remove aspect ratio */
-        height: 120px !important;
+        height: 150px !important; /* Increased from 120px */
     }
     
     .portfolio-item .portfolio-content {
-        padding: 0.75rem !important;
-        height: 160px !important;
+        padding: 1rem !important; /* Increased from 0.75rem */
+        height: 200px !important; /* Increased from 160px */
     }
     
     /* Make sure titles don't take too much space */
     .portfolio-item .title {
-        max-height: 2.4rem !important; /* 2 lines max */
+        max-height: 2.8rem !important; /* Increased from 2.4rem */
         overflow: hidden;
     }
     
     /* Make sure descriptions are limited */
     .portfolio-item .description {
-        max-height: 2.6rem !important; /* 2 lines max */
+        max-height: 4rem !important; /* Increased from 2.6rem */
         overflow: hidden;
     }
 } 
