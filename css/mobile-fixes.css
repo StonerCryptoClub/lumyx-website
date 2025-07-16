@@ -520,3 +520,118 @@
     font-size: 0.75rem;
   }
 } 
+
+/* MacBook and smaller laptop screens */
+@media screen and (min-width: 1024px) and (max-width: 1440px) and (min-height: 600px) and (max-height: 900px) {
+  #home {
+    min-height: 100vh;
+    height: auto;
+    padding: 80px 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-content {
+    max-width: 800px;
+    padding: 0 20px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+  
+  .hero-cta-section {
+    margin-top: 20px;
+  }
+  
+  .hero-stats {
+    margin-top: 30px;
+  }
+  
+  .stat-item {
+    margin: 0 15px;
+  }
+  
+  .stat-number {
+    font-size: 2.2rem;
+  }
+}
+
+/* Specific adjustments for MacBook Pro 13" and similar */
+@media screen and (min-width: 1280px) and (max-width: 1440px) and (min-height: 700px) and (max-height: 900px) {
+  #home {
+    padding: 70px 20px 30px;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 18px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 28px;
+  }
+}
+
+/* MacBook Air and smaller MacBooks */
+@media screen and (min-width: 1024px) and (max-width: 1366px) and (min-height: 600px) and (max-height: 768px) {
+  #home {
+    min-height: 100vh;
+    height: auto;
+    padding: 60px 20px 30px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-badge {
+    margin-bottom: 15px;
+  }
+  
+  .badge-text {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+  
+  .hero-cta-section {
+    margin-top: 15px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .hero-stats {
+    margin-top: 25px;
+  }
+  
+  .stat-item {
+    margin: 0 10px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+} 
