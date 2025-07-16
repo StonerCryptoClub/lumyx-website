@@ -56,8 +56,8 @@ function injectEnvVariables(htmlContent, envConfig) {
         };
     </script>`;
     
-    // Inject before the closing head tag
-    return htmlContent.replace('</head>', `${envScript}\n</head>`);
+    // Inject before the first script tag so it loads before env-loader.js
+    return htmlContent.replace('<script src="js/env-loader.js"></script>', `${envScript}\n  <script src="js/env-loader.js"></script>`);
 }
 
 // Configuration
