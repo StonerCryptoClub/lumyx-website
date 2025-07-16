@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Lumyx Agency</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base color variables */
+        :root {
+            --primary-orange: #FFA500;
+            --primary-orange-light: #FFD700;
+            --complementary-blue: #1E90FF;
+            --complementary-blue-light: #00CED1;
+            --text-light: #ffffff;
+            --bg-dark: #1a1a1a;
+            --bg-light: #2a2a2a;
+            --container-padding: 20px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blog-post-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 2rem 2rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .blog-post-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-post-category {
+            color: var(--primary-orange);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .blog-post-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-post-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .blog-post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-post-image {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .blog-post-content h1 {
+            font-size: 2.5rem;
+            margin: 2rem 0 1rem;
+            color: #ffffff;
+        }
+
+        .blog-post-content h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: #ffffff;
+        }
+
+        .blog-post-content h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: #ffffff;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .blog-post-content ul, 
+        .blog-post-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .blog-post-content ul {
+            list-style-type: disc;
+        }
+
+        .blog-post-content ol {
+            list-style-type: decimal;
+        }
+
+        .blog-post-content li {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            display: list-item;
+            list-style-position: outside;
+            padding-left: 1rem;
+        }
+
+        .blog-post-content ul li::marker {
+            color: var(--primary-orange);
+        }
+
+        .blog-post-content ol li::marker {
+            color: var(--primary-orange);
+        }
+
+        .blog-post-content a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .blog-post-content a:hover {
+            color: var(--primary-orange-light);
+            text-decoration: underline;
+        }
+
+        .blog-post-content hr {
+            margin: 2rem 0;
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary-orange);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: var(--primary-orange-light);
+            transform: translateY(-2px);
+        }
+        
+        .loading-state, .error-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        .loading-state i, .error-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-orange);
+        }
+        
+        .error-state p {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post-container">
+        <div id="blog-post-content">
+            <div class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading blog post...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="./js/contentful-client.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Get the slug from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            const contentElement = document.getElementById('blog-post-content');
+            
+            if (!slug) {
+                showError('No blog post specified');
+                return;
+            }
+            
+            try {
+                // Wait for contentful client to be ready
+                await waitForContentful();
+                
+                // Get the blog post data
+                const blogPost = await window.contentfulHelpers.getBlogPostBySlug(slug);
+                
+                if (!blogPost || !blogPost.fields) {
+                    showError('Blog post not found');
+                    return;
+                }
+                
+                // Display the blog post
+                displayBlogPost(blogPost);
+                
+            } catch (error) {
+                console.error('Error loading blog post:', error);
+                showError('Failed to load blog post');
+            }
+        });
+        
+        // Function to wait for contentful client to be ready
+        async function waitForContentful(maxAttempts = 10) {
+            for (let i = 0; i < maxAttempts; i++) {
+                if (window.contentfulHelpers?.isReady()) {
+                    return true;
+                }
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+            throw new Error('Contentful client not available');
+        }
+        
+        // Function to display blog post
+        function displayBlogPost(post) {
+            const fields = post.fields;
+            
+            // Get featured image URL if available
+            const imageUrl = fields.featuredImage?.fields?.file?.url
+                ? 'https:' + fields.featuredImage.fields.file.url
+                : null;
+            
+            // Format date
+            const publishDate = fields.publishDate || fields.publishdate || '';
+            const formattedDate = formatDate(publishDate);
+            
+            // Create HTML
+            const html = `
+                <div class="blog-post-header">
+                    <span class="blog-post-category">${fields.category || 'Blog'}</span>
+                    <h1 class="blog-post-title">${fields.title || 'Untitled Blog Post'}</h1>
+                    <div class="blog-post-meta">
+                        <span><i class="far fa-calendar"></i> ${formattedDate}</span>
+                        <span><i class="far fa-clock"></i> ${fields.readTime || fields.readtime || '5'} min read</span>
+                        <span><i class="far fa-user"></i> ${fields.author || 'Lumyx Team'}</span>
+                    </div>
+                </div>
+                
+                ${imageUrl ? `
+                <img src="${imageUrl}" alt="${fields.title}" class="blog-post-image">
+                ` : ''}
+                
+                <div class="blog-post-content">
+                    ${fields.content ? renderRichText(fields.content) : fields.excerpt || ''}
+                </div>
+                
+                <div class="blog-post-footer">
+                    <a href="./blog.html" class="back-button">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+            `;
+            
+            // Update content
+            document.getElementById('blog-post-content').innerHTML = html;
+            
+            // Update page title
+            document.title = `${fields.title || 'Blog Post'} - Lumyx Agency`;
+        }
+        
+        // Function to show error message
+        function showError(message) {
+            document.getElementById('blog-post-content').innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>${message || 'An error occurred while loading the blog post.'}</p>
+                    <a href="./blog.html" class="back-button">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+            `;
+        }
+        
+        // Function to format date
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            if (isNaN(date)) return '';
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        // Function to render rich text content
+        function renderRichText(content) {
+            if (!content || !content.content) return '';
+            
+            return content.content.map(node => {
+                if (node.nodeType === 'paragraph') {
+                    return `<p>${node.content.map(text => text.value).join('')}</p>`;
+                }
+                if (node.nodeType === 'heading-1') {
+                    return `<h1>${node.content.map(text => text.value).join('')}</h1>`;
+                }
+                if (node.nodeType === 'heading-2') {
+                    return `<h2>${node.content.map(text => text.value).join('')}</h2>`;
+                }
+                if (node.nodeType === 'heading-3') {
+                    return `<h3>${node.content.map(text => text.value).join('')}</h3>`;
+                }
+                if (node.nodeType === 'unordered-list') {
+                    return `<ul>${node.content.map(item => `<li>${item.content.map(p => p.content.map(text => text.value).join('')).join('')}</li>`).join('')}</ul>`;
+                }
+                if (node.nodeType === 'ordered-list') {
+                    return `<ol>${node.content.map(item => `<li>${item.content.map(p => p.content.map(text => text.value).join('')).join('')}</li>`).join('')}</ol>`;
+                }
+                if (node.nodeType === 'hyperlink') {
+                    return `<a href="${node.data.uri}">${node.content.map(text => text.value).join('')}</a>`;
+                }
+                if (node.nodeType === 'hr') {
+                    return '<hr>';
+                }
+                return '';
+            }).join('');
+        }
+    </script>
+  <script src="js/bundle.min.js"></script>
+</body>
+</html> 

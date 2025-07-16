@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- SEO Meta Tags -->
+  <title>Error | Lumyx Agency</title>
+  <meta name="description" content="Something went wrong. Please try again or contact our support team." />
+  <meta name="robots" content="noindex, follow" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://lumyxagency.com/error">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    /* Base color variables */
+    :root {
+      --primary-orange: #FFA500;
+      --primary-orange-light: #FFD700;
+      --complementary-blue: #1E90FF;
+      --complementary-blue-light: #00CED1;
+      --text-light: #ffffff;
+      --bg-dark: #1a1a1a;
+      --bg-light: #2a2a2a;
+      --container-padding: 20px;
+    }
+
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      color: #ffffff;
+      line-height: 1.6;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 8px 10px 8px 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-left: -5px;
+    }
+    header .logo img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      margin-right: -50px;
+      position: relative;
+      z-index: 2;
+    }
+    header .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      position: relative;
+      letter-spacing: 0.5px;
+      z-index: 1;
+    }
+
+    /* Error Content */
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      padding: 0 20px;
+    }
+    .error-icon {
+      font-size: 6rem;
+      color: var(--complementary-blue);
+      margin-bottom: 30px;
+    }
+    .error-code {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+    .error-message {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+    .error-description {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .button-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .home-button, .contact-button {
+      padding: 15px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .home-button {
+      background: linear-gradient(45deg, var(--primary-orange), var(--primary-orange-light));
+      color: #ffffff;
+      box-shadow: 0 10px 20px rgba(255, 165, 0, 0.2);
+    }
+    .contact-button {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .home-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(255, 165, 0, 0.3);
+    }
+    .contact-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px);
+    }
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.1;
+      background: 
+        linear-gradient(45deg, #1E90FF, #00CED1);
+      animation: gradientBG 15s ease infinite;
+      background-size: 400% 400%;
+      will-change: background-position;
+      transform: translateZ(0);
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Error details section for technical errors */
+    .error-details {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      text-align: left;
+      display: none;
+    }
+    .error-details.show {
+      display: block;
+    }
+    .error-details-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--complementary-blue-light);
+    }
+    .error-details-content {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .toggle-details {
+      background: none;
+      border: none;
+      color: var(--complementary-blue-light);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 2rem;
+      }
+      .error-message {
+        font-size: 1.5rem;
+      }
+      .button-group {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .home-button, .contact-button {
+        width: 100%;
+      }
+    }
+    @media (max-width: 480px) {
+      .error-icon {
+        font-size: 4rem;
+      }
+      .error-code {
+        font-size: 1.5rem;
+      }
+      .error-message {
+        font-size: 1.2rem;
+      }
+      .error-description {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg"></div>
+  
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="Logo.png.png" alt="Lumyx Agency Logo">
+      <h1>Lumyx Agency</h1>
+    </div>
+  </header>
+
+  <!-- Error Content -->
+  <div class="error-container">
+    <i class="fas fa-exclamation-triangle error-icon"></i>
+    <h1 class="error-message">Something Went Wrong</h1>
+    <p class="error-description">We're sorry, but there was an error processing your request. Please try again or contact our support team if the problem persists.</p>
+    
+    <!-- Technical error details (hidden by default) -->
+    <div class="error-details" id="errorDetails">
+      <h3 class="error-details-title">Technical Details:</h3>
+      <pre class="error-details-content" id="errorDetailsContent">Error information will appear here.</pre>
+    </div>
+    
+    <div class="button-group">
+      <a href="/" class="home-button">Return to Home</a>
+      <a href="/contact" class="contact-button">Contact Support</a>
+    </div>
+    
+    <button class="toggle-details" id="toggleDetails">Show Technical Details</button>
+  </div>
+
+  <script>
+    // Get error details from URL parameters
+    document.addEventListener('DOMContentLoaded', function() {
+      // Error tracking
+      const currentURL = window.location.href;
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorCode = urlParams.get('code') || '';
+      const errorMessage = urlParams.get('message') || '';
+      const stack = urlParams.get('stack') || '';
+      
+      // Set error code if provided
+      if (errorCode) {
+        const errorCodeEl = document.createElement('h2');
+        errorCodeEl.className = 'error-code';
+        errorCodeEl.textContent = `Error ${errorCode}`;
+        document.querySelector('.error-icon').after(errorCodeEl);
+      }
+      
+      // Populate error details
+      const errorDetails = {
+        timestamp: new Date().toISOString(),
+        url: currentURL,
+        code: errorCode,
+        message: errorMessage,
+        stack: stack,
+        userAgent: navigator.userAgent
+      };
+      
+      document.getElementById('errorDetailsContent').textContent = JSON.stringify(errorDetails, null, 2);
+      
+      // Toggle technical details
+      const toggleButton = document.getElementById('toggleDetails');
+      const detailsSection = document.getElementById('errorDetails');
+      
+      toggleButton.addEventListener('click', function() {
+        detailsSection.classList.toggle('show');
+        toggleButton.textContent = detailsSection.classList.contains('show') 
+          ? 'Hide Technical Details' 
+          : 'Show Technical Details';
+      });
+      
+      // Analytics tracking for errors
+      if (window.gtag) {
+        gtag('event', 'error', {
+          'event_category': 'Error',
+          'event_label': errorCode ? `${errorCode}: ${errorMessage}` : 'Unknown Error',
+          'page_url': currentURL
+        });
+      }
+      
+      // Console log for debugging
+      console.log('Error occurred:', errorDetails);
+    });
+  </script>
+  <script src="js/bundle.min.js"></script>
+</body>
+</html> 

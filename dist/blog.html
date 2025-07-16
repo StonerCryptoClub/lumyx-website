@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' https: data:; font-src 'self' https: data:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+  
+  <!-- Primary Meta Tags -->
+  <title>Digital Marketing & Web Development Blog | Lumyx Agency Insights</title>
+  <meta name="title" content="Digital Marketing & Web Development Blog | Lumyx Agency Insights">
+  <meta name="description" content="Stay updated with the latest insights in digital marketing, web development, and SEO strategies. Expert tips and industry trends from Lumyx Agency.">
+  <meta name="keywords" content="digital marketing blog, web development tips, SEO strategies, content marketing, social media marketing, web design trends">
+  <meta name="author" content="Lumyx Agency">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="https://lumyxagency.com/blog">
+  <meta property="og:title" content="Digital Marketing & Web Development Blog | Lumyx Agency Insights">
+  <meta property="og:description" content="Stay updated with the latest insights in digital marketing, web development, and SEO strategies. Expert tips and industry trends from Lumyx Agency.">
+  <meta property="og:image" content="https://lumyxagency.com/images/blog-og-image.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://lumyxagency.com/blog">
+  <meta property="twitter:title" content="Digital Marketing & Web Development Blog | Lumyx Agency Insights">
+  <meta property="twitter:description" content="Stay updated with the latest insights in digital marketing, web development, and SEO strategies. Expert tips and industry trends from Lumyx Agency.">
+  <meta property="twitter:image" content="https://lumyxagency.com/images/blog-og-image.jpg">
+
+  <!-- Additional SEO Meta Tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="generator" content="Lumyx Agency">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://lumyxagency.com/blog">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Lumyx Agency Blog",
+      "description": "Expert insights on digital marketing, web development, and SEO strategies",
+      "url": "https://lumyxagency.com/blog",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lumyx Agency",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lumyxagency.com/images/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://lumyxagency.com/blog"
+      }
+    }
+  </script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Mobile Fixes -->
+  <link rel="stylesheet" href="css/mobile-fixes.min.css">
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Contentful -->
+  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+  <!-- Configuration -->
+  <script src="js/config.js"></script>
+  <!-- Database Client -->
+  <script src="js/supabase-client.js"></script>
+  <!-- Contentful Client -->
+  <script src="js/contentful-client.js"></script>
+  <!-- Placeholder Generator -->
+  <script src="js/generate-placeholders.js"></script>
+  <!-- Content Loader Initialization -->
+  <script src="js/content-loader-init.js"></script>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/newsletter.css">
+  
+  <style>
+    /* Base color variables */
+    :root {
+      --primary-orange: #FFA500;
+      --primary-orange-light: #FFD700;
+      --complementary-blue: #1E90FF;
+      --complementary-blue-light: #00CED1;
+      --text-light: #ffffff;
+      --bg-dark: #1a1a1a;
+      --bg-light: #2a2a2a;
+      --container-padding: 20px;
+    }
+
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      color: #ffffff;
+      line-height: 1.6;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header Styles */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 8px 10px 8px 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    header.scrolled {
+      background: rgba(0, 0, 0, 0.98);
+      padding: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-left: -5px;
+    }
+    header .logo img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      margin-right: -50px;
+      position: relative;
+      z-index: 2;
+    }
+    header .logo:hover img {
+      transform: scale(1.05);
+    }
+    header .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      position: relative;
+      letter-spacing: 0.5px;
+      z-index: 1;
+    }
+    header nav {
+      display: flex;
+      gap: 30px;
+      padding-right: 30px;
+    }
+    header nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      padding: 3px 0;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    header nav a.active {
+      color: #ffffff;
+    }
+    header nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
+      transition: width 0.3s ease;
+    }
+    header nav a:hover::before {
+      width: 100%;
+    }
+
+    /* Blog Section Styles */
+    .blog-section {
+      padding: 100px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .blog-header h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .blog-header p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+      justify-items: center;
+    }
+
+    .blog-card {
+      background: rgba(30, 30, 30, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 350px;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: var(--primary-orange);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      padding: 25px;
+    }
+
+    .blog-category {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(255, 165, 0, 0.1);
+      border-radius: 20px;
+      color: var(--primary-orange);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .blog-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .blog-content p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      max-height: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .blog-meta i {
+      margin-right: 5px;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-orange);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+
+    .read-more:hover {
+      color: var(--primary-orange-light);
+      gap: 12px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      background: linear-gradient(135deg, var(--complementary-blue), var(--complementary-blue-light));
+      box-shadow: 0 20px 40px rgba(30, 144, 255, 0.2);
+      padding: 80px 0;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter .container {
+      text-align: center;
+    }
+
+    .newsletter h2 {
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+    }
+
+    .newsletter p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 1rem;
+    }
+    
+    .newsletter-form input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+    
+    .newsletter-form button {
+      margin-top: 10px;
+      padding: 15px 30px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+      max-width: 250px;
+    }
+    
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .feature-item i {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .feature-item h4 {
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .feature-item p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .newsletter-form {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+      
+      .newsletter-form input {
+        width: 100%;
+      }
+      
+      .newsletter-form button {
+        width: 100%;
+        max-width: none;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(14, 14, 14, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer-section h3 {
+      color: var(--primary-orange);
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--primary-orange-light);
+    }
+
+    .social-links a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .mobile-menu-btn:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Enhanced Responsive Design */
+    @media screen and (max-width: 1200px) {
+      .container {
+        max-width: 960px;
+      }
+
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .blog-header h1 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+      .container {
+        max-width: 720px;
+      }
+
+      header {
+        padding: 15px var(--container-padding);
+      }
+
+      header .logo h1 {
+        font-size: 1.5rem;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      header nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 80%;
+        max-width: 400px;
+        background: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease;
+        backdrop-filter: blur(10px);
+        z-index: 99;
+      }
+
+      header nav.active {
+        right: 0;
+      }
+
+      header nav a {
+        font-size: 1.2rem;
+        padding: 15px 0;
+      }
+
+      .blog-section {
+        padding: 100px 15px 60px;
+      }
+
+      .blog-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .blog-header p {
+        font-size: 1.1rem;
+        padding: 0 20px;
+      }
+
+      .newsletter {
+        margin: 40px 15px;
+        padding: 60px 20px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        max-width: 540px;
+        padding: 0 15px;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 15px;
+      }
+
+      .blog-card {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .blog-content {
+        padding: 20px;
+      }
+
+      .blog-content h2 {
+        font-size: 1.3rem;
+      }
+
+      .blog-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .newsletter h2 {
+        font-size: 2rem;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 15px;
+      }
+
+      .newsletter button {
+        width: 100%;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .blog-section {
+        padding: 90px 10px 40px;
+      }
+
+      .blog-header h1 {
+        font-size: 2rem;
+      }
+
+      .blog-header p {
+        font-size: 1rem;
+      }
+
+      .blog-card {
+        margin: 0 10px;
+      }
+
+      .blog-card img {
+        height: 180px;
+      }
+
+      .blog-content {
+        padding: 15px;
+      }
+
+      .blog-category {
+        font-size: 0.8rem;
+      }
+
+      .blog-content h2 {
+        font-size: 1.2rem;
+      }
+
+      .blog-content p {
+        font-size: 0.9rem;
+      }
+
+      .read-more {
+        font-size: 0.9rem;
+      }
+
+      .newsletter {
+        margin: 30px 10px;
+        padding: 40px 15px;
+      }
+
+      .feature-item {
+        padding: 20px;
+      }
+    }
+
+    /* Touch-friendly adjustments */
+    @media (hover: none) {
+      .blog-card:hover {
+        transform: none;
+      }
+
+      .feature-item:hover {
+        transform: none;
+      }
+
+      .read-more:active {
+        transform: scale(0.98);
+      }
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .modal-content h3 {
+      color: var(--primary-orange);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .modal-content .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .modal-content input {
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-size: 1rem;
+    }
+
+    .modal-content input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .modal-content button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
+      color: #ffffff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    }
+
+    .modal-content .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .modal-content .close-modal:hover {
+      color: var(--primary-orange);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="modal" id="comingSoonModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Coming Soon!</h3>
+      <p>We're working hard to bring you our social media presence. In the meantime, sign up for our newsletter to stay updated!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Sign Up Now</button>
+      </form>
+    </div>
+  </div>
+
+  <header>
+    <div class="logo">
+              <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" loading="lazy">
+      <h1>Lumyx Agency</h1>
+    </div>
+    <a href="/index.html" class="mobile-home-btn">Home</a>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav aria-label="Main Navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="blog.html" class="active">Blog</a>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Sidebar -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+  <div class="mobile-nav-sidebar" id="mobile-nav-sidebar">
+    <div class="mobile-nav-header">
+      <h3>Menu</h3>
+      <button class="mobile-nav-close" id="mobile-nav-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="mobile-nav-menu">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="index.html#about" class="mobile-nav-link">About</a>
+      <a href="index.html#services" class="mobile-nav-link">Services</a>
+      <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+      <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+      <a href="blog.html" class="mobile-nav-link active">Blog</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="blog-section">
+      <div class="blog-header">
+        <h1>Digital Marketing Insights & Strategies</h1>
+        <p>Expert tips, industry updates, and proven strategies to accelerate your business growth</p>
+      </div>
+
+      <div class="blog-grid">
+        <!-- Blog posts will be loaded dynamically here -->
+      </div>
+    </section>
+
+      </main>
+
+<footer>
+    <div class="container">
+      <div class="footer-section">
+        <h3>Lumyx Agency</h3>
+        <p style="color: rgba(255,255,255,0.6);">Your Growth Partner</p>
+        <address style="font-style: normal; margin-top: 10px; color: rgba(255,255,255,0.6);">
+          <p>Email: <a href="mailto:contact@lumyx.co" style="color: var(--primary-orange);">contact@lumyx.co</a></p>
+          <p>Phone: <a href="tel:+12345678900" style="color: var(--primary-orange);">+1 (234) 567-8900</a></p>
+        </address>
+      </div>
+      <div class="social-links">
+        <a href="https://www.instagram.com/lumyxgrowth" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/lumyx-agency" target="_blank" rel="noopener noreferrer" aria-label="Connect with us on LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="coming-soon" title="Coming Soon" aria-label="Twitter - Coming Soon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="coming-soon" title="Coming Soon" aria-label="Facebook - Coming Soon"><i class="fab fa-facebook"></i></a>
+      </div>
+      <p>&copy; 2024 Lumyx Agency. All rights reserved.</p>
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <a href="privacy-policy.html">Privacy Policy</a> | 
+        <a href="terms-of-service.html">Terms of Service</a> | 
+        <a href="sitemap.xml">Sitemap</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Navigation Sidebar Functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+    const mobileNavSidebar = document.getElementById('mobile-nav-sidebar');
+    const mobileNavClose = document.getElementById('mobile-nav-close');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function openMobileMenu() {
+      mobileNavOverlay.classList.add('active');
+      mobileNavSidebar.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.replace('fa-bars', 'fa-times');
+    }
+
+    function closeMobileMenu() {
+      mobileNavOverlay.classList.remove('active');
+      mobileNavSidebar.classList.remove('active');
+      document.body.style.overflow = '';
+      
+      const icon = mobileMenuBtn.querySelector('i');
+      icon.classList.replace('fa-times', 'fa-bars');
+    }
+
+    // Open mobile menu
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+
+    // Close mobile menu
+    mobileNavClose.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking overlay
+    mobileNavOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking nav links
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+        
+        // Add active state to clicked link
+        mobileNavLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    // Close menu when pressing escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNavSidebar.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Newsletter form submission
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        try {
+          const result = await addSubscriber(email, null, null, 'newsletter');
+          if (result.success) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+          } else {
+            throw new Error(result.error);
+          }
+        } catch (error) {
+          console.error('Newsletter subscription error:', error);
+          alert('There was an error subscribing to the newsletter. Please try again.');
+        }
+      });
+    }
+
+    const modal = document.getElementById('comingSoonModal');
+    const closeModal = document.querySelector('.close-modal');
+    const comingSoonLinks = document.querySelectorAll('.coming-soon');
+
+    comingSoonLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Modal newsletter form submission
+    const modalNewsletterForm = modal.querySelector('.newsletter-form');
+    if (modalNewsletterForm) {
+      modalNewsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        
+        try {
+          const result = await addSubscriber(email, null, null, 'newsletter');
+          if (result.success) {
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          } else {
+            throw new Error(result.error);
+          }
+        } catch (error) {
+          console.error('Newsletter subscription error:', error);
+          alert('There was an error subscribing to the newsletter. Please try again.');
+        }
+      });
+    }
+
+    // Add structured data dynamically
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add page view tracking (if you have analytics)
+      console.log('Page loaded and ready for tracking');
+      
+      // Lazy load images that come into viewport
+      if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src || img.src;
+              observer.unobserve(img);
+            }
+          });
+        });
+        
+        lazyImages.forEach(img => {
+          imageObserver.observe(img);
+        });
+      }
+    });
+  </script>
+  <script src="js/contentful-loader.js"></script>
+  
+  
+  <script src="js/bundle.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,522 @@
+/* Simple Mobile Fixes */
+
+/* Hide mobile blog button by default (desktop) */
+.mobile-blog-btn {
+  display: none !important;
+}
+
+/* Only show mobile blog button on mobile screens */
+@media screen and (max-width: 992px) {
+  .mobile-blog-btn {
+    display: inline-block !important;
+  }
+}
+
+/* Override any conflicting rules - FORCE HIDE ON DESKTOP */
+@media screen and (min-width: 993px) {
+  .mobile-blog-btn,
+  .mobile-home-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+/* Force hide mobile blog button on all desktop screens */
+@media screen and (min-width: 769px) {
+  .mobile-blog-btn {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* Hide mobile menu button by default */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-btn:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile navigation overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile navigation sidebar */
+.mobile-nav-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 280px;
+  height: 100%;
+  background: #1a1a1a;
+  z-index: 1000;
+  transition: right 0.3s ease;
+}
+
+.mobile-nav-sidebar.active {
+  right: 0;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-header h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.mobile-nav-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.mobile-nav-menu {
+  padding: 20px 0;
+}
+
+.mobile-nav-menu a {
+  display: block;
+  padding: 15px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.mobile-nav-menu a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tablet and Mobile Styles */
+@media screen and (max-width: 992px) {
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  /* Hide desktop navigation */
+  header nav {
+    display: none;
+  }
+
+  /* Fix header layout */
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    position: relative;
+  }
+
+  header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  header .logo img {
+    width: 60px;
+    height: auto;
+    margin-right: 8px;
+  }
+
+  header .logo h1 {
+    font-size: 0.7rem;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .mobile-menu-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Fix hero section */
+  #home {
+    padding: 100px 20px 60px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  /* Fix CTA buttons */
+  .btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    max-width: 280px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  /* Remove section gaps */
+  .main-container > section {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-nav-sidebar {
+    width: 100%;
+  }
+
+  header {
+    padding: 12px 15px;
+  }
+
+  /* Remove left margin - Centered by flex, no margin */
+
+  header .logo img {
+    width: 55px;
+    margin-right: 6px;
+  }
+
+  header .logo h1 {
+    font-size: 0.65rem;
+  }
+
+  .mobile-menu-btn {
+    right: 15px;
+  }
+
+  #home {
+    padding: 90px 15px 50px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .btn {
+    padding: 14px 28px;
+    max-width: 100%;
+  }
+
+  /* Fix overlapping scroll info */
+  .hero-stats {
+    margin-top: 40px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .social-proof {
+    margin-top: 30px;
+  }
+
+  .trust-indicators {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    padding: 10px 12px;
+  }
+
+  /* Remove left margin - Centered by flex, no margin */
+
+  header .logo img {
+    width: 50px;
+    margin-right: 5px;
+  }
+
+  header .logo h1 {
+    font-size: 0.6rem;
+  }
+
+  .mobile-menu-btn {
+    right: 12px;
+  }
+
+  #home {
+    padding: 80px 12px 40px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  header {
+    padding: 8px 10px;
+  }
+
+  /* Remove left margin - Centered by flex, no margin */
+
+  header .logo img {
+    width: 45px;
+    margin-right: 4px;
+  }
+
+  header .logo h1 {
+    font-size: 0.55rem;
+  }
+
+  .mobile-menu-btn {
+    right: 10px;
+  }
+
+  #home {
+    padding: 75px 10px 35px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+} 
+
+/* Hide unused hamburger */
+.mobile-menu-btn {display:none !important;}
+
+/* Mobile button styling now handled by unified rules below */
+
+/* --- Header Centering Overrides --- */
+/* Old rules removed - now using unified mobile header styling below */
+
+/* Fix hero section bottom spacing */
+@media screen and (max-width: 992px) {
+  #home {
+    padding-bottom: 120px !important;
+  }
+  
+  .scroll-indicator {
+    bottom: 40px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #home {
+    padding-bottom: 100px !important;
+  }
+  
+  .scroll-indicator {
+    bottom: 30px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #home {
+    padding-bottom: 80px !important;
+  }
+  
+  .scroll-indicator {
+    bottom: 20px !important;
+  }
+} 
+
+/* =================================================================
+   MOBILE HEADER - UNIFIED STYLING FOR MAIN & BLOG PAGES
+   ================================================================= */
+
+/* Hide desktop nav, show mobile buttons */
+@media screen and (max-width: 992px) {
+  /* Hide desktop navigation */
+  header nav {
+    display: none !important;
+  }
+  
+  /* Header container */
+  header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Logo container - perfectly centered */
+  header .logo {
+    position: absolute;
+    left: 45%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  /* Logo image */
+  header .logo img {
+    width: 120px !important;
+    height: auto !important;
+    object-fit: contain;
+    margin: 0 -10px 0 0 !important;
+  }
+  
+  /* Logo text */
+  header .logo h1 {
+    font-size: 1.8rem !important;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0 -5px !important;
+    white-space: nowrap;
+  }
+  
+  /* Mobile buttons positioning */
+  .mobile-blog-btn,
+  .mobile-home-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-blog-btn:hover,
+  .mobile-home-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (max-width: 768px) {
+  header {
+    padding: 10px 15px;
+  }
+  
+  header .logo img {
+    width: 100px !important;
+  }
+  
+  header .logo h1 {
+    font-size: 1.6rem !important;
+  }
+  
+  .mobile-blog-btn,
+  .mobile-home-btn {
+    right: 15px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Small mobile adjustments */
+@media screen and (max-width: 480px) {
+  header {
+    padding: 8px 12px;
+  }
+  
+  header .logo img {
+    width: 90px !important;
+  }
+  
+  header .logo h1 {
+    font-size: 1.4rem !important;
+  }
+  
+  .mobile-blog-btn,
+  .mobile-home-btn {
+    right: 12px;
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Very small mobile adjustments */
+@media screen and (max-width: 360px) {
+  header {
+    padding: 6px 10px;
+  }
+  
+  header .logo img {
+    width: 80px !important;
+  }
+  
+  header .logo h1 {
+    font-size: 1.3rem !important;
+  }
+  
+  .mobile-blog-btn,
+  .mobile-home-btn {
+    right: 10px;
+    padding: 4px 6px;
+    font-size: 0.75rem;
+  }
+} 

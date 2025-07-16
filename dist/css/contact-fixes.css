@@ -1,0 +1,89 @@
+/* Contact Section Responsive Fixes */
+
+/* Fix for email overflow */
+.contact-item p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+    hyphens: auto;
+}
+
+/* Email container specific styles */
+.contact-item:has(.email-address) {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+/* Specific targeting for email address */
+.email-address {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    display: inline-block !important;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 30px 15px;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-item {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px 10px;
+    }
+    
+    .contact-item p {
+        font-size: 1rem;
+    }
+    
+    .email-address {
+        font-size: 0.9rem !important;
+        display: inline-block !important;
+        max-width: 75% !important;
+    }
+    
+    .contact-cta {
+        text-align: center;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-item p {
+        font-size: 0.9rem;
+    }
+    
+    .email-address {
+        font-size: 0.85rem !important;
+        letter-spacing: -0.5px !important;
+        max-width: 70% !important;
+    }
+    
+    .contact-item i {
+        font-size: 1.5rem;
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+    
+    .cta-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+} 

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- SEO Meta Tags -->
+  <title>Page Not Found | Lumyx Agency</title>
+  <meta name="description" content="The page you are looking for could not be found. Return to Lumyx Agency homepage." />
+  <meta name="robots" content="noindex, follow" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://lumyxagency.com/404">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    /* Base color variables */
+    :root {
+      --primary-orange: #FFA500;
+      --primary-orange-light: #FFD700;
+      --complementary-blue: #1E90FF;
+      --complementary-blue-light: #00CED1;
+      --text-light: #ffffff;
+      --bg-dark: #1a1a1a;
+      --bg-light: #2a2a2a;
+      --container-padding: 20px;
+    }
+
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      color: #ffffff;
+      line-height: 1.6;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 8px 10px 8px 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-left: -5px;
+    }
+    header .logo img {
+      width: 160px;
+      height: auto;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      margin-right: -50px;
+      position: relative;
+      z-index: 2;
+    }
+    header .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      position: relative;
+      letter-spacing: 0.5px;
+      z-index: 1;
+    }
+
+    /* 404 Content */
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      padding: 0 20px;
+    }
+    .error-code {
+      font-size: 10rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, var(--primary-orange), var(--complementary-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      line-height: 1;
+    }
+    .error-message {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+    .error-description {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .home-button {
+      padding: 15px 40px;
+      background: linear-gradient(45deg, var(--primary-orange), var(--primary-orange-light));
+      color: #ffffff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(255, 165, 0, 0.2);
+    }
+    .home-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(255, 165, 0, 0.3);
+    }
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.1;
+      background: 
+        linear-gradient(45deg, #1E90FF, #00CED1);
+      animation: gradientBG 15s ease infinite;
+      background-size: 400% 400%;
+      will-change: background-position;
+      transform: translateZ(0);
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 8rem;
+      }
+      .error-message {
+        font-size: 1.5rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .error-code {
+        font-size: 6rem;
+      }
+      .error-message {
+        font-size: 1.2rem;
+      }
+      .error-description {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg"></div>
+  
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="Logo.png.png" alt="Lumyx Agency Logo">
+      <h1>Lumyx Agency</h1>
+    </div>
+  </header>
+
+  <!-- 404 Content -->
+  <div class="error-container">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-message">Page Not Found</h2>
+    <p class="error-description">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <a href="/" class="home-button">Return to Home</a>
+  </div>
+
+  <script>
+    // Simple analytics tracking for 404 errors
+    document.addEventListener('DOMContentLoaded', function() {
+      // Log the URL that caused the 404 error
+      const currentURL = window.location.href;
+      const referrer = document.referrer;
+      
+      // If you have analytics set up, you could track this
+      if (window.gtag) {
+        gtag('event', '404_error', {
+          'event_category': 'Error',
+          'event_label': currentURL,
+          'referrer': referrer
+        });
+      }
+      
+      // Console log for debugging
+      console.log('404 Error - Page not found:', currentURL, 'Referrer:', referrer);
+    });
+  </script>
+  <script src="js/bundle.min.js"></script>
+</body>
+</html> 
