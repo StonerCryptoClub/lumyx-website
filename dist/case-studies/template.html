@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study | Lumyx Agency</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="../css/case-studies.css">
+</head>
+<body>
+    <header class="case-study-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="../index.html#portfolio">Portfolio</a>
+                <i class="fas fa-chevron-right"></i>
+                <span class="current-page">Loading...</span>
+            </div>
+            <span class="category-tag">Loading...</span>
+            <h1 class="case-study-title">Loading...</h1>
+            <p class="case-study-excerpt">Loading...</p>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <i class="fas fa-building"></i>
+                    <span class="client-name">Loading...</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span class="timeline">Loading...</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span class="date">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="case-study-content">
+        <div class="container">
+            <img class="featured-image" src="" alt="">
+            
+            <div class="content-section">
+                <div class="rich-text-content case-study-description">
+                    Loading...
+                </div>
+            </div>
+
+            <section class="content-section">
+                <h2 class="section-title">Results & Impact</h2>
+                <div class="results-grid">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="../js/contentful-client.js"></script>
+    <script>
+        async function loadCaseStudy() {
+            const slug = window.location.pathname.split('/').pop().replace('.html', '');
+            
+            try {
+                const study = await window.contentfulHelpers.getCaseStudyBySlug(slug);
+                
+                if (!study) {
+                    throw new Error('Case study not found');
+                }
+
+                const fields = study.fields;
+
+                // Update page title and meta
+                document.title = `${fields.title} | Lumyx Agency`;
+                
+                // Update header content
+                document.querySelector('.current-page').textContent = fields.title;
+                document.querySelector('.category-tag').textContent = fields.category;
+                document.querySelector('.case-study-title').textContent = fields.title;
+                document.querySelector('.case-study-excerpt').textContent = fields.excerpt || '';
+                document.querySelector('.client-name').textContent = fields.clientName || 'Confidential';
+                document.querySelector('.timeline').textContent = fields.timeline || 'Ongoing';
+                document.querySelector('.date').textContent = new Date(fields.projectDate || study.sys.createdAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                // Update featured image
+                const image = document.querySelector('.featured-image');
+                if (fields.featuredImage?.fields?.file?.url) {
+                    image.src = 'https:' + fields.featuredImage.fields.file.url;
+                    image.alt = fields.title;
+                } else {
+                    image.style.display = 'none';
+                }
+
+                // Update description
+                document.querySelector('.case-study-description').innerHTML = 
+                    fields.description || fields.excerpt || '';
+
+                // Update results
+                const resultsGrid = document.querySelector('.results-grid');
+                const results = Array.isArray(fields.results) 
+                    ? fields.results 
+                    : fields.results?.content 
+                        ? extractRichTextResults(fields.results)
+                        : [];
+
+                resultsGrid.innerHTML = results.map(result => `
+                    <div class="result-card">
+                        <div class="result-icon">
+                            ${getResultIcon(result)}
+                        </div>
+                        <div class="result-value">${extractMetric(result)}</div>
+                        <div class="result-label">${formatResultLabel(result)}</div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading case study:', error);
+                document.body.innerHTML = `
+                    <div class="error-container">
+                        <h1 class="error-title">Case Study Not Found</h1>
+                        <p class="error-message">
+                            Sorry, we couldn't find the case study you're looking for.
+                        </p>
+                        <a href="../index.html#portfolio" class="back-button">
+                            Back to Portfolio
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        function getResultIcon(text) {
+            const icons = {
+                'roas': '📈',
+                'roi': '📈',
+                '%': '📈',
+                'month': '⏱️',
+                'day': '⏱️',
+                'lead': '👥',
+                'customer': '👥',
+                'campaign': '🚀',
+                'recognition': '⭐',
+                'brand': '⭐',
+                'view': '👀',
+                'follower': '🎯'
+            };
+
+            const match = Object.entries(icons).find(([key]) => 
+                text.toLowerCase().includes(key.toLowerCase())
+            );
+
+            return match ? match[1] : '📊';
+        }
+
+        function extractMetric(text) {
+            const numberMatch = text.match(/(\d+(?:\.\d+)?)\s*%?/);
+            return numberMatch ? numberMatch[0] : '';
+        }
+
+        function formatResultLabel(text) {
+            const metric = extractMetric(text);
+            return text.replace(metric, '').trim();
+        }
+
+        function extractRichTextResults(richText) {
+            if (!richText?.content) return [];
+            
+            return richText.content
+                .filter(node => node.nodeType === 'ordered-list' || node.nodeType === 'unordered-list')
+                .flatMap(list => list.content)
+                .filter(item => item.nodeType === 'list-item')
+                .map(item => item.content
+                    .filter(content => content.nodeType === 'paragraph')
+                    .flatMap(para => para.content)
+                    .filter(content => content.nodeType === 'text')
+                    .map(text => text.value)
+                    .join('')
+                );
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCaseStudy);
+    </script>
+</body>
+</html> 

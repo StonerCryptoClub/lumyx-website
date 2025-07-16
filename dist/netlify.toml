@@ -1,0 +1,10 @@
+[build]
+  publish = "dist"
+
+# Disable Next.js plugin completely
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# Production context
+[context.production]
+  publish = "dist"
