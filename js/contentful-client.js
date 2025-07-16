@@ -1,7 +1,7 @@
 // Initialize Contentful Client
 const client = contentful.createClient({
-    space: '74kxarv2y1kp',
-    accessToken: 'yJszWN6sgnfaKhUmjvl02S-T1UTq9TVBKLUH5xb5H8c'
+    space: window.config.contentful.spaceId,
+    accessToken: window.config.contentful.accessToken
 });
 
 // Define placeholder case studies

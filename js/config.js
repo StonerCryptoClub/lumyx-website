@@ -1,18 +1,20 @@
-// Configuration
+// Configuration - DEPRECATED
+// This file is kept for backward compatibility only
+// API keys have been moved to environment variables for security
 window.config = {
     supabase: {
-        url: 'https://ctvmeaezvszekbljtuwe.supabase.co',
-        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0dm1lYWV6dnN6ZWtibGp0dXdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5Njc5OTksImV4cCI6MjA1NzU0Mzk5OX0.U7TZoaC_lKRvrRCKpSJTHNlB8uFFuHgA4MwuhXWp1E8'
+        url: 'MOVED_TO_ENV_VARS',
+        anonKey: 'MOVED_TO_ENV_VARS'
     },
     emailjs: {
-        publicKey: 'kroz7yxsw1nMzB7br',
-        serviceId: 'service_qe8dgoh',
-        clientTemplateId: 'template_jrwx295',
-        teamTemplateId: 'template_t5xs49r'
+        publicKey: 'MOVED_TO_ENV_VARS',
+        serviceId: 'MOVED_TO_ENV_VARS',
+        clientTemplateId: 'MOVED_TO_ENV_VARS',
+        teamTemplateId: 'MOVED_TO_ENV_VARS'
     },
     contentful: {
-        spaceId: '74kxarv2y1kp',
-        accessToken: 'yJszWN6sgnfaKhUmjvl02S-T1UTq9TVBKLUH5xb5H8c'
+        spaceId: 'MOVED_TO_ENV_VARS',
+        accessToken: 'MOVED_TO_ENV_VARS'
     }
 };
 

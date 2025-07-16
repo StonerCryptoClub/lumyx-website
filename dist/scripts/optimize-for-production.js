@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { loadEnvFile, injectEnvVariables } = require('../js/env-injector');
 
 // Configuration
 const config = {
@@ -159,9 +160,16 @@ function copyAllImages() {
 function processHtmlFiles() {
   console.log('Processing HTML files...');
   
+  // Load environment variables
+  const envConfig = loadEnvFile();
+  console.log('Environment variables loaded for injection');
+  
   config.htmlFiles.forEach(file => {
     try {
       let content = fs.readFileSync(file, 'utf8');
+      
+      // Inject environment variables FIRST
+      content = injectEnvVariables(content, envConfig);
       
       // Replace individual JS files with the minified bundle
       config.jsFiles.forEach(jsFile => {
@@ -190,7 +198,7 @@ function processHtmlFiles() {
       
       // Write the processed HTML file to the output directory
       fs.writeFileSync(path.join(config.outputDir, file), content);
-      console.log(`HTML file ${file} processed successfully`);
+      console.log(`HTML file ${file} processed with env injection`);
     } catch (err) {
       console.error(`Error processing ${file}:`, err);
     }

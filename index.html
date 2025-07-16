@@ -87,7 +87,13 @@
   <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   
   <!-- Configuration -->
-  <script src="js/config.js"></script>
+  <script src="js/env-loader.js"></script>
+  <!-- Production Logger -->
+  <script src="js/production-logger.js"></script>
+  <!-- HTML Sanitizer -->
+  <script src="js/html-sanitizer.js"></script>
+  <!-- Input Validator -->
+  <script src="js/input-validator.js"></script>
   <!-- Database Client -->
   <script src="js/supabase-client.js"></script>
   <!-- Contentful Client -->
@@ -220,7 +226,11 @@
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Configuration -->
-  <script src="js/config.js"></script>
+  <script src="js/env-loader.js"></script>
+  <!-- HTML Sanitizer -->
+  <script src="js/html-sanitizer.js"></script>
+  <!-- Input Validator -->
+  <script src="js/input-validator.js"></script>
   <!-- Database Client -->
   <script src="js/supabase-client.js"></script>
   <!-- Newsletter Popup Integration -->
@@ -5736,7 +5746,11 @@
   <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   
   <!-- Configuration -->
-  <script src="js/config.js"></script>
+  <script src="js/env-loader.js"></script>
+  <!-- HTML Sanitizer -->
+  <script src="js/html-sanitizer.js"></script>
+  <!-- Input Validator -->
+  <script src="js/input-validator.js"></script>
   <!-- Database Client -->
   <script src="js/supabase-client.js"></script>
   <!-- Contentful Client -->
@@ -7076,30 +7090,18 @@
       });
     }
 
-    // Admin Panel Functions
+    // Admin Panel Functions - REMOVED FOR SECURITY
+    // Client-side admin authentication is insecure and has been disabled
     function toggleAdminPanel() {
-      const password = prompt("Please enter admin password:");
-      if (password === config.adminPassword) {
-        const panel = document.getElementById('adminPanel');
-        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-        if (panel.style.display === 'block') {
-          updateAdminPanelStats();
-        }
-      } else if (password !== null) {
-        alert("Incorrect password");
-      }
+      alert("Admin panel has been disabled for security reasons. Please contact support for admin access.");
     }
 
     function closeAdminPanel() {
-      document.getElementById('adminPanel').style.display = 'none';
+      // Admin panel disabled
     }
 
     function toggleSubscriberList() {
-      const list = document.getElementById('subscriberList');
-      list.style.display = list.style.display === 'none' ? 'block' : 'none';
-      if (list.style.display === 'block') {
-        updateSubscriberList();
-      }
+      // Admin panel disabled
     }
 
     function updateAdminPanelStats() {
