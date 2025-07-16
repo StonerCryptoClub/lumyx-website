@@ -635,3 +635,156 @@
     font-size: 0.9rem;
   }
 } 
+
+/* Mobile case study cards - make them shorter and more compact */
+@media screen and (max-width: 768px) {
+    .portfolio-item {
+        margin-bottom: 0.75rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        max-height: 280px; /* Limit total card height */
+    }
+    
+    .portfolio-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        height: 120px !important; /* Much shorter image area */
+        padding-top: 0 !important; /* Remove aspect ratio padding */
+    }
+    
+    .portfolio-image {
+        width: 100%;
+        height: 120px !important; /* Fixed shorter height */
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .portfolio-content {
+        padding: 0.75rem !important;
+        height: 160px !important; /* Fixed content height */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+    
+    .category {
+        font-size: 0.75rem !important;
+        color: #ff6b00;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    .title {
+        font-size: 1rem !important;
+        font-weight: 700;
+        color: #333;
+        margin: 0.25rem 0 !important;
+        line-height: 1.2 !important;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limit to 2 lines */
+        -webkit-box-orient: vertical;
+        max-height: 2.4rem;
+    }
+    
+    .description {
+        font-size: 0.85rem !important;
+        color: #666;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Limit to 2 lines only */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex-grow: 1;
+        max-height: 2.6rem;
+    }
+    
+    .view-project {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #ff6b00;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem !important;
+        transition: color 0.3s ease;
+        margin-top: auto; /* Push to bottom */
+    }
+    
+    .view-project:hover {
+        color: #ff9500;
+    }
+    
+    .view-project i {
+        font-size: 0.75rem !important;
+        transition: transform 0.3s ease;
+    }
+    
+    .view-project:hover i {
+        transform: translateX(2px);
+    }
+}
+
+/* Make portfolio grid more compact on mobile */
+@media screen and (max-width: 768px) {
+    .portfolio-grid {
+        padding: 0.5rem 0 !important;
+    }
+    
+    .portfolio-grid-inner {
+        flex-direction: column;
+        gap: 0.75rem !important; /* Reduced gap between cards */
+        width: 100%;
+    }
+}
+
+/* Placeholder image optimization for mobile - make shorter */
+@media screen and (max-width: 768px) {
+    .placeholder-image {
+        height: 120px !important; /* Match image height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, #ff6b00, #ff9500);
+    }
+    
+    .placeholder-image i {
+        font-size: 2rem !important;
+        color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Override any existing portfolio styles that make cards too tall */
+@media screen and (max-width: 768px) {
+    .portfolio-section .portfolio-item {
+        height: auto !important;
+        max-height: 280px !important;
+        min-height: auto !important;
+    }
+    
+    .portfolio-item .portfolio-image-wrapper {
+        padding-top: 0 !important; /* Remove aspect ratio */
+        height: 120px !important;
+    }
+    
+    .portfolio-item .portfolio-content {
+        padding: 0.75rem !important;
+        height: 160px !important;
+    }
+    
+    /* Make sure titles don't take too much space */
+    .portfolio-item .title {
+        max-height: 2.4rem !important; /* 2 lines max */
+        overflow: hidden;
+    }
+    
+    /* Make sure descriptions are limited */
+    .portfolio-item .description {
+        max-height: 2.6rem !important; /* 2 lines max */
+        overflow: hidden;
+    }
+} 
