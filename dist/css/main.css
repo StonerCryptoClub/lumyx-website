@@ -282,14 +282,34 @@ header nav a[href="/blog.html"] {
 #home {
   position: relative;
   background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center/cover;
+  min-height: 100vh;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 20px;
+  padding: 80px 20px 20px;
   will-change: transform;
   transform: translateZ(0);
+}
+
+/* MacBook and laptop specific adjustments */
+@media screen and (min-width: 1024px) and (max-width: 1440px) and (min-height: 600px) and (max-height: 900px) {
+  #home {
+    min-height: 100vh;
+    height: auto;
+    padding: 60px 20px 40px;
+  }
+  
+  #home h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  
+  #home p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
 }
 #home::before {
   content: '';
@@ -377,4 +397,38 @@ header nav a[href="/blog.html"] {
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: 0.5s;
+} 
+
+/* Client Avatar Styling */
+.proof-avatars {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.proof-avatars img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-orange);
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.proof-avatars img:hover {
+  transform: scale(1.1);
+}
+
+.proof-text {
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+/* Ensure SVG images load properly */
+.proof-avatars img[src$=".svg"] {
+  display: block;
+  background: transparent;
 } 
