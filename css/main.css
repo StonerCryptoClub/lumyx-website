@@ -266,6 +266,17 @@ header nav a::before {
 header nav a:hover::before {
   width: 100%;
 }
+header nav a:visited {
+  color: #ffffff;
+}
+header nav a[href="/blog.html"] {
+  display: none !important;
+}
+@media screen and (max-width: 992px) {
+  header nav {
+    display: none !important;
+  }
+}
 
 /* Hero Section */
 #home {
