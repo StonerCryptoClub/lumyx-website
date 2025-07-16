@@ -48,7 +48,8 @@ function copyFiles() {
         'mailchimp-form-custom.html',
         'mailchimp-thank-you.html',
         'newsletter-popup.html',
-        'portfolio-section.html'
+        'portfolio-section.html',
+        'Logo.png'
     ];
     
     // Copy individual files
