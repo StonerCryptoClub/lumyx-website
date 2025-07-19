@@ -3,7 +3,12 @@
 <head>
   <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/658c23db9ba64ab753d154574/de13bc0fc5ec5a5b56cb40162.js");</script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
+  <!-- Performance Hints -->
+  <meta name="theme-color" content="#ff6b35">
+  <meta name="color-scheme" content="light">
+  <link rel="manifest" href="/public/manifest.json">
   
   <!-- CSRF Protection -->
   <meta name="csrf-token" content="{{csrf_token}}">
@@ -59,54 +64,14 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
 
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "YOUR_CLARITY_PROJECT_ID");
-  </script>
-  <!-- End Microsoft Clarity -->
+  <!-- Clarity removed - add real project ID when ready -->
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_ACTUAL_GA4_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-YOUR_ACTUAL_GA4_ID');
-  </script>
-  <!-- End Google Analytics 4 -->
+  <!-- Analytics removed - replace with actual GA4 ID when ready -->
 
-  <!-- Required Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
-  
-  <!-- Configuration -->
+  <!-- Load only essential scripts in head -->
   <script src="js/env-loader.js"></script>
-  <!-- Production Logger -->
-  <script src="js/production-logger.js"></script>
-  <!-- HTML Sanitizer -->
-  <script src="js/html-sanitizer.js"></script>
-  <!-- Input Validator -->
-  <script src="js/input-validator.js"></script>
-
-  <!-- Contentful Client -->
-  <script src="js/contentful-client.js?v=20250116c"></script>
-  <!-- Portfolio Manager -->
-  <script src="js/portfolio-manager.js"></script>
-  <!-- Placeholder Generator -->
-  <script src="js/generate-placeholders.js"></script>
-  <!-- Analytics -->
-  <script src="js/analytics.js"></script>
-  <!-- Placeholder Generator -->
-  <script src="js/generate-placeholders.js"></script>
-  <!-- Content Loader Initialization -->
-  <script src="js/content-loader-init.js"></script>
+  
+  <!-- Move scripts to bottom for better performance -->
   <!-- Portfolio Manager -->
   <script src="js/portfolio-manager.js"></script>
   <!-- Analytics -->
@@ -203,40 +168,37 @@
   5. Check for mobile usability issues
   -->
 
-  <!-- Google Font -->
+  <!-- Resource Hints for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  
+  <!-- DNS Prefetch for third-party domains -->
+  <link rel="dns-prefetch" href="//connect.facebook.net">
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//assets.calendly.com">
+  
+  <!-- Google Font - Optimized -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"></noscript>
   
-  <!-- Font Awesome - Preload -->
+  <!-- Font Awesome - Optimized -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
   
-  <!-- Critical CSS Preload -->
-  <link rel="preload" href="css/main.css" as="style">
-  <link rel="preload" href="css/portfolio.css" as="style">
-  <link rel="preload" href="css/mobile-fixes.css" as="style">
-  
-  <!-- Main Styles -->
+  <!-- Only critical CSS in head -->
   <link rel="stylesheet" href="css/main.css">
-  <!-- Portfolio Styles -->
-  <link rel="stylesheet" href="css/portfolio.css">
-  <!-- Mobile Fixes -->
-  <link rel="stylesheet" href="css/mobile-fixes.css">
-  <!-- FullCalendar CSS -->
-  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet' />
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <!-- Configuration -->
-  <script src="js/env-loader.js"></script>
-  <!-- HTML Sanitizer -->
-  <script src="js/html-sanitizer.js"></script>
-  <!-- Input Validator -->
-  <script src="js/input-validator.js"></script>
-  <!-- Database Client -->
-
-  <!-- Newsletter Popup Integration -->
-  <script src="js/mailchimp-integration.js"></script>
+  
+  <!-- Load other CSS asynchronously -->
+  <link rel="preload" href="css/portfolio.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/mobile-fixes.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <noscript>
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/mobile-fixes.css">
+  </noscript>
+  <!-- Scripts moved to bottom for better performance -->
   <style>
     /* Base color variables */
     :root {
@@ -5740,25 +5702,7 @@
       }
     }
   </style>
-  <!-- Add these in the head section -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
-  
-  <!-- Configuration -->
-  <script src="js/env-loader.js"></script>
-  <!-- HTML Sanitizer -->
-  <script src="js/html-sanitizer.js"></script>
-  <!-- Input Validator -->
-  <script src="js/input-validator.js"></script>
-  <!-- Case Studies Loaders -->
-  <!-- <script src="js/case-studies-loader.js"></script> -->
-  <script src="js/case-study-loader.js"></script>
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://lumyx.co/">
+  <!-- Duplicate scripts removed for performance -->
 
 
 
@@ -5863,12 +5807,7 @@
     }
   </script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/portfolio.css">
-  <link rel="stylesheet" href="css/contact-fixes.css">
-  <link rel="stylesheet" href="css/mobile-fixes.css">
-  <link rel="stylesheet" href="css/value-card.css">
+  <!-- CSS already loaded in head - removed duplicate loading -->
 </head>
 <body>
   <!-- Failsafe loader remover script has been removed -->
@@ -6507,13 +6446,42 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/meta-pixel-events.js"></script>
-  <script src="js/newsletter.js"></script>
-  <script src="js/form-validation.js"></script>
-  <script src="js/form-fix.js"></script>
-  <script src="js/performance-optimization.js"></script>
+  <!-- Essential Scripts Only -->
+  <script defer src="js/performance-optimization.js"></script>
+  <script defer src="js/newsletter.js"></script>
+  <script defer src="js/form-validation.js"></script>
+  
+  <!-- Load heavy scripts on demand -->
+  <script>
+    // Load jQuery only when needed
+    function loadJQuery(callback) {
+      if (typeof jQuery === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+        script.onload = callback;
+        document.head.appendChild(script);
+      } else {
+        callback();
+      }
+    }
+    
+    // Load other scripts after page load
+    window.addEventListener('load', function() {
+      requestIdleCallback(() => {
+        // Load non-critical scripts
+        const scripts = [
+          'js/contentful-client.js?v=20250116c',
+          'js/portfolio-manager.js'
+        ];
+        scripts.forEach(src => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.defer = true;
+          document.body.appendChild(script);
+        });
+      });
+    });
+  </script>
   
   <!-- Initialize Portfolio -->
   <script>
@@ -7197,10 +7165,9 @@
       emailjs.init(config.emailjs.publicKey);
     })();
   </script>
-  <!-- Add this before closing body tag -->
-  <script src="js/animations.js"></script>
-  <script src="js/performance-optimization.js"></script>
-  <!-- Loader div and script have been removed -->
+  <!-- Animation script only -->
+  <script defer src="js/animations.js"></script>
+  <!-- Removed duplicate performance script -->
 </body>
 </html>
 
