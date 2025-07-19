@@ -68,12 +68,20 @@
 
   <!-- Analytics removed - replace with actual GA4 ID when ready -->
 
-  <!-- Load only essential scripts in head -->
+  <!-- Essential scripts for functionality -->
   <script src="js/env-loader.js"></script>
+  <script src="js/html-sanitizer.js"></script>
+  <script src="js/input-validator.js"></script>
   
-  <!-- Move scripts to bottom for better performance -->
-  <!-- Portfolio Manager -->
+  <!-- Contentful dependencies (need to load together) -->
+  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+  <script src="js/contentful-helpers.js"></script>
+  <script src="js/contentful-client.js?v=20250116c"></script>
+  <script src="js/case-study-loader.js"></script>
   <script src="js/portfolio-manager.js"></script>
+  
+  <!-- Other dependencies -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <!-- Analytics -->
   
   <!-- Canonical URL -->
@@ -6465,22 +6473,7 @@
       }
     }
     
-    // Load other scripts after page load
-    window.addEventListener('load', function() {
-      requestIdleCallback(() => {
-        // Load non-critical scripts
-        const scripts = [
-          'js/contentful-client.js?v=20250116c',
-          'js/portfolio-manager.js'
-        ];
-        scripts.forEach(src => {
-          const script = document.createElement('script');
-          script.src = src;
-          script.defer = true;
-          document.body.appendChild(script);
-        });
-      });
-    });
+    // Scripts already loaded in head for better performance
   </script>
   
   <!-- Initialize Portfolio -->
