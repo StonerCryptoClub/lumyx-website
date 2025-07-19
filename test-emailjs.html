@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EmailJS Test</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <h1>EmailJS Test</h1>
+    <button onclick="testEmail()">Test Email</button>
+    <div id="result"></div>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init("kroz7yxsw1nMzB7br");
+        
+        async function testEmail() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Sending test email...';
+            
+            try {
+                const result = await emailjs.send(
+                    'service_qe8dgoh', 
+                    'template_jrwx295', 
+                    {
+                        to_email: 'cadenbuiting6@gmail.com', // Replace with your email
+                        from_name: "Lumyx Agency",
+                        to_name: "Test User",
+                        subject: "Test Email from EmailJS",
+                        message: "This is a test email to verify EmailJS configuration.",
+                        meeting_type: "Test",
+                        meeting_details: "Test meeting details",
+                        date: "Today",
+                        time: "Now"
+                    }
+                );
+                
+                resultDiv.innerHTML = `
+                    <h3>Success!</h3>
+                    <p>Status: ${result.status}</p>
+                    <p>Text: ${result.text}</p>
+                    <p>Check your email inbox (and spam folder)</p>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <h3>Error!</h3>
+                    <p>Error: ${error.message || error}</p>
+                    <p>Full error: ${JSON.stringify(error)}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html> 

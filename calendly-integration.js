@@ -4,19 +4,62 @@ let selectedTime = null;
 let confirmButton = null;
 let originalText = '';
 
-// Initialize EmailJS
+// Initialize EmailJS with better error handling
 (function() {
-    emailjs.init("kroz7yxsw1nMzB7br");
+    try {
+        emailjs.init("kroz7yxsw1nMzB7br");
+        console.log('EmailJS initialized successfully');
+    } catch (error) {
+        console.error('Failed to initialize EmailJS:', error);
+    }
 })();
 
-// Function to send email
+// Improved function to send email with better error handling
 async function sendEmail(templateId, templateParams) {
+    console.log('Attempting to send email with template:', templateId);
+    console.log('Template params:', templateParams);
+    
     try {
-        const result = await emailjs.send('service_qe8dgoh', templateId, templateParams);
+        // Validate required parameters
+        if (!templateParams.to_email) {
+            throw new Error('to_email is required');
+        }
+        
+        if (!templateParams.to_name) {
+            throw new Error('to_name is required');
+        }
+        
+        // Send email with timeout
+        const result = await Promise.race([
+            emailjs.send('service_qe8dgoh', templateId, templateParams),
+            new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Email timeout after 10 seconds')), 10000)
+            )
+        ]);
+        
         console.log('Email sent successfully:', result);
+        console.log('Status:', result.status);
+        console.log('Text:', result.text);
+        
+        // Show success notification
+        if (typeof showNotification === 'function') {
+            showNotification('Email sent successfully!', 'success');
+        }
+        
         return true;
     } catch (error) {
         console.error('Failed to send email:', error);
+        console.error('Error details:', {
+            message: error.message,
+            status: error.status,
+            text: error.text
+        });
+        
+        // Show error notification
+        if (typeof showNotification === 'function') {
+            showNotification(`Failed to send email: ${error.message}`, 'error');
+        }
+        
         return false;
     }
 }
