@@ -1,0 +1,525 @@
+/**
+ * Comprehensive Conversion Tracking for Lumyx Digital Marketing Agency
+ * Optimized for performance - maintains 90+ PageSpeed scores
+ * Includes: GA4, GTM, Facebook Pixel, LinkedIn Insight Tag
+ */
+
+class ConversionTracker {
+    constructor() {
+        this.trackingId = 'G-YOUR_GA4_ID'; // Replace with actual GA4 ID
+        this.gtmId = 'GTM-XXXXXXX'; // Replace with actual GTM ID
+        this.fbPixelId = '1361608738369835'; // Your existing Facebook Pixel
+        this.linkedinPartnerId = 'YOUR_LINKEDIN_ID'; // Replace with LinkedIn Partner ID
+        
+        this.isLoaded = false;
+        this.eventQueue = [];
+        this.userInteracted = false;
+        
+        this.init();
+    }
+
+    /**
+     * Initialize tracking with performance optimization
+     */
+    init() {
+        // Wait for user interaction before loading heavy tracking scripts
+        this.setupInteractionListeners();
+        
+        // Load essential tracking immediately but asynchronously
+        this.loadEssentialTracking();
+        
+        // Setup form tracking
+        this.setupFormTracking();
+        
+        // Setup engagement tracking
+        this.setupEngagementTracking();
+    }
+
+    /**
+     * Setup interaction-based loading for performance
+     */
+    setupInteractionListeners() {
+        const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove'];
+        
+        const loadFullTracking = () => {
+            if (this.userInteracted) return;
+            this.userInteracted = true;
+            
+            this.loadGoogleTagManager();
+            this.loadSocialPixels();
+            
+            // Remove listeners to prevent multiple loads
+            events.forEach(event => {
+                document.removeEventListener(event, loadFullTracking);
+            });
+        };
+
+        events.forEach(event => {
+            document.addEventListener(event, loadFullTracking, { 
+                once: true, 
+                passive: true 
+            });
+        });
+
+        // Fallback timeout for non-interactive users
+        setTimeout(loadFullTracking, 3000);
+    }
+
+    /**
+     * Load essential tracking immediately
+     */
+    loadEssentialTracking() {
+        // Lightweight GA4 config
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        
+        gtag('js', new Date());
+        gtag('config', this.trackingId, {
+            page_title: document.title,
+            page_location: window.location.href,
+            send_page_view: true
+        });
+
+        // Process any queued events
+        this.processEventQueue();
+    }
+
+    /**
+     * Load Google Tag Manager with performance optimization
+     */
+    loadGoogleTagManager() {
+        if (document.querySelector('[src*="googletagmanager.com/gtm.js"]')) return;
+
+        // GTM Script
+        const gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${this.gtmId}`;
+        document.head.appendChild(gtmScript);
+
+        // GTM DataLayer initialization
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+        });
+
+        // GTM NoScript fallback
+        const noscript = document.createElement('noscript');
+        noscript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${this.gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+        document.body.appendChild(noscript);
+
+        this.isLoaded = true;
+    }
+
+    /**
+     * Load social media pixels efficiently
+     */
+    loadSocialPixels() {
+        // Facebook Pixel (already optimized in your existing code)
+        // LinkedIn Insight Tag
+        this.loadLinkedInInsightTag();
+    }
+
+    /**
+     * Load LinkedIn Insight Tag
+     */
+    loadLinkedInInsightTag() {
+        window._linkedin_partner_id = this.linkedinPartnerId;
+        window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+        window._linkedin_data_partner_ids.push(this.linkedinPartnerId);
+
+        const linkedinScript = document.createElement('script');
+        linkedinScript.type = 'text/javascript';
+        linkedinScript.async = true;
+        linkedinScript.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+        document.head.appendChild(linkedinScript);
+    }
+
+    /**
+     * Setup comprehensive form tracking
+     */
+    setupFormTracking() {
+        document.addEventListener('DOMContentLoaded', () => {
+            // Contact forms
+            this.trackContactForms();
+            
+            // Newsletter signups
+            this.trackNewsletterSignups();
+            
+            // Calendly interactions
+            this.trackCalendlyInteractions();
+        });
+    }
+
+    /**
+     * Track contact form submissions
+     */
+    trackContactForms() {
+        const contactForms = document.querySelectorAll('form[id*="contact"], form[id*="Contact"], .contact-form');
+        
+        contactForms.forEach(form => {
+            // Track form start (first input focus)
+            const inputs = form.querySelectorAll('input, textarea, select');
+            let formStarted = false;
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    if (!formStarted) {
+                        formStarted = true;
+                        this.trackEvent('form_start', {
+                            form_name: 'contact_form',
+                            form_location: window.location.pathname
+                        });
+                    }
+                }, { once: true });
+            });
+
+            // Track form submission
+            form.addEventListener('submit', (e) => {
+                const formData = new FormData(form);
+                const formFields = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    formFields[key] = value;
+                }
+
+                this.trackEvent('form_submit', {
+                    form_name: 'contact_form',
+                    form_location: window.location.pathname,
+                    form_fields: Object.keys(formFields),
+                    value: 100 // Assign monetary value to lead
+                });
+
+                // Facebook Pixel conversion
+                if (window.fbq) {
+                    window.fbq('track', 'Lead', {
+                        content_name: 'Contact Form',
+                        content_category: 'Lead Generation',
+                        value: 100,
+                        currency: 'USD'
+                    });
+                }
+
+                // LinkedIn conversion
+                if (window.lintrk) {
+                    window.lintrk('track', { conversion_id: 'YOUR_LINKEDIN_CONVERSION_ID' });
+                }
+            });
+        });
+    }
+
+    /**
+     * Track newsletter signups
+     */
+    trackNewsletterSignups() {
+        // Mailchimp form tracking
+        const newsletterForms = document.querySelectorAll('form[action*="mailchimp"], .newsletter-form');
+        
+        newsletterForms.forEach(form => {
+            form.addEventListener('submit', () => {
+                this.trackEvent('newsletter_signup', {
+                    form_location: window.location.pathname,
+                    value: 50
+                });
+
+                if (window.fbq) {
+                    window.fbq('track', 'Subscribe', {
+                        content_name: 'Newsletter',
+                        value: 50,
+                        currency: 'USD'
+                    });
+                }
+            });
+        });
+    }
+
+    /**
+     * Track Calendly booking interactions
+     */
+    trackCalendlyInteractions() {
+        // Track Calendly widget loads
+        const calendlyContainer = document.getElementById('calendly-container');
+        if (calendlyContainer) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.trackEvent('calendly_widget_view', {
+                            page: window.location.pathname
+                        });
+                        observer.disconnect();
+                    }
+                });
+            });
+            observer.observe(calendlyContainer);
+        }
+
+        // Listen for Calendly events
+        window.addEventListener('calendly.event_scheduled', (e) => {
+            this.trackEvent('calendly_booking', {
+                event_type: e.data.payload.event.event_type,
+                value: 500 // High value for consultation bookings
+            });
+
+            if (window.fbq) {
+                window.fbq('track', 'Schedule', {
+                    content_name: 'Consultation Booking',
+                    value: 500,
+                    currency: 'USD'
+                });
+            }
+        });
+    }
+
+    /**
+     * Setup engagement tracking
+     */
+    setupEngagementTracking() {
+        // Scroll depth tracking
+        this.setupScrollTracking();
+        
+        // Time on page tracking
+        this.setupTimeTracking();
+        
+        // Click tracking
+        this.setupClickTracking();
+        
+        // Service page engagement
+        this.setupServicePageTracking();
+    }
+
+    /**
+     * Track scroll depth
+     */
+    setupScrollTracking() {
+        const scrollThresholds = [25, 50, 75, 90, 100];
+        const scrolled = new Set();
+
+        window.addEventListener('scroll', this.throttle(() => {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            
+            scrollThresholds.forEach(threshold => {
+                if (scrollPercent >= threshold && !scrolled.has(threshold)) {
+                    scrolled.add(threshold);
+                    this.trackEvent('scroll_depth', {
+                        scroll_depth: threshold,
+                        page: window.location.pathname
+                    });
+                }
+            });
+        }, 1000));
+    }
+
+    /**
+     * Track time on page
+     */
+    setupTimeTracking() {
+        const timeThresholds = [30, 60, 120, 300]; // seconds
+        const timeTracked = new Set();
+        const startTime = Date.now();
+
+        timeThresholds.forEach(threshold => {
+            setTimeout(() => {
+                if (!timeTracked.has(threshold)) {
+                    timeTracked.add(threshold);
+                    this.trackEvent('time_on_page', {
+                        time_threshold: threshold,
+                        page: window.location.pathname
+                    });
+                }
+            }, threshold * 1000);
+        });
+    }
+
+    /**
+     * Track important clicks
+     */
+    setupClickTracking() {
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button');
+            if (!target) return;
+
+            // Phone number clicks
+            if (target.href && target.href.startsWith('tel:')) {
+                this.trackEvent('phone_click', {
+                    phone_number: target.href.replace('tel:', ''),
+                    location: window.location.pathname
+                });
+            }
+
+            // Email clicks
+            if (target.href && target.href.startsWith('mailto:')) {
+                this.trackEvent('email_click', {
+                    email: target.href.replace('mailto:', ''),
+                    location: window.location.pathname
+                });
+            }
+
+            // CTA button clicks
+            if (target.classList.contains('cta-button') || 
+                target.classList.contains('primary-button') ||
+                target.textContent.toLowerCase().includes('book') ||
+                target.textContent.toLowerCase().includes('contact')) {
+                
+                this.trackEvent('cta_click', {
+                    button_text: target.textContent.trim(),
+                    button_location: window.location.pathname,
+                    button_position: this.getElementPosition(target)
+                });
+            }
+
+            // Service page links
+            if (target.href && (
+                target.href.includes('ppc-services') ||
+                target.href.includes('seo-services') ||
+                target.href.includes('social-media') ||
+                target.href.includes('web-development')
+            )) {
+                this.trackEvent('service_page_click', {
+                    service: this.extractServiceFromUrl(target.href),
+                    source_page: window.location.pathname
+                });
+            }
+
+            // External links
+            if (target.href && !target.href.includes(window.location.hostname)) {
+                this.trackEvent('external_link_click', {
+                    url: target.href,
+                    text: target.textContent.trim(),
+                    location: window.location.pathname
+                });
+            }
+        });
+    }
+
+    /**
+     * Track service page specific engagement
+     */
+    setupServicePageTracking() {
+        if (window.location.pathname.includes('services') || 
+            window.location.pathname.includes('ppc') ||
+            window.location.pathname.includes('seo')) {
+            
+            // Track service page views
+            this.trackEvent('service_page_view', {
+                service: this.extractServiceFromUrl(window.location.pathname),
+                referrer: document.referrer
+            });
+
+            // Track specific service interactions
+            document.querySelectorAll('.service-card, .service-feature').forEach(element => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.trackEvent('service_feature_view', {
+                                feature: element.textContent.trim().substring(0, 50),
+                                service: this.extractServiceFromUrl(window.location.pathname)
+                            });
+                            observer.disconnect();
+                        }
+                    });
+                });
+                observer.observe(element);
+            });
+        }
+    }
+
+    /**
+     * Track custom events
+     */
+    trackEvent(eventName, parameters = {}) {
+        const eventData = {
+            event: eventName,
+            timestamp: Date.now(),
+            page_title: document.title,
+            page_location: window.location.href,
+            ...parameters
+        };
+
+        // Queue events if tracking not loaded yet
+        if (!this.isLoaded && !window.gtag) {
+            this.eventQueue.push(eventData);
+            return;
+        }
+
+        // Send to Google Analytics 4
+        if (window.gtag) {
+            window.gtag('event', eventName, parameters);
+        }
+
+        // Send to Google Tag Manager
+        if (window.dataLayer) {
+            window.dataLayer.push(eventData);
+        }
+
+        // Debug logging (remove in production)
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('127.0.0.1')) {
+            console.log('Conversion Event Tracked:', eventData);
+        }
+    }
+
+    /**
+     * Process queued events
+     */
+    processEventQueue() {
+        while (this.eventQueue.length > 0) {
+            const event = this.eventQueue.shift();
+            this.trackEvent(event.event, event);
+        }
+    }
+
+    /**
+     * Utility functions
+     */
+    throttle(func, delay) {
+        let timeoutId;
+        let lastExecTime = 0;
+        
+        return function (...args) {
+            const currentTime = Date.now();
+            
+            if (currentTime - lastExecTime > delay) {
+                func.apply(this, args);
+                lastExecTime = currentTime;
+            } else {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    func.apply(this, args);
+                    lastExecTime = Date.now();
+                }, delay - (currentTime - lastExecTime));
+            }
+        };
+    }
+
+    getElementPosition(element) {
+        const rect = element.getBoundingClientRect();
+        return {
+            x: Math.round(rect.left),
+            y: Math.round(rect.top),
+            viewport_height: window.innerHeight,
+            viewport_width: window.innerWidth
+        };
+    }
+
+    extractServiceFromUrl(url) {
+        if (url.includes('ppc')) return 'ppc';
+        if (url.includes('seo')) return 'seo';
+        if (url.includes('social-media')) return 'social_media';
+        if (url.includes('web-development')) return 'web_development';
+        return 'general';
+    }
+}
+
+// Initialize conversion tracking
+document.addEventListener('DOMContentLoaded', () => {
+    window.conversionTracker = new ConversionTracker();
+});
+
+// Export for manual event tracking
+window.trackConversion = function(eventName, parameters) {
+    if (window.conversionTracker) {
+        window.conversionTracker.trackEvent(eventName, parameters);
+    }
+};
+
+export default ConversionTracker; 
