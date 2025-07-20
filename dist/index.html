@@ -53,40 +53,105 @@
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), bluetooth=(), midi=(), notifications=()">
   <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
   
-  <!-- Analytics scripts - loaded after critical content -->
+  <!-- Ultra-optimized analytics for TBT reduction -->
   <script>
-    // Defer analytics until after page load for better Core Web Vitals
-    window.addEventListener('load', function() {
-      // Meta Pixel Code - deferred
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1361608738369835');
-      fbq('track', 'PageView');
+    // Ultra-aggressive analytics deferring with task scheduling for minimal TBT impact
+    const loadAnalyticsOptimized = async () => {
+      // Advanced task scheduler for breaking up analytics loading
+      const scheduleAnalyticsTask = (callback) => {
+        if ('scheduler' in window && 'postTask' in window.scheduler) {
+          return window.scheduler.postTask(callback, { priority: 'background' });
+        }
+        return new Promise(resolve => {
+          const channel = new MessageChannel();
+          channel.port2.onmessage = () => {
+            callback();
+            resolve();
+          };
+          channel.port1.postMessage(null);
+        });
+      };
 
-      // Microsoft Clarity - deferred
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "YOUR_CLARITY_PROJECT_ID");
+      // Task 1: Facebook Pixel with chunked loading
+      await scheduleAnalyticsTask(() => {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Delay pixel initialization to prevent main thread blocking
+        setTimeout(() => {
+          if (window.fbq) {
+            fbq('init', '1361608738369835');
+            fbq('track', 'PageView');
+          }
+        }, 200);
+      });
 
-      // Google Analytics 4 - deferred
-      const gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YOUR_ACTUAL_GA4_ID';
-      document.head.appendChild(gaScript);
+      // Yield to main thread between analytics loads
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Task 2: Microsoft Clarity with background priority
+      await scheduleAnalyticsTask(() => {
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "YOUR_CLARITY_PROJECT_ID");
+      });
+
+      // Yield again
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Task 3: Google Analytics 4 with maximum deferral
+      await scheduleAnalyticsTask(() => {
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.defer = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-YOUR_ACTUAL_GA4_ID';
+        document.head.appendChild(gaScript);
+        
+        gaScript.onload = () => {
+          setTimeout(() => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YOUR_ACTUAL_GA4_ID');
+          }, 200);
+        };
+      });
+    };
+
+    // Only load analytics after significant user engagement
+    let analyticsLoaded = false;
+    const triggerAnalytics = () => {
+      if (analyticsLoaded) return;
+      analyticsLoaded = true;
       
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YOUR_ACTUAL_GA4_ID');
+      // Use requestIdleCallback for even better TBT
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAnalyticsOptimized, { timeout: 2000 });
+      } else {
+        setTimeout(loadAnalyticsOptimized, 100);
+      }
+    };
+
+    // Multiple interaction triggers with extended timeout for TBT optimization
+    const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove', 'wheel'];
+    events.forEach(event => {
+      document.addEventListener(event, triggerAnalytics, { 
+        once: true, 
+        passive: true,
+        capture: true
+      });
     });
+    
+    // Much longer timeout to prioritize initial page load performance
+    setTimeout(triggerAnalytics, 7000);
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1361608738369835&ev=PageView&noscript=1"
@@ -153,62 +218,151 @@
   <script defer src="js/input-validator.js"></script>
   <script defer src="js/contentful-client.js?v=20250116c"></script>
   
+  <!-- Advanced TBT optimization script -->
+  <script defer src="js/performance-optimization.js"></script>
+  
   <!-- Optimize third-party integrations -->
   <script>
-    // Intersection Observer for Calendly - only load when booking section is visible
+    // Ultra-aggressive TBT optimization strategy
+    let calendlyLoaded = false;
+    let scriptsLoaded = false;
+    
+    // Task scheduling for better TBT performance
+    const scheduleTask = (callback, priority = 'normal') => {
+      if ('scheduler' in window && 'postTask' in window.scheduler) {
+        return window.scheduler.postTask(callback, { priority });
+      }
+      // Fallback for browsers without scheduler API
+      if (priority === 'background') {
+        return new Promise(resolve => {
+          const timeoutId = setTimeout(() => {
+            callback();
+            resolve();
+          }, 0);
+        });
+      }
+      return new Promise(resolve => {
+        requestIdleCallback(() => {
+          callback();
+          resolve();
+        }, { timeout: 1000 });
+      });
+    };
+
+    // Break up Calendly loading into smaller tasks
+    const loadCalendlyChunked = async () => {
+      if (calendlyLoaded) return;
+      calendlyLoaded = true;
+
+      // Task 1: Load script
+      await scheduleTask(() => {
+        const calendlyScript = document.createElement('script');
+        calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
+        calendlyScript.async = true;
+        calendlyScript.defer = true;
+        document.head.appendChild(calendlyScript);
+      }, 'background');
+
+      // Task 2: Wait for script and initialize (with timeout)
+      await scheduleTask(() => {
+        let attempts = 0;
+        const initCalendly = () => {
+          if (typeof window.Calendly !== 'undefined') {
+            window.Calendly.initInlineWidget({
+              url: 'https://calendly.com/cadenbuiting6/30min',
+              parentElement: document.getElementById('calendly-container'),
+              prefill: {},
+              utm: {},
+              styles: { height: '650px' }
+            });
+          } else if (attempts < 20) {
+            attempts++;
+            setTimeout(initCalendly, 100);
+          }
+        };
+        setTimeout(initCalendly, 100);
+      }, 'background');
+    };
+
+    // Ultra-aggressive intersection observer with large margins
     const bookingObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Load Calendly when booking section is visible
-          const calendlyScript = document.createElement('script');
-          calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
-          calendlyScript.async = true;
-          document.head.appendChild(calendlyScript);
+          loadCalendlyChunked();
           bookingObserver.disconnect();
         }
       });
-    }, { rootMargin: '100px' });
-
-    // Observe booking section when DOM is ready
-    document.addEventListener('DOMContentLoaded', () => {
-      const bookingSection = document.getElementById('booking-section');
-      if (bookingSection) {
-        bookingObserver.observe(bookingSection);
-      }
+    }, { 
+      rootMargin: '300px', // Load when 300px away from viewport
+      threshold: 0.1
     });
 
-    // Load critical third-party scripts after page interaction or 3 seconds
-    let scriptsLoaded = false;
-    const loadThirdPartyScripts = () => {
+    // Load non-essential scripts in background tasks
+    const loadThirdPartyScripts = async () => {
       if (scriptsLoaded) return;
       scriptsLoaded = true;
 
       const scripts = [
-        'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js',
         'https://apis.google.com/js/api.js',
-        'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js',
-        'https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js'
+        'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js'
       ];
       
-      scripts.forEach((src, index) => {
-        setTimeout(() => {
+      // Load scripts with exponential backoff to reduce main thread impact
+      for (let i = 0; i < scripts.length; i++) {
+        await scheduleTask(() => {
           const script = document.createElement('script');
-          script.src = src;
+          script.src = scripts[i];
           script.async = true;
+          script.defer = true;
           document.head.appendChild(script);
-        }, index * 100); // Stagger loading
-      });
+        }, 'background');
+        
+        // Exponential delay to prevent main thread blocking
+        if (i < scripts.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 100));
+        }
+      }
     };
 
-    // Load on first user interaction or after 3 seconds
-    ['click', 'scroll', 'keydown', 'touchstart'].forEach(event => {
-      document.addEventListener(event, loadThirdPartyScripts, { 
-        once: true, 
-        passive: true 
+    // Initialize everything with proper sequencing
+    document.addEventListener('DOMContentLoaded', () => {
+      // Observe booking section immediately
+      const bookingSection = document.getElementById('booking-section');
+      if (bookingSection) {
+        bookingObserver.observe(bookingSection);
+      }
+
+      // Load scripts on ANY user interaction (much more aggressive)
+      const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove'];
+      const loadOnInteraction = () => {
+        loadThirdPartyScripts();
+        events.forEach(event => {
+          document.removeEventListener(event, loadOnInteraction);
+        });
+      };
+      
+      events.forEach(event => {
+        document.addEventListener(event, loadOnInteraction, { 
+          once: true, 
+          passive: true 
+        });
       });
+
+      // Fallback timeout reduced to 2 seconds for faster loading
+      setTimeout(loadThirdPartyScripts, 2000);
     });
-    
-    setTimeout(loadThirdPartyScripts, 3000);
+
+    // Performance monitoring for TBT optimization
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          if (entry.duration > 50) {
+            console.warn('Long task detected:', entry.duration + 'ms');
+          }
+        }
+      });
+      observer.observe({ entryTypes: ['longtask'] });
+    }
   </script>
   <script src="js/portfolio-manager.js"></script>
   <!-- Placeholder Generator -->
@@ -347,8 +501,7 @@
   <script src="js/input-validator.js"></script>
   <!-- Database Client -->
 
-  <!-- Newsletter Popup Integration -->
-  <script src="js/mailchimp-integration.js"></script>
+  <!-- Mailchimp handled by optimized loading above -->
   <style>
     /* Base color variables */
     :root {
@@ -5854,10 +6007,11 @@
   </style>
   <!-- Add these in the head section -->
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <script src="https://apis.google.com/js/api.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <!-- Critical: Contentful and crypto-js must load immediately for case studies -->
   <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  
+  <!-- Other third-party scripts loaded via optimized lazy loading above -->
   
   <!-- Configuration -->
   <script src="js/env-loader.js"></script>
@@ -5874,25 +6028,10 @@
 
 
 
-  <!-- Initialize Calendly -->
+  <!-- Calendly booking events handler (optimized) -->
   <script>
-      window.onload = function() {
-          console.log('Initializing Calendly widget...');
-          Calendly.initInlineWidget({
-              url: 'https://calendly.com/cadenbuiting6/30min',
-              parentElement: document.getElementById('calendly-container'),
-              prefill: {},
-              utm: {},
-              styles: {
-                  height: '100%'
-              }
-          });
-          console.log('Calendly widget initialized');
-      }
-
-      // Handle Calendly booking events
+      // Handle Calendly booking events with optimized loading
       window.addEventListener('calendly.event_scheduled', async function(e) {
-          console.log('Calendly event scheduled:', e.data);
           const event = e.data.payload.event;
           const invitee = e.data.payload.invitee;
           
@@ -5907,8 +6046,6 @@
               callType: 'zoom',
               eventId: event.uuid
           };
-
-          console.log('Processing booking:', bookingData);
           
           try {
               // Import the database functions
@@ -5916,7 +6053,6 @@
               
               // Store the booking
               const result = await addBooking(bookingData);
-              console.log('Booking result:', result);
               
               if (!result.success) {
                   console.error('Failed to store booking:', result.error);
@@ -6659,44 +6795,7 @@
     });
   </script>
   
-  <!-- Add Calendly Widget Script -->
-  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function() {
-          console.log('Initializing Calendly widget...');
-          if (typeof Calendly !== 'undefined') {
-              Calendly.initInlineWidget({
-                  url: 'https://calendly.com/cadenbuiting6/30min',
-                  parentElement: document.getElementById('calendly-container'),
-                  prefill: {},
-                  utm: {},
-                  styles: {
-                      height: '650px'
-                  }
-              });
-              console.log('Calendly widget initialized');
-          } else {
-              console.log('Waiting for Calendly to load...');
-              // Retry after a short delay if Calendly isn't loaded yet
-              setTimeout(function() {
-                  if (typeof Calendly !== 'undefined') {
-                      Calendly.initInlineWidget({
-                          url: 'https://calendly.com/cadenbuiting6/30min',
-                          parentElement: document.getElementById('calendly-container'),
-                          prefill: {},
-                          utm: {},
-                          styles: {
-                              height: '650px'
-                          }
-                      });
-                      console.log('Calendly widget initialized (delayed)');
-                  } else {
-                      console.error('Failed to load Calendly widget');
-                  }
-              }, 2000);
-          }
-      });
-  </script>
+  <!-- Calendly handled by optimized lazy loading above -->
   <script>
     // Optimize star creation with a more efficient approach
     function createStars() {
