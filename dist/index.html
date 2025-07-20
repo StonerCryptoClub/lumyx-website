@@ -192,10 +192,15 @@
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   
-  <!-- Load critical CSS immediately to prevent layout issues -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/animations.css">
+  <!-- Optimized CSS loading for mobile FCP improvement -->
+  <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+  </noscript>
   
   <!-- Preload critical resources -->
   <link rel="preload" href="js/main.js" as="script">
@@ -211,15 +216,49 @@
   <link rel="prefetch" href="/blog.html">
   <link rel="prefetch" href="/case-study.html">
   
-  <!-- Load critical scripts with defer for better performance -->
+  <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
   <script defer src="js/production-logger.js"></script>
-  <script defer src="js/html-sanitizer.js"></script>
-  <script defer src="js/input-validator.js"></script>
-  <script defer src="js/contentful-client.js?v=20250116c"></script>
   
-  <!-- Advanced TBT optimization script -->
-  <script defer src="js/performance-optimization.js"></script>
+  <!-- Mobile-specific script prioritization -->
+  <script>
+    // Mobile-optimized script loading with reduced critical path
+    if (window.innerWidth <= 768) {
+      // Mobile: Load only essential scripts immediately
+      const essentialScripts = [
+        'js/html-sanitizer.js',
+        'js/input-validator.js'
+      ];
+      
+      essentialScripts.forEach((src, index) => {
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.defer = true;
+          document.head.appendChild(script);
+        }, index * 50); // Stagger loading to reduce blocking
+      });
+      
+      // Defer contentful and performance scripts more aggressively on mobile
+      setTimeout(() => {
+        const script1 = document.createElement('script');
+        script1.src = 'js/contentful-client.js?v=20250116c';
+        script1.defer = true;
+        document.head.appendChild(script1);
+        
+        const script2 = document.createElement('script');
+        script2.src = 'js/performance-optimization.js';
+        script2.defer = true;
+        document.head.appendChild(script2);
+      }, 200);
+    } else {
+      // Desktop: Load normally for optimal performance
+      document.write('<script defer src="js/html-sanitizer.js"><\/script>');
+      document.write('<script defer src="js/input-validator.js"><\/script>');
+      document.write('<script defer src="js/contentful-client.js?v=20250116c"><\/script>');
+      document.write('<script defer src="js/performance-optimization.js"><\/script>');
+    }
+  </script>
   
   <!-- Optimize third-party integrations -->
   <script>
@@ -6117,6 +6156,85 @@
   <link rel="stylesheet" href="css/contact-fixes.css">
   <link rel="stylesheet" href="css/mobile-fixes.css">
   <link rel="stylesheet" href="css/value-card.css">
+
+  <!-- Mobile-specific optimizations for FCP/LCP improvement -->
+  <style>
+    /* Mobile-first critical CSS for faster FCP */
+    @media (max-width: 768px) {
+      /* Critical above-the-fold styles for mobile */
+      body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+      .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+      .hero-content { text-align: center; padding: 20px; }
+      .hero-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+      .hero-subtitle { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9; }
+      .cta-button { 
+        display: inline-block; padding: 15px 30px; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white; text-decoration: none; border-radius: 8px;
+        font-weight: 600; transition: transform 0.2s ease;
+      }
+      
+      /* Navigation critical styles */
+      nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 15px 20px; }
+      .logo { height: 40px; width: auto; }
+      
+      /* Ensure immediate visibility of key elements */
+      .section-reveal { opacity: 1 !important; transform: translateY(0) !important; }
+    }
+  </style>
+
+  <!-- Font optimization for mobile FCP with font-display: swap -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <style>
+    /* Font display optimization for mobile FCP */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap; /* Critical for mobile FCP */
+      src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa25L7.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2JL7.woff2') format('woff2');
+    }
+  </style>
+  
+  <!-- Fallback font loading -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  </noscript>
+
+  <!-- Optimize Font Awesome loading for mobile -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </noscript>
+
+  <!-- Mobile-specific resource hints -->
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  
+  <!-- Preload critical above-the-fold image for mobile -->
+  <link rel="preload" href="Logo.png" as="image" media="(max-width: 768px)">
+
+  <!-- Minimal critical CSS - only for performance, no layout changes -->
 </head>
 <body>
   <!-- Failsafe loader remover script has been removed -->

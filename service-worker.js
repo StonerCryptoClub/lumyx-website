@@ -1,228 +1,281 @@
 /**
- * Service Worker for Lumyx Agency
- * Optimized for Core Web Vitals and fast loading
+ * Enhanced Service Worker for Mobile Performance Optimization
+ * Focuses on better cache lifetimes and mobile-specific caching strategies
  */
 
-const CACHE_NAME = 'lumyx-v1.2.0';
-const STATIC_CACHE = 'lumyx-static-v1.2.0';
-const DYNAMIC_CACHE = 'lumyx-dynamic-v1.2.0';
+const CACHE_NAME = 'lumyx-v1.2-mobile-optimized';
+const STATIC_CACHE = 'lumyx-static-v1.2';
+const DYNAMIC_CACHE = 'lumyx-dynamic-v1.2';
 
-// Assets to cache immediately
-const STATIC_ASSETS = [
+// Enhanced cache durations for mobile performance
+const CACHE_STRATEGIES = {
+  // Static assets - long cache for mobile performance
+  static: {
+    maxAge: 365 * 24 * 60 * 60, // 1 year
+    strategy: 'cache-first'
+  },
+  // Images - aggressive caching for mobile
+  images: {
+    maxAge: 180 * 24 * 60 * 60, // 6 months
+    strategy: 'cache-first'
+  },
+  // Scripts and CSS - mobile optimized caching
+  assets: {
+    maxAge: 90 * 24 * 60 * 60, // 3 months
+    strategy: 'stale-while-revalidate'
+  },
+  // API and dynamic content
+  api: {
+    maxAge: 24 * 60 * 60, // 1 day
+    strategy: 'network-first'
+  }
+};
+
+// Assets to cache immediately for mobile performance
+const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/blog.html',
-  '/case-study.html',
   '/css/main.css',
   '/css/styles.css',
-  '/js/main.js',
-  '/js/performance-optimization.js',
-  '/Logo.png'
+  '/css/mobile-fixes.css',
+  '/js/env-loader.js',
+  '/js/production-logger.js',
+  '/Logo.png',
+  '/manifest.json'
 ];
 
-// Assets to cache on first request
-const CACHE_ON_REQUEST = [
-  '/js/',
-  '/css/',
-  '/images/',
-  'https://cdnjs.cloudflare.com/',
-  'https://fonts.googleapis.com/',
-  'https://fonts.gstatic.com/'
-];
-
-// Install event - cache static assets
+// Install event - precache critical assets for mobile
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(STATIC_CACHE)
-      .then(cache => {
-        console.log('Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
-      })
-      .then(() => {
-        return self.skipWaiting();
-      })
+    Promise.all([
+      // Cache critical static assets
+      caches.open(STATIC_CACHE).then(cache => {
+        return cache.addAll(PRECACHE_ASSETS);
+      }),
+      // Skip waiting for immediate activation on mobile
+      self.skipWaiting()
+    ])
   );
 });
 
-// Activate event - cleanup old caches
+// Activate event - clean up old caches
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys()
-      .then(cacheNames => {
+    Promise.all([
+      // Clean up old caches
+      caches.keys().then(cacheNames => {
         return Promise.all(
-          cacheNames
-            .filter(cacheName => {
-              return cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE;
-            })
-            .map(cacheName => {
-              console.log('Deleting old cache:', cacheName);
+          cacheNames.map(cacheName => {
+            if (cacheName !== STATIC_CACHE && 
+                cacheName !== DYNAMIC_CACHE && 
+                cacheName !== CACHE_NAME) {
               return caches.delete(cacheName);
-            })
+            }
+          })
         );
-      })
-      .then(() => {
-        return self.clients.claim();
-      })
+      }),
+      // Take control of all pages immediately for mobile
+      self.clients.claim()
+    ])
   );
 });
 
-// Fetch event - serve from cache with network fallback
+// Fetch event - implement mobile-optimized caching strategies
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip cross-origin requests for analytics/tracking
-  if (url.origin !== location.origin && 
-      (url.hostname.includes('google-analytics') ||
-       url.hostname.includes('googletagmanager') ||
-       url.hostname.includes('facebook') ||
-       url.hostname.includes('clarity'))) {
+  // Skip non-GET requests
+  if (request.method !== 'GET') {
     return;
   }
 
-  // Handle different types of requests
-  if (request.destination === 'image') {
-    event.respondWith(handleImageRequest(request));
-  } else if (isStaticAsset(request.url)) {
-    event.respondWith(handleStaticRequest(request));
-  } else if (request.mode === 'navigate') {
-    event.respondWith(handleNavigationRequest(request));
-  } else {
-    event.respondWith(handleDynamicRequest(request));
+  // Skip cross-origin requests except for known CDNs
+  if (url.origin !== location.origin && !isTrustedCDN(url.origin)) {
+    return;
   }
+
+  event.respondWith(handleRequest(request));
 });
 
-// Handle image requests with stale-while-revalidate
-async function handleImageRequest(request) {
-  const cache = await caches.open(DYNAMIC_CACHE);
-  const cachedResponse = await cache.match(request);
+// Enhanced request handling with mobile-specific optimizations
+async function handleRequest(request) {
+  const url = new URL(request.url);
+  const strategy = getStrategy(url);
 
-  if (cachedResponse) {
-    // Serve cached version immediately
-    fetchAndCache(request, cache); // Update in background
-    return cachedResponse;
-  }
-
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      cache.put(request, response.clone());
-    }
-    return response;
-  } catch (error) {
-    // Return fallback image if available
-    return cache.match('/images/placeholder.svg') || 
-           new Response('Image not available', { status: 404 });
+  switch (strategy.type) {
+    case 'cache-first':
+      return cacheFirst(request, strategy);
+    case 'network-first':
+      return networkFirst(request, strategy);
+    case 'stale-while-revalidate':
+      return staleWhileRevalidate(request, strategy);
+    default:
+      return fetch(request);
   }
 }
 
-// Handle static assets (CSS, JS) with cache-first strategy
-async function handleStaticRequest(request) {
-  const cache = await caches.open(STATIC_CACHE);
-  const cachedResponse = await cache.match(request);
-
-  if (cachedResponse) {
-    return cachedResponse;
+// Determine caching strategy based on request
+function getStrategy(url) {
+  const pathname = url.pathname;
+  
+  // Static assets (images, fonts, etc.)
+  if (pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf)$/)) {
+    return { type: 'cache-first', cache: STATIC_CACHE, ...CACHE_STRATEGIES.static };
   }
-
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      cache.put(request, response.clone());
-    }
-    return response;
-  } catch (error) {
-    throw error;
+  
+  // CSS and JS files
+  if (pathname.match(/\.(css|js)$/)) {
+    return { type: 'stale-while-revalidate', cache: STATIC_CACHE, ...CACHE_STRATEGIES.assets };
   }
+  
+  // API calls
+  if (pathname.startsWith('/api/') || url.hostname.includes('contentful')) {
+    return { type: 'network-first', cache: DYNAMIC_CACHE, ...CACHE_STRATEGIES.api };
+  }
+  
+  // HTML pages
+  if (pathname.endsWith('.html') || pathname === '/') {
+    return { type: 'stale-while-revalidate', cache: DYNAMIC_CACHE, ...CACHE_STRATEGIES.api };
+  }
+  
+  // Default to network-first for unknown resources
+  return { type: 'network-first', cache: DYNAMIC_CACHE, ...CACHE_STRATEGIES.api };
 }
 
-// Handle navigation requests with network-first strategy
-async function handleNavigationRequest(request) {
+// Cache-first strategy with mobile optimization
+async function cacheFirst(request, strategy) {
+  const cache = await caches.open(strategy.cache);
+  const cachedResponse = await cache.match(request);
+  
+  if (cachedResponse) {
+    // Check if cache is still valid for mobile performance
+    const cacheTime = new Date(cachedResponse.headers.get('sw-cache-time') || 0);
+    const now = new Date();
+    const age = (now - cacheTime) / 1000;
+    
+    if (age < strategy.maxAge) {
+      return cachedResponse;
+    }
+  }
+  
   try {
-    const response = await fetch(request);
-    return response;
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const responseToCache = networkResponse.clone();
+      // Add cache timestamp for mobile cache management
+      const headers = new Headers(responseToCache.headers);
+      headers.set('sw-cache-time', new Date().toISOString());
+      
+      const modifiedResponse = new Response(responseToCache.body, {
+        status: responseToCache.status,
+        statusText: responseToCache.statusText,
+        headers: headers
+      });
+      
+      cache.put(request, modifiedResponse);
+    }
+    return networkResponse;
   } catch (error) {
-    const cache = await caches.open(STATIC_CACHE);
-    const cachedResponse = await cache.match('/index.html');
     return cachedResponse || new Response('Offline', { status: 503 });
   }
 }
 
-// Handle dynamic requests with network-first, cache fallback
-async function handleDynamicRequest(request) {
-  const cache = await caches.open(DYNAMIC_CACHE);
-
+// Network-first strategy for dynamic content
+async function networkFirst(request, strategy) {
+  const cache = await caches.open(strategy.cache);
+  
   try {
-    const response = await fetch(request);
-    if (response.ok && shouldCache(request.url)) {
-      cache.put(request, response.clone());
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const responseToCache = networkResponse.clone();
+      cache.put(request, responseToCache);
     }
-    return response;
+    return networkResponse;
   } catch (error) {
     const cachedResponse = await cache.match(request);
-    return cachedResponse || new Response('Resource not available', { status: 404 });
+    return cachedResponse || new Response('Offline', { status: 503 });
   }
 }
 
-// Helper function to fetch and cache in background
-async function fetchAndCache(request, cache) {
-  try {
-    const response = await fetch(request);
-    if (response.ok) {
-      cache.put(request, response.clone());
+// Stale-while-revalidate for optimal mobile performance
+async function staleWhileRevalidate(request, strategy) {
+  const cache = await caches.open(strategy.cache);
+  const cachedResponse = await cache.match(request);
+  
+  // Always try to update cache in background for mobile
+  const fetchPromise = fetch(request).then(networkResponse => {
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse.clone());
     }
-  } catch (error) {
-    console.log('Background fetch failed:', error);
+    return networkResponse;
+  }).catch(() => null);
+  
+  // Return cached version immediately if available for mobile speed
+  if (cachedResponse) {
+    return cachedResponse;
   }
+  
+  // Wait for network if no cache available
+  return fetchPromise || new Response('Offline', { status: 503 });
 }
 
-// Check if URL should be cached
-function shouldCache(url) {
-  return CACHE_ON_REQUEST.some(pattern => url.includes(pattern));
+// Check if origin is a trusted CDN for mobile optimization
+function isTrustedCDN(origin) {
+  const trustedCDNs = [
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com',
+    'https://cdnjs.cloudflare.com',
+    'https://cdn.jsdelivr.net',
+    'https://assets.calendly.com'
+  ];
+  return trustedCDNs.includes(origin);
 }
 
-// Check if request is for static asset
-function isStaticAsset(url) {
-  return url.includes('/css/') || 
-         url.includes('/js/') || 
-         url.includes('/fonts/') ||
-         url.endsWith('.css') ||
-         url.endsWith('.js');
-}
-
-// Handle background sync for offline actions
+// Enhanced background sync for mobile
 self.addEventListener('sync', event => {
   if (event.tag === 'background-sync') {
     event.waitUntil(doBackgroundSync());
   }
 });
 
+// Background sync implementation
 async function doBackgroundSync() {
-  // Handle any offline actions when connection is restored
-  console.log('Background sync triggered');
+  // Sync any pending form submissions or analytics
+  const cache = await caches.open(DYNAMIC_CACHE);
+  // Implementation depends on your specific sync needs
 }
 
-// Handle push notifications (if needed)
+// Push notification support for mobile engagement
 self.addEventListener('push', event => {
-  if (!event.data) return;
-
-  const data = event.data.json();
-  
-  event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
+  if (event.data) {
+    const options = {
+      body: event.data.text(),
       icon: '/Logo.png',
-      badge: '/images/badge.png',
-      tag: 'lumyx-notification'
-    })
-  );
+      badge: '/Logo.png',
+      vibrate: [200, 100, 200],
+      actions: [
+        {
+          action: 'open',
+          title: 'Open App',
+          icon: '/Logo.png'
+        }
+      ]
+    };
+    
+    event.waitUntil(
+      self.registration.showNotification('Lumyx Agency', options)
+    );
+  }
 });
 
-// Handle notification clicks
+// Handle notification clicks for mobile
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   
-  event.waitUntil(
-    clients.openWindow('/')
-  );
+  if (event.action === 'open') {
+    event.waitUntil(
+      clients.openWindow('/')
+    );
+  }
 }); 
