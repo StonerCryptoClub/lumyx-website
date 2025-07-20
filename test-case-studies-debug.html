@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-info { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffe6e6; }
+        .success { background: #e6ffe6; }
+    </style>
+</head>
+<body>
+    <h1>Case Studies Debug Page</h1>
+    
+    <div id="debug-output"></div>
+    
+    <div id="case-studies-container"></div>
+    
+    <!-- Load same scripts as main page -->
+    <script src="js/env-loader.js"></script>
+    <script src="js/html-sanitizer.js"></script>
+    <script src="js/input-validator.js"></script>
+    
+    <!-- Contentful dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
+    <script src="js/contentful-helpers.js"></script>
+    <script src="js/contentful-client.js"></script>
+    
+    <script>
+        const debugOutput = document.getElementById('debug-output');
+        const caseStudiesContainer = document.getElementById('case-studies-container');
+        
+        function addDebugInfo(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `debug-info ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            debugOutput.appendChild(div);
+            console.log(message);
+        }
+        
+        // Start debugging
+        addDebugInfo('🚀 Starting case studies debug...');
+        
+        // Check if environment loader worked
+        const envLoader = new EnvironmentLoader();
+        const config = envLoader.loadConfig();
+        addDebugInfo(`✅ Config loaded: spaceId=${config.contentful.spaceId}`, 'success');
+        
+        // Wait for everything to load
+        window.addEventListener('load', async () => {
+            addDebugInfo('📄 Page loaded, starting tests...');
+            
+            // Test 1: Check if contentful library is available
+            if (typeof contentful !== 'undefined') {
+                addDebugInfo('✅ Contentful library loaded', 'success');
+            } else {
+                addDebugInfo('❌ Contentful library NOT loaded', 'error');
+                return;
+            }
+            
+            // Test 2: Check if contentful helpers are ready
+            if (window.contentfulHelpers) {
+                addDebugInfo('✅ Contentful helpers available', 'success');
+                
+                // Wait a bit for helpers to initialize
+                setTimeout(async () => {
+                    try {
+                        addDebugInfo('🔍 Attempting to fetch case studies...');
+                        const studies = await window.contentfulHelpers.getCaseStudies();
+                        
+                        if (studies && studies.length > 0) {
+                            addDebugInfo(`✅ Success! Found ${studies.length} case studies`, 'success');
+                            
+                            // Display the studies
+                            caseStudiesContainer.innerHTML = '<h2>Case Studies Found:</h2>';
+                            studies.forEach((study, index) => {
+                                const div = document.createElement('div');
+                                div.innerHTML = `
+                                    <h3>${index + 1}. ${study.fields?.title || 'No Title'}</h3>
+                                    <p><strong>Category:</strong> ${study.fields?.category || 'N/A'}</p>
+                                    <p><strong>Excerpt:</strong> ${study.fields?.excerpt || 'N/A'}</p>
+                                    <p><strong>Slug:</strong> ${study.fields?.slug || 'N/A'}</p>
+                                    <p><strong>Source:</strong> ${study.sys ? 'Contentful' : 'Placeholder'}</p>
+                                    <hr>
+                                `;
+                                caseStudiesContainer.appendChild(div);
+                            });
+                        } else {
+                            addDebugInfo('⚠️ No case studies returned', 'error');
+                        }
+                    } catch (error) {
+                        addDebugInfo(`❌ Error fetching case studies: ${error.message}`, 'error');
+                        console.error('Full error:', error);
+                    }
+                }, 2000);
+                
+            } else {
+                addDebugInfo('❌ Contentful helpers NOT available', 'error');
+            }
+        });
+    </script>
+</body>
+</html> 
