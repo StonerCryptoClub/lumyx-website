@@ -48,7 +48,7 @@ window.contentfulHelpers = {
         console.log('🔍 Loading case studies from Contentful...');
         try {
             const response = await client.getEntries({
-                content_type: 'caseStudy',
+                content_type: 'caseStudies',
                 order: '-sys.createdAt'
             });
             
@@ -89,7 +89,7 @@ window.contentfulHelpers = {
         try {
             // First try to get from Contentful
             const response = await client.getEntries({
-                content_type: 'caseStudy',
+                content_type: 'caseStudies',
                 'fields.slug': slug,
                 include: 2
             });

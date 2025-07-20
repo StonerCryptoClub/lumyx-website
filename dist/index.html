@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.defer=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/658c23db9ba64ab753d154574/de13bc0fc5ec5a5b56cb40162.js");</script>
+  <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/658c23db9ba64ab753d154574/de13bc0fc5ec5a5b56cb40162.js");</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   
@@ -9,15 +9,6 @@
   <meta name="theme-color" content="#ff6b35">
   <meta name="color-scheme" content="light">
   <link rel="manifest" href="/public/manifest.json">
-  
-  <!-- Critical Resource Hints for PageSpeed -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="preconnect" href="https://chimpstatic.com" crossorigin>
-  <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
-  <link rel="dns-prefetch" href="https://assets.calendly.com">
-  <link rel="dns-prefetch" href="https://cdn.contentful.com">
   
   <!-- CSRF Protection -->
   <meta name="csrf-token" content="{{csrf_token}}">
@@ -55,22 +46,18 @@
   <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), bluetooth=(), midi=(), notifications=()">
   <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
   
-  <!-- Meta Pixel Code - Optimized -->
+  <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;t.defer=!0;
+  n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  
-  // Delay pixel initialization slightly for better performance
-  setTimeout(() => {
-    fbq('init', '1361608738369835');
-    fbq('track', 'PageView');
-  }, 100);
+  fbq('init', '1361608738369835');
+  fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1361608738369835&ev=PageView&noscript=1"
@@ -81,12 +68,12 @@
 
   <!-- Analytics removed - replace with actual GA4 ID when ready -->
 
-  <!-- Essential scripts for functionality - load immediately -->
+  <!-- Essential scripts for functionality -->
   <script src="js/env-loader.js"></script>
   <script src="js/html-sanitizer.js"></script>
   <script src="js/input-validator.js"></script>
   
-  <!-- Contentful dependencies - keep immediate for case studies -->
+  <!-- Contentful dependencies -->
   <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   <script src="js/contentful-helpers.js"></script>
   <script src="js/contentful-client.js?v=20250116c"></script>
@@ -204,12 +191,12 @@
   
   <!-- Font Awesome - Optimized -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-      <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
-    
-    <!-- Load CSS with minor optimization but preserve styling -->
-    <link rel="stylesheet" href="css/main.css" media="all">
-    <link rel="stylesheet" href="css/portfolio.css" media="all">
-    <link rel="stylesheet" href="css/mobile-fixes.css" media="all">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+  
+  <!-- Load CSS normally to preserve styling -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/portfolio.css">
+  <link rel="stylesheet" href="css/mobile-fixes.css">
   <!-- Scripts moved to bottom for better performance -->
   <style>
     /* Base color variables */
@@ -5856,7 +5843,7 @@
   <!-- Header -->
   <header>
     <div class="logo">
-          <img src="Logo.png" alt="Lumyx Agency Logo" width="160" height="auto" loading="eager" fetchpriority="high">
+          <img src="Logo.png" alt="Lumyx Agency Logo">
       <h1>Lumyx Agency</h1>
     </div>
     <!-- Mobile blog button (visible only on mobile) -->
@@ -5922,9 +5909,9 @@
         
         <div class="social-proof">
           <div class="proof-avatars">
-                      <img src="images/testimonials/alex.svg" alt="Client" loading="lazy" width="40" height="40">
-          <img src="images/testimonials/maria.svg" alt="Client" loading="lazy" width="40" height="40">
-          <img src="images/testimonials/james.svg" alt="Client" loading="lazy" width="40" height="40">
+            <img src="images/testimonials/alex.svg" alt="Client">
+            <img src="images/testimonials/maria.svg" alt="Client">
+            <img src="images/testimonials/james.svg" alt="Client">
             <span class="proof-text">Join 25+ successful clients</span>
           </div>
           <div class="trust-indicators">
@@ -6225,7 +6212,7 @@
                         </div>
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/testimonials/alex.svg" alt="Alex Thompson" class="author-avatar" loading="lazy" width="60" height="60">
+                        <img src="images/testimonials/alex.svg" alt="Alex Thompson" class="author-avatar">
                         <div class="author-info">
               <h4>Alex Thompson</h4>
               <p>Head of Growth, CloudStack</p>
@@ -6252,7 +6239,7 @@
                         </div>
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/testimonials/maria.svg" alt="Maria Rodriguez" class="author-avatar" loading="lazy" width="60" height="60">
+                        <img src="images/testimonials/maria.svg" alt="Maria Rodriguez" class="author-avatar">
                         <div class="author-info">
               <h4>Maria Rodriguez</h4>
               <p>Director of Digital, RetailPro</p>
@@ -6279,7 +6266,7 @@
                         </div>
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/testimonials/james.svg" alt="James Chen" class="author-avatar" loading="lazy" width="60" height="60">
+                        <img src="images/testimonials/james.svg" alt="James Chen" class="author-avatar">
                         <div class="author-info">
               <h4>James Chen</h4>
               <p>Founder, MarketFlow</p>
