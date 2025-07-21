@@ -50,6 +50,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- FAQ Page - Critical for Long-tail SEO -->
+  <url>
+    <loc>https://lumyx.co/faq.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Case Studies Section -->
   <url>
     <loc>https://lumyx.co/case-study.html</loc>
