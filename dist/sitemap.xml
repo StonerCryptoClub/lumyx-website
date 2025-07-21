@@ -7,7 +7,7 @@
   <!-- Home Page - Highest Priority -->
   <url>
     <loc>https://lumyx.co/</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,21 +15,21 @@
   <!-- Main Page Sections -->
   <url>
     <loc>https://lumyx.co/#about</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://lumyx.co/#services</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://lumyx.co/#contact</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -37,20 +37,20 @@
   <!-- Booking/Scheduling Section - High Priority for Conversions -->
   <url>
     <loc>https://lumyx.co/#booking-section</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Blog Section - High Priority for Content Marketing -->
+  <!-- Blog Section -->
   <url>
     <loc>https://lumyx.co/blog.html</loc>
-    <lastmod>2024-12-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
-  <!-- FAQ Page - Critical for Long-tail SEO -->
+  <!-- FAQ Page -->
   <url>
     <loc>https://lumyx.co/faq.html</loc>
     <lastmod>2025-01-20</lastmod>
@@ -61,35 +61,14 @@
   <!-- Case Studies Section -->
   <url>
     <loc>https://lumyx.co/case-study.html</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Service Pages - High Priority for SEO -->
+  <!-- Service Pages That Actually Exist -->
   <url>
-    <loc>https://lumyx.co/ppc-services.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://lumyx.co/seo-services.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://lumyx.co/social-media-marketing.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://lumyx.co/web-development.html</loc>
+    <loc>https://lumyx.co/ppc-management.html</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -98,16 +77,8 @@
   <!-- Individual Case Studies -->
   <url>
     <loc>https://lumyx.co/case-studies/testproject.html</loc>
-    <lastmod>2024-12-18</lastmod>
+    <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Portfolio Section -->
-  <url>
-    <loc>https://lumyx.co/portfolio-section.html</loc>
-    <lastmod>2024-12-18</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 

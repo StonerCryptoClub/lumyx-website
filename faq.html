@@ -141,16 +141,19 @@
     /* Header - Desktop */
     header {
       position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       background: rgba(0, 0, 0, 0.95);
-      padding: 8px 10px 8px 0;
-      z-index: 100;
+      padding: 15px 50px;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       transition: all 0.3s ease;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     }
     header.scrolled {
       background: rgba(0, 0, 0, 0.98);
@@ -244,6 +247,61 @@
     }
     header nav a:hover::before {
       width: 100%;
+    }
+
+    /* Navigation Dropdown */
+    .nav-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(26, 26, 26, 0.98);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 8px;
+      min-width: 180px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      margin-top: 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
     }
 
     /* Mobile Menu */
@@ -393,7 +451,7 @@
 
     /* FAQ Section */
     .faq-section {
-      padding: 80px 0;
+      padding: 140px 0 80px;
     }
 
     .faq-container {
@@ -865,7 +923,13 @@
     <nav>
       <a href="/">Home</a>
       <a href="/#about">About</a>
-      <a href="/#services">Services</a>
+      <div class="nav-dropdown">
+        <a href="/#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-menu">
+          <a href="/ppc-management.html">PPC Management</a>
+          <a href="/#services">All Services</a>
+        </div>
+      </div>
       <a href="/#portfolio">Portfolio</a>
       <a href="/#contact">Contact</a>
       <a href="/blog.html">Blog</a>
