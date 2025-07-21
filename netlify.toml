@@ -66,3 +66,47 @@
   from = "/config/*"
   to = "/404.html"
   status = 404
+
+# HTTPS redirects - Force HTTPS for all pages (no www)
+[[redirects]]
+  from = "http://lumyx.co/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.lumyx.co/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]  
+  from = "https://www.lumyx.co/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
+
+# Redirect old domain variations
+[[redirects]]
+  from = "http://lumyxagency.com/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://lumyxagency.com/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://lumyx.agency/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://lumyx.agency/*"
+  to = "https://lumyx.co/:splat"
+  status = 301
+  force = true
