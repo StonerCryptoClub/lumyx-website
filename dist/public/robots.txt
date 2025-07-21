@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /blog/
+Allow: /services/
+Allow: /about/
+Allow: /contact/
+Allow: /case-studies/
+Allow: /sitemap.xml
+
+# Disallow sensitive and system files
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.next/
+Disallow: /scripts/
+
+Sitemap: https://lumyx.agency/sitemap.xml

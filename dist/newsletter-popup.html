@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LumyxAgency Newsletter Popup</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    /* Custom Newsletter Popup for Mailchimp Integration - 2025 (Optimized) */
+    :root {
+      --primary-orange: #FFA500;
+      --primary-orange-light: #FFD700;
+      --complementary-blue: #1E90FF;
+      --complementary-blue-light: #00CED1;
+      --text-light: #ffffff;
+      --bg-dark: #1a1a1a;
+      --bg-light: #2a2a2a;
+    }
+    
+    /* Newsletter Popup Styles - Performance optimized */
+    .newsletter-popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .newsletter-popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: 90%;
+      max-width: 500px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      z-index: 1001;
+      overflow: hidden;
+      animation: scaleIn 0.5s ease forwards;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .newsletter-popup::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+      z-index: -1;
+    }
+    
+    .popup-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .popup-header h3 {
+      font-size: 24px;
+      color: var(--primary-orange);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .popup-header p {
+      font-size: 15px;
+      color: var(--text-light);
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+    
+    .popup-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      color: var(--text-light);
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    
+    .popup-close:hover {
+      color: var(--primary-orange);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .newsletter-form {
+      margin-top: 20px;
+    }
+    
+    .newsletter-form .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .newsletter-form label {
+      display: block;
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .newsletter-form input {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: var(--text-light);
+      transition: all 0.3s ease;
+    }
+    
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--complementary-blue);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+    }
+    
+    .newsletter-form input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .newsletter-form .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+    
+    .newsletter-form .checkbox-group input[type="checkbox"] {
+      width: auto;
+      margin-right: 10px;
+      margin-top: 4px;
+    }
+    
+    .newsletter-form .checkbox-group label {
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary-orange);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .submit-btn:hover {
+      background: var(--primary-orange-light);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 165, 0, 0.2);
+    }
+    
+    .newsletter-benefits {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+    
+    .benefit-item i {
+      color: var(--complementary-blue);
+    }
+    
+    .popup-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+    
+    /* Animation Keyframes - Optimized */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: translate(-50%, -50%) scale(0.95); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 576px) {
+      .newsletter-popup {
+        width: 95%;
+        padding: 20px;
+      }
+      
+      .popup-header h3 {
+        font-size: 20px;
+      }
+      
+      .popup-header p {
+        font-size: 14px;
+      }
+    }
+
+    /* Asterisk for required fields */
+    .required::after {
+      content: "*";
+      color: var(--primary-orange);
+      margin-left: 3px;
+    }
+
+    /* Hidden anti-bot field (for Mailchimp) */
+    .bot-field {
+      position: absolute;
+      left: -5000px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Newsletter Popup Overlay -->
+<div id="newsletter-popup-overlay" class="newsletter-popup-overlay">
+  <div class="newsletter-popup">
+    <button class="popup-close" id="popup-close">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <div class="popup-header">
+      <h3>Join Our Newsletter</h3>
+      <p>Subscribe for expert insights, industry updates, and exclusive content delivered straight to your inbox.</p>
+    </div>
+    
+    <!-- Mailchimp Form - Updated with redirect URL and optimized for performance -->
+    <form 
+      action="https://eepurl.com/jdPU6E" 
+      method="get" 
+      id="mc-embedded-subscribe-form" 
+      name="mc-embedded-subscribe-form" 
+      class="newsletter-form" 
+      target="_blank">
+      
+      <div class="form-group">
+        <label for="mce-EMAIL" class="required">Email Address</label>
+        <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="your@email.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="mce-FNAME">First Name</label>
+        <input type="text" name="FNAME" id="mce-FNAME" placeholder="Your first name">
+      </div>
+      
+      <div class="form-group">
+        <label for="mce-COMPANY">Company</label>
+        <input type="text" name="COMPANY" id="mce-COMPANY" placeholder="Your company name">
+      </div>
+      
+      <!-- Add redirect to thank you page -->
+      <input type="hidden" name="redirect" value="https://lumyx.co/mailchimp-thank-you.html">
+      
+      <!-- Bot Protection (required for Mailchimp) -->
+      <div class="bot-field" aria-hidden="true">
+        <input type="text" name="b_" tabindex="-1" value="">
+      </div>
+      
+      <div class="checkbox-group">
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">I agree to receive marketing communications from LumyxAgency. You can unsubscribe at any time.</label>
+      </div>
+      
+      <button type="submit" name="subscribe" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Subscribe Now
+      </button>
+    </form>
+    
+    <div class="newsletter-benefits">
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Exclusive industry insights and trends</span>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Actionable tips to grow your online presence</span>
+      </div>
+      <div class="benefit-item">
+        <i class="fas fa-check-circle"></i>
+        <span>Early access to our special offers</span>
+      </div>
+    </div>
+    
+    <div class="popup-footer">
+      We respect your privacy. We won't share your information.
+    </div>
+  </div>
+</div>
+
+<script>
+  // Newsletter Popup Logic - Optimized for performance
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('newsletter-popup-overlay');
+    const closeBtn = document.getElementById('popup-close');
+    
+    // Function to show popup
+    function showPopup() {
+      popup.style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+    }
+    
+    // Function to close popup
+    function closePopup() {
+      popup.style.display = 'none';
+      document.body.style.overflow = ''; // Restore scrolling
+      
+      // Set cookie to not show popup again for some time
+      setCookie('newsletter_popup_shown', 'true', 7); // 7 days
+    }
+    
+    // Set cookie function - Optimized
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 86400000)); // 86400000 = 24 * 60 * 60 * 1000
+      document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/';
+    }
+    
+    // Get cookie function - Optimized
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+      }
+      return null;
+    }
+    
+    // Close popup on click
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closePopup);
+    }
+    
+    // Close popup when clicking outside
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) closePopup();
+    });
+    
+    // Show popup after delay if cookie not set
+    const popupShown = getCookie('newsletter_popup_shown');
+    if (!popupShown) {
+      // Use requestAnimationFrame for smoother loading
+      requestAnimationFrame(() => {
+        setTimeout(showPopup, 5000); // Show after 5 seconds
+      });
+    }
+  });
+</script>
+
+</body>
+</html> 
