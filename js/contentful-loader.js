@@ -102,6 +102,8 @@ function createBlogModal(post) {
 
 // Function to load blog posts
 async function loadBlogPosts() {
+    console.log('🚀 Starting to load blog posts...');
+    
     // Blog posts placeholders in case the API fails
     const placeholderPosts = window.PLACEHOLDER_BLOG_POSTS || [
         {
@@ -156,9 +158,11 @@ async function loadBlogPosts() {
     // Get blog container
     const blogContainer = document.querySelector('.blog-grid');
     if (!blogContainer) {
-        console.error('Blog container not found');
+        console.error('❌ Blog container (.blog-grid) not found');
         return;
     }
+    
+    console.log('✅ Blog container found, proceeding with API call...');
     
     try {
         // Try to fetch from Contentful
@@ -193,11 +197,12 @@ async function loadBlogPosts() {
             });
         } else {
             // No posts from Contentful, use placeholders
-            console.log('No blog posts found in Contentful, using placeholders');
+            console.log('⚠️ No blog posts found in Contentful, using placeholders');
             renderPlaceholderPosts(blogContainer, placeholderPosts);
         }
     } catch (error) {
-        console.error('Error loading blog posts from Contentful:', error);
+        console.error('❌ Error loading blog posts from Contentful:', error);
+        console.log('🔄 Falling back to placeholder posts...');
         renderPlaceholderPosts(blogContainer, placeholderPosts);
     }
 }
@@ -225,6 +230,7 @@ function createBlogPostHTML(post, imageUrl) {
 
 // Helper function to render placeholder posts
 function renderPlaceholderPosts(container, posts) {
+    console.log('📝 Rendering placeholder posts...');
     // Clear container first
     container.innerHTML = '';
     
