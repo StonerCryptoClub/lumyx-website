@@ -297,14 +297,18 @@ class PortfolioManager {
         }
     }
 
-    async waitForContentful(maxAttempts = 10) {
+    async waitForContentful(maxSeconds = 10) {
+        const isMobile = window.innerWidth <= 768;
+        const maxAttempts = isMobile ? maxSeconds * 2 : maxSeconds; // More attempts for mobile
+        
         for (let i = 0; i < maxAttempts; i++) {
-            if (window.contentfulHelpers?.isReady && window.contentfulHelpers.isReady()) {
+            if (window.contentfulHelpers?.isReady?.()) {
+                console.log('✅ Contentful ready after', i + 1, 'attempts');
                 return true;
             }
-            await new Promise(resolve => setTimeout(resolve, 300));
+            await new Promise(resolve => setTimeout(resolve, isMobile ? 1000 : 500)); // Longer wait for mobile
         }
-        console.warn('Contentful client not ready after waiting');
+        console.warn('⚠️ Contentful not ready after', maxAttempts, 'attempts');
         return false;
     }
 
