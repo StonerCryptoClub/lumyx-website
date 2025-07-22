@@ -3466,7 +3466,15 @@
         /* Portfolio Section */
         .modern-portfolio-grid {
             grid-template-columns: 1fr;
-            gap: 25px;
+            gap: 30px;
+            display: grid !important;
+            visibility: visible !important;
+        }
+        
+        .modern-portfolio-grid .portfolio-item {
+            min-height: 400px !important;
+            display: block !important;
+            visibility: visible !important;
         }
         
         /* Testimonials Section */
@@ -7106,7 +7114,7 @@
   <!-- Enhanced contact form - Conversion optimized -->
   <script defer src="js/enhanced-contact-form.js"></script>
   
-  <!-- Initialize Portfolio -->
+  <!-- DISABLED - Initialize Portfolio -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       console.log('Initializing modern portfolio...');

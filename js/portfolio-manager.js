@@ -141,32 +141,42 @@ class PortfolioManager {
     }
 
     async init() {
+        const isMobile = window.innerWidth <= 768;
+        console.log(`📱 PortfolioManager init - Mobile: ${isMobile}, Screen width: ${window.innerWidth}`);
+        
         if (!this.portfolioGrid) {
-            console.error('Portfolio grid element not found');
+            console.error('❌ Portfolio grid element not found');
+            console.log('🔍 Available elements:', {
+                'modern-portfolio-grid': !!document.querySelector('.modern-portfolio-grid'),
+                'portfolio-grid': !!document.querySelector('.portfolio-grid'),
+                'body': !!document.querySelector('body')
+            });
             return;
         }
 
+        console.log(`✅ Portfolio grid found: ${this.portfolioGrid.className}`);
         this.showLoadingMessage();
 
         try {
             // Wait for contentful helpers to be ready
-            await this.waitForContentful(10);
+            console.log('⏳ Waiting for Contentful helpers...');
+            await this.waitForContentful(isMobile ? 15 : 10); // Longer wait for mobile
             
             // Get case studies from Contentful
-            console.log('Loading case studies...');
+            console.log('📊 Loading case studies...');
             const studies = await this.contentfulHelpers.getCaseStudies();
-            console.log('Got studies:', studies);
+            console.log(`📈 Got studies: ${studies ? studies.length : 0}`);
             
             if (studies && studies.length > 0) {
-                console.log('Rendering', studies.length, 'case studies');
+                console.log(`✅ Rendering ${studies.length} case studies`);
                 this.renderCaseStudies(studies);
             } else {
-                console.log('No studies found, showing error');
+                console.log('⚠️ No studies found, showing error');
                 this.showErrorMessage();
             }
             
         } catch (error) {
-            console.error('Error loading case studies:', error);
+            console.error('❌ Error loading case studies:', error);
             this.showErrorMessage();
         }
     }
