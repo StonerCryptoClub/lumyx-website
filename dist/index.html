@@ -3221,6 +3221,1418 @@
         text-shadow: 0 0 8px rgba(47, 69, 255, 0.3);
     }
 
+    .service-cta {
+        margin-top: auto;
+    }
+
+    .service-btn {
+        display: block;
+      width: 100%;
+        padding: 15px 25px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 700;
+        text-align: center;
+        font-size: 1rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .service-btn.primary {
+        background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+        border-color: var(--primary-orange);
+        color: #000;
+    }
+
+    .service-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: var(--primary-orange);
+        transform: translateY(-2px);
+    }
+
+    .service-btn.primary:hover {
+        background: linear-gradient(135deg, #FF8C00, var(--primary-orange));
+        box-shadow: 0 10px 30px rgba(255, 165, 0, 0.4);
+    }
+
+    .services-guarantee {
+        text-align: center;
+        max-width: 900px;
+        margin: 60px auto 0 auto;
+        padding: 50px 40px;
+        background: rgba(0, 200, 83, 0.1);
+        border: 1px solid rgba(0, 200, 83, 0.3);
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0, 200, 83, 0.2);
+    }
+
+    .guarantee-content h3 {
+        font-size: 2rem;
+        color: #00C853;
+        margin-bottom: 25px;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .guarantee-content p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        margin: 0;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        /* Modern Portfolio Section */
+        .modern-portfolio-section {
+            padding: 120px 5%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(15, 15, 30, 0.95));
+            width: 100vw;
+            margin: 0;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .portfolio-container {
+            max-width: none;
+            margin: 0;
+            padding: 0 5%;
+            width: 100%;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .portfolio-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--complementary-blue));
+            -webkit-background-clip: text;
+
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portfolio-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .modern-filter-btn {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modern-filter-btn:hover,
+        .modern-filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            border-color: var(--primary-orange);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .modern-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        /* Modern Testimonials Section */
+        .modern-testimonials-section {
+            padding: 120px 5%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+            position: relative;
+            width: 100vw;
+            margin: 0;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .testimonials-container {
+            max-width: none;
+            margin: 0;
+            padding: 0 5%;
+            width: 100%;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .testimonials-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--complementary-blue));
+            -webkit-background-clip: text;
+
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .testimonials-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .modern-testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .modern-testimonial-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+        }
+
+        .modern-testimonial-item.featured {
+            border: 2px solid var(--primary-orange);
+            background: rgba(255, 165, 0, 0.05);
+            transform: scale(1.05);
+        }
+
+        .modern-testimonial-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-orange);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .modern-testimonial-item.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .testimonial-content {
+            margin-bottom: 30px;
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+        }
+
+        .testimonial-result {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .result-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-orange), #FFD700);
+            -webkit-background-clip: text;
+
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .result-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-orange);
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .rating {
+            margin-left: auto;
+            display: flex;
+            gap: 4px;
+        }
+
+        .rating i {
+            color: #FFD700;
+            font-size: 1rem;
+        }
+
+        /* Modern Newsletter Section */
+        .modern-newsletter-section {
+            position: relative;
+            overflow: hidden;
+            width: 100vw;
+            margin: 0;
+            margin-left: calc(-50vw + 50%);
+            display: block;
+        }
+
+        .newsletter-background {
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.95), rgba(26, 26, 46, 0.95));
+            padding: 120px 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .newsletter-background::before {
+      content: '';
+      position: absolute;
+      top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(65, 105, 225, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .newsletter-container {
+            max-width: none;
+            margin: 0;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2;
+      width: 100%;
+        }
+
+        .newsletter-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .newsletter-header h2 {
+            font-size: clamp(3rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-orange), var(--complementary-blue));
+            -webkit-background-clip: text;
+
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            line-height: 1.2;
+    }
+
+        .newsletter-header p {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form-wrapper {
+      display: flex;
+      justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .newsletter-cta {
+            text-align: center;
+        }
+
+        .modern-subscribe-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            color: #000;
+            padding: 25px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 15px 40px rgba(255, 165, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modern-subscribe-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(255, 165, 0, 0.6);
+            background: linear-gradient(135deg, #FFD700, var(--primary-orange));
+        }
+
+        .modern-subscribe-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .modern-subscribe-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        .newsletter-disclaimer {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .newsletter-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 45px 40px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 165, 0, 0.2);
+            transition: all 0.4s ease;
+            min-height: 180px;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-orange);
+            box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2);
+        }
+
+        .benefit-icon {
+            background: linear-gradient(135deg, var(--primary-orange), #FFD700);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .benefit-icon i {
+            font-size: 1.8rem;
+            color: #000;
+        }
+
+        .benefit-content h4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .benefit-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        /* Modern Contact Section */
+        .modern-contact-section {
+            position: relative;
+            width: 100vw;
+            margin: 0;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .contact-background {
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.95), rgba(26, 26, 46, 0.95));
+            padding: 120px 5% 40px;
+            width: 100%;
+        }
+
+        .contact-container {
+            max-width: none;
+            margin: 0;
+            padding: 0 5%;
+            width: 100%;
+        }
+
+        .contact-header {
+      text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .contact-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--complementary-blue));
+            -webkit-background-clip: text;
+
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-header p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: grid;
+            gap: 80px;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+        }
+
+        .contact-info-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+      text-align: center;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-info-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-orange);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .contact-icon i {
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .contact-details h4 {
+            font-size: 1.3rem;
+      font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .contact-details p {
+            font-size: 1.1rem;
+      color: var(--primary-orange);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .contact-details span {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-cta-section {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            border-radius: 25px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .cta-content h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .modern-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            color: #000;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);
+        }
+
+        .modern-cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 165, 0, 0.4);
+        }
+
+        .modern-cta-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .modern-cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Clean Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(15, 15, 30, 0.95));
+            color: white;
+            padding: 40px 5% 25px;
+            width: 100vw;
+            margin: 0;
+            margin-left: calc(-50vw + 50%);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #667eea;
+    }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-orange);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info i {
+            color: var(--primary-orange);
+            width: 16px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .footer-cta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-cta span {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-cta-link {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-cta-link:hover {
+            color: #FFD700;
+        }
+
+        /* Mobile Responsive for Modern Sections */
+        @media (max-width: 768px) {
+            /* Modern Portfolio Mobile */
+            .portfolio-container {
+                padding: 0 20px;
+            }
+            
+            .portfolio-filters {
+                gap: 15px;
+            }
+            
+            .modern-filter-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .modern-portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            /* Modern Testimonials Mobile */
+            .testimonials-container {
+                padding: 0 20px;
+            }
+            
+            .modern-testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .modern-testimonial-item {
+                padding: 30px 25px;
+            }
+            
+            .modern-testimonial-item.featured {
+                transform: none;
+            }
+            
+            .modern-testimonial-item.featured:hover {
+                transform: translateY(-10px);
+            }
+            
+            /* Modern Newsletter Mobile */
+            .newsletter-container {
+                padding: 0 20px;
+            }
+            
+            .newsletter-benefits {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .benefit-item {
+                padding: 25px 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .modern-subscribe-btn {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+            }
+            
+            /* Modern Contact Mobile */
+            .contact-container {
+                padding: 0 20px;
+            }
+            
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .contact-info-item {
+                padding: 30px 25px;
+            }
+            
+            .contact-cta-section {
+                padding: 40px 25px;
+            }
+            
+            .modern-cta-button {
+                padding: 18px 30px;
+                font-size: 1.1rem;
+            }
+            
+            /* Footer Mobile */
+            footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            /* Full width sections mobile fix */
+            .problem-solution-section,
+            .modern-services-section,
+            .booking-section,
+            .modern-portfolio-section,
+            .modern-testimonials-section,
+            .modern-newsletter-section,
+            .modern-contact-section,
+            footer {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .problem-solution-content,
+            .booking-content,
+            .portfolio-container,
+            .testimonials-container,
+            .newsletter-container,
+            .contact-container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Hero Stats */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto 30px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    
+    @media (max-width: 768px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 400px;
+        margin: 30px auto 20px auto;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 320px;
+        gap: 0;
+      }
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 20px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-orange), var(--complementary-blue));
+      -webkit-background-clip: text;
+
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+    }
+    .floating-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .floating-element {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--primary-orange);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    .scroll-indicator span {
+      font-weight: 500;
+    }
+
+    .scroll-indicator i {
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+      animation: bounce 2s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+    }
+    section {
+      padding: 0;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .section-divider {
+      display: none;
+    }
+    .section-title {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 50px;
+      color: #ffffff;
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--complementary-blue), var(--complementary-blue-light));
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(47, 69, 255, 0.3);
+    }
+    h2 {
+      margin-bottom: 60px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(45deg, var(--primary-orange), var(--primary-orange-light));
+      -webkit-background-clip: text;
+
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 100%;
+    }
+    h2::after {
+      display: none;
+    }
+
+    /* Problem/Solution Section */
+    .problem-solution-section {
+      padding: 120px 5%;
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+      width: 100vw;
+      margin: 0;
+      margin-left: calc(-50vw + 50%);
+    }
+
+    .problem-solution-content {
+      max-width: none;
+      margin: 0;
+      padding: 0 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ff6b6b, var(--primary-orange));
+      -webkit-background-clip: text;
+
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .problem-solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 100px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .problem-side, .solution-side {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 50px 40px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .problem-side {
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .solution-side {
+      border: 1px solid rgba(0, 200, 83, 0.3);
+    }
+
+    .problem-side h3, .solution-side h3 {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .problem-list, .solution-list {
+      list-style: disc;
+      padding-left: 25px;
+      list-style-position: inside;
+    }
+
+    .problem-list li, .solution-list li {
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .problem-list li:last-child, .solution-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Proof Section */
+    .proof-section {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 40px;
+    }
+
+    .proof-section h3 {
+      font-size: 2rem;
+      margin-bottom: 50px;
+      color: var(--primary-orange);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .results-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 50px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .result-item {
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.15), rgba(65, 105, 225, 0.15));
+      padding: 60px 40px;
+      border-radius: 25px;
+      border: 2px solid rgba(255, 165, 0, 0.3);
+      backdrop-filter: blur(15px);
+      transition: all 0.4s ease;
+      text-align: center !important;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .result-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.1), rgba(65, 105, 225, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .result-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--primary-orange);
+      box-shadow: 0 25px 50px rgba(255, 165, 0, 0.4);
+    }
+
+    .result-item:hover::before {
+      opacity: 1;
+    }
+
+    .result-item .result-number {
+      text-align: center !important;
+      display: block;
+      width: 100%;
+      font-size: 4.5rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 2;
+      line-height: 1;
+    }
+
+    .result-item .result-desc {
+      text-align: center !important;
+      display: block;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.4;
+      position: relative;
+      z-index: 2;
+    }
+
+    .result-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-orange);
+      box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2);
+    }
+
+    .result-number {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary-orange), var(--complementary-blue));
+      -webkit-background-clip: text;
+
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .result-desc {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .about-values {
+      margin-top: 60px;
+    }
+    .about-values h3 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #FFA500;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+    .value-card {
+      background: rgba(30, 30, 30, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 165, 0, 0.2);
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-orange);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .value-card i {
+      font-size: 2.5rem;
+      color: var(--primary-orange);
+      margin-bottom: 20px;
+    }
+    .value-card h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+    .value-card p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: 80px 40px;
+        background: rgba(32, 32, 32, 0.85);
+        border-radius: 30px;
+      backdrop-filter: blur(10px);
+        margin: 60px auto;
+        max-width: 1400px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+                    0 0 30px rgba(47, 69, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-card {
+        background: rgba(45, 45, 45, 0.7);
+        border-radius: 25px;
+      padding: 40px;
+        margin: 20px;
+      transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+                    0 0 20px rgba(47, 69, 255, 0.05);
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        background: rgba(50, 50, 50, 0.8);
+        border: 1px solid rgba(255, 165, 0, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
+                    0 0 30px rgba(255, 165, 0, 0.2);
+    }
+
+    .process-container {
+        background: rgba(41, 46, 66, 0.7);
+        border-radius: 20px;
+        padding: 30px;
+        margin-top: 30px;
+        border: 1px solid rgba(47, 69, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+                    0 0 20px rgba(47, 69, 255, 0.05);
+      transition: all 0.3s ease;
+      position: relative; /* Add this to ensure proper positioning */
+    }
+
+    .process-container:hover {
+        border-color: rgba(47, 69, 255, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15),
+                    0 0 25px rgba(47, 69, 255, 0.15);
+    }
+    
+    /* Remove any potential arrows or decorative elements at the bottom */
+    .process-container::after {
+        display: none;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(47, 69, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+        border: 2px solid var(--complementary-blue);
+        box-shadow: 0 0 15px rgba(47, 69, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .service-icon:hover {
+        box-shadow: 0 0 25px rgba(47, 69, 255, 0.5);
+        transform: scale(1.05);
+    }
+
+    .service-icon i {
+        font-size: 24px;
+      color: var(--complementary-blue);
+    }
+
+    .service-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
+    }
+
+    .service-description {
+        color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .service-features {
+      list-style: none;
+        padding: 0;
+    }
+
+    .service-features li {
+        margin: 12px 0;
+      display: flex;
+      align-items: center;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .service-features i {
+      color: var(--complementary-blue);
+        margin-right: 10px;
+        font-size: 16px;
+        text-shadow: 0 0 8px rgba(47, 69, 255, 0.3);
+    }
+
     @media (max-width: 768px) {
         /* Legacy Services */
         .services-section {
@@ -6487,1297 +7899,4 @@
     </div>
     <!-- Mobile blog button (visible only on mobile) -->
     <a href="/blog.html" class="mobile-blog-btn">Blog</a>
-    <button class="mobile-menu-btn" id="mobile-menu-btn">
-      <i class="fas fa-bars"></i>
-    </button>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <div class="nav-dropdown">
-        <a href="#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
-        <div class="dropdown-menu">
-          <a href="ppc-management.html">PPC Management</a>
-          <a href="#services">All Services</a>
-        </div>
-      </div>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-      <a href="/blog.html">Blog</a>
-    </nav>
-  </header>
-
-  <!-- Mobile Navigation Sidebar -->
-  <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
-  <div class="mobile-nav-sidebar" id="mobile-nav-sidebar">
-    <div class="mobile-nav-header">
-      <h3>Menu</h3>
-      <button class="mobile-nav-close" id="mobile-nav-close">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="mobile-nav-menu">
-      <a href="#home" class="mobile-nav-link">Home</a>
-      <a href="#about" class="mobile-nav-link">About</a>
-      <a href="#services" class="mobile-nav-link">Services</a>
-      <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
-      <a href="#contact" class="mobile-nav-link">Contact</a>
-      <a href="/blog.html" class="mobile-nav-link">Blog</a>
-    </div>
-  </div>
-
-  <!-- Home Section -->
-  <section id="home" class="hero-load-animation">
-    <div class="floating-elements">
-      <div class="floating-element" style="top: 20%; left: 10%;"></div>
-      <div class="floating-element" style="top: 40%; right: 15%;"></div>
-      <div class="floating-element" style="top: 60%; left: 20%;"></div>
-      <div class="floating-element" style="top: 80%; right: 25%;"></div>
-    </div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-text">🚀 Ranked #1 Agency for Growth Results</span>
-      </div>
-      <h1>Scale Your Online Store to <span class="gradient-text">7-Figures</span></h1>
-      <p class="hero-subtitle">We help Shopify stores, online businesses, and SaaS companies increase revenue by an average of 312% in 90 days. Specializing in proven growth strategies, PPC management, and conversion optimization.</p>
-      
-      <div class="hero-cta-section">
-        <div class="cta-buttons">
-          <a href="#booking-section" class="btn btn-primary">
-            <span>Get Your Free Strategy Call</span>
-            <small>Worth $497 - Limited Time</small>
-          </a>
-          <a href="#case-studies" class="btn btn-secondary">
-            <i class="fas fa-play"></i>
-            Watch Success Stories
-          </a>
-        </div>
-        
-        <div class="social-proof">
-          <div class="proof-avatars">
-            <img src="images/testimonials/alex.svg" alt="Client">
-            <img src="images/testimonials/maria.svg" alt="Client">
-            <img src="images/testimonials/james.svg" alt="Client">
-            <span class="proof-text">Join 25+ successful clients</span>
-          </div>
-          <div class="trust-indicators">
-            <div class="trust-item">
-              <i class="fas fa-star"></i>
-              <span>4.9/5 Rating</span>
-            </div>
-            <div class="trust-item">
-              <i class="fas fa-shield-alt"></i>
-              <span>100% Satisfaction Guarantee</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number">312%</div>
-          <div class="stat-label">Average Revenue Increase</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">90</div>
-          <div class="stat-label">Days to Results</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">25+</div>
-          <div class="stat-label">Success Stories</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">$2M+</div>
-          <div class="stat-label">Generated for Clients</div>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-indicator">
-      <span>Scroll to see how we do it</span>
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </section>
-
-    <!-- Problem/Solution Section -->
-    <section id="about" class="problem-solution-section animate-on-scroll section-reveal">
-      <div class="problem-solution-content">
-        <div class="section-header">
-          <h2>Most Agencies Promise Everything, Deliver Nothing</h2>
-          <p class="section-subtitle">Sound familiar? You've been burned before by agencies that overpromise and underdeliver. We're different.</p>
-            </div>
-
-        <div class="problem-solution-grid">
-          <div class="problem-side">
-            <h3>❌ What Other Agencies Do</h3>
-            <ul class="problem-list">
-              <li>Make unrealistic promises to win clients</li>
-              <li>Use outdated strategies that don't work</li>
-              <li>Lack transparency in reporting</li>
-              <li>Treat you like just another number</li>
-              <li>Disappear when results don't come</li>
-            </ul>
-            </div>
-
-          <div class="solution-side">
-            <h3>✅ The Lumyx Difference</h3>
-            <ul class="solution-list">
-              <li>Guarantee results within 90 days or you don't pay</li>
-              <li>Use cutting-edge, proven strategies</li>
-              <li>Provide weekly transparent reporting</li>
-              <li>Treat you as a true partner</li>
-              <li>Stay with you until you achieve success</li>
-            </ul>
-            </div>
-          </div>
-
-        <div class="proof-section">
-          <h3>Here's Proof We Walk the Talk</h3>
-          <div class="results-showcase">
-            <div class="result-item">
-              <div class="result-number">312%</div>
-              <div class="result-desc">Average revenue increase for our clients</div>
-            </div>
-            <div class="result-item">
-              <div class="result-number">$2M+</div>
-              <div class="result-desc">Generated in client revenue</div>
-            </div>
-            <div class="result-item">
-              <div class="result-number">98%</div>
-              <div class="result-desc">Client retention rate</div>
-            </div>
-          </div>
-        </div>
-        </div>
-    </section>
-
-
-
-    <!-- Booking Calendar Section -->
-    <section class="booking-section" id="booking-section">
-      <div class="booking-content">
-        <div class="booking-info">
-          <div class="booking-header">
-            <div class="booking-badge">
-              <span class="urgency-text">🔥 LIMITED TIME: Free Strategy Session</span>
-            </div>
-            <h2>Get Your Free $497 Strategy Call</h2>
-            <p class="booking-subtitle">In just 30 minutes, we'll show you exactly how to scale your business to 7-figures. No pitch, just value.</p>
-            </div>
-
-          <div class="value-proposition">
-            <h3>What You'll Get On This Call:</h3>
-            <div class="booking-features">
-              <div class="booking-feature">
-              <i class="fas fa-chart-line"></i>
-                <div class="feature-text">
-                  <span class="feature-title">Revenue Roadmap</span>
-                  <span class="feature-desc">Custom strategy to 3x your revenue in 90 days</span>
-            </div>
-              </div>
-              <div class="booking-feature">
-                <i class="fas fa-bullseye"></i>
-                <div class="feature-text">
-                  <span class="feature-title">Competitor Analysis</span>
-                  <span class="feature-desc">See exactly what your competitors are doing wrong</span>
-                </div>
-              </div>
-              <div class="booking-feature">
-                <i class="fas fa-rocket"></i>
-                <div class="feature-text">
-                  <span class="feature-title">Quick Wins</span>
-                  <span class="feature-desc">3 strategies you can implement today for instant results</span>
-                </div>
-              </div>
-              <div class="booking-feature">
-                <i class="fas fa-gift"></i>
-                <div class="feature-text">
-                  <span class="feature-title">Bonus Resources</span>
-                  <span class="feature-desc">Free tools & templates worth $1,497</span>
-                </div>
-              </div>
-            </div>
-            </div>
-
-          <div class="booking-guarantee">
-            <div class="guarantee-badge">
-              <i class="fas fa-trophy"></i>
-              <span>Proven Results Discussion</span>
-            </div>
-            <p>We'll show you exactly how we've helped similar businesses achieve 200%+ growth and discuss how we can replicate these results for your business.</p>
-            </div>
-          </div>
-          
-        <div class="calendar-container">
-          <div class="calendar-header">
-            <h3>Choose Your Time</h3>
-            <p>Select a time that works best for you</p>
-        </div>
-          <div id="calendly-container"></div>
-
-          <div class="booking-urgency">
-            <p><i class="fas fa-clock"></i> Only 5 spots available this week</p>
-      </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="modern-services-section" id="services">
-        <div class="services-header">
-          <h2>How We Scale Online Stores</h2>
-          <p class="services-subtitle">Our proven 3-pillar system that's generated over $2M for Shopify stores, online businesses, and SaaS companies worldwide</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="modern-service-card">
-                <div class="service-number">01</div>
-          <div class="service-icon">
-                    <i class="fas fa-rocket"></i>
-          </div>
-                <h3>PPC Management - Google Ads & Shopping Campaigns</h3>
-                <p class="service-desc">Specialized PPC management for online stores including Google Shopping, Facebook/Instagram ads, and retargeting campaigns. We optimize for ROAS with advanced product feed management and dynamic remarketing.</p>
-                
-                <div class="service-results">
-                    <div class="result-metric">
-                        <span class="metric-number">4.8x</span>
-                        <span class="metric-label">Avg ROAS</span>
-                    </div>
-                </div>
-
-                <ul class="service-features">
-                    <li><i class="fas fa-check"></i>Google Shopping Campaign Management</li>
-                    <li><i class="fas fa-check"></i>Facebook & Instagram Ads for Ecommerce</li>
-                    <li><i class="fas fa-check"></i>Product Feed Optimization</li>
-                    <li><i class="fas fa-check"></i>Dynamic Remarketing & Retargeting</li>
-                    <li><i class="fas fa-check"></i>Shopify Plus Integration & Setup</li>
-                    <li><i class="fas fa-check"></i>Multi-Platform Campaign Management</li>
-            </ul>
-
-                <div class="service-cta" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                    <a href="ppc-management.html" class="service-btn">Learn More About PPC</a>
-                    <a href="#booking-section" class="service-btn-secondary">Get Started</a>
-            </div>
-          </div>
-
-            <div class="modern-service-card featured">
-                <div class="featured-badge">Most Popular</div>
-                <div class="service-number">02</div>
-          <div class="service-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-                <h3>SEO & Product Optimization</h3>
-                <p class="service-desc">Complete SEO for online stores including product page optimization, category structure, and technical SEO. We help Shopify and WooCommerce stores rank higher and drive organic sales.</p>
-                
-                <div class="service-results">
-                    <div class="result-metric">
-                        <span class="metric-number">285%</span>
-                        <span class="metric-label">Organic Traffic Increase</span>
-                    </div>
-                </div>
-
-                <ul class="service-features">
-                    <li><i class="fas fa-check"></i>Product Page SEO Optimization</li>
-                    <li><i class="fas fa-check"></i>Category & Collection Page SEO</li>
-                    <li><i class="fas fa-check"></i>Technical SEO for Ecommerce</li>
-                    <li><i class="fas fa-check"></i>Schema Markup for Products</li>
-                    <li><i class="fas fa-check"></i>Shopify & WooCommerce SEO</li>
-                    <li><i class="fas fa-check"></i>Local SEO for Online Stores</li>
-            </ul>
-
-                <div class="service-cta">
-                    <a href="#booking-section" class="service-btn primary">Scale My Ads</a>
-            </div>
-          </div>
-
-            <div class="modern-service-card">
-                <div class="service-number">03</div>
-          <div class="service-icon">
-                    <i class="fas fa-bullseye"></i>
-          </div>
-                <h3>Conversion Rate Optimization & Store Development</h3>
-                <p class="service-desc">Complete CRO services and Shopify store development. We optimize checkout flows, product pages, and build high-converting online stores that turn visitors into customers.</p>
-                
-                <div class="service-results">
-                    <div class="result-metric">
-                        <span class="metric-number">67%</span>
-                        <span class="metric-label">Conversion Rate Increase</span>
-                    </div>
-                </div>
-
-                <ul class="service-features">
-                    <li><i class="fas fa-check"></i>Shopify Store Development & Optimization</li>
-                    <li><i class="fas fa-check"></i>A/B Testing & Conversion Optimization</li>
-                    <li><i class="fas fa-check"></i>Checkout Flow Optimization</li>
-                    <li><i class="fas fa-check"></i>Product Page & Landing Page Design</li>
-            </ul>
-
-                <div class="service-cta">
-                    <a href="#booking-section" class="service-btn">Build My Brand</a>
-          </div>
-        </div>
-      </div>
-        
-        <div class="services-guarantee">
-            <div class="guarantee-content">
-                <h3>🚀 The Lumyx Guarantee</h3>
-                <p>We're so confident in our system, if you don't see a 200% ROI within 90 days, we'll refund every penny and pay you $1,000 for wasting your time.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="modern-portfolio-section">
-        <div class="portfolio-container">
-            <div class="portfolio-header">
-                <h2>Client Success Stories</h2>
-                <p class="portfolio-subtitle">Real results from real businesses we've transformed</p>
-            </div>
-            <div class="portfolio-filters">
-                <button class="modern-filter-btn active" data-filter="all">All Campaigns</button>
-                <button class="modern-filter-btn" data-filter="Ad Campaigns">Paid Ads</button>
-                <button class="modern-filter-btn" data-filter="CRO & Funnel">Conversion</button>
-                <button class="modern-filter-btn" data-filter="SEO & Content Strategy">Growth</button>
-            </div>
-            <div class="modern-portfolio-grid">
-            </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="modern-testimonials-section">
-        <div class="testimonials-container">
-            <div class="testimonials-header">
-      <h2>What Our Clients Say</h2>
-                <p class="testimonials-subtitle">Don't just take our word for it - hear from businesses we've scaled</p>
-            </div>
-            <div class="modern-testimonial-grid">
-                <div class="modern-testimonial-item">
-                    <div class="testimonial-content">
-                        <div class="quote-icon">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"The PPC campaign Lumyx set up for our SaaS product was a game-changer. We saw a 43% drop in cost per acquisition within the first month, and our demo signups doubled. They completely exceeded our expectations."</p>
-                        <div class="testimonial-result">
-                            <span class="result-number">43%</span>
-                            <span class="result-text">Cost Reduction</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="images/testimonials/alex.svg" alt="Alex Thompson" class="author-avatar">
-                        <div class="author-info">
-              <h4>Alex Thompson</h4>
-              <p>Head of Growth, CloudStack</p>
-            </div>
-                        <div class="rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-                </div>
-
-                <div class="modern-testimonial-item featured">
-                    <div class="testimonial-content">
-                        <div class="quote-icon">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"Our website was stuck in 2010 until Lumyx stepped in. They rebuilt everything from scratch, focusing on mobile-first design. The new site loads in under 2 seconds and our bounce rate dropped by 35%."</p>
-                        <div class="testimonial-result">
-                            <span class="result-number">35%</span>
-                            <span class="result-text">Bounce Rate Drop</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="images/testimonials/maria.svg" alt="Maria Rodriguez" class="author-avatar">
-                        <div class="author-info">
-              <h4>Maria Rodriguez</h4>
-              <p>Director of Digital, RetailPro</p>
-            </div>
-                        <div class="rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-                </div>
-
-                <div class="modern-testimonial-item">
-                    <div class="testimonial-content">
-                        <div class="quote-icon">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <p>"What sets Lumyx apart is their deep understanding of conversion funnels. They completely revamped our email sequences and landing pages. Our trial-to-paid conversion jumped from 12% to 28%."</p>
-                        <div class="testimonial-result">
-                            <span class="result-number">133%</span>
-                            <span class="result-text">Conversion Boost</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="images/testimonials/james.svg" alt="James Chen" class="author-avatar">
-                        <div class="author-info">
-              <h4>James Chen</h4>
-              <p>Founder, MarketFlow</p>
-            </div>
-                        <div class="rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-    <!-- Newsletter Section -->
-    <section class="modern-newsletter-section">
-        <div class="newsletter-background">
-            <div class="newsletter-container">
-                <div class="newsletter-header">
-                    <h2>Stay Ahead of the Competition</h2>
-                    <p>Get exclusive insights, proven strategies, and real case studies delivered to your inbox. Join 500+ business owners scaling faster with our proven methods.</p>
-          </div>
-                
-                <div class="newsletter-form-wrapper">
-                    <div class="newsletter-cta">
-                        <a href="/mailchimp-form-custom.html" class="modern-subscribe-btn" target="_blank">
-                            <span>Get Free Strategy Insights</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <p class="newsletter-disclaimer">Free insights worth $497 • No spam, unsubscribe anytime</p>
-          </div>
-                </div>
-                
-                <div class="newsletter-benefits">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Weekly Insights</h4>
-                            <p>Marketing strategies that convert</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Case Studies</h4>
-                            <p>Real results from real businesses</p>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <div class="benefit-content">
-                            <h4>Growth Tips</h4>
-                            <p>Scale your business faster</p>
-                        </div>
-                    </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="modern-contact-section">
-        <div class="contact-background">
-        <div class="contact-container">
-                <div class="contact-header">
-                    <h2>Ready to Scale Your Business?</h2>
-                    <p>Get in touch with our team and let's discuss how we can help you achieve your growth goals.</p>
-                </div>
-                
-                <div class="contact-content">
-                    <div class="contact-info-grid">
-                        <div class="contact-info-item">
-                            <div class="contact-icon">
-              <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Call Us</h4>
-                    <p>(248) 238-2704</p>
-                                <span>Available Mon-Fri, 9AM-6PM EST</span>
-            </div>
-                        </div>
-                        
-                        <div class="contact-info-item">
-                            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-                            <div class="contact-details">
-                                <h4>Email Us</h4>
-                                <p>Lumyxagency@gmail.com</p>
-                                <span>We respond within 24 hours</span>
-            </div>
-          </div>
-                        
-                        <div class="contact-info-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-calendar-alt"></i>
-    </div>
-                            <div class="contact-details">
-                                <h4>Book a Call</h4>
-                                <p>Free 30-min strategy session</p>
-                                <span>Discuss your growth goals</span>
-            </div>
-            </div>
-            </div>
-                    
-                    <div class="contact-cta-section">
-                        <div class="cta-content">
-                            <h3>Ready to Transform Your Business?</h3>
-                            <p>Schedule a free strategy call and discover how we can help you scale to 7-figures.</p>
-                            <a href="#booking-section" class="modern-cta-button">
-                                <span>Schedule Your Free Call</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-          </div>
-        </div>
-                </div>
-        </div>
-      </div>
-    </section>
-
-  <!-- Floating contact button removed and replaced with newsletter popup -->
-  <!-- <div class="floating-contact">
-    <i class="fas fa-comments"></i>
-  </div> -->
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Lumyx Agency</h3>
-        <p>Scaling businesses to 7-figures with data-driven marketing strategies and proven conversion systems.</p>
-      </div>
-      
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#portfolio">Case Studies</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="/blog.html">Blog</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="/sitemap.xml" target="_blank">Sitemap</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section">
-        <h3>Connect With Us</h3>
-        <div class="social-links">
-          <a href="https://www.instagram.com/lumyxgrowth" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/company/lumyx-agency" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-        </div>
-        <div class="contact-info">
-          <p><i class="fas fa-phone"></i> (248) 238-2704</p>
-          <p><i class="fas fa-envelope"></i> Lumyxagency@gmail.com</p>
-      </div>
-    </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <p>&copy; 2025 Lumyx Agency. All rights reserved.</p>
-      <div class="footer-cta">
-        <span>Ready to scale? </span>
-        <a href="#booking-section" class="footer-cta-link">Book your free call →</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/meta-pixel-events.js"></script>
-  <script src="js/newsletter.js"></script>
-  <script src="js/form-validation.js"></script>
-  <script src="js/form-fix.js"></script>
-  <script src="js/performance-optimization.js"></script>
-  
-  <!-- Conversion tracking - Performance optimized -->
-  <script defer src="js/conversion-tracking.js"></script>
-  
-  <!-- Enhanced contact form - Conversion optimized -->
-  <script defer src="js/enhanced-contact-form.js"></script>
-  
-  <!-- Initialize Portfolio -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Initializing modern portfolio...');
-      
-      // Check if we have the modern portfolio grid
-      const portfolioGrid = document.querySelector('.modern-portfolio-grid');
-      if (portfolioGrid) {
-        console.log('Found modern portfolio grid, initializing...');
-        
-        // Initialize portfolio manager if it exists
-        if (window.PortfolioManager) {
-          try {
-            new PortfolioManager();
-            console.log('Portfolio manager initialized successfully');
-          } catch (error) {
-            console.error('Error initializing portfolio manager:', error);
-          }
-        } else {
-          console.log('PortfolioManager not found, waiting...');
-          setTimeout(() => {
-            if (window.PortfolioManager) {
-              new PortfolioManager();
-            }
-          }, 1000);
-        }
-      } else {
-        console.log('Modern portfolio grid not found');
-      }
-    });
-  </script>
-  
-  <!-- Calendly handled by optimized lazy loading above -->
-  <script>
-    // Optimize star creation with a more efficient approach
-    function createStars() {
-      const starsContainer = document.querySelector('.stars-container');
-      const numberOfStars = 100; // Increased number of stars
-      
-      // Create stars in batches for better performance
-      const batchSize = 20;
-      let currentBatch = 0;
-      
-      function createStarBatch() {
-        const start = currentBatch * batchSize;
-        const end = Math.min(start + batchSize, numberOfStars);
-        
-        for (let i = start; i < end; i++) {
-          const star = document.createElement('div');
-          star.className = 'star';
-          // Random position across the entire viewport
-          star.style.left = `${Math.random() * 100}%`;
-          star.style.top = `${Math.random() * 100}%`;
-          // Random size between 1px and 3px
-          const size = 1 + Math.random() * 2;
-          star.style.width = `${size}px`;
-          star.style.height = `${size}px`;
-          // Random animation delay and duration
-          star.style.animationDelay = `${Math.random() * 3}s`;
-          star.style.animationDuration = `${2 + Math.random() * 3}s`;
-          starsContainer.appendChild(star);
-        }
-        
-        currentBatch++;
-        if (currentBatch * batchSize < numberOfStars) {
-          requestAnimationFrame(createStarBatch);
-        }
-      }
-      
-      // Clear existing stars
-      starsContainer.innerHTML = '';
-      createStarBatch();
-    }
-
-    // Update star styles
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = `
-      .star {
-        position: absolute;
-        background: #ffffff;
-        border-radius: 50%;
-        opacity: 0;
-        will-change: opacity, transform;
-        animation: twinkle var(--duration, 2s) ease-in-out infinite;
-        pointer-events: none;
-      }
-
-      @keyframes twinkle {
-        0%, 100% { 
-          opacity: 0.2; 
-          transform: scale(1);
-        }
-        50% { 
-          opacity: 1;
-          transform: scale(1.5);
-        }
-      }
-    `;
-    document.head.appendChild(styleSheet);
-
-    // Initialize stars and recreate them on window resize
-    document.addEventListener('DOMContentLoaded', createStars);
-    window.addEventListener('resize', createStars);
-
-    // Optimize scroll handling with throttling
-    function throttle(func, limit) {
-      let inThrottle;
-      return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-          func.apply(context, args);
-          inThrottle = true;
-          setTimeout(() => inThrottle = false, limit);
-        }
-      }
-    }
-
-    const handleScroll = throttle(function() {
-      const header = document.querySelector('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }, 100);
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Mobile menu is handled in the DOMContentLoaded section below
-
-    // Initialize stars after DOM is loaded
-    document.addEventListener('DOMContentLoaded', createStars);
-
-    // Optimize animations with Intersection Observer
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe elements for animation
-    document.querySelectorAll('.service-item, .portfolio-item, .testimonial-item').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Initialize all animations and observers
-    document.addEventListener('DOMContentLoaded', function() {
-      // Fade-in animation and section transitions
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, observerOptions);
-
-      // Observe all sections and fade-in elements
-      document.querySelectorAll('.fade-in, .services-section, .process-section, .team-section, .clients-section, .contact-section, .portfolio-section').forEach((element) => {
-        observer.observe(element);
-      });
-
-      // Smooth scroll for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
-
-      // Form submission
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your message! We will get back to you soon.');
-        this.reset();
-      });
-
-      // Newsletter form submission
-      document.querySelector('.newsletter form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for subscribing to our newsletter!');
-        this.reset();
-      });
-
-            // Mobile Menu - SIMPLE AND WORKING
-      setTimeout(function() {
-        const btn = document.getElementById('mobile-menu-btn');
-        const overlay = document.getElementById('mobile-nav-overlay');
-        const sidebar = document.getElementById('mobile-nav-sidebar');
-        const close = document.getElementById('mobile-nav-close');
-
-        console.log('Elements found:', {
-          btn: btn ? 'YES' : 'NO',
-          overlay: overlay ? 'YES' : 'NO', 
-          sidebar: sidebar ? 'YES' : 'NO',
-          close: close ? 'YES' : 'NO'
-        });
-
-        if (btn && overlay && sidebar && close) {
-          btn.onclick = function() {
-            console.log('Button clicked!');
-            overlay.style.opacity = '1';
-            overlay.style.visibility = 'visible';
-            sidebar.style.right = '0';
-            document.body.style.overflow = 'hidden';
-          };
-
-          close.onclick = function() {
-            console.log('Close clicked!');
-            overlay.style.opacity = '0';
-            overlay.style.visibility = 'hidden';
-            sidebar.style.right = '-100%';
-            document.body.style.overflow = '';
-          };
-
-          overlay.onclick = function(e) {
-            if (e.target === overlay) {
-              console.log('Overlay clicked!');
-              overlay.style.opacity = '0';
-              overlay.style.visibility = 'hidden';
-              sidebar.style.right = '-100%';
-              document.body.style.overflow = '';
-            }
-          };
-        } else {
-          console.error('Mobile menu elements missing!');
-        }
-      }, 100);
-
-      // Scheduling functionality
-      const dayGrid = document.querySelector('.day-grid');
-      const today = new Date();
-      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      
-      // Clear existing day options
-      dayGrid.innerHTML = '';
-      
-      // Function to get all available dates for the next 2 weeks
-      function getAvailableDates() {
-        const dates = [];
-        const date = new Date();
-        
-        // Get next 14 days
-        for (let i = 0; i < 14; i++) {
-          const nextDate = new Date(date);
-          nextDate.setDate(date.getDate() + i);
-          
-          // Only include Monday-Saturday (skip Sunday)
-          if (nextDate.getDay() !== 0) {
-            dates.push({
-              date: nextDate,
-              dayName: days[nextDate.getDay()],
-              dayNumber: nextDate.getDate()
-            });
-          }
-        }
-        
-        // Sort dates chronologically
-        return dates.sort((a, b) => a.date - b.date);
-      }
-      
-      // Create day options
-      const availableDates = getAvailableDates();
-      
-      // Take only the first 12 slots (2 weeks of Mon-Sat)
-      availableDates.slice(0, 12).forEach(dateInfo => {
-          const dayOption = document.createElement('div');
-          dayOption.className = 'day-option';
-        
-        // Format the date
-        dayOption.textContent = `${dateInfo.dayName} ${dateInfo.dayNumber}`;
-        dayOption.dataset.date = dateInfo.date.toISOString().split('T')[0];
-        
-        // Add click handler
-            dayOption.addEventListener('click', function() {
-              document.querySelectorAll('.day-option').forEach(opt => opt.classList.remove('selected'));
-              this.classList.add('selected');
-              selectedDate = this.dataset.date;
-              showTimeSlots();
-            });
-          
-          dayGrid.appendChild(dayOption);
-      });
-
-      // Function to update dates - call this daily or when needed
-      function updateAvailableDates() {
-        const dayOptions = document.querySelectorAll('.day-option');
-        const newDates = getAvailableDates().slice(0, 12);
-        
-        dayOptions.forEach((option, index) => {
-          const dateInfo = newDates[index];
-          option.textContent = `${dateInfo.dayName} ${dateInfo.dayNumber}`;
-          option.dataset.date = dateInfo.date.toISOString().split('T')[0];
-        });
-      }
-
-      // Update dates every day at midnight
-      const now = new Date();
-      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-      const timeUntilMidnight = tomorrow - now;
-      setTimeout(() => {
-        updateAvailableDates();
-        // After first update, run daily
-        setInterval(updateAvailableDates, 24 * 60 * 60 * 1000);
-      }, timeUntilMidnight);
-    });
-
-    let selectedDate = null;
-    let selectedTime = null;
-
-    async function showTimeSlots() {
-      const timeSlotsContainer = document.querySelector('.time-slots-container');
-      timeSlotsContainer.classList.add('show');
-        
-        try {
-            const timeSlotGrid = document.querySelector('.time-slot-grid');
-            
-            // Fetch booked times
-            const { data: bookedTimes, error } = await getBookedTimes(selectedDate);
-            
-            if (error) {
-                console.error('Error fetching booked times:', error);
-                return;
-            }
-            
-            // Reset all time slots to default state
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                // First remove all classes and restore full opacity
-                slot.classList.remove('selected', 'booked');
-                slot.style.removeProperty('opacity');
-                
-                // Then check if this time slot is booked
-                if (bookedTimes && bookedTimes.includes(slot.dataset.time)) {
-                    slot.classList.add('booked');
-                }
-            });
-            
-            document.querySelector('.booking-confirmation').classList.remove('show');
-            selectedTime = null;
-            
-        } catch (error) {
-            console.error('Error updating time slots:', error);
-        }
-    }
-
-    // Remove the separate event listeners since we're handling them in showTimeSlots
-    document.querySelectorAll('.time-slot').forEach(slot => {
-      slot.addEventListener('click', function() {
-        if (!selectedDate) {
-          alert('Please select a date first');
-          return;
-        }
-        if (this.classList.contains('booked')) {
-          alert('This time slot is already booked. Please choose another time.');
-          return;
-        }
-        
-        document.querySelectorAll('.time-slot').forEach(s => {
-          s.classList.remove('selected');
-        });
-        
-        this.classList.add('selected');
-        selectedTime = this.dataset.time;
-        
-        const confirmation = document.querySelector('.booking-confirmation');
-        confirmation.querySelector('.selected-date').textContent = new Date(selectedDate).toLocaleDateString();
-        confirmation.querySelector('.selected-time').textContent = this.textContent;
-        confirmation.classList.add('show');
-
-        // Scroll to the confirmation section with a slight delay
-        setTimeout(() => {
-          confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 300);
-      });
-    });
-
-    function updateTimeSlots() {
-      document.querySelectorAll('.time-slot').forEach(slot => {
-        slot.classList.remove('selected', 'booked');
-      });
-      document.querySelector('.booking-confirmation').classList.remove('show');
-      selectedTime = null;
-    }
-
-    let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-
-    function saveAppointment(appointment) {
-      appointments.push(appointment);
-      localStorage.setItem('appointments', JSON.stringify(appointments));
-      updateAppointmentsList();
-    }
-
-    function updateAppointmentsList() {
-      const appointmentsList = document.querySelector('.appointments-list');
-      if (!appointmentsList) return;
-
-      appointmentsList.innerHTML = '<h3>Upcoming Appointments</h3>';
-      
-      const sortedAppointments = appointments.sort((a, b) => new Date(a.date + 'T' + a.time) - new Date(b.date + 'T' + b.time));
-      
-      sortedAppointments.forEach(appointment => {
-        const appointmentElement = document.createElement('div');
-        appointmentElement.className = 'appointment-item';
-        appointmentElement.innerHTML = `
-          <h4>${appointment.name}</h4>
-          <p><i class="fas fa-calendar"></i> ${new Date(appointment.date).toLocaleDateString()}</p>
-          <p><i class="fas fa-clock"></i> ${appointment.time}</p>
-          <p><i class="fas fa-envelope"></i> ${appointment.email}</p>
-          <p><i class="fas fa-phone"></i> ${appointment.phone}</p>
-        `;
-        appointmentsList.appendChild(appointmentElement);
-      });
-    }
-
-    window.confirmBooking = async function() {
-      if (!selectedDate || !selectedTime) return;
-      
-      const name = document.getElementById('clientName').value;
-      const email = document.getElementById('clientEmail').value;
-      const phone = document.getElementById('clientPhone').value;
-        const callType = document.querySelector('input[name="callType"]:checked').value;
-
-      if (!name || !email || !phone) {
-        alert('Please fill in all contact information');
-        return;
-      }
-
-        try {
-            const result = await addBooking({
-                name: name,
-                email: email,
-                phone: phone,
-        date: selectedDate,
-        time: selectedTime,
-                callType: callType
-            });
-
-            if (result.success) {
-      // Clear the form
-      document.getElementById('clientName').value = '';
-      document.getElementById('clientEmail').value = '';
-      document.getElementById('clientPhone').value = '';
-      
-                // Hide confirmation
-                document.querySelector('.booking-confirmation').classList.remove('show');
-                
-                // Show success message
-      alert('Call scheduled successfully! We will send you a confirmation email shortly.');
-      
-                // Refresh the time slots to show updated availability
-                await showTimeSlots();
-                
-            } else {
-                throw new Error('Failed to schedule call');
-            }
-        } catch (error) {
-            console.error('Booking error:', error);
-            alert('There was an error scheduling your call. Please try again or contact us directly.');
-        }
-    };
-
-    window.cancelBooking = function() {
-      document.querySelector('.booking-confirmation').classList.remove('show');
-      document.querySelectorAll('.time-slot').forEach(slot => {
-        slot.classList.remove('selected');
-      });
-      selectedTime = null;
-    };
-
-    // Initialize appointments list when the page loads
-    document.addEventListener('DOMContentLoaded', function() {
-    });
-
-    // Add this to your existing script section
-    const modal = document.getElementById('comingSoonModal');
-    const closeModal = document.querySelector('.close-modal');
-    const comingSoonLinks = document.querySelectorAll('.coming-soon');
-
-    comingSoonLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-
-    closeModal.addEventListener('click', () => {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    });
-
-    // Newsletter form submission in modal
-    const modalNewsletterForm = modal.querySelector('.newsletter-form');
-    if (modalNewsletterForm) {
-      modalNewsletterForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you for subscribing to our newsletter!');
-      this.reset();
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    }
-
-    // Admin Panel Functions - REMOVED FOR SECURITY
-    // Client-side admin authentication is insecure and has been disabled
-    function toggleAdminPanel() {
-      alert("Admin panel has been disabled for security reasons. Please contact support for admin access.");
-    }
-
-    function closeAdminPanel() {
-      // Admin panel disabled
-    }
-
-    function toggleSubscriberList() {
-      // Admin panel disabled
-    }
-
-    function updateAdminPanelStats() {
-      const emailList = JSON.parse(localStorage.getItem('emailList')) || [];
-      document.getElementById('subscriberCount').textContent = emailList.length;
-      document.getElementById('newsletterCount').textContent = 
-        emailList.filter(sub => sub.source === 'newsletter').length;
-      document.getElementById('bookingCount').textContent = 
-        emailList.filter(sub => sub.source === 'booking').length;
-    }
-
-    function updateSubscriberList() {
-      const list = document.getElementById('subscriberList');
-      list.innerHTML = '';
-      
-      emailListManager.emailList.forEach(subscriber => {
-        const item = document.createElement('div');
-        item.className = 'subscriber-item';
-        item.innerHTML = `
-          <strong>${subscriber.email}</strong><br>
-          ${subscriber.name ? `Name: ${subscriber.name}<br>` : ''}
-          ${subscriber.phone ? `Phone: ${subscriber.phone}<br>` : ''}
-          Source: ${subscriber.source}<br>
-          ${subscriber.bookings && subscriber.bookings.length > 0 
-            ? `Latest Booking: ${subscriber.bookings[subscriber.bookings.length - 1].date} at ${subscriber.bookings[subscriber.bookings.length - 1].time}<br>` 
-            : ''}
-          Added: ${new Date(subscriber.subscriptionDate).toLocaleDateString()}
-        `;
-        list.appendChild(item);
-      });
-    }
-
-    // Email List Manager Class
-    class EmailListManager {
-      constructor() {
-        const encryptedData = localStorage.getItem('emailList');
-        this.emailList = encryptedData 
-          ? decryptData(encryptedData, encryptionKey) 
-          : [];
-      }
-
-      addSubscriber(data) {
-        const existingSubscriber = this.emailList.find(sub => sub.email === data.email);
-        if (existingSubscriber) {
-          Object.assign(existingSubscriber, data);
-          if (data.source === 'booking') {
-            if (!existingSubscriber.bookings) existingSubscriber.bookings = [];
-            existingSubscriber.bookings.push({
-              date: data.bookingDate,
-              time: data.bookingTime,
-              callType: data.callType
-            });
-          }
-        } else {
-          const newSubscriber = {
-            ...data,
-            bookings: data.source === 'booking' ? [{
-              date: data.bookingDate,
-              time: data.bookingTime,
-              callType: data.callType
-            }] : []
-          };
-          this.emailList.push(newSubscriber);
-        }
-        
-        // Encrypt data before storing
-        localStorage.setItem('emailList', encryptData(this.emailList, encryptionKey));
-        updateAdminPanelStats();
-      }
-
-      exportToCSV() {
-        const headers = ['Email', 'Name', 'Phone', 'Source', 'Subscription Date', 'Latest Booking'];
-        const csvContent = [
-          headers.join(','),
-          ...this.emailList.map(sub => [
-            sub.email,
-            sub.name || '',
-            sub.phone || '',
-            sub.source,
-            new Date(sub.subscriptionDate).toLocaleDateString(),
-            sub.bookings && sub.bookings.length > 0 
-              ? `${sub.bookings[sub.bookings.length - 1].date} ${sub.bookings[sub.bookings.length - 1].time}`
-              : ''
-          ].join(','))
-        ].join('\n');
-
-        const blob = new Blob([csvContent], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'email_list.csv';
-        a.click();
-        window.URL.revokeObjectURL(url);
-      }
-    }
-
-    // Initialize email list manager
-    const emailListManager = new EmailListManager();
-
-    // Initialize EmailJS with config
-    (function() {
-      emailjs.init(config.emailjs.publicKey);
-    })();
-  </script>
-  <!-- Defer non-critical scripts for better performance -->
-  <script>
-    // Load remaining scripts after critical rendering
-    window.addEventListener('load', function() {
-      // Load animation and performance scripts after page load
-      const deferredScripts = [
-        'js/animations.js',
-        'js/performance-optimization.js',
-        'js/main.js',
-        'js/form-validation.js',
-        'js/form-fix.js',
-        'js/newsletter.js',
-        'js/meta-pixel-events.js'
-      ];
-      
-      deferredScripts.forEach(src => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        document.body.appendChild(script);
-      });
-    });
-  </script>
-</body>
-</html>
-
+    <button class="mobile-menu-btn"
