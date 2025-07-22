@@ -753,5 +753,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardManager = new CardManager();
 });
 
-// Export for global access
-window.PortfolioManager = PortfolioManager; 
+// Add this to your placeholders array at the top of the file
+const PLACEHOLDER_CASE_STUDIES = [
+    {
+        title: "Meta Ads Scaling Success",
+        category: "Ad Campaigns",
+        excerpt: "Scaled ad campaigns across Meta platforms achieving 350% ROAS and 2.5x customer acquisition rate.",
+        slug: "meta-ads-scaling",
+        icon: "chart-line"
+    },
+    {
+        title: "E-commerce Conversion Rate Optimization",
+        category: "CRO & Funnel",
+        excerpt: "Complete funnel optimization resulting in 85% higher conversion rates and 40% lower cart abandonment.",
+        slug: "ecommerce-cro",
+        icon: "funnel-dollar"
+    },
+    {
+        title: "SaaS Content Strategy",
+        category: "SEO & Content Strategy",
+        excerpt: "Comprehensive SEO and content strategy that grew organic traffic by 200% in 6 months.",
+        slug: "saas-content-strategy",
+        icon: "search"
+    }
+]; 
