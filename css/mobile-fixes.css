@@ -129,8 +129,33 @@
 @media screen and (max-width: 992px) {
   /* Show mobile menu button */
   .mobile-menu-btn {
-    display: block;
+    display: block !important;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
   }
+  /* Fallback visible hamburger (works even if icon font fails) */
+  .mobile-menu-btn i { display: none; }
+  .mobile-menu-btn .hamburger-bars {
+    position: relative;
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+  }
+  .mobile-menu-btn .hamburger-bars::before,
+  .mobile-menu-btn .hamburger-bars::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+  }
+  .mobile-menu-btn .hamburger-bars::before { top: -6px; }
+  .mobile-menu-btn .hamburger-bars::after { top: 6px; }
 
   /* Hide desktop navigation */
   header nav {
@@ -149,17 +174,18 @@
   header .logo {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
   }
 
   header .logo img {
-    width: 60px;
-    height: auto;
-    margin-right: 8px;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
   }
 
-  header .logo h1 {
-    font-size: 0.7rem;
+  header .logo h1,
+  header .logo h2 {
+    font-size: 1.3rem;
     margin: 0;
     white-space: nowrap;
   }
@@ -221,8 +247,11 @@
     margin-right: 6px;
   }
 
-  header .logo h1 {
-    font-size: 0.65rem;
+  header .logo h1,
+  header .logo h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .mobile-menu-btn {
@@ -278,8 +307,11 @@
     margin-right: 5px;
   }
 
-  header .logo h1 {
-    font-size: 0.6rem;
+  header .logo h1,
+  header .logo h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .mobile-menu-btn {
@@ -316,8 +348,11 @@
     margin-right: 4px;
   }
 
-  header .logo h1 {
-    font-size: 0.55rem;
+  header .logo h1,
+  header .logo h2 {
+    font-size: 1rem;
+    margin: 0;
+    white-space: nowrap;
   }
 
   .mobile-menu-btn {
@@ -342,10 +377,8 @@
   }
 } 
 
-/* Hide unused hamburger */
-.mobile-menu-btn {display:none !important;}
-
-/* Mobile button styling now handled by unified rules below */
+/* Keep hamburger available for pages that use it (e.g., index) */
+/* Blog page keeps its own Home button; no global hiding here */
 
 /* --- Header Centering Overrides --- */
 /* Old rules removed - now using unified mobile header styling below */
@@ -422,10 +455,12 @@
   }
   
   /* Logo text */
-  header .logo h1 {
+  header .logo h2 {
     font-size: 1.8rem !important;
     font-weight: 700;
     color: #ffffff;
+    margin: 0;
+    white-space: nowrap;
     margin: 0 0 0 -5px !important;
     white-space: nowrap;
   }
@@ -465,8 +500,11 @@
     width: 100px !important;
   }
   
-  header .logo h1 {
+  header .logo h1,
+  header .logo h2 {
     font-size: 1.6rem !important;
+    margin: 0;
+    white-space: nowrap;
   }
   
   .mobile-blog-btn,
@@ -487,8 +525,11 @@
     width: 90px !important;
   }
   
-  header .logo h1 {
+  header .logo h1,
+  header .logo h2 {
     font-size: 1.4rem !important;
+    margin: 0;
+    white-space: nowrap;
   }
   
   .mobile-blog-btn,
@@ -509,8 +550,11 @@
     width: 80px !important;
   }
   
-  header .logo h1 {
+  header .logo h1,
+  header .logo h2 {
     font-size: 1.3rem !important;
+    margin: 0;
+    white-space: nowrap;
   }
   
   .mobile-blog-btn,
