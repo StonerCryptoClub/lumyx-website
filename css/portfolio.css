@@ -21,11 +21,7 @@
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: var(--text-light);
-    background: linear-gradient(to right, #FFA500, #FF6B00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
 }
 
 .section-description {
@@ -1134,9 +1130,7 @@
 .values-section h2 {
     margin-bottom: 20px;
     font-size: 2.5rem;
-    background: linear-gradient(45deg, var(--primary-orange), #FF6B00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
     text-align: center;
 }
 

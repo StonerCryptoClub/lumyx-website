@@ -8,6 +8,7 @@
   --bg-dark: #1a1a1a;
   --bg-light: #2a2a2a;
   --container-padding: 20px;
+  --shadow-soft: 0 0 12px rgba(255, 165, 0, 0.15), 0 0 28px rgba(255, 165, 0, 0.08);
 }
 
 /* Reset & Base Styles */
@@ -44,6 +45,19 @@ body::before {
     radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
   z-index: -1;
   pointer-events: none;
+}
+
+/* Subtle global vignette and color bloom for consistent polish */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(120% 70% at 50% 15%, rgba(255, 165, 0, 0.06), transparent 45%),
+    radial-gradient(120% 70% at 85% 10%, rgba(30, 144, 255, 0.05), transparent 50%),
+    radial-gradient(100% 90% at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%);
 }
 
 /* Floating Stars and Circles */
@@ -545,6 +559,8 @@ header nav a:visited {
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
               background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* Focus visibility for accessibility */
+#home .btn:focus-visible { outline: 2px solid rgba(255,165,0,0.85); outline-offset: 2px; }
 #home .btn::before {
   content: '';
   position: absolute;
