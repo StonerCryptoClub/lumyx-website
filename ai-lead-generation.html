@@ -58,24 +58,145 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/service-pages.css?v=1.8">
     <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017V">
+    <link rel="stylesheet" href="css/enhanced-cards.css?v=1.0">
     <style>
-      /* AI page theme enhancements */
-      .ai-theme .service-hero {
-        background: radial-gradient(1200px 600px at 10% 10%, rgba(30,144,255,0.25), transparent 60%),
-                    radial-gradient(1000px 500px at 90% 20%, rgba(255,165,0,0.22), transparent 60%),
-                    linear-gradient(135deg, #0f0f23 0%, #141428 40%, #101a30 100%) !important;
+      /* AI page theme - clean consistent background */
+      body.ai-theme {
+        background: #0a0a0f !important;
       }
+      
+      .ai-theme .service-hero {
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%) !important;
+        border-bottom: 1px solid rgba(255,165,0,0.1);
+      }
+      
       .ai-theme .hero-badge {
         display: inline-flex; align-items: center; gap: 8px;
         padding: 8px 14px; border-radius: 999px;
         background: linear-gradient(135deg, rgba(255,165,0,0.15), rgba(30,144,255,0.15));
-        border: 1px solid rgba(255,255,255,0.12); color: #fff; font-weight: 600; font-size: 0.95rem; margin-bottom: 20px;
+        border: 1px solid rgba(255,255,255,0.12); 
+        color: #fff; 
+        font-weight: 600; 
+        font-size: 0.95rem; 
+        margin-bottom: 20px;
       }
-      .ai-theme .gradient-text { background: none; -webkit-text-fill-color: initial; color: #ffffff; }
-      .ai-theme .service-card { border-color: rgba(255, 165, 0, 0.35); box-shadow: 0 10px 30px rgba(255,165,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.03); }
-      .ai-theme .service-card:hover { box-shadow: 0 24px 48px rgba(255,165,0,0.18), 0 0 0 1px rgba(255,165,0,0.15); }
-      .ai-theme .service-hero .container { position: relative; z-index: 2; }
-      .ai-theme .hero-stats .stat-number { text-shadow: 0 0 20px rgba(255,165,0,0.25); }
+      
+      .ai-theme .gradient-text { 
+        background: none; 
+        -webkit-text-fill-color: initial; 
+        color: #ffffff; 
+      }
+      
+      .ai-theme .service-card { 
+        border-color: rgba(255, 165, 0, 0.2); 
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        background: rgba(26,26,40,0.6);
+      }
+      
+      .ai-theme .service-card:hover { 
+        box-shadow: 0 8px 32px rgba(255,165,0,0.15);
+        border-color: rgba(255,165,0,0.4);
+      }
+      
+      .ai-theme .service-hero .container { 
+        position: relative; 
+        z-index: 2; 
+      }
+      
+      .ai-theme .hero-stats .stat-number { 
+        text-shadow: 0 0 20px rgba(255,165,0,0.25); 
+      }
+      
+      /* Section separators */
+      .section-separator {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,165,0,0.3), transparent);
+        margin: 0;
+      }
+      
+      /* Industry card hover effects */
+      .industry-card {
+        text-align: center;
+        padding: 20px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .industry-card:hover {
+        background: rgba(255,165,0,0.08);
+        transform: translateY(-5px);
+      }
+      
+      .industry-card .emoji {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease;
+        display: inline-block;
+      }
+      
+      .industry-card:hover .emoji {
+        transform: scale(1.2) rotate(5deg);
+      }
+      
+      .industry-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      
+      .industry-card:hover h4 {
+        color: #FFA500;
+      }
+      
+      .industry-card p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.7);
+        margin: 0;
+        transition: color 0.3s ease;
+      }
+      
+      .industry-card:hover p {
+        color: rgba(255,255,255,0.9);
+      }
+      
+      /* Stat card hover effects */
+      .stat-card-red {
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      
+      .stat-card-red:hover {
+        background: rgba(255,20,20,0.15) !important;
+        border-color: rgba(255,80,80,0.8) !important;
+        box-shadow: 0 0 40px rgba(255,0,0,0.6), 0 0 80px rgba(255,0,0,0.3) !important;
+        transform: scale(1.02);
+      }
+      
+      .stat-card-green {
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      
+      .stat-card-green:hover {
+        background: rgba(50,255,50,0.15) !important;
+        border-color: rgba(100,255,100,0.8) !important;
+        box-shadow: 0 0 40px rgba(0,255,0,0.6), 0 0 80px rgba(0,255,0,0.3) !important;
+        transform: scale(1.02);
+      }
+      
+      .stat-card-orange {
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      
+      .stat-card-orange:hover {
+        background: rgba(255,200,0,0.15) !important;
+        border-color: rgba(255,165,0,0.8) !important;
+        box-shadow: 0 0 40px rgba(255,165,0,0.7), 0 0 80px rgba(255,200,0,0.4) !important;
+        transform: scale(1.02);
+      }
       
       /* Desktop hero padding */
       @media screen and (min-width: 993px) {
@@ -91,15 +212,69 @@
           padding-right: 20px !important;
         }
       }
+      
+      /* Mobile responsive for stat cards and problem cards */
+      @media screen and (max-width: 768px) {
+        .stat-cards-grid {
+          grid-template-columns: 1fr !important;
+        }
+        
+        /* Problem cards mobile responsive */
+        .services-overview div[style*="grid-template-columns: repeat(3, 1fr)"] {
+          grid-template-columns: 1fr !important;
+        }
+        
+        .services-overview div[style*="display: flex"] {
+          flex-direction: column !important;
+          max-width: 100% !important;
+        }
+        
+        .services-overview .service-card {
+          max-width: 100% !important;
+        }
+        
+        /* Footer mobile responsive */
+        footer > div > div:first-child {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+        
+        footer {
+          padding: 40px 0 20px !important;
+        }
+        
+        footer > div {
+          padding: 0 20px !important;
+        }
+        
+        /* Breadcrumb mobile responsive */
+        .breadcrumb {
+          top: 10px !important;
+          left: 15px !important;
+          padding: 6px 12px !important;
+          font-size: 0.8rem !important;
+        }
+        
+        .breadcrumb ol {
+          font-size: 0.75rem !important;
+        }
+      }
+      
+      /* Tablet responsive */
+      @media screen and (min-width: 769px) and (max-width: 992px) {
+        .services-overview div[style*="grid-template-columns: repeat(3, 1fr)"] {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
     </style>
 </head>
 <body class="ai-theme">
-    <!-- Header - EXACT COPY FROM INDEX -->
+    <!-- Header -->
     <header>
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
             <h1>Lumyx Agency</h1>
-        </div>
+        </a>
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
             <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
             <span class="hamburger-bars" aria-hidden="true"></span>
@@ -139,11 +314,36 @@
             <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
             <a href="index.html#contact" class="mobile-nav-link">Contact</a>
             <a href="/blog.html" class="mobile-nav-link">Blog</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="service-hero">
+    <section class="service-hero" style="position: relative;">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" aria-label="Breadcrumb" style="position: absolute; top: 20px; left: 40px; z-index: 10; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html#services" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Services</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name" style="color: #FFA500; font-weight: 500;">AI Lead Gen</span>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </nav>
+        
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-bolt"></i> New for 2025</div>
@@ -173,11 +373,50 @@
         </div>
     </section>
 
+    <!-- Speed Matters Section -->
+    <section class="services-overview" style="background: rgba(15,15,25,0.4); padding: 80px 0; border-top: 1px solid rgba(255,165,0,0.1); border-bottom: 1px solid rgba(255,165,0,0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700;">⚡ Speed Is Everything in Lead Conversion</h2>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 1.6;">Business owners are busy—juggling operations, customers, and growth. Meanwhile, leads are slipping through the cracks.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto 40px;" class="stat-cards-grid">
+                <div class="stat-card-red" style="background: rgba(20,20,30,0.8); padding: 32px 24px; border-radius: 16px; text-align: center; border: 2px solid rgba(255,80,80,0.4); box-shadow: 0 4px 20px rgba(255,50,50,0.15);">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: #ff4444; margin-bottom: 12px; line-height: 1;">1%</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: #fff;">30-Minute Response</div>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.5; margin: 0;">Lead conversion rate drops to just 1% when you wait half an hour</p>
+                </div>
+                
+                <div class="stat-card-green" style="background: rgba(20,20,30,0.8); padding: 32px 24px; border-radius: 16px; text-align: center; border: 2px solid rgba(100,255,100,0.4); box-shadow: 0 4px 20px rgba(50,255,50,0.15);">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: #33ff66; margin-bottom: 12px; line-height: 1;">24%</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: #fff;">5-Minute Response</div>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.5; margin: 0;">Leads contacted within 5 minutes are 24x more likely to convert</p>
+                </div>
+                
+                <div class="stat-card-orange" style="background: rgba(20,20,30,0.8); padding: 32px 24px; border-radius: 16px; text-align: center; border: 2px solid rgba(255,165,0,0.4); box-shadow: 0 4px 20px rgba(255,165,0,0.2);">
+                    <div style="font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #FFA500, #1E90FF); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; line-height: 1;">100%</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: #fff;">Our AI Agents</div>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.5; margin: 0;">Respond instantly, 24/7—even while you sleep, vacation, or focus on running your business</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(20,20,30,0.6); padding: 32px 40px; border-radius: 12px; border-left: 3px solid #FFA500; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                <p style="font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,0.9); margin: 0;">
+                    <strong style="color: #FFA500;">Our AI agents work when you can't.</strong> They capture every lead the moment it arrives, qualify them with smart questions, answer FAQs instantly, and book qualified prospects directly into your calendar—automatically. No manual work. No missed opportunities.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Services Overview -->
-    <section class="services-overview">
-        <div class="container">
-            <h2>What Problems We Solve</h2>
-            <div class="services-grid">
+    <section class="services-overview" style="background: transparent; padding: 80px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="margin-bottom: 16px; text-align: center;">What Problems We Solve</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1rem; color: rgba(255,255,255,0.8);">Custom AI agents built for your industry—from professional services to local businesses</p>
+            
+            <!-- Top Row - 3 Cards -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto 24px;">
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-clock"></i></div>
                     <h3>Slow Response Kills Leads</h3>
@@ -193,26 +432,83 @@
                     <h3>Manual Follow-Up</h3>
                     <p>Agents run nurture sequences, handle objections, answer FAQs, and re-engage stale leads—no human required.</p>
                 </div>
-                <div class="service-card">
+            </div>
+            
+            <!-- Bottom Row - 2 Cards Centered -->
+            <div style="display: flex; gap: 24px; max-width: 750px; margin: 0 auto; justify-content: center;">
+                <div class="service-card" style="flex: 1; max-width: 360px;">
                     <div class="service-icon"><i class="fas fa-plug"></i></div>
                     <h3>Integrations</h3>
                     <p>Calendars, CRMs, chat widgets, ad platforms, and website forms. We plug into your stack.</p>
-                    <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.95rem; color: rgba(255,255,255,0.8);">
+                    <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.6;">
                         <li>Calendly, Google/Outlook Calendar</li>
                         <li>HubSpot, Pipedrive, Salesforce</li>
                         <li>Meta/Google Ads, website forms</li>
                     </ul>
                 </div>
+                <div class="service-card" style="flex: 1; max-width: 360px;">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Lead Quality & Tracking</h3>
+                    <p>AI scores and prioritizes leads, logs every interaction in your CRM, and provides insights on what's working.</p>
+                </div>
+            </div>
+
+            <!-- Industries Section -->
+            <div style="margin-top: 60px; background: rgba(20,20,30,0.5); padding: 40px; border-radius: 16px; border: 1px solid rgba(255,165,0,0.2);">
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 30px; color: #FFA500;">Built for Any Industry</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                    <div class="industry-card">
+                        <div class="emoji">⚖️</div>
+                        <h4>Legal Services</h4>
+                        <p>Lawyers, attorneys, law firms</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">💼</div>
+                        <h4>Professional Services</h4>
+                        <p>CPAs, consultants, coaches</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🏥</div>
+                        <h4>Healthcare</h4>
+                        <p>Dentists, clinics, med spas</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">💅</div>
+                        <h4>Beauty & Wellness</h4>
+                        <p>Nail salons, spas, barbers</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🏡</div>
+                        <h4>Home Services</h4>
+                        <p>HVAC, plumbers, contractors</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🌿</div>
+                        <h4>Outdoor Services</h4>
+                        <p>Lawn care, landscaping, pools</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🏠</div>
+                        <h4>Real Estate</h4>
+                        <p>Agents, brokers, investors</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🎓</div>
+                        <h4>Education</h4>
+                        <p>Tutors, courses, training</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px; font-size: 1rem; color: rgba(255,255,255,0.8);">Every agent is customized with industry-specific questions, FAQs, and booking logic tailored to your business.</p>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="services-overview" id="how-it-works" style="background: linear-gradient(135deg, rgba(15, 15, 35, 0.95), rgba(26, 26, 52, 0.95)); padding: 80px 0;">
-        <div class="container">
-            <h2>How We Scale Stores</h2>
+    <section class="services-overview" id="how-it-works" style="background: rgba(15,15,25,0.4); padding: 80px 0; border-top: 1px solid rgba(255,165,0,0.1); border-bottom: 1px solid rgba(255,165,0,0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center;">How We Get You Set Up</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; font-size: 1.1rem; color: rgba(255,255,255,0.8);">Deploy in days, not weeks. We handle setup, integrations, and ongoing optimization.</p>
-            <div class="services-grid">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto;">
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-comments"></i></div>
                     <h3>1. Discovery Call</h3>
@@ -233,10 +529,10 @@
     </section>
 
     <!-- Packages Section -->
-    <section class="services-overview" style="padding: 80px 0;">
-        <div class="container">
-            <h2>Packages That Fit Your Growth Stage</h2>
-            <div class="services-grid">
+    <section class="services-overview" style="background: transparent; padding: 80px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 50px;">Packages That Fit Your Growth Stage</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto;">
                 <div class="service-card">
                     <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Starter</h3>
                     <ul style="padding-left: 20px; margin-bottom: 20px;">
@@ -279,30 +575,40 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                    <div class="footer-logo">
-                    <img src="Logo.png" alt="Lumyx Agency" width="60" height="60">
-                    <h2>Lumyx Agency</h2>
-                    <p>Scaling ecommerce and online businesses to 7-figures through proven marketing strategies.</p>
+    <footer style="background: rgba(15,15,25,0.8); border-top: 1px solid rgba(255,165,0,0.2); padding: 60px 0 30px;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <img src="Logo.png" alt="Lumyx Agency" width="50" height="50" style="border-radius: 8px;">
+                        <h2 style="font-size: 1.5rem; margin: 0; color: #fff;">Lumyx Agency</h2>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; max-width: 400px;">Scaling ecommerce and online businesses to 7-figures through proven marketing strategies.</p>
                 </div>
-                <div class="footer-links">
-                    <h3>Services</h3>
-                    <a href="index.html#services">All Services</a>
-                    <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
-                    <a href="ppc-management.html">PPC Management</a>
+                
+                <div>
+                    <h3 style="color: #FFA500; font-size: 1.1rem; margin-bottom: 20px; font-weight: 600;">Services</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="index.html#services" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">All Services</a>
+                        <a href="ai-lead-generation.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">AI Lead Gen & Booking Agents</a>
+                        <a href="ppc-management.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">PPC Management</a>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <h3>Company</h3>
-                    <a href="index.html#about">About</a>
-                    <a href="index.html#portfolio">Portfolio</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="index.html#contact">Contact</a>
+                
+                <div>
+                    <h3 style="color: #FFA500; font-size: 1.1rem; margin-bottom: 20px; font-weight: 600;">Company</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="index.html#about" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">About</a>
+                        <a href="index.html#portfolio" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Portfolio</a>
+                        <a href="blog.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Blog</a>
+                        <a href="faq.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">FAQ</a>
+                        <a href="index.html#contact" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Contact</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Lumyx Agency. All rights reserved.</p>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.5); margin: 0; font-size: 0.9rem;">&copy; 2025 Lumyx Agency. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -340,6 +646,7 @@
       })();
     </script>
     
+    <script src="js/enhanced-cards.js" defer></script>
     <script src="js/main.js" defer></script>
 </body>
 </html>

@@ -65,29 +65,41 @@
     </script>
     
     <style>
-        /* Desktop hero padding */
-        @media screen and (min-width: 993px) {
-            .service-hero {
-                padding-top: 140px !important;
-            }
+      /* Desktop hero padding */
+      @media screen and (min-width: 993px) {
+        .service-hero {
+          padding-top: 140px !important;
+        }
+      }
+      
+      /* Mobile container padding */
+      @media screen and (max-width: 992px) {
+        .container {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
         }
         
-        /* Mobile container padding */
-        @media screen and (max-width: 992px) {
-            .container {
-                padding-left: 20px !important;
-                padding-right: 20px !important;
-            }
+        /* Breadcrumb mobile responsive */
+        .breadcrumb {
+          top: 10px !important;
+          left: 15px !important;
+          padding: 6px 12px !important;
+          font-size: 0.8rem !important;
         }
+        
+        .breadcrumb ol {
+          font-size: 0.75rem !important;
+        }
+      }
     </style>
 </head>
 <body>
-    <!-- Header - EXACT COPY FROM INDEX -->
+    <!-- Header -->
     <header>
-        <div class="logo">
+        <a href="index.html" class="logo">
             <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
             <h1>Lumyx Agency</h1>
-        </div>
+        </a>
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
             <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
             <span class="hamburger-bars" aria-hidden="true"></span>
@@ -127,16 +139,41 @@
             <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
             <a href="index.html#contact" class="mobile-nav-link">Contact</a>
             <a href="/blog.html" class="mobile-nav-link">Blog</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="service-hero">
+    <section class="service-hero" style="position: relative;">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" aria-label="Breadcrumb" style="position: absolute; top: 20px; left: 40px; z-index: 10; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html#services" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Services</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name" style="color: #FFA500; font-weight: 500;">PPC Management</span>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </nav>
+        
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-chart-line"></i> Proven Results Since 2020</div>
                 <h1><span>PPC Management</span> Services<br>for <span class="glow-text">Ecommerce Stores</span> and High Ticket Offers</h1>
-                <p class="hero-subtitle">Drive profitable growth with our proven PPC strategies. Specializing in Google Shopping, Facebook ads, and retargeting campaigns that deliver an average 4.8x ROAS for Shopify stores and high-ticket coaches.</p>
+                <p class="hero-subtitle">Drive profitable growth with our proven PPC strategies. Specializing in Google Shopping, Facebook ads, and retargeting campaigns that deliver an average 4.8x ROAS for Shopify stores and high-ticket coaches. <a href="index.html#case-studies" style="color: #FFA500; text-decoration: underline;">See our results</a>.</p>
                 
                 <div class="hero-stats">
                     <div class="stat stat-card">
@@ -171,7 +208,7 @@
                         <i class="fab fa-google"></i>
                     </div>
                     <h3>Google Ads & Shopping</h3>
-                    <p>Maximize your Google Shopping campaigns with optimized product feeds, smart bidding strategies, and conversion-focused ad copy.</p>
+                    <p>Maximize your Google Shopping campaigns with optimized product feeds, smart bidding strategies, and conversion-focused ad copy. Learn more about our <a href="index.html#services" style="color: #FFA500;">digital marketing services</a>.</p>
                     <ul>
                         <li>Google Shopping Campaigns</li>
                         <li>Search & Display Ads</li>
@@ -230,7 +267,7 @@
                             <span class="result-label">CPA</span>
                         </div>
                     </div>
-                    <p>Implemented Google Shopping optimization and Facebook retargeting campaigns, resulting in 6.2x ROAS and 450% revenue increase.</p>
+                    <p>Implemented Google Shopping optimization and Facebook retargeting campaigns, resulting in 6.2x ROAS and 450% revenue increase. <a href="index.html#case-studies" style="color: #FFA500;">View more case studies</a>.</p>
                 </div>
                 <div class="case-study-card">
                     <div class="case-study-header">

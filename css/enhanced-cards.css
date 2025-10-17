@@ -1,0 +1,326 @@
+/**
+ * Enhanced Cards System for Lumyx.co
+ * Adds interactive animations, 3D effects, and dynamic glows
+ * while preserving accessibility and performance
+ */
+
+/* ================================
+   Section-Level Enhancements
+   ================================ */
+
+/* Animated gradient background for problem-solving section */
+.services-overview {
+  position: relative;
+  overflow: hidden;
+}
+
+.services-overview::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(250, 204, 21, 0.02) 0%, transparent 50%);
+  animation: gradientShift 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5%, 5%); }
+}
+
+/* Ensure content stays above background */
+.services-overview > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================
+   Interactive Card Base Enhancements
+   ================================ */
+
+.service-card,
+.industry-card {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+  
+  /* Initial state for scroll animations */
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Activated state when scrolled into view */
+.service-card.animate-in,
+.industry-card.animate-in {
+  animation: cardFadeIn 0.6s ease-out forwards;
+}
+
+@keyframes cardFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered delays for cascade effect */
+.service-card:nth-child(1) { animation-delay: 0s; }
+.service-card:nth-child(2) { animation-delay: 0.1s; }
+.service-card:nth-child(3) { animation-delay: 0.2s; }
+.service-card:nth-child(4) { animation-delay: 0.3s; }
+.service-card:nth-child(5) { animation-delay: 0.4s; }
+
+.industry-card:nth-child(1) { animation-delay: 0s; }
+.industry-card:nth-child(2) { animation-delay: 0.08s; }
+.industry-card:nth-child(3) { animation-delay: 0.16s; }
+.industry-card:nth-child(4) { animation-delay: 0.24s; }
+.industry-card:nth-child(5) { animation-delay: 0.32s; }
+.industry-card:nth-child(6) { animation-delay: 0.4s; }
+.industry-card:nth-child(7) { animation-delay: 0.48s; }
+.industry-card:nth-child(8) { animation-delay: 0.56s; }
+
+/* ================================
+   3D Tilt Effect (Desktop Only)
+   ================================ */
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card.tilt-enabled,
+  .industry-card.tilt-enabled {
+    --tiltX: 0deg;
+    --tiltY: 0deg;
+    transform: rotateX(var(--tiltY)) rotateY(var(--tiltX)) translateZ(8px);
+    transition: transform 0.1s ease-out;
+  }
+  
+  .service-card.tilt-enabled:not(:hover),
+  .industry-card.tilt-enabled:not(:hover) {
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+/* ================================
+   Dynamic Glow/Spotlight Effect
+   ================================ */
+
+.service-card::before,
+.industry-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  --x: 50%;
+  --y: 50%;
+  background: radial-gradient(
+    600px circle at var(--x) var(--y),
+    rgba(245, 158, 11, 0.15),
+    rgba(250, 204, 21, 0.08) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover::before,
+  .industry-card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Ensure card content stays above glow */
+.service-card > *,
+.industry-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ================================
+   Elevated Hover States
+   ================================ */
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover,
+  .industry-card:hover {
+    transform: translateY(-6px) translateZ(12px);
+    box-shadow: 0 12px 32px rgba(245, 158, 11, 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: rgba(245, 158, 11, 0.5) !important;
+  }
+  
+  /* Maintain 3D tilt during hover elevation */
+  .service-card.tilt-enabled:hover,
+  .industry-card.tilt-enabled:hover {
+    transform: translateY(-6px) rotateX(var(--tiltY)) rotateY(var(--tiltX)) translateZ(12px);
+  }
+}
+
+/* ================================
+   Icon Microinteractions
+   ================================ */
+
+.service-icon,
+.industry-card .emoji {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover .service-icon,
+  .industry-card:hover .emoji {
+    transform: scale(1.15) rotate(5deg);
+  }
+}
+
+/* Icon pulse effect on focus */
+.service-card:focus-within .service-icon,
+.industry-card:focus-within .emoji {
+  animation: iconPulse 0.6s ease-out;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ================================
+   Focus & Accessibility States
+   ================================ */
+
+.service-card:focus,
+.industry-card:focus,
+.service-card:focus-within,
+.industry-card:focus-within {
+  outline: 2px solid rgba(245, 158, 11, 0.6);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2),
+              0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+/* ================================
+   Mobile Touch States
+   ================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Tap to activate state */
+  .service-card.touch-active,
+  .industry-card.touch-active {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+    border-color: rgba(245, 158, 11, 0.5) !important;
+  }
+  
+  .service-card.touch-active::before,
+  .industry-card.touch-active::before {
+    opacity: 0.8;
+    background: radial-gradient(
+      circle at center,
+      rgba(245, 158, 11, 0.15),
+      rgba(250, 204, 21, 0.08) 40%,
+      transparent 70%
+    );
+  }
+  
+  .service-card.touch-active .service-icon,
+  .industry-card.touch-active .emoji {
+    transform: scale(1.1);
+  }
+}
+
+/* ================================
+   Reduced Motion Support
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .industry-card,
+  .service-icon,
+  .industry-card .emoji {
+    animation: none !important;
+    transition: opacity 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  
+  .service-card::before,
+  .industry-card::before {
+    display: none;
+  }
+  
+  .services-overview::before {
+    animation: none;
+  }
+  
+  /* Simple fade-in only */
+  .service-card,
+  .industry-card {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .service-card:hover,
+  .industry-card:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+  }
+}
+
+/* ================================
+   Performance Optimizations
+   ================================ */
+
+.service-card,
+.industry-card {
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* Hardware acceleration hints */
+.service-card::before,
+.industry-card::before,
+.service-icon,
+.industry-card .emoji {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ================================
+   Optional: Magnetic Attraction Effect
+   ================================ */
+
+.card-grid-magnetic {
+  position: relative;
+}
+
+.service-card.magnetic-active,
+.industry-card.magnetic-active {
+  --magnetX: 0px;
+  --magnetY: 0px;
+  transform: translate(var(--magnetX), var(--magnetY));
+}
+
+/* ================================
+   Loading State (prevents flash)
+   ================================ */
+
+.services-overview:not(.cards-loaded) .service-card,
+.services-overview:not(.cards-loaded) .industry-card {
+  opacity: 0;
+}
+
+/* Once JS has initialized */
+.services-overview.cards-loaded .service-card,
+.services-overview.cards-loaded .industry-card {
+  opacity: 1;
+}
+
