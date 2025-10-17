@@ -82,6 +82,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="css/main.css?v=3.7">
+  <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017P">
   
   <style>
     /* Base color variables */
@@ -905,6 +907,116 @@
       }
     }
   </style>
+
+  <!-- JAVASCRIPT HEADER FIX - FORCE CENTERING -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Force header centering with JavaScript
+      function forceHeaderCentering() {
+        const header = document.querySelector('header');
+        const logo = document.querySelector('header .logo');
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (header && logo && mobileBtn) {
+          // Force header styles - override both normal and scrolled states
+          header.style.cssText = `
+            padding: 15px 20px !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            position: relative !important;
+            min-height: 64px !important;
+          `;
+          
+          // Also override scrolled state
+          const scrolledHeader = document.querySelector('header.scrolled');
+          if (scrolledHeader) {
+            scrolledHeader.style.cssText = `
+              padding: 15px 20px !important;
+              display: flex !important;
+              justify-content: center !important;
+              align-items: center !important;
+              position: relative !important;
+              min-height: 64px !important;
+            `;
+          }
+          
+          // Force logo centering
+          logo.style.cssText = `
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            position: absolute !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: auto !important;
+          `;
+          
+          // Force logo image
+          const logoImg = logo.querySelector('img');
+          if (logoImg) {
+            logoImg.style.cssText = `
+              width: 120px !important;
+              height: auto !important;
+              margin-right: 0 !important;
+              margin-left: 0 !important;
+            `;
+          }
+          
+          // Force logo text
+          const logoText = logo.querySelector('h1, h2');
+          if (logoText) {
+            logoText.style.cssText = `
+              font-size: 1.3rem !important;
+              margin: 0 !important;
+              white-space: nowrap !important;
+              font-weight: 700 !important;
+              color: #ffffff !important;
+            `;
+          }
+          
+          // Force mobile button positioning
+          mobileBtn.style.cssText = `
+            display: block !important;
+            position: absolute !important;
+            right: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1001 !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            padding: 0 !important;
+            border-radius: 6px !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            backdrop-filter: blur(10px) !important;
+            width: 40px !important;
+            height: 40px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          `;
+        }
+      }
+      
+      // Run immediately
+      forceHeaderCentering();
+      
+      // Run again after a short delay to override any late-loading styles
+      setTimeout(forceHeaderCentering, 100);
+      setTimeout(forceHeaderCentering, 500);
+      setTimeout(forceHeaderCentering, 1000);
+      
+      // Also run on scroll to handle scrolled state
+      window.addEventListener('scroll', forceHeaderCentering);
+      
+      // Run on window resize
+      window.addEventListener('resize', forceHeaderCentering);
+    });
+  </script>
 </head>
 
 <body>
@@ -914,8 +1026,6 @@
       <img src="Logo.png" alt="Lumyx Agency Logo">
       <h1>Lumyx Agency</h1>
     </div>
-    <!-- Mobile blog button (visible only on mobile) -->
-    <a href="/blog.html" class="mobile-blog-btn">Blog</a>
     <button class="mobile-menu-btn" id="mobile-menu-btn">
       <i class="fas fa-bars"></i>
     </button>
@@ -925,6 +1035,7 @@
       <div class="nav-dropdown">
         <a href="/#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
         <div class="dropdown-menu">
+          <a href="/ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
           <a href="/ppc-management.html">PPC Management</a>
           <a href="/#services">All Services</a>
         </div>

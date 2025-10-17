@@ -221,69 +221,117 @@ header {
 }
 header.scrolled {
   background: rgba(0, 0, 0, 0.98);
-  padding: 10px;
+  padding: 15px 50px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
-header .logo {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  position: relative;
-  margin-left: -5px;
-}
-header .logo img {
-  width: 160px;
-  height: auto;
-  object-fit: contain;
-  transition: all 0.3s ease;
-  position: relative;
-  display: block;
-  margin-right: -50px;
-  z-index: 2;
-}
-header .logo h1,
-header .logo h2 {
-  line-height: 1;
-  margin: 0;
-}
-header .logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  white-space: nowrap;
-}
-@media (min-width: 1440px) {
-  header .logo img {
-    width: 176px;
-    height: auto;
-  }
-}
+
 @media (max-width: 992px) {
-  header {
-    justify-content: center;
-  }
-  header .logo img {
-    width: 120px;
-    height: auto;
-  }
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.3rem;
+  header.scrolled {
+    padding: 15px 20px;
   }
 }
-header .logo:hover img {
-  transform: scale(1.05);
+
+/* Logo - Desktop First */
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
-header .logo h1,
-header .logo h2 {
-  font-size: 1.8rem;
+
+header .logo:hover {
+  transform: scale(1.02);
+}
+
+header .logo img {
+  width: 140px;
+  height: auto;
+  display: block;
+  margin-right: -8px;
+}
+
+header .logo h1 {
+  font-size: 1.5rem;
   font-weight: 700;
   color: #ffffff;
-  position: relative;
-  letter-spacing: 0.5px;
   margin: 0;
   white-space: nowrap;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 255, 255, 0.2);
 }
+
+/* Mobile Logo - Prevent Layout Shift */
+@media screen and (max-width: 992px) {
+  header {
+    padding: 20px !important;
+    justify-content: center !important;
+    position: relative !important;
+    min-height: 80px !important;
+  }
+  
+  header .logo {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    left: 48% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    gap: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+  }
+  
+  header .logo img {
+    width: 75px !important;
+    height: auto !important;
+    margin: 0 !important;
+    margin-right: -6px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+  }
+  
+  header .logo h1 {
+    font-size: 1.25rem !important;
+    margin: 0 !important;
+    margin-left: -2px !important;
+    padding: 0 !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .mobile-menu-btn {
+    display: flex !important;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1001 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    backdrop-filter: blur(10px) !important;
+    width: 40px !important;
+    height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .mobile-menu-btn i {
+    font-size: 1.2rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
 header nav {
   display: flex;
   gap: 30px;
@@ -376,27 +424,23 @@ header nav a:visited {
   color: #667eea;
 }
 
-/* Mobile menu button - hidden on desktop */
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
+/* Mobile menu button styling now handled by emergency inline fix */
 
-.mobile-menu-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Ensure mobile menu button is hidden on desktop */
+/* Desktop Navigation - Ensure proper display */
 @media screen and (min-width: 993px) {
   .mobile-menu-btn {
     display: none !important;
+  }
+  
+  header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  
+  header .logo {
+    position: static !important;
+    transform: none !important;
   }
   
   header nav {
@@ -411,9 +455,7 @@ header nav a:visited {
 }
 
 @media screen and (max-width: 992px) {
-  .mobile-menu-btn {
-    display: block !important;
-  }
+  /* Mobile menu button styling now handled by emergency inline fix */
   
   header nav {
     display: none !important;
@@ -423,9 +465,7 @@ header nav a:visited {
     display: none !important;
   }
   
-  header {
-    padding: 15px 20px;
-  }
+  /* Let header keep its desktop padding for consistent appearance */
 }
 
 /* Service Button Secondary */
@@ -454,14 +494,23 @@ header nav a:visited {
   position: relative;
   background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center/cover;
   min-height: 100vh;
-  height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 80px 20px 20px;
+  padding: 100px 20px 60px;
   will-change: transform;
   transform: translateZ(0);
+}
+
+@media screen and (max-width: 992px) {
+  #home {
+    min-height: auto !important;
+    height: auto !important;
+    padding-top: 90px !important;
+    padding-bottom: 80px !important;
+  }
 }
 
 /* MacBook and laptop specific adjustments */

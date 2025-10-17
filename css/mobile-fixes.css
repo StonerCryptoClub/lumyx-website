@@ -30,27 +30,7 @@
   }
 }
 
-/* Hide mobile menu button by default */
-.mobile-menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 1001;
-  padding: 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.mobile-menu-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.mobile-menu-btn:active {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+/* Mobile menu button styling now handled by emergency inline fix */
 
 /* Mobile navigation overlay */
 .mobile-nav-overlay {
@@ -127,79 +107,45 @@
 
 /* Tablet and Mobile Styles */
 @media screen and (max-width: 992px) {
-  /* Show mobile menu button */
-  .mobile-menu-btn {
-    display: block !important;
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-  }
-  /* Fallback visible hamburger (works even if icon font fails) */
-  .mobile-menu-btn i { display: none; }
-  .mobile-menu-btn .hamburger-bars {
-    position: relative;
-    width: 22px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-  }
-  .mobile-menu-btn .hamburger-bars::before,
-  .mobile-menu-btn .hamburger-bars::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 22px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-  }
-  .mobile-menu-btn .hamburger-bars::before { top: -6px; }
-  .mobile-menu-btn .hamburger-bars::after { top: 6px; }
+  /* Performance: remove heavy backgrounds on mobile */
+  .animated-bg,
+  .stars-container,
+  .floating-circle { display: none !important; }
+  body::before,
+  body::after { content: none !important; background: none !important; }
+
+  /* Mobile menu button styling now handled by emergency inline fix */
 
   /* Hide desktop navigation */
   header nav {
     display: none;
   }
 
-  /* Fix header layout */
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 20px;
-    position: relative;
+  /* Let service-header-fix.css handle mobile menu button styling */
+
+  /* Ensure all containers have proper side padding */
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
-  header .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  header .logo img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-  }
-
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.3rem;
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  .mobile-menu-btn {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+  .service-hero .container,
+  .services-overview .container,
+  .cta-section .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   /* Fix hero section */
   #home {
-    padding: 100px 20px 60px;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 90px 20px 80px !important;
+  }
+  
+  /* Ensure all service heroes have consistent spacing */
+  .service-hero {
+    padding: 130px 20px 80px !important;
   }
 
   .hero-content h1 {
@@ -232,238 +178,85 @@
 }
 
 @media screen and (max-width: 768px) {
-  .mobile-nav-sidebar {
-    width: 100%;
-  }
-
-  header {
-    padding: 12px 15px;
-  }
-
-  /* Remove left margin - Centered by flex, no margin */
-
-  header .logo img {
-    width: 55px;
-    margin-right: 6px;
-  }
-
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.2rem;
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  .mobile-menu-btn {
-    right: 15px;
-  }
-
-  #home {
-    padding: 90px 15px 50px;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-    line-height: 1.2;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  .btn {
-    padding: 14px 28px;
-    max-width: 100%;
-  }
-
-  /* Fix overlapping scroll info */
-  .hero-stats {
-    margin-top: 40px;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .social-proof {
-    margin-top: 30px;
-  }
-
-  .trust-indicators {
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
+  /* Replace gradient/rainbow accents with solid color for clarity */
+  .gradient-text,
+  .glow-accent { 
+    background: none !important; 
+    -webkit-text-fill-color: #ffb020 !important; 
+    color: #ffb020 !important; 
   }
 }
 
-@media screen and (max-width: 480px) {
-  header {
-    padding: 10px 12px;
+/* Blog-specific mobile improvements */
+@media screen and (max-width: 768px) {
+  /* Tighten blog post spacing */
+  .blog-post-card {
+    margin-bottom: 24px;
   }
 
-  /* Remove left margin - Centered by flex, no margin */
-
-  header .logo img {
-    width: 50px;
-    margin-right: 5px;
+  /* Adjust search and filter sections */
+  .blog-search,
+  .blog-filters {
+    padding: 16px;
   }
 
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.1rem;
-    margin: 0;
-    white-space: nowrap;
+  /* Make category tags wrap better */
+  .blog-categories {
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .mobile-menu-btn {
-    right: 12px;
-  }
-
-  #home {
-    padding: 80px 12px 40px;
-  }
-
-  .hero-content h1 {
+  /* Improve blog typography on mobile */
+  .blog-post-content h1 {
     font-size: 1.8rem;
   }
 
-  .hero-subtitle {
-    font-size: 0.95rem;
+  .blog-post-content h2 {
+    font-size: 1.5rem;
   }
 
-  .btn {
-    padding: 12px 24px;
-    font-size: 0.9rem;
+  .blog-post-content h3 {
+    font-size: 1.3rem;
+  }
+
+  /* Make blog images responsive */
+  .blog-post-content img {
+    max-width: 100%;
+    height: auto;
   }
 }
 
-@media screen and (max-width: 360px) {
-  header {
-    padding: 8px 10px;
+/* Phone-specific adjustments */
+/* Let main.css handle mobile logo sizing */
+
+/* Large screens - blog page specific adjustments */
+@media screen and (min-width: 1200px) {
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
 
-  /* Remove left margin - Centered by flex, no margin */
-
-  header .logo img {
-    width: 45px;
-    margin-right: 4px;
-  }
-
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1rem;
-    margin: 0;
-    white-space: nowrap;
-  }
-
+/* Hide mobile menu on larger screens */
+@media screen and (min-width: 993px) {
+  .mobile-nav-overlay,
+  .mobile-nav-sidebar,
   .mobile-menu-btn {
-    right: 10px;
-  }
-
-  #home {
-    padding: 75px 10px 35px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.6rem;
-  }
-
-  .hero-subtitle {
-    font-size: 0.9rem;
-  }
-
-  .btn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-  }
-} 
-
-/* Keep hamburger available for pages that use it (e.g., index) */
-/* Blog page keeps its own Home button; no global hiding here */
-
-/* --- Header Centering Overrides --- */
-/* Old rules removed - now using unified mobile header styling below */
-
-/* Fix hero section bottom spacing */
-@media screen and (max-width: 992px) {
-  #home {
-    padding-bottom: 120px !important;
-  }
-  
-  .scroll-indicator {
-    bottom: 40px !important;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  #home {
-    padding-bottom: 100px !important;
-  }
-  
-  .scroll-indicator {
-    bottom: 30px !important;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #home {
-    padding-bottom: 80px !important;
-  }
-  
-  .scroll-indicator {
-    bottom: 20px !important;
-  }
-} 
-
-/* =================================================================
-   MOBILE HEADER - UNIFIED STYLING FOR MAIN & BLOG PAGES
-   ================================================================= */
-
-/* Hide desktop nav, show mobile buttons */
-@media screen and (max-width: 992px) {
-  /* Hide desktop navigation */
-  header nav {
     display: none !important;
   }
-  
-  /* Header container */
-  header {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+/* Very specific fix for blog page header */
+@media screen and (max-width: 992px) {
+  /* Fix header container on blog page */
+  .blog-page header {
     padding: 12px 20px;
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
   }
   
-  /* Logo container - perfectly centered */
-  header .logo {
-    position: absolute;
-    left: 45%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 2px;
-  }
+  /* Let main.css handle header styling */
   
-  /* Logo image */
-  header .logo img {
-    width: 120px !important;
-    height: auto !important;
-    object-fit: contain;
-    margin: 0 -10px 0 0 !important;
-  }
-  
-  /* Logo text */
-  header .logo h2 {
-    font-size: 1.8rem !important;
-    font-weight: 700;
-    color: #ffffff;
-    margin: 0;
-    white-space: nowrap;
-    margin: 0 0 0 -5px !important;
-    white-space: nowrap;
-  }
+  /* Let main.css handle logo styling */
   
   /* Mobile buttons positioning */
   .mobile-blog-btn,
@@ -472,363 +265,148 @@
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    display: inline-block;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
     padding: 8px 12px;
-    font-size: 0.9rem;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-    text-decoration: none;
-    background: rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 100;
+    display: inline-block !important;
+    width: auto;
+    height: auto;
   }
   
   .mobile-blog-btn:hover,
   .mobile-home-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-50%) scale(1.05);
   }
-}
+  
+  .mobile-blog-btn:active,
+  .mobile-home-btn:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 
-/* Tablet adjustments */
-@media screen and (max-width: 768px) {
-  header {
-    padding: 10px 15px;
+  /* Blog hero specific adjustments */
+  .blog-hero {
+    padding: 100px 20px 60px !important;
+    margin-top: 0;
   }
-  
-  header .logo img {
-    width: 100px !important;
-  }
-  
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.6rem !important;
-    margin: 0;
-    white-space: nowrap;
-  }
-  
-  .mobile-blog-btn,
-  .mobile-home-btn {
-    right: 15px;
-    padding: 6px 10px;
-    font-size: 0.85rem;
-  }
-}
 
-/* Small mobile adjustments */
-@media screen and (max-width: 480px) {
-  header {
-    padding: 8px 12px;
+  .blog-hero h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
   }
-  
-  header .logo img {
-    width: 90px !important;
-  }
-  
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.4rem !important;
-    margin: 0;
-    white-space: nowrap;
-  }
-  
-  .mobile-blog-btn,
-  .mobile-home-btn {
-    right: 12px;
-    padding: 5px 8px;
-    font-size: 0.8rem;
-  }
-}
 
-/* Very small mobile adjustments */
-@media screen and (max-width: 360px) {
-  header {
-    padding: 6px 10px;
+  .blog-hero .subtitle {
+    font-size: 1rem;
   }
-  
-  header .logo img {
-    width: 80px !important;
-  }
-  
-  header .logo h1,
-  header .logo h2 {
-    font-size: 1.3rem !important;
-    margin: 0;
-    white-space: nowrap;
-  }
-  
-  .mobile-blog-btn,
-  .mobile-home-btn {
-    right: 10px;
-    padding: 4px 6px;
-    font-size: 0.75rem;
-  }
-} 
 
-/* MacBook and smaller laptop screens */
-@media screen and (min-width: 1024px) and (max-width: 1440px) and (min-height: 600px) and (max-height: 900px) {
-  #home {
-    min-height: 100vh;
-    height: auto;
-    padding: 80px 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .hero-content {
-    max-width: 800px;
+  /* Blog categories */
+  .blog-categories {
+    gap: 8px;
     padding: 0 20px;
   }
   
-  .hero-content h1 {
-    font-size: 2.8rem;
-    line-height: 1.2;
-    margin-bottom: 15px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-  }
-  
-  .hero-cta-section {
-    margin-top: 20px;
-  }
-  
-  .hero-stats {
-    margin-top: 30px;
-  }
-  
-  .stat-item {
-    margin: 0 15px;
-  }
-  
-  .stat-number {
-    font-size: 2.2rem;
-  }
-}
-
-/* Specific adjustments for MacBook Pro 13" and similar */
-@media screen and (min-width: 1280px) and (max-width: 1440px) and (min-height: 700px) and (max-height: 900px) {
-  #home {
-    padding: 70px 20px 30px;
-  }
-  
-  .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 18px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 28px;
-  }
-}
-
-/* MacBook Air and smaller MacBooks */
-@media screen and (min-width: 1024px) and (max-width: 1366px) and (min-height: 600px) and (max-height: 768px) {
-  #home {
-    min-height: 100vh;
-    height: auto;
-    padding: 60px 20px 30px;
-  }
-  
-  .hero-content h1 {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    margin-bottom: 12px;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
+  /* Blog post cards */
+  .blog-post-card {
     margin-bottom: 20px;
   }
-  
-  .hero-badge {
-    margin-bottom: 15px;
-  }
-  
-  .badge-text {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-  }
-  
-  .hero-cta-section {
-    margin-top: 15px;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-  
-  .hero-stats {
-    margin-top: 25px;
-  }
-  
-  .stat-item {
-    margin: 0 10px;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .stat-label {
-    font-size: 0.9rem;
-  }
-} 
 
-/* Mobile case study cards - make them shorter and more compact */
-@media screen and (max-width: 768px) {
-    .portfolio-item {
-        margin-bottom: 1rem; /* Increased from 0.75rem */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        overflow: hidden;
-        max-height: 350px; /* Increased from 280px */
-    }
-    
-    .portfolio-image-wrapper {
-        position: relative;
-        overflow: hidden;
-        height: 150px !important; /* Increased from 120px */
-        padding-top: 0 !important; /* Remove aspect ratio padding */
-    }
-    
-    .portfolio-image {
-        width: 100%;
-        height: 150px !important; /* Increased from 120px */
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-    
-    .portfolio-content {
-        padding: 1rem !important; /* Increased from 0.75rem */
-        height: 200px !important; /* Increased from 160px */
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-    }
-    
-    .category {
-        font-size: 0.8rem !important; /* Increased from 0.75rem */
-        color: #ff6b00;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 0.5rem !important; /* Increased from 0.25rem */
-    }
-    
-    .title {
-        font-size: 1.1rem !important; /* Increased from 1rem */
-        font-weight: 700;
-        color: #333;
-        margin: 0.5rem 0 !important; /* Increased from 0.25rem */
-        line-height: 1.3 !important; /* Increased from 1.2 */
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2; /* Keep at 2 lines */
-        -webkit-box-orient: vertical;
-        max-height: 2.8rem; /* Increased from 2.4rem */
-    }
-    
-    .description {
-        font-size: 0.9rem !important; /* Increased from 0.85rem */
-        color: #666;
-        line-height: 1.4 !important; /* Increased from 1.3 */
-        margin-bottom: 0.75rem !important; /* Increased from 0.5rem */
-        display: -webkit-box;
-        -webkit-line-clamp: 3; /* Increased from 2 lines to 3 lines */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        flex-grow: 1;
-        max-height: 4rem; /* Increased from 2.6rem */
-    }
-    
-    .view-project {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #ff6b00;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem !important; /* Increased from 0.85rem */
-        transition: color 0.3s ease;
-        margin-top: auto; /* Push to bottom */
-    }
-    
-    .view-project:hover {
-        color: #ff9500;
-    }
-    
-    .view-project i {
-        font-size: 0.8rem !important; /* Increased from 0.75rem */
-        transition: transform 0.3s ease;
-    }
-    
-    .view-project:hover i {
-        transform: translateX(2px);
-    }
+  /* Blog search */
+  .blog-search {
+    margin: 20px 20px;
+  }
+
+  /* Blog content sections */
+  .blog-posts,
+  .blog-featured {
+    padding: 40px 20px;
+  }
 }
 
-/* Make portfolio grid more compact on mobile */
+/* Additional blog mobile fixes */
 @media screen and (max-width: 768px) {
-    .portfolio-grid {
-        padding: 1rem 0 !important; /* Increased from 0.5rem */
-    }
-    
-    .portfolio-grid-inner {
-        flex-direction: column;
-        gap: 1rem !important; /* Increased from 0.75rem */
-        width: 100%;
-    }
+  .blog-hero {
+    padding: 80px 16px 40px !important;
+  }
+
+  .blog-hero h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .blog-post-card {
+    padding: 16px;
+  }
+
+  .blog-post-title {
+    font-size: 1.25rem;
+  }
+
+  .blog-post-excerpt {
+    font-size: 0.95rem;
+  }
+
+  /* Tighten up category tags */
+  .blog-category-tag {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+  }
 }
 
-/* Placeholder image optimization for mobile - make shorter */
-@media screen and (max-width: 768px) {
-    .placeholder-image {
-        height: 150px !important; /* Increased to match image height */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(45deg, #ff6b00, #ff9500);
-    }
-    
-    .placeholder-image i {
-        font-size: 2.5rem !important; /* Increased from 2rem */
-        color: rgba(255, 255, 255, 0.3);
-    }
+/* Ultra-small screens */
+@media screen and (max-width: 360px) {
+  .blog-hero h1 {
+    font-size: 1.5rem !important;
+  }
 }
 
-/* Override any existing portfolio styles that make cards too tall */
-@media screen and (max-width: 768px) {
-    .portfolio-section .portfolio-item {
-        height: auto !important;
-        max-height: 350px !important; /* Increased from 280px */
-        min-height: auto !important;
-    }
-    
-    .portfolio-item .portfolio-image-wrapper {
-        padding-top: 0 !important; /* Remove aspect ratio */
-        height: 150px !important; /* Increased from 120px */
-    }
-    
-    .portfolio-item .portfolio-content {
-        padding: 1rem !important; /* Increased from 0.75rem */
-        height: 200px !important; /* Increased from 160px */
-    }
-    
-    /* Make sure titles don't take too much space */
-    .portfolio-item .title {
-        max-height: 2.8rem !important; /* Increased from 2.4rem */
-        overflow: hidden;
-    }
-    
-    /* Make sure descriptions are limited */
-    .portfolio-item .description {
-        max-height: 4rem !important; /* Increased from 2.6rem */
-        overflow: hidden;
-    }
-} 
+/* Let main.css handle tablet header styling */
+
+/* High DPI screen adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  header .logo img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark mode support for blog (if needed) */
+@media (prefers-color-scheme: dark) {
+  .blog-page {
+    background: #0a0a0a;
+  }
+
+  .blog-post-card {
+    background: rgba(26, 26, 26, 0.8);
+  }
+}
+
+/* Performance: reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  header,
+  .mobile-nav-sidebar,
+  .mobile-nav-overlay,
+  .mobile-menu-btn,
+  .mobile-blog-btn,
+  .mobile-home-btn {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}

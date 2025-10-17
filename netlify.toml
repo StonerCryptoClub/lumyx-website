@@ -86,6 +86,22 @@
   status = 301
   force = true
 
+# Aliases for AI Lead Gen page to avoid 404s
+[[redirects]]
+  from = "/ai-lead-generation"
+  to = "/ai-lead-generation.html"
+  status = 301
+
+[[redirects]]
+  from = "/ai-lead-generation/"
+  to = "/ai-lead-generation.html"
+  status = 301
+
+[[redirects]]
+  from = "/ai-agents"
+  to = "/ai-lead-generation.html"
+  status = 301
+
 # Redirect old domain variations
 [[redirects]]
   from = "http://lumyxagency.com/*"

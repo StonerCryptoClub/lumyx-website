@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Lumyx – Draft Home (v2)</title>
+  <meta name="description" content="Draft redesign of Lumyx homepage focused on clarity, credibility, and conversions." />
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css?v=2.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Draft v2 styles are fully scoped under .draft-v2 to avoid conflicts */
+    :root { --draft-bg:#ffffff; --draft-surface:#f7f9fc; --draft-border:rgba(0,0,0,0.08); --draft-text:#101828; --draft-muted:#475467; --accent:#2563eb; --accent-600:#1d4ed8; --accent-700:#1e40af; }
+    body.draft-v2 { font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#ffffff; color: var(--draft-text); }
+    .draft-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .draft-section { padding: 80px 0; }
+    .draft-header { position: sticky; top:0; z-index:50; background:rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--draft-border); }
+    .draft-nav { display:flex; align-items:center; justify-content:space-between; height:70px; }
+    .draft-brand { display:flex; align-items:center; gap:12px; }
+    .draft-brand img { width:34px; height:34px; object-fit:contain; }
+    .draft-brand h1 { font-size:1.1rem; margin:0; font-weight:700; }
+    .draft-links { display:flex; align-items:center; gap:24px; }
+    .draft-links a { color: var(--draft-text); text-decoration:none; font-weight:600; font-size:0.95rem; opacity:0.9; }
+    .draft-links a:hover { opacity:1; color:#000; }
+    .btn-primary-v2 { display:inline-flex; align-items:center; gap:10px; background: linear-gradient(180deg, var(--accent), var(--accent-600)); color:#fff; padding:14px 22px; border-radius:10px; font-weight:800; text-decoration:none; box-shadow: 0 10px 24px rgba(37,99,235,.25); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .btn-primary-v2:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(37,99,235,.35); background: linear-gradient(180deg, var(--accent-600), var(--accent-700)); }
+    .btn-primary-v2 i { transition: transform .2s ease; }
+    .btn-primary-v2:hover i { transform: translateX(4px); }
+    .btn-primary-v2:focus-visible { outline: 3px solid rgba(37,99,235,.35); outline-offset: 2px; }
+    .btn-secondary-v2 { display:inline-flex; align-items:center; gap:10px; border:1px solid var(--draft-border); color: var(--draft-text); padding:14px 22px; border-radius:10px; font-weight:700; text-decoration:none; background:#fff; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .btn-secondary-v2:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(16,24,40,.08); border-color: rgba(16,24,40,.16); }
+
+    /* Hero */
+    .hero-v2 { position: relative; background:
+      radial-gradient(900px 420px at 10% 10%, rgba(255,165,0,.12), transparent 60%),
+      radial-gradient(900px 420px at 90% 10%, rgba(30,144,255,.10), transparent 60%),
+      linear-gradient(180deg, #ffffff, #f9fbff); }
+    .hero-v2::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:.35; background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 22px 22px; mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.3)); }
+    .hero-grid { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:40px; align-items:center; }
+    .hero-title { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height:1.1; font-weight:800; margin:0 0 16px; }
+    .hero-sub { font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--draft-muted); margin:0 0 24px; max-width: 640px; }
+    .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+    .hero-right { display:flex; flex-direction:column; gap:16px; }
+    .hero-card { background: var(--draft-surface); border:1px solid var(--draft-border); border-radius:14px; padding:18px; box-shadow: 0 8px 18px rgba(16,24,40,.06); }
+    .hero-form { background:#fff; border:1px solid var(--draft-border); border-radius:14px; padding:18px; box-shadow: 0 10px 24px rgba(16,24,40,.08); }
+    .hero-form h3 { margin:0 0 6px; font-size:1.25rem; }
+    .hero-form p { margin:0 0 14px; color: var(--draft-muted); font-size:0.95rem; }
+    .form-grid { display:grid; grid-template-columns: 1fr; gap:12px; }
+    .field { display:flex; flex-direction:column; gap:6px; }
+    .field label { font-weight:600; font-size:0.9rem; color: var(--draft-text); }
+    .field input, .field textarea { background:#fff; border:1px solid var(--draft-border); border-radius:10px; padding:12px 12px; font-size:0.95rem; color: var(--draft-text); }
+    .field input:focus, .field textarea:focus { outline:3px solid rgba(37,99,235,.2); border-color: var(--accent-600); }
+    .hero-form .btn-primary-v2 { width:100%; justify-content:center; }
+    .hero-form small { display:block; margin-top:8px; color: var(--draft-muted); }
+    .hero-stats { display:grid; grid-template-columns: repeat(4, minmax(120px,1fr)); gap:10px; margin-top:26px; }
+    .hero-stat { text-align:center; background: #fff; border: 1px solid var(--draft-border); border-radius:12px; padding:14px 8px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .hero-stat .num { font-size:1.6rem; font-weight:900; color: var(--draft-text); }
+    .hero-stat .label { font-size:0.8rem; color: var(--draft-muted); }
+    .hero-stat:hover { transform: translateY(-2px); border-color: rgba(37,99,235,.3); box-shadow: 0 10px 22px rgba(16,24,40,.08); }
+
+    /* Trust row */
+    .trust-row { display:flex; gap:28px; flex-wrap:wrap; align-items:center; opacity:0.9; }
+    .trust-badge { background:#fff; border:1px solid var(--draft-border); border-radius:10px; padding:10px 14px; font-weight:700; font-size:0.9rem; color: var(--draft-text); transition: border-color .2s ease, box-shadow .2s ease; }
+    .trust-badge:hover { border-color: rgba(37,99,235,.35); box-shadow: 0 8px 18px rgba(16,24,40,.06); }
+    .logo-row { display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:16px; opacity:.85; }
+    .logo-pill { background:#fff; border:1px solid var(--draft-border); border-radius:999px; padding:8px 12px; font-weight:700; font-size:0.9rem; color: var(--draft-muted); }
+
+    /* Services */
+    .section-head { text-align:center; margin-bottom:38px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin:0 0 10px; }
+    .section-head p { color: var(--draft-muted); margin:0; }
+    .cards-3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:22px; }
+    .svc-card { background: #fff; border:1px solid var(--draft-border); border-radius:16px; padding:20px; display:flex; flex-direction:row; align-items:flex-start; gap:14px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .svc-card:hover { transform: translateY(-6px); box-shadow: 0 14px 28px rgba(16,24,40,.10); border-color: rgba(16,24,40,.16); }
+    .svc-media { display:none; }
+    .svc-icon { width:48px; height:48px; border-radius:12px; background: #eef2ff; border:1px solid var(--draft-border); display:flex; align-items:center; justify-content:center; color: var(--accent-600); font-size:1.2rem; flex:0 0 auto; }
+    .svc-body { display:flex; flex-direction:column; gap:6px; }
+    .svc-card h3 { font-size:1.1rem; margin:0; }
+    .svc-card p { color: var(--draft-muted); margin:0; font-size:0.95rem; }
+    .svc-link { display:inline-flex; align-items:center; gap:6px; color: var(--accent-600); font-weight:700; text-decoration:none; margin-top:6px; font-size:0.93rem; }
+    .svc-link:hover { text-decoration:underline; }
+
+    /* Case studies teaser */
+    .grid-3 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; }
+    .teaser-card { background: #fff; border:1px solid var(--draft-border); border-radius:14px; overflow:hidden; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .teaser-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(16,24,40,.10); border-color: rgba(16,24,40,.16); }
+    .teaser-img { height:150px; background: linear-gradient(45deg, #f4f6fb, #e9edf5); }
+    .teaser-body { padding:16px; }
+    .teaser-body h4 { margin:0 0 8px; }
+    .teaser-body p { margin:0; color: var(--draft-muted); font-size:0.95rem; }
+
+    /* Testimonials */
+    .t-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; }
+    .t-card { background:#fff; border:1px solid var(--draft-border); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:14px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .t-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(16,24,40,.10); border-color: rgba(16,24,40,.16); }
+    .t-quote { color: var(--draft-text); font-size:0.98rem; }
+    .t-meta { display:flex; align-items:center; gap:10px; }
+    .t-avatar { width:40px; height:40px; border-radius:50%; background:#f2f4f7; border:1px solid var(--draft-border); }
+    .t-name { font-weight:700; }
+
+    /* CTA band */
+    .cta-band { background: #eef2ff; border: 1px solid rgba(37,99,235,.25); border-radius:16px; padding:28px; text-align:center; }
+    .cta-band h3 { margin:0 0 12px; font-size:1.6rem; color:#1e3a8a; }
+    .cta-band p { margin:0 0 16px; color:#334155; }
+
+    /* Footer */
+    .draft-footer { border-top:1px solid var(--draft-border); padding:28px 0; color: var(--draft-muted); font-size:0.95rem; text-align:center; }
+
+    @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } .hero-stats { grid-template-columns: repeat(2,1fr); } .cards-3, .grid-3, .t-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="draft-v2">
+  <header class="draft-header">
+    <div class="draft-container draft-nav">
+      <div class="draft-brand">
+        <img src="Logo.png" alt="Lumyx Logo" width="34" height="34" />
+        <h1>Lumyx Agency</h1>
+      </div>
+      <nav class="draft-links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#booking-section" class="btn-primary-v2">Book Strategy Call <i class="fas fa-arrow-right"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="draft-section hero-v2">
+    <div class="draft-container hero-grid">
+      <div>
+        <h2 class="hero-title">Scale Profitably with a Performance Partner You Can Trust</h2>
+        <p class="hero-sub">We build acquisition systems that turn paid traffic into predictable revenue. PPC management, AI lead gen agents, and CRO — deployed fast, measured rigorously.</p>
+        <div class="hero-ctas">
+          <a href="index.html#booking-section" class="btn-primary-v2">Get Your Free Strategy Call <i class="fas fa-arrow-right"></i></a>
+          <a href="#services" class="btn-secondary-v2">Explore Services</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">312%</div><div class="label">Avg Revenue Increase</div></div>
+          <div class="hero-stat"><div class="num">90</div><div class="label">Days to Results</div></div>
+          <div class="hero-stat"><div class="num">25+</div><div class="label">Success Stories</div></div>
+          <div class="hero-stat"><div class="num">$2M+</div><div class="label">Generated for Clients</div></div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <form class="hero-form" action="index.html#booking-section" method="get" aria-label="Quick inquiry form">
+          <h3>Get a Free Growth Plan</h3>
+          <p>Tell us a bit about your business and we’ll send a tailored outline.</p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="q-name">Your name</label>
+              <input id="q-name" name="name" type="text" placeholder="Alex Thompson" required />
+            </div>
+            <div class="field">
+              <label for="q-email">Email</label>
+              <input id="q-email" name="email" type="email" placeholder="you@company.com" required />
+            </div>
+            <div class="field">
+              <label for="q-site">Website (optional)</label>
+              <input id="q-site" name="website" type="url" placeholder="https://yourstore.com" />
+            </div>
+            <button class="btn-primary-v2" type="submit">Send Me a Plan <i class="fas fa-arrow-right"></i></button>
+            <small>No spam. We’ll follow up within 24 hours.</small>
+          </div>
+        </form>
+        <div class="hero-card">
+          <div class="trust-row" aria-label="Highlights">
+          <span class="trust-badge"><i class="fas fa-shield-alt"></i> ROI-Driven</span>
+          <span class="trust-badge"><i class="fas fa-bolt"></i> Fast Deployment</span>
+          <span class="trust-badge"><i class="fas fa-chart-line"></i> Transparent Reporting</span>
+          <div class="logo-row">
+            <span class="logo-pill">Shopify</span>
+            <span class="logo-pill">Meta Ads</span>
+            <span class="logo-pill">Google Ads</span>
+            <span class="logo-pill">HubSpot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="draft-section">
+    <div class="draft-container">
+      <div class="section-head">
+        <h2>What We Do</h2>
+        <p>Acquisition and conversion programs built to compound.</p>
+      </div>
+      <div class="cards-3">
+        <!-- 1: SEO -->
+        <article class="svc-card">
+          <div class="svc-icon"><i class="fas fa-search"></i></div>
+          <div class="svc-body">
+            <h3>SEO & Product Optimization</h3>
+            <p>Technical fixes, product-page SEO, and content that improves rankings and conversion.</p>
+            <a class="svc-link" href="seo-services.html">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <!-- 2: Google Ads -->
+        <article class="svc-card">
+          <div class="svc-icon"><i class="fab fa-google"></i></div>
+          <div class="svc-body">
+            <h3>Google Ads & Shopping</h3>
+            <p>Full-funnel Shopping and Search campaigns engineered for profitable scale.</p>
+            <a class="svc-link" href="ppc-management.html">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <!-- 3: Meta & TikTok Ads -->
+        <article class="svc-card">
+          <div class="svc-icon"><i class="fab fa-facebook"></i></div>
+          <div class="svc-body">
+            <h3>Meta & TikTok Ads</h3>
+            <p>Creative-led social campaigns across Meta and TikTok to drive demand and revenue.</p>
+            <a class="svc-link" href="ppc-management.html">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <!-- 4: Local SEO -->
+        <article class="svc-card">
+          <div class="svc-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="svc-body">
+            <h3>Local SEO (GBP Ranker)</h3>
+            <p>Dominate local search with GBP optimization, citations, and review building.</p>
+            <a class="svc-link" href="seo-services.html">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+        <!-- 5: Social Posting -->
+        <article class="svc-card">
+          <div class="svc-icon"><i class="fas fa-share-nodes"></i></div>
+          <div class="svc-body">
+            <h3>Social Posting</h3>
+            <p>Professional content planning and posting to stay top-of-mind and grow reach.</p>
+          </div>
+        </article>
+        <!-- 6: Content Writing -->
+        <article class="svc-card">
+          <div class="svc-icon"><i class="fas fa-pen-nib"></i></div>
+          <div class="svc-body">
+            <h3>Content Writing</h3>
+            <p>On-brand articles and product content designed to rank and convert.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDY TEASER -->
+  <section id="work" class="draft-section" style="padding-top:0;">
+    <div class="draft-container">
+      <div class="section-head">
+        <h2>Recent Results</h2>
+        <p>Real outcomes from ecommerce and online businesses.</p>
+      </div>
+      <div class="grid-3">
+        <article class="teaser-card">
+          <div class="teaser-img"></div>
+          <div class="teaser-body">
+            <h4>Fashion Brand</h4>
+            <p>312% revenue lift with Shopping + CRO.</p>
+          </div>
+        </article>
+        <article class="teaser-card">
+          <div class="teaser-img"></div>
+          <div class="teaser-body">
+            <h4>Home & Garden</h4>
+            <p>5.1x ROAS and 45% more conversions.</p>
+          </div>
+        </article>
+        <article class="teaser-card">
+          <div class="teaser-img"></div>
+          <div class="teaser-body">
+            <h4>DTC Wellness</h4>
+            <p>67% higher CVR from iterative CRO sprints.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="draft-section" aria-labelledby="testiTitle">
+    <div class="draft-container">
+      <div class="section-head">
+        <h2 id="testiTitle">What Clients Say</h2>
+        <p>Proof beats promises. Here’s what partners report.</p>
+      </div>
+      <div class="t-grid">
+        <article class="t-card">
+          <p class="t-quote">“Lumyx rebuilt our paid structure and cut CPA by 43% within the first month. Demo signups doubled.”</p>
+          <div class="t-meta">
+            <div class="t-avatar"></div>
+            <div>
+              <div class="t-name">Alex Thompson</div>
+              <div class="t-role">Head of Growth</div>
+            </div>
+          </div>
+        </article>
+        <article class="t-card">
+          <p class="t-quote">“We modernized our site and load times. Bounce dropped 35% and checkout throughput improved dramatically.”</p>
+          <div class="t-meta">
+            <div class="t-avatar"></div>
+            <div>
+              <div class="t-name">Maria Rodriguez</div>
+              <div class="t-role">Director of Digital</div>
+            </div>
+          </div>
+        </article>
+        <article class="t-card">
+          <p class="t-quote">“CRO + lifecycle workflows lifted trial-to-paid from 12% to 28%. Process, pacing, and reporting are elite.”</p>
+          <div class="t-meta">
+            <div class="t-avatar"></div>
+            <div>
+              <div class="t-name">James Chen</div>
+              <div class="t-role">Founder</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="draft-section" style="padding-top:0;">
+    <div class="draft-container">
+      <div class="cta-band">
+        <h3>Ready to Scale with Confidence?</h3>
+        <p>Get a free strategy call. We’ll map revenue opportunities across PPC, AI agents, and CRO.</p>
+        <a href="index.html#booking-section" class="btn-primary-v2">Book Your Strategy Call</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="draft-footer">
+    <div class="draft-container">© 2025 Lumyx Agency · Draft v2 (not live)</div>
+  </footer>
+</body>
+</html>
+
+

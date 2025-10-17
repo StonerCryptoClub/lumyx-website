@@ -16,6 +16,12 @@
     overflow: hidden;
 }
 
+@media screen and (max-width: 992px) {
+  .service-hero {
+    padding: 130px 20px 80px !important;
+  }
+}
+
 .service-hero::before {
     content: '';
     position: absolute;
@@ -113,9 +119,9 @@
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -445,7 +451,7 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .service-hero {
-        padding: 100px 20px 60px;
+        padding: 90px 16px 40px;
     }
     
     .service-hero .container {
@@ -463,16 +469,18 @@
     
     .services-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
+        padding: 0 6px;
     }
     
     .service-card {
-        padding: 30px 20px;
+        padding: 22px 16px;
+        margin: 0;
     }
     
     .case-studies-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
     }
     
     .case-study-header {
@@ -510,7 +518,7 @@
 /* Extra small mobile devices */
 @media (max-width: 480px) {
     .service-hero {
-        padding: 100px 15px 60px;
+        padding: 80px 12px 36px;
     }
     
     .service-hero .container,
@@ -526,8 +534,8 @@
     }
     
     .service-card {
-        padding: 25px 15px;
-        margin: 0 10px;
+        padding: 18px 12px;
+        margin: 0;
     }
 }
 

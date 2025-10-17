@@ -331,11 +331,11 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   
   <!-- Optimized CSS loading for mobile FCP improvement -->
-  <link rel="preload" href="css/main.css?v=2.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/main.css?v=2.4" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet" href="css/main.css?v=2.0">
+    <link rel="stylesheet" href="css/main.css?v=3.7">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
   </noscript>
@@ -345,9 +345,9 @@
   <link rel="preload" href="Logo.png" as="image">
   
   <!-- Load non-critical CSS asynchronously -->
-  <link rel="preload" href="css/mobile-fixes.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="css/mobile-fixes.css?v=20251017f" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet" href="css/mobile-fixes.css">
+    <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017P">
   </noscript>
   
   <!-- Prefetch likely navigation -->
@@ -470,7 +470,7 @@
         }
       });
     }, { 
-      rootMargin: '300px', // Load when 300px away from viewport
+      rootMargin: '800px', // Load sooner for faster perceived speed on mobile
       threshold: 0.1
     });
 
@@ -699,16 +699,16 @@
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
   
   <!-- Critical CSS Preload -->
-  <link rel="preload" href="css/main.css?v=2.0" as="style">
-  <link rel="preload" href="css/portfolio.css" as="style">
-  <link rel="preload" href="css/mobile-fixes.css" as="style">
+  <link rel="preload" href="css/main.css?v=2.4" as="style">
+  <link rel="preload" href="css/portfolio.css?v=2.0" as="style">
+  <link rel="preload" href="css/mobile-fixes.css?v=20251017f" as="style">
   
   <!-- Main Styles -->
-  <link rel="stylesheet" href="css/main.css?v=2.0">
+  <link rel="stylesheet" href="css/main.css?v=3.7">
   <!-- Portfolio Styles -->
-  <link rel="stylesheet" href="css/portfolio.css">
+  <link rel="stylesheet" href="css/portfolio.css?v=2.0">
   <!-- Mobile Fixes -->
-  <link rel="stylesheet" href="css/mobile-fixes.css">
+  <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017P">
   <!-- FullCalendar CSS -->
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css' rel='stylesheet' />
   <!-- EmailJS -->
@@ -1046,7 +1046,7 @@
       border: 1px solid rgba(255, 165, 0, 0.5);
       border-radius: 50px;
       padding: 12px 24px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       backdrop-filter: blur(15px);
       box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
     }
@@ -1594,9 +1594,11 @@
 
     /* Modern Services Section */
     .modern-services-section {
-        padding: 120px 5%;
+        padding: 60px 5% 120px;
+        margin-top: -40px;
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(15, 15, 30, 0.95));
-        margin: 0;
+        margin-left: 0;
+        margin-right: 0;
         width: 100vw;
         margin-left: calc(-50vw + 50%);
     }
@@ -3426,26 +3428,7 @@
             padding-right: 15px !important;
         }
         
-        /* Header */
-        header {
-            padding: 8px 15px;
-            padding-right: 50px; /* FIXED: Add right padding for mobile menu button */
-            justify-content: center; /* Center logo on mobile */
-        }
-        
-        header .logo {
-            gap: 8px;
-        }
-        
-        header .logo img {
-            width: 76px;
-            height: 76px;
-        }
-        
-        header .logo h2 {
-            font-size: 1.2rem;
-            white-space: nowrap;
-        }
+        /* Header styling now handled by unified-header-fix.css */
         
         header nav {
             gap: 20px;
@@ -4239,7 +4222,8 @@
     .booking-section {
       background: rgba(30, 30, 30, 0.8);
       border: 1px solid rgba(255, 165, 0, 0.2);
-      padding: 80px 0;
+      padding: 80px 0 40px;
+      margin-bottom: 0;
       margin: 40px 0;
       border-radius: 15px;
       width: 100%;
@@ -4947,29 +4931,7 @@
         --container-padding: 15px;
       }
       
-      header {
-        padding: 15px var(--container-padding);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      
-      header .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      
-      header .logo h2 {
-        font-size: 1.4rem;
-        margin: 0;
-        white-space: nowrap;
-      }
-      
-      header .logo img {
-        width: 56px;
-        height: 56px;
-      }
+      /* Header styling now handled by main.css and mobile-fixes.css */
       
       header nav {
         position: fixed;
@@ -4997,19 +4959,7 @@
         padding: 15px 0;
       }
       
-      .mobile-menu-btn {
-        display: block;
-        font-size: 1.5rem;
-        color: var(--text-light);
-        cursor: pointer;
-        z-index: 1003; /* FIXED: Higher z-index to appear above logo */
-        position: fixed; /* FIXED: Position fixed to avoid logo interference */
-        right: 20px; /* FIXED: Position on the right side */
-        top: 15px; /* FIXED: Position from top */
-        background: none;
-        border: none;
-        transition: all 0.3s ease;
-      }
+      /* Mobile menu button styling now handled by emergency inline fix */
       
       .hero-content {
         padding: 0 var(--container-padding);
@@ -5137,24 +5087,7 @@
       }
     }
 
-    /* Add Mobile Menu Button */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-light);
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 1003; /* FIXED: Higher z-index to appear above logo */
-      position: fixed; /* FIXED: Position fixed to avoid logo interference */
-      right: 15px; /* FIXED: Position on the right side */
-      top: 12px; /* FIXED: Position from top */
-    }
-
-    .mobile-menu-btn:hover {
-      color: var(--primary-orange);
-    }
+    /* Mobile menu button styling now handled by emergency inline fix */
 
     /* Mobile Menu Animation */
     @keyframes slideIn {
@@ -6382,10 +6315,11 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/portfolio.css">
+  <link rel="stylesheet" href="css/portfolio.css?v=2.0">
   <link rel="stylesheet" href="css/contact-fixes.css">
-  <link rel="stylesheet" href="css/mobile-fixes.css">
+  <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017P">
   <link rel="stylesheet" href="css/value-card.css">
+  <link rel="stylesheet" href="css/main.css?v=3.7">
 
   <!-- Mobile-specific optimizations for FCP/LCP improvement -->
   <style>
@@ -6501,7 +6435,7 @@
   <!-- Header -->
   <header>
     <div class="logo">
-          <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" loading="lazy">
+      <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
       <h1>Lumyx Agency</h1>
     </div>
     <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
@@ -6524,19 +6458,6 @@
       <a href="blog.html">Blog</a>
     </nav>
   </header>
-  <style>
-    /* Ensure hamburger shows on homepage mobile and sits at top-right */
-    @media screen and (max-width: 992px) {
-      .mobile-menu-btn {
-        display: block !important;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1001;
-      }
-    }
-  </style>
 
   <!-- Mobile Navigation Sidebar -->
   <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
@@ -6576,7 +6497,7 @@
       
       <div class="hero-cta-section">
         <div class="cta-buttons">
-          <a href="#booking-section" class="btn btn-primary">
+          <a href="#booking-section" class="btn btn-primary" data-scroll-target="#calendly-container">
             <span>Get Your Free Strategy Call</span>
             <small>Worth $497 - Limited Time</small>
           </a>
@@ -6745,9 +6666,9 @@
             <h3>Choose Your Time</h3>
             <p>Select a time that works best for you</p>
         </div>
-          <div id="calendly-container"></div>
+          <div id="calendly-container" style="margin-bottom: 0;"></div>
 
-          <div class="booking-urgency">
+          <div class="booking-urgency" style="margin-top: 12px; margin-bottom: 0;">
             <p><i class="fas fa-clock"></i> Only 5 spots available this week</p>
       </div>
         </div>
@@ -6788,7 +6709,7 @@
 
                 <div class="service-cta" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
                     <a href="ppc-management.html" class="service-btn">Learn More About PPC</a>
-                    <a href="#booking-section" class="service-btn-secondary">Get Started</a>
+                    <a href="#booking-section" class="service-btn-secondary" data-scroll-target="#calendly-container">Get Started</a>
             </div>
           </div>
 
@@ -6818,7 +6739,7 @@
             </ul>
 
                 <div class="service-cta">
-                    <a href="#booking-section" class="service-btn primary">Scale My Ads</a>
+                    <a href="#booking-section" class="service-btn primary" data-scroll-target="#calendly-container">Scale My Ads</a>
             </div>
           </div>
 
@@ -6845,7 +6766,7 @@
             </ul>
 
                 <div class="service-cta">
-                    <a href="#booking-section" class="service-btn">Build My Brand</a>
+                    <a href="#booking-section" class="service-btn" data-scroll-target="#calendly-container">Build My Brand</a>
           </div>
         </div>
       </div>
@@ -7125,7 +7046,7 @@
       <p>&copy; 2025 Lumyx Agency. All rights reserved.</p>
       <div class="footer-cta">
         <span>Ready to scale? </span>
-        <a href="#booking-section" class="footer-cta-link">Book your free call →</a>
+        <a href="#booking-section" class="footer-cta-link" data-scroll-target="#calendly-container">Book your free call →</a>
       </div>
     </div>
   </footer>
@@ -7319,16 +7240,23 @@
         observer.observe(element);
       });
 
-      // Smooth scroll for navigation links
+      // Smooth scroll for navigation links (support sub-target via data-scroll-target)
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
+          const href = this.getAttribute('href');
+          const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const subTargetSelector = this.getAttribute('data-scroll-target');
+            if (subTargetSelector) {
+              setTimeout(() => {
+                const subTarget = document.querySelector(subTargetSelector);
+                if (subTarget) {
+                  subTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }, 120);
+            }
           }
         });
       });

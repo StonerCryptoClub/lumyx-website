@@ -54,11 +54,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/main.css?v=3.7">
+    <link rel="stylesheet" href="css/main.css?v=2.0">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/service-pages.css?v=1.2">
-    <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017P">
+    <link rel="stylesheet" href="css/service-pages.css?v=1.1">
+    <link rel="stylesheet" href="css/mobile-fixes.css">
     <style>
+      /* Hide breadcrumb on this page while keeping markup for SEO */
+      .service-hero .breadcrumb { display: none; }
       /* AI page theme enhancements */
       .ai-theme .service-hero {
         background: radial-gradient(1200px 600px at 10% 10%, rgba(30,144,255,0.25), transparent 60%),
@@ -76,49 +78,32 @@
       .ai-theme .service-card:hover { box-shadow: 0 24px 48px rgba(255,165,0,0.18), 0 0 0 1px rgba(255,165,0,0.15); }
       .ai-theme .service-hero .container { position: relative; z-index: 2; }
       .ai-theme .hero-stats .stat-number { text-shadow: 0 0 20px rgba(255,165,0,0.25); }
-      
-      /* Desktop hero padding */
-      @media screen and (min-width: 993px) {
-        .service-hero {
-          padding-top: 140px !important;
-        }
-      }
-      
-      /* Mobile container padding */
-      @media screen and (max-width: 992px) {
-        .container {
-          padding-left: 20px !important;
-          padding-right: 20px !important;
-        }
-      }
     </style>
 </head>
 <body class="ai-theme">
-    <!-- Header - EXACT COPY FROM INDEX -->
+    <!-- Header (brand-aligned simple variant for service pages) -->
     <header>
         <div class="logo">
-            <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
+            <img src="Logo.png" alt="Lumyx Agency Logo" width="160" height="40">
             <h1>Lumyx Agency</h1>
         </div>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
-            <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
-            <span class="hamburger-bars" aria-hidden="true"></span>
-        </button>
         <nav aria-label="Main Navigation">
             <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
             <div class="nav-dropdown">
                 <a href="index.html#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
                 <div class="dropdown-menu">
-                    <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
+              <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
                     <a href="ppc-management.html">PPC Management</a>
                     <a href="index.html#services">All Services</a>
                 </div>
             </div>
-            <a href="index.html#portfolio">Portfolio</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="case-studies.html">Case Studies</a>
             <a href="blog.html">Blog</a>
+            <a href="index.html#contact">Contact</a>
         </nav>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
     </header>
 
     <!-- Mobile Navigation Sidebar -->
@@ -138,13 +123,14 @@
             <a href="ppc-management.html" class="mobile-nav-link">PPC Management</a>
             <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
             <a href="index.html#contact" class="mobile-nav-link">Contact</a>
-            <a href="/blog.html" class="mobile-nav-link">Blog</a>
+            <a href="blog.html" class="mobile-nav-link">Blog</a>
         </div>
     </div>
 
     <!-- Hero Section -->
     <section class="service-hero">
         <div class="container">
+            
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-bolt"></i> New for 2025</div>
                 <h1>AI Lead Generation & Booking Agents</h1>
@@ -156,24 +142,24 @@
                     <span class="stat-label">Lead Capture & Follow-up</span>
                 </div>
                 <div class="stat">
-                        <span class="stat-number"><span aria-hidden="true">3–14d</span></span>
+                    <span class="stat-number">3–14d</span>
                     <span class="stat-label">Typical Go-Live</span>
                 </div>
                 <div class="stat">
-                        <span class="stat-number"><span aria-hidden="true">2–5x</span></span>
+                    <span class="stat-number">2–5x</span>
                     <span class="stat-label">More Booked Calls</span>
                 </div>
                 </div>
 
                 <div class="hero-cta">
-                    <a href="index.html#calendly-container" class="btn btn-primary">Book a Demo</a>
-                    <a href="index.html#how-it-works" class="btn btn-secondary">See How It Works</a>
+                    <a href="#book-demo" class="btn btn-primary">Book a Demo</a>
+                    <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Overview -->
+    <!-- Pain Points Section -->
     <section class="services-overview">
         <div class="container">
             <h2>What Problems We Solve</h2>
@@ -184,97 +170,120 @@
                     <p>Leads go cold within minutes. Agents respond instantly via SMS/email, qualify, and push to booking.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-phone-slash"></i></div>
+                    <div class="service-icon"><i class="fas fa-phone-volume"></i></div>
                     <h3>No-Show & Drop-Off</h3>
                     <p>Automated reminders and rescheduling workflows reduce no-shows and recover missed opportunities.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-layer-group"></i></div>
-                    <h3>Manual Follow-Up</h3>
-                    <p>Agents run nurture sequences, handle objections, answer FAQs, and re-engage stale leads—no human required.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-plug"></i></div>
-                    <h3>Integrations</h3>
-                    <p>Calendars, CRMs, chat widgets, ad platforms, and website forms. We plug into your stack.</p>
-                    <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.95rem; color: rgba(255,255,255,0.8);">
-                        <li>Calendly, Google/Outlook Calendar</li>
-                        <li>HubSpot, Pipedrive, Salesforce</li>
-                        <li>Meta/Google Ads, website forms</li>
-                    </ul>
+                    <h3>Leaky Workflows</h3>
+                    <p>We unify forms, chat, ads, and CRM so every hand-raiser gets routed, nurtured, and booked.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="services-overview" id="how-it-works" style="background: linear-gradient(135deg, rgba(15, 15, 35, 0.95), rgba(26, 26, 52, 0.95)); padding: 80px 0;">
+    <section id="how-it-works" class="services-overview">
         <div class="container">
-            <h2>How We Scale Stores</h2>
-            <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; font-size: 1.1rem; color: rgba(255,255,255,0.8);">Deploy in days, not weeks. We handle setup, integrations, and ongoing optimization.</p>
+            <h2>How It Works</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-comments"></i></div>
-                    <h3>1. Discovery Call</h3>
-                    <p>We map your funnel, identify drop-off points, and design your agent workflow.</p>
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI Agents</h3>
+                    <p>Qualify leads, answer objections, handle FAQs, and route to your calendar. Custom playbooks by industry.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Lead qualification & intent scoring</li>
+                        <li><i class="fas fa-check"></i> Objection handling & FAQs</li>
+                        <li><i class="fas fa-check"></i> Live handoff to team when needed</li>
+                    </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>2. Setup & Integration</h3>
-                    <p>We configure your AI agent, connect it to your calendar, CRM, and messaging channels.</p>
+                    <div class="service-icon"><i class="fas fa-diagram-project"></i></div>
+                    <h3>Workflows</h3>
+                    <p>Automated SMS/email sequences, reminders, rescheduling, and post-call follow-ups.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Drip & reminder sequences</li>
+                        <li><i class="fas fa-check"></i> No-show recovery</li>
+                        <li><i class="fas fa-check"></i> CRM updates & tagging</li>
+                    </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-rocket"></i></div>
-                    <h3>3. Go Live</h3>
-                    <p>Your agent starts capturing and qualifying leads 24/7. We monitor, tweak, and scale.</p>
+                    <div class="service-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Integrations</h3>
+                    <p>Calendars, CRMs, chat widgets, ad platforms, and website forms. We plug into your stack.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Calendly, Google/Outlook Calendar</li>
+                        <li><i class="fas fa-check"></i> HubSpot, Pipedrive, Salesforce</li>
+                        <li><i class="fas fa-check"></i> Meta/Google Ads, website forms</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Packages Section -->
-    <section class="services-overview" style="padding: 80px 0;">
+    <!-- Packages -->
+    <section class="services-overview">
         <div class="container">
             <h2>Packages That Fit Your Growth Stage</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Starter</h3>
-                    <ul style="padding-left: 20px; margin-bottom: 20px;">
-                        <li style="margin-bottom: 8px;">Inbound agent + Calendly</li>
-                        <li style="margin-bottom: 8px;">Basic follow-ups & reminders</li>
-                        <li style="margin-bottom: 8px;">Standard integrations</li>
+                    <h3>Starter</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Inbound agent + Calendly</li>
+                        <li><i class="fas fa-check"></i> Basic follow-ups & reminders</li>
+                        <li><i class="fas fa-check"></i> Standard integrations</li>
                     </ul>
-                    <a href="index.html#calendly-container" class="btn btn-primary">Get Started</a>
-                </div>
-                <div class="service-card" style="border: 2px solid rgba(255,165,0,0.5);">
-                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Pro</h3>
-                    <ul style="padding-left: 20px; margin-bottom: 20px;">
-                        <li style="margin-bottom: 8px;">Multi-channel agents (SMS, email, chat)</li>
-                        <li style="margin-bottom: 8px;">Advanced qualification & routing</li>
-                        <li style="margin-bottom: 8px;">CRM updates & tagging</li>
-                        <li style="margin-bottom: 8px;">No-show recovery</li>
-                    </ul>
-                    <a href="index.html#calendly-container" class="btn btn-primary">Book a Call</a>
                 </div>
                 <div class="service-card">
-                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Enterprise</h3>
-                    <ul style="padding-left: 20px; margin-bottom: 20px;">
-                        <li style="margin-bottom: 8px;">Custom workflows & logic</li>
-                        <li style="margin-bottom: 8px;">White-label deployment</li>
-                        <li style="margin-bottom: 8px;">Dedicated support & optimization</li>
+                    <h3>Pro</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Multi-channel workflows</li>
+                        <li><i class="fas fa-check"></i> Objection handling & scoring</li>
+                        <li><i class="fas fa-check"></i> CRM sync & reporting</li>
                     </ul>
-                    <a href="index.html#calendly-container" class="btn btn-primary">Contact Us</a>
+                </div>
+                <div class="service-card">
+                    <h3>Scale</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Custom playbooks & data layer</li>
+                        <li><i class="fas fa-check"></i> Advanced routing & SLAs</li>
+                        <li><i class="fas fa-check"></i> Dedicated optimization</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <!-- FAQs -->
+    <section class="services-overview">
+        <div class="container">
+            <h2>FAQs</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>How fast can we launch?</h3>
+                    <p>Most go live in 3–14 days depending on integrations and playbook depth.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Do you replace our team?</h3>
+                    <p>No—agents augment your team, handle repetitive tasks, and hand off qualified leads.</p>
+                </div>
+                <div class="service-card">
+                    <h3>How do you measure success?</h3>
+                    <p>Booked calls/appointments, show rates, and revenue. We report weekly/monthly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA (links to main page Calendly) -->
+    <section id="book-demo" class="cta-section">
+        <div class="container">
             <div class="cta-content">
                 <h2>See It Working With Your Leads</h2>
                 <p>Get a live demo and launch plan tailored to your business. We handle setup end-to-end.</p>
-            <a href="index.html#calendly-container" class="btn btn-primary">Book a Strategy Call</a>
+                <a href="index.html#booking-section" class="btn btn-primary">Book a Strategy Call</a>
+            </div>
         </div>
     </section>
 
@@ -282,23 +291,35 @@
     <footer>
         <div class="container">
             <div class="footer-content">
+                <div class="footer-section">
                     <div class="footer-logo">
-                    <img src="Logo.png" alt="Lumyx Agency" width="60" height="60">
-                    <h2>Lumyx Agency</h2>
+                        <img src="Logo.png" alt="Lumyx Agency" width="120" height="30">
+                        <h3>Lumyx Agency</h3>
+                    </div>
                     <p>Scaling ecommerce and online businesses to 7-figures through proven marketing strategies.</p>
                 </div>
-                <div class="footer-links">
-                    <h3>Services</h3>
-                    <a href="index.html#services">All Services</a>
-                    <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
-                    <a href="ppc-management.html">PPC Management</a>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a></li>
+                        <li><a href="ppc-management.html">PPC Management</a></li>
+                        <li><a href="index.html#services">SEO Services</a></li>
+                        <li><a href="index.html#services">Conversion Optimization</a></li>
+                    </ul>
                 </div>
-                <div class="footer-links">
-                    <h3>Company</h3>
-                    <a href="index.html#about">About</a>
-                    <a href="index.html#portfolio">Portfolio</a>
-                    <a href="blog.html">Blog</a>
-                    <a href="index.html#contact">Contact</a>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: hello@lumyx.co</p>
+                    <p>Phone: +1-248-238-2704</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -307,45 +328,25 @@
         </div>
     </footer>
 
-    <!-- EXACT SAME MOBILE MENU JS FROM INDEX -->
     <script>
-        // Mobile Menu - toggle sidebar and overlay
+      // Simple mobile menu toggle for this page
       (function(){
         const btn = document.getElementById('mobile-menu-btn');
         const overlay = document.getElementById('mobile-nav-overlay');
         const sidebar = document.getElementById('mobile-nav-sidebar');
         const closeBtn = document.getElementById('mobile-nav-close');
-
-            function openMenu(){
-                overlay.classList.add('active');
-                sidebar.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMenu(){
-                overlay.classList.remove('active');
-                sidebar.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
+        function openMenu(){ overlay.classList.add('active'); sidebar.classList.add('active'); document.body.style.overflow='hidden'; }
+        function closeMenu(){ overlay.classList.remove('active'); sidebar.classList.remove('active'); document.body.style.overflow=''; }
         if (btn && overlay && sidebar && closeBtn) {
           btn.addEventListener('click', openMenu);
           closeBtn.addEventListener('click', closeMenu);
           overlay.addEventListener('click', function(e){ if (e.target === overlay) closeMenu(); });
-                // Close on ESC
           document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
-                // Close when navigating via sidebar links
           sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
         }
       })();
     </script>
-    
-    <script src="js/main.js" defer></script>
 </body>
 </html>
-
-
-
-
 
 
