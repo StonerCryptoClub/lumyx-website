@@ -275,7 +275,7 @@ header .logo h1 {
     align-items: center !important;
     justify-content: center !important;
     position: absolute !important;
-    left: 48% !important;
+    left: 46% !important;
     top: 50% !important;
     transform: translate(-50%, -50%) !important;
     gap: 0px !important;
@@ -508,7 +508,7 @@ header nav a:visited {
   #home {
     min-height: auto !important;
     height: auto !important;
-    padding-top: 90px !important;
+    padding-top: 70px !important;
     padding-bottom: 80px !important;
   }
 }
