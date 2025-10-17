@@ -86,20 +86,60 @@
   status = 301
   force = true
 
-# Aliases for AI Lead Gen page to avoid 404s
+# Semantic URL structure - Clean URLs without .html
 [[redirects]]
-  from = "/ai-lead-generation"
+  from = "/ai-agents-and-workflows"
   to = "/ai-lead-generation.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-lead-generation.html"
+  to = "/ai-agents-and-workflows"
   status = 301
 
 [[redirects]]
-  from = "/ai-lead-generation/"
-  to = "/ai-lead-generation.html"
+  from = "/ai-lead-generation"
+  to = "/ai-agents-and-workflows"
   status = 301
 
 [[redirects]]
   from = "/ai-agents"
-  to = "/ai-lead-generation.html"
+  to = "/ai-agents-and-workflows"
+  status = 301
+
+[[redirects]]
+  from = "/ppc-management.html"
+  to = "/ppc-management"
+  status = 301
+
+[[redirects]]
+  from = "/ppc-management"
+  to = "/ppc-management.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq.html"
+  to = "/faq"
+  status = 301
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog"
+  status = 301
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
   status = 301
 
 # Redirect old domain variations
