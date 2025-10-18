@@ -786,17 +786,37 @@
       justify-content: center;
     }
     
+    /* Breadcrumb positioning - override main.css */
+    .breadcrumb {
+      position: absolute !important;
+      top: 8px !important;
+      left: 12px !important;
+      z-index: 10 !important;
+      border-radius: 8px;
+      margin-top: 0 !important;
+      padding: 8px 16px !important;
+    }
+    
     /* Breadcrumb mobile responsive */
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 992px) {
+      /* Breadcrumb mobile positioning - top left corner */
       .breadcrumb {
-        top: 120px !important;
-        left: 15px !important;
-        padding: 6px 12px !important;
-        font-size: 0.8rem !important;
+        top: 5px !important;
+        left: 5px !important;
+        padding: 5px 10px !important;
+        font-size: 0.7rem !important;
+        max-width: calc(100% - 20px);
+        z-index: 15 !important;
+        margin-top: 0 !important;
       }
       
       .breadcrumb ol {
-        font-size: 0.75rem !important;
+        font-size: 0.65rem !important;
+        gap: 3px !important;
+      }
+      
+      .breadcrumb ol span {
+        margin: 0 3px !important;
       }
     }
   </style>
@@ -863,7 +883,7 @@
 
   <main style="position: relative;">
     <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb" aria-label="Breadcrumb" style="position: absolute; top: 140px; left: 40px; z-index: 10; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
         <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
                 <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
