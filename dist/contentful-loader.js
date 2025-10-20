@@ -161,9 +161,9 @@ async function loadBlogPosts() {
     }
     
     try {
-        // Try to fetch from Contentful
+        // Try to fetch from Contentful with sorting by publish date (newest first)
         const response = await fetch(
-            `https://cdn.contentful.com/spaces/${contentfulClient.spaceId}/entries?content_type=blogPost&access_token=${contentfulClient.accessToken}`,
+            `https://cdn.contentful.com/spaces/${contentfulClient.spaceId}/entries?content_type=blogPost&order=-fields.publishdate&access_token=${contentfulClient.accessToken}`,
             { method: 'GET', timeout: 3000 }
         );
         
@@ -176,12 +176,14 @@ async function loadBlogPosts() {
         // If we got posts from Contentful and they have items
         if (data && data.items && data.items.length > 0) {
             console.log('Successfully loaded blog posts from Contentful:', data.items.length);
+            console.log('Blog posts:', data.items.map(p => p.fields.title));
         
             // Clear blog container
             blogContainer.innerHTML = '';
         
             // Render posts from Contentful
             data.items.forEach((post) => {
+                console.log('Rendering post:', post.fields.title);
                     // Get the image URL from the linked assets
                     const imageId = post.fields.featuredImage?.sys?.id;
                 const imageAsset = data.includes?.Asset?.find(asset => asset.sys.id === imageId);
