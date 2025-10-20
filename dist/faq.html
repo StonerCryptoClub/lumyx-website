@@ -82,6 +82,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="css/main.css?v=4.4">
+  <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017V2">
   
   <style>
     /* Base color variables */
@@ -94,293 +96,6 @@
       --bg-dark: #1a1a1a;
       --bg-light: #2a2a2a;
       --container-padding: 20px;
-    }
-
-    /* Reset & Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    html, body {
-      height: 100%;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-      color: #ffffff;
-      line-height: 1.6;
-      margin: 0;
-      overflow-x: hidden;
-      position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    a {
-      color: #1E90FF;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    /* Header - Desktop */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      padding: 15px 50px;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(15px);
-      transition: all 0.3s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    }
-    header.scrolled {
-      background: rgba(0, 0, 0, 0.98);
-      padding: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-    header .logo {
-      display: flex;
-      align-items: center;
-      position: relative;
-      margin-left: -5px;
-    }
-    header .logo img {
-      width: 160px;
-      height: auto;
-      object-fit: contain;
-      transition: all 0.3s ease;
-      margin-right: -50px;
-      position: relative;
-      z-index: 2;
-    }
-    header .logo:hover img {
-      transform: scale(1.05);
-    }
-    header .logo h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #ffffff;
-      position: relative;
-      letter-spacing: 0.5px;
-      z-index: 1;
-      margin: 0;
-    }
-    header nav {
-      display: flex;
-      gap: 30px;
-      padding-right: 30px;
-    }
-    header nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      position: relative;
-      padding: 3px 0;
-      transition: color 0.3s ease;
-    }
-    header nav a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    header nav a.active {
-      color: #ffffff;
-    }
-    header nav a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
-      transition: width 0.3s ease;
-    }
-    header nav a:hover::before {
-      width: 100%;
-    }
-    header nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      position: relative;
-      padding: 3px 0;
-      transition: color 0.3s ease;
-    }
-    header nav a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    header nav a.active {
-      color: #ffffff;
-    }
-    header nav a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
-      transition: width 0.3s ease;
-    }
-    header nav a:hover::before {
-      width: 100%;
-    }
-
-    /* Navigation Dropdown */
-    .nav-dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-toggle {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: rgba(26, 26, 26, 0.98);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(102, 126, 234, 0.3);
-      border-radius: 8px;
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
-      z-index: 1001;
-      margin-top: 10px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-menu a {
-      display: block;
-      padding: 12px 16px;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background-color 0.3s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .dropdown-menu a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(102, 126, 234, 0.1);
-      color: #667eea;
-    }
-
-    /* Mobile Menu */
-    .mobile-menu-btn, .mobile-blog-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 10px;
-    }
-
-    .mobile-nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 998;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .mobile-nav-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .mobile-nav-sidebar {
-      position: fixed;
-      top: 0;
-      right: -300px;
-      width: 300px;
-      height: 100%;
-      background: rgba(26, 26, 26, 0.95);
-      backdrop-filter: blur(20px);
-      z-index: 999;
-      transition: right 0.3s ease;
-      border-left: 1px solid rgba(255, 165, 0, 0.2);
-    }
-
-    .mobile-nav-sidebar.active {
-      right: 0;
-    }
-
-    .mobile-nav-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .mobile-nav-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .mobile-nav-menu {
-      padding: 20px;
-    }
-
-    .mobile-nav-link {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      transition: color 0.3s ease;
-    }
-
-    .mobile-nav-link:hover {
-      color: var(--primary-orange);
     }
 
     /* Hero Section */
@@ -401,27 +116,33 @@
       width: 100%;
     }
 
-    .hero-badge {
-      display: inline-block;
-      background: linear-gradient(45deg, #FFA500, #FFD700);
-      color: #000;
-      padding: 8px 20px;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
+     .hero-badge {
+       display: inline-flex;
+       align-items: center;
+       gap: 8px;
+       background: rgba(255, 165, 0, 0.12);
+       border: 1px solid rgba(255, 165, 0, 0.4);
+       color: #FFA500;
+       padding: 10px 18px;
+       border-radius: 50px;
+       font-size: 0.9rem;
+       font-weight: 600;
+       margin-bottom: 30px;
+       backdrop-filter: blur(10px);
+       box-shadow: 0 4px 15px rgba(255, 165, 0, 0.15);
+     }
+     
+     .hero-badge i {
+       color: #FFA500;
+     }
 
-    .hero-title {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 800;
-      margin-bottom: 20px;
-      background: linear-gradient(45deg, #FFA500, #FFD700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-    }
+     .hero-title {
+       font-size: clamp(2.5rem, 5vw, 3.5rem);
+       font-weight: 800;
+       margin-bottom: 20px;
+       color: #ffffff;
+       line-height: 1.2;
+     }
 
     .hero-subtitle {
       font-size: clamp(1.1rem, 2.5vw, 1.4rem);
@@ -433,21 +154,30 @@
       margin-right: auto;
     }
 
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(45deg, #FFA500, #FFD700);
-      color: #000;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);
-    }
+     .cta-button {
+       display: inline-flex;
+       align-items: center;
+       gap: 10px;
+       background: linear-gradient(135deg, #FFA500, #FF8C00);
+       color: #000;
+       padding: 16px 32px;
+       border-radius: 50px;
+       text-decoration: none;
+       font-weight: 600;
+       font-size: 1rem;
+       transition: all 0.3s ease;
+       box-shadow: 0 4px 20px rgba(255, 165, 0, 0.3);
+     }
+     
+     .cta-button:hover {
+       transform: translateY(-3px);
+       box-shadow: 0 8px 30px rgba(255, 165, 0, 0.5);
+       background: linear-gradient(135deg, #FF8C00, #FFA500);
+     }
+     
+     .cta-button i {
+       font-size: 1.1rem;
+     }
 
     /* FAQ Section */
     .faq-section {
@@ -620,135 +350,8 @@
       font-size: 0.9rem;
     }
 
-    /* Mobile Menu Button - Hidden on Desktop */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--primary-orange);
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 1003;
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .mobile-menu-btn:hover {
-      color: var(--primary-orange);
-    }
-
-    /* Mobile Navigation Overlay */
-    .mobile-nav-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .mobile-nav-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Mobile Navigation Sidebar */
-    .mobile-nav-sidebar {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 280px;
-      height: 100%;
-      background: #1a1a1a;
-      z-index: 1000;
-      transition: right 0.3s ease;
-    }
-
-    .mobile-nav-sidebar.active {
-      right: 0;
-    }
-
-    .mobile-nav-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .mobile-nav-header h3 {
-      color: var(--primary-orange);
-      font-size: 1.2rem;
-      margin: 0;
-    }
-
-    .mobile-nav-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .mobile-nav-menu {
-      padding: 20px 0;
-    }
-
-    .mobile-nav-menu a {
-      display: block;
-      padding: 15px 20px;
-      color: #fff;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .mobile-nav-menu a:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    /* Mobile Blog Button - Hidden */
-    .mobile-blog-btn {
-      display: none;
-    }
-
     /* Mobile Responsiveness - Tablet and Mobile */
     @media screen and (max-width: 992px) {
-      /* Hide desktop navigation */
-      header nav {
-        display: none;
-      }
-
-      /* Show mobile menu button */
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      /* Center logo and text on mobile */
-      header {
-        justify-content: center;
-        padding: 15px 20px;
-      }
-
-      .logo {
-        position: relative;
-      }
-
-      .logo img {
-        display: none;
-      }
-
-      .logo h1 {
-        text-align: center;
-        font-size: 1.8rem;
-      }
-
       /* Hero Section Mobile */
       .hero-section {
         padding: 100px 0 60px;
@@ -842,31 +445,6 @@
         right: 15px;
         top: 18px;
       }
-    }
-
-    /* Mobile Styles - Small Screens */
-    @media screen and (max-width: 768px) {
-      header {
-        padding: 10px 15px;
-      }
-
-      .logo img {
-        width: 100px !important;
-      }
-
-      .logo h1 {
-        font-size: 1.6rem !important;
-      }
-
-      .mobile-blog-btn {
-        right: 50px;
-        padding: 6px 10px;
-        font-size: 0.85rem;
-      }
-
-      .mobile-menu-btn {
-        right: 15px;
-      }
 
       .hero-content {
         padding: 0 15px;
@@ -877,32 +455,43 @@
       }
     }
 
-    /* Mobile Styles - Very Small Screens */
+    /* Mobile Styles - Small Screens */
     @media screen and (max-width: 480px) {
-      header {
-        padding: 8px 12px;
-      }
-
-      .logo img {
-        width: 90px !important;
-      }
-
-      .logo h1 {
-        font-size: 1.4rem !important;
-      }
-
-      .mobile-blog-btn {
-        right: 45px;
-        padding: 5px 8px;
-        font-size: 0.8rem;
-      }
-
-      .mobile-menu-btn {
-        right: 12px;
-      }
-
       .faq-item {
         padding: 15px 12px;
+      }
+    }
+    
+    /* Breadcrumb positioning - override main.css */
+    .breadcrumb {
+      position: absolute !important;
+      top: 8px !important;
+      left: 12px !important;
+      z-index: 10 !important;
+      border-radius: 8px;
+      margin-top: 0 !important;
+      padding: 8px 16px !important;
+    }
+    
+    /* Breadcrumb mobile responsive */
+    @media screen and (max-width: 992px) {
+      .breadcrumb {
+        top: 5px !important;
+        left: 5px !important;
+        padding: 5px 10px !important;
+        font-size: 0.7rem !important;
+        max-width: calc(100% - 20px);
+        z-index: 15 !important;
+        margin-top: 0 !important;
+      }
+      
+      .breadcrumb ol {
+        font-size: 0.65rem !important;
+        gap: 3px !important;
+      }
+      
+      .breadcrumb ol span {
+        margin: 0 3px !important;
       }
     }
   </style>
@@ -911,28 +500,28 @@
 <body>
   <!-- Header -->
   <header>
-    <div class="logo">
-      <img src="Logo.png" alt="Lumyx Agency Logo">
+    <a href="index.html" class="logo">
+      <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
       <h1>Lumyx Agency</h1>
-    </div>
-    <!-- Mobile blog button (visible only on mobile) -->
-    <a href="/blog.html" class="mobile-blog-btn">Blog</a>
-    <button class="mobile-menu-btn" id="mobile-menu-btn">
-      <i class="fas fa-bars"></i>
+    </a>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+      <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
+      <span class="hamburger-bars" aria-hidden="true"></span>
     </button>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/#about">About</a>
+    <nav aria-label="Main Navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
       <div class="nav-dropdown">
-        <a href="/#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+        <a href="index.html#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
         <div class="dropdown-menu">
-          <a href="/ppc-management.html">PPC Management</a>
-          <a href="/#services">All Services</a>
+          <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
+          <a href="ppc-management.html">PPC Management</a>
+          <a href="index.html#services">All Services</a>
         </div>
       </div>
-      <a href="/#portfolio">Portfolio</a>
-      <a href="/#contact">Contact</a>
-      <a href="/blog.html">Blog</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="blog.html">Blog</a>
     </nav>
   </header>
 
@@ -952,11 +541,29 @@
       <a href="/#portfolio" class="mobile-nav-link">Portfolio</a>
       <a href="/#contact" class="mobile-nav-link">Contact</a>
       <a href="/blog.html" class="mobile-nav-link">Blog</a>
+      <a href="faq.html" class="mobile-nav-link active">FAQ</a>
     </div>
   </div>
 
   <!-- Hero Section -->
-  <section class="hero-section">
+  <section class="hero-section" style="position: relative;">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+          <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+            <span itemprop="name">Home</span>
+          </a>
+          <meta itemprop="position" content="1" />
+          <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <span itemprop="name" style="color: #FFA500; font-weight: 500;">FAQ</span>
+          <meta itemprop="position" content="2" />
+        </li>
+      </ol>
+    </nav>
+    
     <div class="hero-content">
       <div class="hero-badge">
         <i class="fas fa-question-circle"></i> Frequently Asked Questions
@@ -1014,6 +621,26 @@
               <p>We work with businesses across all industries, with particular expertise in healthcare, legal services, e-commerce, professional services, and home services. Our strategies are customized for each industry's unique challenges and customer behavior patterns. We've successfully scaled businesses in SaaS, real estate, automotive, fitness, beauty, and many other sectors.</p>
             </div>
           </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What size businesses do you typically work with?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We work with businesses of all sizes, from startups and small businesses to mid-market and enterprise companies. Our sweet spot is businesses generating $500K-$10M annually who are ready to scale. We customize our approach based on your current revenue, growth goals, and marketing budget. Whether you're just starting or looking to scale to 7-8 figures, we have proven strategies for your stage.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              How quickly can you start working on my account?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We can typically start within 5-7 business days after our initial strategy call and contract signing. For urgent situations, we offer expedited onboarding within 48-72 hours. The timeline depends on account access, campaign complexity, and whether we're taking over existing campaigns or starting from scratch. We prioritize getting results fast while ensuring everything is set up correctly for long-term success.</p>
+            </div>
+          </div>
         </div>
 
         <!-- PPC Management -->
@@ -1050,6 +677,114 @@
             </h4>
             <div class="faq-answer">
               <p>PPC campaigns can start generating traffic immediately once approved (usually within 24-48 hours). However, optimization for best results typically takes 2-4 weeks as we gather data and refine targeting. Most clients see significant improvements in cost-per-acquisition and ROI within 30-60 days of campaign launch.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What's your average return on ad spend (ROAS)?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Our clients typically see 3-5x ROAS on Google Ads and 4-8x ROAS on Facebook/Instagram ads, though results vary by industry and competition level. E-commerce clients often achieve higher ROAS (5-10x), while lead generation campaigns focus more on cost-per-lead metrics. We focus on profitable scaling—not just vanity metrics—ensuring your ad spend translates to actual revenue growth.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Do you manage the ad budget or do I?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>You control your ad budget and pay platforms directly (Google, Facebook, etc.). We manage how that budget is spent—optimizing bids, targeting, ad creative, and campaign strategy. This keeps your costs transparent and means we don't mark up ad spend. We recommend starting with $2,000-$5,000/month minimum for most platforms to gather sufficient data, though this varies by industry and goals.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Can you take over my existing PPC campaigns?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Absolutely! We specialize in account audits and takeovers. We'll conduct a thorough analysis of your current campaigns, identify what's working and what's wasting budget, then implement improvements immediately. Most takeover clients see 30-50% improvement in performance within the first 60 days just from better optimization and account structure.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Lead Gen & Booking Agents -->
+        <div class="faq-category">
+          <h3 class="category-title">
+            <i class="fas fa-robot"></i>
+            AI Lead Gen & Booking Agents
+          </h3>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What are AI booking agents and how do they work?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>AI booking agents are automated systems that capture, qualify, and book leads 24/7 without human intervention. When a lead fills out a form or contacts you, our AI agent responds instantly via SMS or email, asks qualifying questions, answers common FAQs, and books qualified prospects directly into your calendar. They work around the clock, even while you sleep or focus on running your business.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Why does lead response speed matter so much?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Speed is critical in lead conversion. Studies show that leads contacted within 5 minutes are 24% more likely to convert compared to just 1% conversion rate when you wait 30 minutes. Most business owners are busy with operations, customers, and growth—they can't respond to every lead instantly. That's where our AI agents excel: they respond in seconds, every single time, capturing opportunities that would otherwise be lost.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What kind of workflows can AI agents handle?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Our AI agents handle complete lead-to-booking workflows including: instant lead capture and response, lead qualification through smart questions, FAQ answering, appointment scheduling and calendar management, automated reminders to reduce no-shows, follow-up sequences for nurturing, re-engagement of stale leads, and CRM updates and tagging. All workflows are customized to your business needs and integrate seamlessly with your existing tools.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What systems do AI agents integrate with?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We integrate with all major business tools including: Calendar systems (Calendly, Google Calendar, Outlook), CRM platforms (HubSpot, Pipedrive, Salesforce), Communication channels (SMS, email, website chat widgets), Advertising platforms (Meta/Facebook Ads, Google Ads), and Website forms and lead capture tools. We plug into your existing tech stack so there's minimal disruption to your current processes.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              How long does it take to deploy AI agents?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Typical deployment takes 3-14 days depending on complexity. We start with a discovery call to map your funnel, identify drop-off points, and design your workflow. Then we configure your AI agent, connect it to your calendar, CRM, and messaging channels. Once testing is complete, your agent goes live and starts capturing leads 24/7. We handle all setup, integration, and ongoing optimization.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              How much do AI booking agents cost?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We offer three packages: Starter (inbound agent + Calendly integration with basic follow-ups), Pro (multi-channel agents with advanced qualification, CRM updates, and no-show recovery), and Enterprise (custom workflows, white-label deployment, and dedicated support). Pricing varies based on your needs, but most businesses see 2-5x more booked calls and a positive ROI within the first month. Book a free demo to see pricing tailored to your business.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Will AI agents sound robotic or impersonal?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Not at all! We train our AI agents to match your brand voice and communication style. They can be professional, friendly, casual, or formal—whatever fits your business. The conversations feel natural and helpful, not robotic. Plus, leads care more about getting instant answers than whether it's a human or AI. The key is speed and helpfulness, which our agents deliver perfectly.</p>
             </div>
           </div>
         </div>
@@ -1090,6 +825,36 @@
               <p>We don't guarantee specific rankings because Google's algorithm is constantly changing and no ethical SEO agency can guarantee rankings. However, we do guarantee improved organic traffic, better search visibility, and increased leads from SEO within 6 months, or we'll continue working at no additional cost until you see results.</p>
             </div>
           </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              How much does SEO cost per month?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Our SEO services range from $2,000-$5,000/month depending on your market competition, website size, and goals. This includes technical SEO, content creation, link building, and monthly reporting. Local SEO for Tampa-area businesses starts at $1,500/month. Unlike PPC, SEO is a long-term investment that builds compounding results over time, often delivering the best ROI after 6-12 months.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What's the difference between local SEO and regular SEO?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Local SEO focuses on ranking for location-specific searches (e.g., "digital marketing agency Tampa") and optimizing your Google Business Profile, local citations, and reviews. Regular SEO targets broader, national keywords. If you serve customers in a specific geographic area, local SEO is critical. We excel at both and will recommend the right strategy based on your business model and target customers.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Do you write content for my website?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Yes! High-quality content is essential for SEO success. We create blog posts, service pages, landing pages, and other content optimized for both search engines and your target audience. All content is original, researched, and designed to establish your authority while ranking for valuable keywords. We typically produce 2-4 pieces of content per month as part of our SEO packages.</p>
+            </div>
+          </div>
         </div>
 
         <!-- Social Media & Web Development -->
@@ -1126,6 +891,36 @@
             </h4>
             <div class="faq-answer">
               <p>Website costs vary based on complexity and features. A basic business website starts at $5,000, while e-commerce sites typically range from $10,000-$25,000. This includes design, development, mobile optimization, basic SEO setup, and 3 months of support. We also offer payment plans to make our services accessible to growing businesses.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              How long does it take to build a website?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>A standard business website typically takes 4-6 weeks from kickoff to launch. E-commerce sites take 6-10 weeks due to additional complexity like product setup, payment integration, and inventory management. Rush projects can be completed in 2-3 weeks for an additional fee. Timeline depends on content availability, feedback turnaround, and the number of pages/features required.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Do you offer website maintenance and updates?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Yes! We offer ongoing website maintenance packages starting at $200/month, which include security updates, plugin updates, content changes, performance monitoring, and technical support. This ensures your website stays secure, fast, and up-to-date. We also provide emergency support for critical issues that arise outside business hours.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What platforms do you build websites on?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We primarily build on WordPress and Shopify, depending on your needs. WordPress is perfect for content-heavy sites and offers maximum flexibility. Shopify is ideal for e-commerce stores with its powerful built-in features. We also work with custom HTML/CSS/JavaScript solutions for unique requirements. We'll recommend the best platform based on your goals, budget, and technical comfort level.</p>
             </div>
           </div>
         </div>
@@ -1176,6 +971,26 @@
               <p>We offer a 90-day satisfaction guarantee. If you don't see at least 200% ROI within 90 days, we'll either continue working at no cost until you do, or provide a full refund. We're so confident in our methods because we've consistently delivered results for our clients over the years.</p>
             </div>
           </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Do you offer month-to-month services or require annual contracts?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We offer both options. Month-to-month agreements provide maximum flexibility, while annual contracts receive a 15% discount and priority support. Most clients choose 6-12 month agreements for the best balance of commitment and results. There are no cancellation fees, though we ask for 30 days notice if you decide to discontinue services.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What payment methods do you accept?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We accept all major credit cards, ACH/bank transfers, and wire transfers for larger clients. Payment is typically due on the 1st of each month, with invoicing sent 5 days prior. We also offer net-30 terms for qualified businesses and can set up automatic recurring payments for your convenience.</p>
+            </div>
+          </div>
         </div>
 
         <!-- Getting Started -->
@@ -1212,6 +1027,26 @@
             </h4>
             <div class="faq-answer">
               <p>Absolutely! We often collaborate with in-house marketing teams, providing specialized expertise in areas like PPC management or SEO while your team focuses on other initiatives. We're flexible and can adapt our services to complement your existing resources and workflows.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              Do you work with startups or only established businesses?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>We work with both! For early-stage startups, we offer streamlined packages focused on quick wins and lean budgets. For established businesses, we provide comprehensive strategies for scaling. The key requirement is having a validated product/service and budget to invest in growth. We'll assess your current stage during the strategy call and recommend the best path forward.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="faq-question">
+              What makes a good fit for your agency?
+              <i class="fas fa-chevron-down faq-toggle"></i>
+            </h4>
+            <div class="faq-answer">
+              <p>Ideal clients are growth-focused businesses with proven products/services, realistic marketing budgets ($3,000+/month), willingness to implement recommendations, and commitment to at least 3-6 months for meaningful results. We work best with businesses that value data-driven decisions, transparent communication, and are ready to scale. If you're looking for quick fixes or unrealistic overnight results, we're probably not the right fit.</p>
             </div>
           </div>
         </div>

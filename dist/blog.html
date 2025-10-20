@@ -106,8 +106,10 @@
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   
+  <link rel="stylesheet" href="css/main.css?v=4.3">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/newsletter.css">
+  <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017V">
   
   <style>
     /* Base color variables */
@@ -136,7 +138,7 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      background: #0a0a0f !important;
       color: #ffffff;
       line-height: 1.6;
       margin: 0;
@@ -144,157 +146,8 @@
       position: relative;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(30, 144, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* Header Styles */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      padding: 15px 50px;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(15px);
-      transition: all 0.3s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    }
-    header.scrolled {
-      background: rgba(0, 0, 0, 0.98);
-      padding: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-    header .logo {
-      display: flex;
-      align-items: center;
-      position: relative;
-      margin-left: -5px;
-    }
-    header .logo img {
-      width: 160px;
-      height: auto;
-      object-fit: contain;
-      transition: all 0.3s ease;
-      margin-right: -50px;
-      position: relative;
-      z-index: 2;
-    }
-    header .logo:hover img {
-      transform: scale(1.05);
-    }
-    header .logo h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #ffffff;
-      position: relative;
-      letter-spacing: 0.5px;
-      z-index: 1;
-    }
-    header nav {
-      display: flex;
-      gap: 30px;
-      padding-right: 30px;
-    }
-    header nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      position: relative;
-      padding: 3px 0;
-      transition: color 0.3s ease;
-    }
-    header nav a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-    header nav a.active {
-      color: #ffffff;
-    }
-    header nav a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-orange), var(--primary-orange-light));
-      transition: width 0.3s ease;
-    }
-    header nav a:hover::before {
-      width: 100%;
-    }
-
-    /* Navigation Dropdown */
-    .nav-dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-toggle {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: rgba(26, 26, 26, 0.98);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(102, 126, 234, 0.3);
-      border-radius: 8px;
-      min-width: 180px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
-      z-index: 1001;
-      margin-top: 10px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-menu a {
-      display: block;
-      padding: 12px 16px;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background-color 0.3s ease;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .dropdown-menu a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(102, 126, 234, 0.1);
-      color: #667eea;
-    }
-
+    /* Header styles now handled by main.css */
+    
     /* Blog Section Styles */
     .blog-section {
       padding: 140px 20px 60px;
@@ -422,8 +275,10 @@
 
     /* Newsletter Section */
     .newsletter {
-      background: linear-gradient(135deg, var(--complementary-blue), var(--complementary-blue-light));
-      box-shadow: 0 20px 40px rgba(30, 144, 255, 0.2);
+      background: rgba(15,15,25,0.4);
+      border-top: 1px solid rgba(255,165,0,0.1);
+      border-bottom: 1px solid rgba(255,165,0,0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       padding: 80px 0;
       margin: 0;
       position: relative;
@@ -695,47 +550,12 @@
         font-size: 2.8rem;
       }
     }
+    
+    /* Header styles now handled by main.css and mobile-fixes.css */
 
     @media screen and (max-width: 992px) {
       .container {
         max-width: 720px;
-      }
-
-      header {
-        padding: 15px var(--container-padding);
-      }
-
-      header .logo h1 {
-        font-size: 1.5rem;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      header nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 80%;
-        max-width: 400px;
-        background: rgba(0, 0, 0, 0.95);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: right 0.3s ease;
-        backdrop-filter: blur(10px);
-        z-index: 99;
-      }
-
-      header nav.active {
-        right: 0;
-      }
-
-      header nav a {
-        font-size: 1.2rem;
-        padding: 15px 0;
       }
 
       .blog-section {
@@ -965,7 +785,42 @@
       align-items: center;
       justify-content: center;
     }
+    
+    /* Breadcrumb positioning - override main.css */
+    .breadcrumb {
+      position: absolute !important;
+      top: 8px !important;
+      left: 12px !important;
+      z-index: 10 !important;
+      border-radius: 8px;
+      margin-top: 0 !important;
+      padding: 8px 16px !important;
+    }
+    
+    /* Breadcrumb mobile responsive */
+    @media screen and (max-width: 992px) {
+      /* Breadcrumb mobile positioning - top left corner */
+      .breadcrumb {
+        top: 5px !important;
+        left: 5px !important;
+        padding: 5px 10px !important;
+        font-size: 0.7rem !important;
+        max-width: calc(100% - 20px);
+        z-index: 15 !important;
+        margin-top: 0 !important;
+      }
+      
+      .breadcrumb ol {
+        font-size: 0.65rem !important;
+        gap: 3px !important;
+      }
+      
+      .breadcrumb ol span {
+        margin: 0 3px !important;
+      }
+    }
   </style>
+
 </head>
 <body>
   <div class="modal" id="comingSoonModal">
@@ -982,10 +837,9 @@
 
   <header>
     <div class="logo">
-              <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" loading="lazy">
+      <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
       <h1>Lumyx Agency</h1>
     </div>
-    <a href="/index.html" class="mobile-home-btn">Home</a>
     <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
       <i class="fas fa-bars"></i>
     </button>
@@ -1023,10 +877,28 @@
       <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
       <a href="index.html#contact" class="mobile-nav-link">Contact</a>
       <a href="blog.html" class="mobile-nav-link active">Blog</a>
+      <a href="faq.html" class="mobile-nav-link">FAQ</a>
     </div>
   </div>
 
-  <main>
+  <main style="position: relative;">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+        <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                    <span itemprop="name">Home</span>
+                </a>
+                <meta itemprop="position" content="1" />
+                <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                <span itemprop="name" style="color: #FFA500; font-weight: 500;">Blog</span>
+                <meta itemprop="position" content="2" />
+            </li>
+        </ol>
+    </nav>
+    
     <section class="blog-section">
       <div class="blog-header">
         <h1>Digital Marketing Insights & Strategies</h1>
@@ -1241,7 +1113,7 @@
       }
     });
   </script>
-  <script src="contentful-loader.js"></script>
+  <script src="contentful-loader.js?v=2"></script>
   <script src="js/newsletter.js"></script>
   <script src="js/form-fix.js"></script>
 </body>

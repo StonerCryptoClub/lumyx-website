@@ -54,56 +54,294 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/main.css?v=2.0">
+    <link rel="stylesheet" href="css/main.css?v=4.3">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/service-pages.css?v=1.1">
-    <link rel="stylesheet" href="css/mobile-fixes.css">
+    <link rel="stylesheet" href="css/service-pages.css?v=1.8">
+    <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017V">
+    <link rel="stylesheet" href="css/enhanced-cards.css?v=1.0">
     <style>
-      /* Hide breadcrumb on this page while keeping markup for SEO */
-      .service-hero .breadcrumb { display: none; }
-      /* AI page theme enhancements */
-      .ai-theme .service-hero {
-        background: radial-gradient(1200px 600px at 10% 10%, rgba(30,144,255,0.25), transparent 60%),
-                    radial-gradient(1000px 500px at 90% 20%, rgba(255,165,0,0.22), transparent 60%),
-                    linear-gradient(135deg, #0f0f23 0%, #141428 40%, #101a30 100%) !important;
+      /* AI page theme - clean consistent background */
+      body.ai-theme {
+        background: #0a0a0f !important;
       }
+      
+      .ai-theme .service-hero {
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%) !important;
+        border-bottom: 1px solid rgba(255,165,0,0.1);
+        position: relative;
+      }
+      
+      .ai-theme .service-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(255,165,0,0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(30,144,255,0.06) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+      
       .ai-theme .hero-badge {
         display: inline-flex; align-items: center; gap: 8px;
         padding: 8px 14px; border-radius: 999px;
         background: linear-gradient(135deg, rgba(255,165,0,0.15), rgba(30,144,255,0.15));
-        border: 1px solid rgba(255,255,255,0.12); color: #fff; font-weight: 600; font-size: 0.95rem; margin-bottom: 16px;
+        border: 1px solid rgba(255,255,255,0.12); 
+        color: #fff; 
+        font-weight: 600; 
+        font-size: 0.95rem; 
+        margin-bottom: 20px;
       }
-      .ai-theme .gradient-text { background: none; -webkit-text-fill-color: initial; color: #ffffff; }
-      .ai-theme .service-card { border-color: rgba(255, 165, 0, 0.35); box-shadow: 0 10px 30px rgba(255,165,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.03); }
-      .ai-theme .service-card:hover { box-shadow: 0 24px 48px rgba(255,165,0,0.18), 0 0 0 1px rgba(255,165,0,0.15); }
-      .ai-theme .service-hero .container { position: relative; z-index: 2; }
-      .ai-theme .hero-stats .stat-number { text-shadow: 0 0 20px rgba(255,165,0,0.25); }
+      
+      .ai-theme .gradient-text { 
+        background: none; 
+        -webkit-text-fill-color: initial; 
+        color: #ffffff; 
+      }
+      
+      .ai-theme .service-card { 
+        border-color: rgba(255, 165, 0, 0.2); 
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        background: rgba(26,26,40,0.6);
+      }
+      
+      .ai-theme .service-card:hover { 
+        box-shadow: 0 8px 32px rgba(255,165,0,0.15);
+        border-color: rgba(255,165,0,0.4);
+      }
+      
+      .ai-theme .service-hero .container { 
+        position: relative; 
+        z-index: 2; 
+      }
+      
+      .ai-theme .hero-stats .stat-number { 
+        text-shadow: 0 0 20px rgba(255,165,0,0.25); 
+      }
+      
+      /* Section separators */
+      .section-separator {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,165,0,0.3), transparent);
+        margin: 0;
+      }
+      
+      /* Industry card hover effects */
+      .industry-card {
+        text-align: center;
+        padding: 20px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .industry-card:hover {
+        background: rgba(255,165,0,0.08);
+        transform: translateY(-5px);
+      }
+      
+      .industry-card .emoji {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        transition: transform 0.3s ease;
+        display: inline-block;
+      }
+      
+      .industry-card:hover .emoji {
+        transform: scale(1.2) rotate(5deg);
+      }
+      
+      .industry-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+      
+      .industry-card:hover h4 {
+        color: #FFA500;
+      }
+      
+      .industry-card p {
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.7);
+        margin: 0;
+        transition: color 0.3s ease;
+      }
+      
+      .industry-card:hover p {
+        color: rgba(255,255,255,0.9);
+      }
+      
+      /* Stat card hover effects */
+      .stat-card-red {
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      
+      .stat-card-red:hover {
+        background: rgba(255,20,20,0.15) !important;
+        border-color: rgba(255,80,80,0.8) !important;
+        box-shadow: 0 0 40px rgba(255,0,0,0.6), 0 0 80px rgba(255,0,0,0.3) !important;
+        transform: scale(1.02);
+      }
+      
+      .stat-card-green {
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      
+      .stat-card-green:hover {
+        background: rgba(50,255,50,0.15) !important;
+        border-color: rgba(100,255,100,0.8) !important;
+        box-shadow: 0 0 40px rgba(0,255,0,0.6), 0 0 80px rgba(0,255,0,0.3) !important;
+        transform: scale(1.02);
+      }
+      
+      .stat-card-orange {
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      
+      .stat-card-orange:hover {
+        background: rgba(255,200,0,0.15) !important;
+        border-color: rgba(255,165,0,0.8) !important;
+        box-shadow: 0 0 40px rgba(255,165,0,0.7), 0 0 80px rgba(255,200,0,0.4) !important;
+        transform: scale(1.02);
+      }
+      
+      /* Breadcrumb desktop positioning - override main.css */
+      .breadcrumb {
+        position: absolute !important;
+        top: 8px !important;
+        left: 12px !important;
+        z-index: 10 !important;
+        border-radius: 8px;
+        margin-top: 0 !important;
+        padding: 8px 16px !important;
+      }
+      
+      /* Desktop hero padding */
+      @media screen and (min-width: 993px) {
+        .service-hero {
+          padding-top: 140px !important;
+        }
+      }
+      
+      /* Mobile container padding and breadcrumb */
+      @media screen and (max-width: 992px) {
+        .container {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        
+        /* Mobile hero adjustments - reduced padding */
+        .service-hero {
+          padding-top: 100px !important;
+        }
+        
+        .service-hero .hero-content {
+          padding-top: 15px;
+        }
+        
+        .hero-badge {
+          margin-top: 0 !important;
+          margin-bottom: 15px !important;
+        }
+        
+        /* Breadcrumb mobile positioning - top left corner of hero */
+        .breadcrumb {
+          position: absolute !important;
+          top: 5px !important;
+          left: 5px !important;
+          padding: 5px 10px !important;
+          font-size: 0.7rem !important;
+          max-width: calc(100% - 20px);
+          z-index: 15 !important;
+          margin-top: 0 !important;
+        }
+        
+        .breadcrumb ol {
+          font-size: 0.65rem !important;
+          gap: 3px !important;
+        }
+        
+        .breadcrumb ol span {
+          margin: 0 3px !important;
+        }
+      }
+      
+      /* Mobile responsive for stat cards and problem cards */
+      @media screen and (max-width: 768px) {
+        .stat-cards-grid {
+          grid-template-columns: 1fr !important;
+        }
+        
+        /* Problem cards mobile responsive */
+        .services-overview div[style*="grid-template-columns: repeat(3, 1fr)"] {
+          grid-template-columns: 1fr !important;
+        }
+        
+        .services-overview div[style*="display: flex"] {
+          flex-direction: column !important;
+          max-width: 100% !important;
+        }
+        
+        .services-overview .service-card {
+          max-width: 100% !important;
+        }
+        
+        /* Footer mobile responsive */
+        footer > div > div:first-child {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+        
+        footer {
+          padding: 40px 0 20px !important;
+        }
+        
+        footer > div {
+          padding: 0 20px !important;
+        }
+      }
+      
+      /* Tablet responsive */
+      @media screen and (min-width: 769px) and (max-width: 992px) {
+        .services-overview div[style*="grid-template-columns: repeat(3, 1fr)"] {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
     </style>
 </head>
 <body class="ai-theme">
-    <!-- Header (brand-aligned simple variant for service pages) -->
+    <!-- Header -->
     <header>
-        <div class="logo">
-            <img src="Logo.png" alt="Lumyx Agency Logo" width="160" height="40">
+        <a href="index.html" class="logo">
+            <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
             <h1>Lumyx Agency</h1>
-        </div>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
+            <span class="hamburger-bars" aria-hidden="true"></span>
+        </button>
         <nav aria-label="Main Navigation">
             <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
             <div class="nav-dropdown">
                 <a href="index.html#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
                 <div class="dropdown-menu">
-              <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
+                    <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
                     <a href="ppc-management.html">PPC Management</a>
                     <a href="index.html#services">All Services</a>
                 </div>
             </div>
-            <a href="case-studies.html">Case Studies</a>
-            <a href="blog.html">Blog</a>
+            <a href="index.html#portfolio">Portfolio</a>
             <a href="index.html#contact">Contact</a>
+            <a href="blog.html">Blog</a>
         </nav>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
-            <i class="fas fa-bars"></i>
-        </button>
     </header>
 
     <!-- Mobile Navigation Sidebar -->
@@ -123,14 +361,38 @@
             <a href="ppc-management.html" class="mobile-nav-link">PPC Management</a>
             <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
             <a href="index.html#contact" class="mobile-nav-link">Contact</a>
-            <a href="blog.html" class="mobile-nav-link">Blog</a>
+            <a href="/blog.html" class="mobile-nav-link">Blog</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="service-hero">
+    <section class="service-hero" style="position: relative;">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" aria-label="Breadcrumb" style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html#services" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Services</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name" style="color: #FFA500; font-weight: 500;">AI Lead Gen</span>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </nav>
+        
         <div class="container">
-            
             <div class="hero-content">
                 <div class="hero-badge"><i class="fas fa-bolt"></i> New for 2025</div>
                 <h1>AI Lead Generation & Booking Agents</h1>
@@ -142,211 +404,303 @@
                     <span class="stat-label">Lead Capture & Follow-up</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">3–14d</span>
+                        <span class="stat-number"><span aria-hidden="true">3–14d</span></span>
                     <span class="stat-label">Typical Go-Live</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">2–5x</span>
+                        <span class="stat-number"><span aria-hidden="true">2–5x</span></span>
                     <span class="stat-label">More Booked Calls</span>
                 </div>
                 </div>
 
                 <div class="hero-cta">
-                    <a href="#book-demo" class="btn btn-primary">Book a Demo</a>
-                    <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+                    <a href="index.html#calendly-container" class="btn btn-primary">Book a Demo</a>
+                    <a href="index.html#how-it-works" class="btn btn-secondary">See How It Works</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pain Points Section -->
-    <section class="services-overview">
-        <div class="container">
-            <h2>What Problems We Solve</h2>
-            <div class="services-grid">
+    <!-- Speed Matters Section -->
+    <section class="services-overview" style="background: rgba(15,15,25,0.4); padding: 80px 0; border-top: 1px solid rgba(255,165,0,0.1); border-bottom: 1px solid rgba(255,165,0,0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 16px; font-weight: 700;">⚡ Speed Is Everything in Lead Conversion</h2>
+                <p style="font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 1.6;">Business owners are busy—juggling operations, customers, and growth. Meanwhile, leads are slipping through the cracks.</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto 40px;" class="stat-cards-grid">
+                <div class="stat-card-red" style="background: rgba(20,20,30,0.8); padding: 32px 24px; border-radius: 16px; text-align: center; border: 2px solid rgba(255,80,80,0.4); box-shadow: 0 4px 20px rgba(255,50,50,0.15);">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: #ff4444; margin-bottom: 12px; line-height: 1;">1%</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: #fff;">30-Minute Response</div>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.5; margin: 0;">Lead conversion rate drops to just 1% when you wait half an hour</p>
+                </div>
+                
+                <div class="stat-card-green" style="background: rgba(20,20,30,0.8); padding: 32px 24px; border-radius: 16px; text-align: center; border: 2px solid rgba(100,255,100,0.4); box-shadow: 0 4px 20px rgba(50,255,50,0.15);">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: #33ff66; margin-bottom: 12px; line-height: 1;">24%</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: #fff;">5-Minute Response</div>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.5; margin: 0;">Leads contacted within 5 minutes are 24x more likely to convert</p>
+                </div>
+                
+                <div class="stat-card-orange" style="background: rgba(20,20,30,0.8); padding: 32px 24px; border-radius: 16px; text-align: center; border: 2px solid rgba(255,165,0,0.4); box-shadow: 0 4px 20px rgba(255,165,0,0.2);">
+                    <div style="font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #FFA500, #1E90FF); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; line-height: 1;">100%</div>
+                    <div style="font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; color: #fff;">Our AI Agents</div>
+                    <p style="color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.5; margin: 0;">Respond instantly, 24/7—even while you sleep, vacation, or focus on running your business</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(20,20,30,0.6); padding: 32px 40px; border-radius: 12px; border-left: 3px solid #FFA500; max-width: 900px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                <p style="font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,0.9); margin: 0;">
+                    <strong style="color: #FFA500;">Our AI agents work when you can't.</strong> They capture every lead the moment it arrives, qualify them with smart questions, answer FAQs instantly, and book qualified prospects directly into your calendar—automatically. No manual work. No missed opportunities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview" style="background: transparent; padding: 80px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="margin-bottom: 16px; text-align: center;">What Problems We Solve</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1rem; color: rgba(255,255,255,0.8);">Custom AI agents built for your industry—from professional services to local businesses</p>
+            
+            <!-- Top Row - 3 Cards -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto 24px;">
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-clock"></i></div>
                     <h3>Slow Response Kills Leads</h3>
                     <p>Leads go cold within minutes. Agents respond instantly via SMS/email, qualify, and push to booking.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-phone-volume"></i></div>
+                    <div class="service-icon"><i class="fas fa-phone-slash"></i></div>
                     <h3>No-Show & Drop-Off</h3>
                     <p>Automated reminders and rescheduling workflows reduce no-shows and recover missed opportunities.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-layer-group"></i></div>
-                    <h3>Leaky Workflows</h3>
-                    <p>We unify forms, chat, ads, and CRM so every hand-raiser gets routed, nurtured, and booked.</p>
+                    <h3>Manual Follow-Up</h3>
+                    <p>Agents run nurture sequences, handle objections, answer FAQs, and re-engage stale leads—no human required.</p>
                 </div>
+            </div>
+            
+            <!-- Bottom Row - 2 Cards Centered -->
+            <div style="display: flex; gap: 24px; max-width: 750px; margin: 0 auto; justify-content: center;">
+                <div class="service-card" style="flex: 1; max-width: 360px;">
+                    <div class="service-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Integrations</h3>
+                    <p>Calendars, CRMs, chat widgets, ad platforms, and website forms. We plug into your stack.</p>
+                    <ul style="margin-top: 12px; padding-left: 20px; font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                        <li>Calendly, Google/Outlook Calendar</li>
+                        <li>HubSpot, Pipedrive, Salesforce</li>
+                        <li>Meta/Google Ads, website forms</li>
+                    </ul>
+                </div>
+                <div class="service-card" style="flex: 1; max-width: 360px;">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Lead Quality & Tracking</h3>
+                    <p>AI scores and prioritizes leads, logs every interaction in your CRM, and provides insights on what's working.</p>
+                </div>
+            </div>
+
+            <!-- Industries Section -->
+            <div style="margin-top: 60px; background: rgba(20,20,30,0.5); padding: 40px; border-radius: 16px; border: 1px solid rgba(255,165,0,0.2);">
+                <h3 style="text-align: center; font-size: 1.8rem; margin-bottom: 30px; color: #FFA500;">Built for Any Industry</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                    <div class="industry-card">
+                        <div class="emoji">⚖️</div>
+                        <h4>Legal Services</h4>
+                        <p>Lawyers, attorneys, law firms</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">💼</div>
+                        <h4>Professional Services</h4>
+                        <p>CPAs, consultants, coaches</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🏥</div>
+                        <h4>Healthcare</h4>
+                        <p>Dentists, clinics, med spas</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">💅</div>
+                        <h4>Beauty & Wellness</h4>
+                        <p>Nail salons, spas, barbers</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🏡</div>
+                        <h4>Home Services</h4>
+                        <p>HVAC, plumbers, contractors</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🌿</div>
+                        <h4>Outdoor Services</h4>
+                        <p>Lawn care, landscaping, pools</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🏠</div>
+                        <h4>Real Estate</h4>
+                        <p>Agents, brokers, investors</p>
+                    </div>
+                    <div class="industry-card">
+                        <div class="emoji">🎓</div>
+                        <h4>Education</h4>
+                        <p>Tutors, courses, training</p>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 30px; font-size: 1rem; color: rgba(255,255,255,0.8);">Every agent is customized with industry-specific questions, FAQs, and booking logic tailored to your business.</p>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section id="how-it-works" class="services-overview">
-        <div class="container">
-            <h2>How It Works</h2>
-            <div class="services-grid">
+    <section class="services-overview" id="how-it-works" style="background: rgba(15,15,25,0.4); padding: 80px 0; border-top: 1px solid rgba(255,165,0,0.1); border-bottom: 1px solid rgba(255,165,0,0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center;">How We Get You Set Up</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; font-size: 1.1rem; color: rgba(255,255,255,0.8);">Deploy in days, not weeks. We handle setup, integrations, and ongoing optimization.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto;">
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-robot"></i></div>
-                    <h3>AI Agents</h3>
-                    <p>Qualify leads, answer objections, handle FAQs, and route to your calendar. Custom playbooks by industry.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Lead qualification & intent scoring</li>
-                        <li><i class="fas fa-check"></i> Objection handling & FAQs</li>
-                        <li><i class="fas fa-check"></i> Live handoff to team when needed</li>
-                    </ul>
+                    <div class="service-icon"><i class="fas fa-comments"></i></div>
+                    <h3>1. Discovery Call</h3>
+                    <p>We map your funnel, identify drop-off points, and design your agent workflow.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-diagram-project"></i></div>
-                    <h3>Workflows</h3>
-                    <p>Automated SMS/email sequences, reminders, rescheduling, and post-call follow-ups.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Drip & reminder sequences</li>
-                        <li><i class="fas fa-check"></i> No-show recovery</li>
-                        <li><i class="fas fa-check"></i> CRM updates & tagging</li>
-                    </ul>
+                    <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>2. Setup & Integration</h3>
+                    <p>We configure your AI agent, connect it to your calendar, CRM, and messaging channels.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-plug"></i></div>
-                    <h3>Integrations</h3>
-                    <p>Calendars, CRMs, chat widgets, ad platforms, and website forms. We plug into your stack.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Calendly, Google/Outlook Calendar</li>
-                        <li><i class="fas fa-check"></i> HubSpot, Pipedrive, Salesforce</li>
-                        <li><i class="fas fa-check"></i> Meta/Google Ads, website forms</li>
-                    </ul>
+                    <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>3. Go Live</h3>
+                    <p>Your agent starts capturing and qualifying leads 24/7. We monitor, tweak, and scale.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Packages -->
-    <section class="services-overview">
-        <div class="container">
-            <h2>Packages That Fit Your Growth Stage</h2>
-            <div class="services-grid">
+    <!-- Packages Section -->
+    <section class="services-overview" style="background: transparent; padding: 80px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 50px;">Packages That Fit Your Growth Stage</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto;">
                 <div class="service-card">
-                    <h3>Starter</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Inbound agent + Calendly</li>
-                        <li><i class="fas fa-check"></i> Basic follow-ups & reminders</li>
-                        <li><i class="fas fa-check"></i> Standard integrations</li>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Starter</h3>
+                    <ul style="padding-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;">Inbound agent + Calendly</li>
+                        <li style="margin-bottom: 8px;">Basic follow-ups & reminders</li>
+                        <li style="margin-bottom: 8px;">Standard integrations</li>
                     </ul>
+                    <a href="index.html#calendly-container" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="service-card" style="border: 2px solid rgba(255,165,0,0.5);">
+                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Pro</h3>
+                    <ul style="padding-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;">Multi-channel agents (SMS, email, chat)</li>
+                        <li style="margin-bottom: 8px;">Advanced qualification & routing</li>
+                        <li style="margin-bottom: 8px;">CRM updates & tagging</li>
+                        <li style="margin-bottom: 8px;">No-show recovery</li>
+                    </ul>
+                    <a href="index.html#calendly-container" class="btn btn-primary">Book a Call</a>
                 </div>
                 <div class="service-card">
-                    <h3>Pro</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Multi-channel workflows</li>
-                        <li><i class="fas fa-check"></i> Objection handling & scoring</li>
-                        <li><i class="fas fa-check"></i> CRM sync & reporting</li>
+                    <h3 style="font-size: 1.6rem; margin-bottom: 16px;">Enterprise</h3>
+                    <ul style="padding-left: 20px; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;">Custom workflows & logic</li>
+                        <li style="margin-bottom: 8px;">White-label deployment</li>
+                        <li style="margin-bottom: 8px;">Dedicated support & optimization</li>
                     </ul>
-                </div>
-                <div class="service-card">
-                    <h3>Scale</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Custom playbooks & data layer</li>
-                        <li><i class="fas fa-check"></i> Advanced routing & SLAs</li>
-                        <li><i class="fas fa-check"></i> Dedicated optimization</li>
-                    </ul>
+                    <a href="index.html#calendly-container" class="btn btn-primary">Contact Us</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQs -->
-    <section class="services-overview">
-        <div class="container">
-            <h2>FAQs</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>How fast can we launch?</h3>
-                    <p>Most go live in 3–14 days depending on integrations and playbook depth.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Do you replace our team?</h3>
-                    <p>No—agents augment your team, handle repetitive tasks, and hand off qualified leads.</p>
-                </div>
-                <div class="service-card">
-                    <h3>How do you measure success?</h3>
-                    <p>Booked calls/appointments, show rates, and revenue. We report weekly/monthly.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA (links to main page Calendly) -->
-    <section id="book-demo" class="cta-section">
-        <div class="container">
+    <!-- CTA Section -->
+    <section class="cta-section">
             <div class="cta-content">
                 <h2>See It Working With Your Leads</h2>
                 <p>Get a live demo and launch plan tailored to your business. We handle setup end-to-end.</p>
-                <a href="index.html#booking-section" class="btn btn-primary">Book a Strategy Call</a>
-            </div>
+            <a href="index.html#calendly-container" class="btn btn-primary">Book a Strategy Call</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="Logo.png" alt="Lumyx Agency" width="120" height="30">
-                        <h3>Lumyx Agency</h3>
+    <footer style="background: rgba(15,15,25,0.8); border-top: 1px solid rgba(255,165,0,0.2); padding: 60px 0 30px;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <img src="Logo.png" alt="Lumyx Agency" width="50" height="50" style="border-radius: 8px;">
+                        <h2 style="font-size: 1.5rem; margin: 0; color: #fff;">Lumyx Agency</h2>
                     </div>
-                    <p>Scaling ecommerce and online businesses to 7-figures through proven marketing strategies.</p>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; max-width: 400px;">Scaling ecommerce and online businesses to 7-figures through proven marketing strategies.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a></li>
-                        <li><a href="ppc-management.html">PPC Management</a></li>
-                        <li><a href="index.html#services">SEO Services</a></li>
-                        <li><a href="index.html#services">Conversion Optimization</a></li>
-                    </ul>
+                
+                <div>
+                    <h3 style="color: #FFA500; font-size: 1.1rem; margin-bottom: 20px; font-weight: 600;">Services</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="index.html#services" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">All Services</a>
+                        <a href="ai-lead-generation.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">AI Lead Gen & Booking Agents</a>
+                        <a href="ppc-management.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">PPC Management</a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="case-studies.html">Case Studies</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: hello@lumyx.co</p>
-                    <p>Phone: +1-248-238-2704</p>
+                
+                <div>
+                    <h3 style="color: #FFA500; font-size: 1.1rem; margin-bottom: 20px; font-weight: 600;">Company</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="index.html#about" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">About</a>
+                        <a href="index.html#portfolio" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Portfolio</a>
+                        <a href="blog.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Blog</a>
+                        <a href="faq.html" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">FAQ</a>
+                        <a href="index.html#contact" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;">Contact</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Lumyx Agency. All rights reserved.</p>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center;">
+                <p style="color: rgba(255,255,255,0.5); margin: 0; font-size: 0.9rem;">&copy; 2025 Lumyx Agency. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- EXACT SAME MOBILE MENU JS FROM INDEX -->
     <script>
-      // Simple mobile menu toggle for this page
+        // Mobile Menu - toggle sidebar and overlay
       (function(){
         const btn = document.getElementById('mobile-menu-btn');
         const overlay = document.getElementById('mobile-nav-overlay');
         const sidebar = document.getElementById('mobile-nav-sidebar');
         const closeBtn = document.getElementById('mobile-nav-close');
-        function openMenu(){ overlay.classList.add('active'); sidebar.classList.add('active'); document.body.style.overflow='hidden'; }
-        function closeMenu(){ overlay.classList.remove('active'); sidebar.classList.remove('active'); document.body.style.overflow=''; }
+
+            function openMenu(){
+                overlay.classList.add('active');
+                sidebar.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu(){
+                overlay.classList.remove('active');
+                sidebar.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
         if (btn && overlay && sidebar && closeBtn) {
           btn.addEventListener('click', openMenu);
           closeBtn.addEventListener('click', closeMenu);
           overlay.addEventListener('click', function(e){ if (e.target === overlay) closeMenu(); });
+                // Close on ESC
           document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+                // Close when navigating via sidebar links
           sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
         }
       })();
     </script>
+    
+    <script src="js/enhanced-cards.js" defer></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>
+
+
+
+
 
 

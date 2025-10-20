@@ -39,10 +39,10 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
     
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/main.css?v=2.0">
+    <link rel="stylesheet" href="css/main.css?v=4.3">
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Service Pages CSS - Load Last -->
-    <link rel="stylesheet" href="css/service-pages.css?v=1.1">
+    <link rel="stylesheet" href="css/service-pages.css?v=1.8">
+    <link rel="stylesheet" href="css/mobile-fixes.css?v=20251017V">
     
     <!-- Schema Markup -->
     <script type="application/ld+json">
@@ -63,77 +63,194 @@
         }
     }
     </script>
+    
+    <style>
+      /* PPC Hero gradient background */
+      .service-hero {
+        background: linear-gradient(135deg, rgba(15,15,30,0.95) 0%, rgba(26,26,46,0.95) 50%, rgba(15,15,30,0.95) 100%) !important;
+        position: relative;
+      }
+      
+      .service-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(255,165,0,0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(30,144,255,0.06) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
+      }
+      
+      .service-hero .container {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Breadcrumb desktop positioning - override main.css */
+      .breadcrumb {
+        position: absolute !important;
+        top: 8px !important;
+        left: 12px !important;
+        z-index: 10 !important;
+        border-radius: 8px;
+        margin-top: 0 !important;
+        padding: 8px 16px !important;
+      }
+      
+      /* Desktop hero padding */
+      @media screen and (min-width: 993px) {
+        .service-hero {
+          padding-top: 140px !important;
+        }
+      }
+      
+      /* Mobile container padding and breadcrumb */
+      @media screen and (max-width: 992px) {
+        .container {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        
+        /* Mobile hero adjustments - reduced padding */
+        .service-hero {
+          padding-top: 100px !important;
+        }
+        
+        .service-hero .hero-content {
+          padding-top: 8px;
+        }
+        
+        .hero-badge {
+          margin-top: 0 !important;
+          margin-bottom: 15px !important;
+        }
+        
+        /* Breadcrumb mobile positioning - top left corner of hero */
+        .breadcrumb {
+          position: absolute !important;
+          top: 5px !important;
+          left: 5px !important;
+          padding: 5px 10px !important;
+          font-size: 0.7rem !important;
+          max-width: calc(100% - 20px);
+          z-index: 15 !important;
+          margin-top: 0 !important;
+        }
+        
+        .breadcrumb ol {
+          font-size: 0.65rem !important;
+          gap: 3px !important;
+        }
+        
+        .breadcrumb ol span {
+          margin: 0 3px !important;
+        }
+      }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="logo">
-            <img src="Logo.png" alt="Lumyx Agency Logo" width="160" height="40">
+        <a href="index.html" class="logo">
+            <img src="Logo.png" alt="Lumyx Agency - Digital Marketing & Growth Agency" width="160" height="auto" fetchpriority="high">
             <h1>Lumyx Agency</h1>
-        </div>
-        <nav>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
+            <span class="hamburger-bars" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Main Navigation">
             <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
             <div class="nav-dropdown">
                 <a href="index.html#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
                 <div class="dropdown-menu">
+                    <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
                     <a href="ppc-management.html">PPC Management</a>
                     <a href="index.html#services">All Services</a>
                 </div>
             </div>
-            <a href="case-studies.html">Case Studies</a>
-            <a href="blog.html">Blog</a>
+            <a href="index.html#portfolio">Portfolio</a>
             <a href="index.html#contact">Contact</a>
-        </nav>
-        <button class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-    </header>
+      <a href="blog.html">Blog</a>
+    </nav>
+  </header>
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav-overlay">
-        <div class="mobile-nav">
-            <div class="mobile-nav-header">
-                <h2>Menu</h2>
-                <button class="mobile-nav-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="mobile-nav-content">
-                <a href="index.html">Home</a>
-                <a href="index.html#services">Services</a>
-                <a href="case-studies.html">Case Studies</a>
-                <a href="blog.html">Blog</a>
-                <a href="faq.html">FAQ</a>
-                <a href="index.html#contact">Contact</a>
-            </div>
+    <!-- Mobile Navigation Sidebar -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-sidebar" id="mobile-nav-sidebar">
+        <div class="mobile-nav-header">
+            <h3>Menu</h3>
+            <button class="mobile-nav-close" id="mobile-nav-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-nav-menu">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="index.html#about" class="mobile-nav-link">About</a>
+            <a href="index.html#services" class="mobile-nav-link">Services</a>
+            <a href="ai-lead-generation.html" class="mobile-nav-link">AI Lead Gen & Booking Agents</a>
+            <a href="ppc-management.html" class="mobile-nav-link">PPC Management</a>
+            <a href="index.html#portfolio" class="mobile-nav-link">Portfolio</a>
+            <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+            <a href="/blog.html" class="mobile-nav-link">Blog</a>
+            <a href="faq.html" class="mobile-nav-link">FAQ</a>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="service-hero">
+    <section class="service-hero" style="position: relative;">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" aria-label="Breadcrumb" style="background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); padding: 8px 16px; border-radius: 8px;">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; padding: 0; font-size: 0.85rem;">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" style="display: flex; align-items: center;">
+                    <a itemprop="item" href="index.html#services" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.3s;">
+                        <span itemprop="name">Services</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                    <span style="margin: 0 6px; color: rgba(255,255,255,0.5);">/</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span itemprop="name" style="color: #FFA500; font-weight: 500;">PPC Management</span>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </nav>
+        
         <div class="container">
             <div class="hero-content">
-                <h1><span>PPC Management</span> Services<br>for <span>Ecommerce</span> Stores</h1>
-                <p class="hero-subtitle">Drive profitable growth with our proven PPC strategies. Specializing in Google Shopping, Facebook ads, and retargeting campaigns that deliver an average 4.8x ROAS for Shopify stores.</p>
+                <div class="hero-badge"><i class="fas fa-chart-line"></i> Proven Results Since 2020</div>
+                <h1><span>PPC Management</span> Services<br>for <span class="glow-text">Ecommerce Stores</span> and High Ticket Offers</h1>
+                <p class="hero-subtitle">Drive profitable growth with our proven PPC strategies. Specializing in Google Shopping, Facebook ads, and retargeting campaigns that deliver an average 4.8x ROAS for Shopify stores and high-ticket coaches. <a href="index.html#case-studies" style="color: #FFA500; text-decoration: underline;">See our results</a>.</p>
                 
                 <div class="hero-stats">
-                    <div class="stat">
+                    <div class="stat stat-card">
                         <span class="stat-number">4.8x</span>
                         <span class="stat-label">Average ROAS</span>
                     </div>
-                    <div class="stat">
+                    <div class="stat stat-card">
                         <span class="stat-number">312%</span>
                         <span class="stat-label">Revenue Increase</span>
                     </div>
-                    <div class="stat">
+                    <div class="stat stat-card">
                         <span class="stat-number">25+</span>
                         <span class="stat-label">Stores Scaled</span>
                     </div>
                 </div>
                 
                 <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get Your Free PPC Audit</a>
-                    <a href="#case-studies" class="btn btn-secondary">View Case Studies</a>
+                    <a href="index.html#calendly-container" class="btn btn-primary">Get Your Free PPC Audit</a>
+                    <a href="index.html#case-studies" class="btn btn-secondary">View Case Studies</a>
                 </div>
             </div>
         </div>
@@ -149,40 +266,35 @@
                         <i class="fab fa-google"></i>
                     </div>
                     <h3>Google Ads & Shopping</h3>
-                    <p>Maximize visibility with Google Shopping campaigns, search ads, and display advertising optimized for ecommerce conversions.</p>
+                    <p>Maximize your Google Shopping campaigns with optimized product feeds, smart bidding strategies, and conversion-focused ad copy. Learn more about our <a href="index.html#services" style="color: #FFA500;">digital marketing services</a>.</p>
                     <ul>
                         <li>Google Shopping Campaigns</li>
                         <li>Search & Display Ads</li>
                         <li>Product Feed Optimization</li>
-                        <li>Bid Strategy Management</li>
                     </ul>
                 </div>
-                
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fab fa-facebook"></i>
                     </div>
                     <h3>Facebook & Instagram Ads</h3>
-                    <p>Scale your brand with targeted social media advertising that converts browsers into buyers across Meta platforms.</p>
+                    <p>Target your ideal customers with precision using Facebook and Instagram's advanced targeting options and creative ad formats.</p>
                     <ul>
                         <li>Dynamic Product Ads</li>
                         <li>Lookalike Audiences</li>
-                        <li>Video Ad Creation</li>
-                        <li>Conversion Tracking</li>
+                        <li>Creative Testing & Optimization</li>
                     </ul>
                 </div>
-                
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
                     <h3>Retargeting Campaigns</h3>
-                    <p>Re-engage visitors who didn't purchase with strategic retargeting across multiple platforms to maximize conversions.</p>
+                    <p>Re-engage visitors who didn't convert with strategic retargeting campaigns across multiple platforms.</p>
                     <ul>
                         <li>Website Retargeting</li>
                         <li>Abandoned Cart Recovery</li>
                         <li>Cross-Platform Campaigns</li>
-                        <li>Dynamic Creative Testing</li>
                     </ul>
                 </div>
             </div>
@@ -190,52 +302,51 @@
     </section>
 
     <!-- Case Studies -->
-    <section id="case-studies" class="case-studies">
+    <section class="case-studies">
         <div class="container">
-            <h2>PPC Success Stories</h2>
+            <h2>Success Stories</h2>
             <div class="case-studies-grid">
                 <div class="case-study-card">
                     <div class="case-study-header">
-                        <h3>Fashion Ecommerce Store</h3>
-                        <span class="industry">Fashion & Apparel</span>
+                        <h3>Ecommerce Fashion Brand</h3>
+                        <span class="case-study-industry">Fashion & Apparel</span>
                     </div>
                     <div class="case-study-results">
                         <div class="result">
-                            <span class="result-number">312%</span>
-                            <span class="result-label">Revenue Increase</span>
-                        </div>
-                        <div class="result">
-                            <span class="result-number">4.2x</span>
+                            <span class="result-number">6.2x</span>
                             <span class="result-label">ROAS</span>
                         </div>
                         <div class="result">
-                            <span class="result-number">68%</span>
-                            <span class="result-label">Lower CPA</span>
+                            <span class="result-number">+450%</span>
+                            <span class="result-label">Revenue</span>
+                        </div>
+                        <div class="result">
+                            <span class="result-number">-35%</span>
+                            <span class="result-label">CPA</span>
                         </div>
                     </div>
-                    <p>Transformed Google Shopping campaigns and implemented strategic retargeting, resulting in explosive growth for this fashion brand.</p>
+                    <p>Implemented Google Shopping optimization and Facebook retargeting campaigns, resulting in 6.2x ROAS and 450% revenue increase. <a href="index.html#case-studies" style="color: #FFA500;">View more case studies</a>.</p>
                 </div>
-                
                 <div class="case-study-card">
                     <div class="case-study-header">
                         <h3>Home & Garden Store</h3>
-                        <span class="industry">Home & Garden</span>
+                        <span class="case-study-industry">Home & Garden</span>
                     </div>
                     <div class="case-study-results">
                         <div class="result">
-                            <span class="result-number">189%</span>
-                            <span class="result-label">Revenue Growth</span>
-                        </div>
-                        <div class="result">
-                            <span class="result-number">5.1x</span>
+                            <span class="result-number">4.8x</span>
                             <span class="result-label">ROAS</span>
                         </div>
                         <div class="result">
-                            <span class="result-number">45%</span>
-                            <span class="result-label">More Conversions</span>
+                            <span class="result-number">+312%</span>
+                            <span class="result-label">Revenue</span>
+                        </div>
+                        <div class="result">
+                            <span class="result-number">+85%</span>
+                            <span class="result-label">Traffic</span>
                         </div>
                     </div>
-                    <p>Optimized product feeds and launched targeted Facebook campaigns, driving significant revenue growth in competitive market.</p>
+                    <p>Optimized Google Ads campaigns and implemented strategic retargeting, achieving 4.8x ROAS and 312% revenue growth.</p>
                 </div>
             </div>
         </div>
@@ -244,51 +355,33 @@
     <!-- Process Section -->
     <section class="process-section">
         <div class="container">
-            <h2>Our Proven PPC Process</h2>
+            <h2>Our PPC Management Process</h2>
             <div class="process-steps">
                 <div class="process-step">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Account Audit & Analysis</h3>
-                        <p>Comprehensive review of existing campaigns, identifying opportunities for optimization and growth.</p>
-                    </div>
+                    <div class="step-number">1</div>
+                    <h3>Audit & Strategy</h3>
+                    <p>We analyze your current campaigns, identify opportunities, and develop a data-driven strategy for maximum ROI.</p>
                 </div>
-                
                 <div class="process-step">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Strategy Development</h3>
-                        <p>Custom PPC strategy aligned with your business goals, target audience, and competitive landscape.</p>
-                    </div>
+                    <div class="step-number">2</div>
+                    <h3>Campaign Setup</h3>
+                    <p>We build and optimize your campaigns with proper structure, targeting, and creative elements for better performance.</p>
                 </div>
-                
                 <div class="process-step">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Campaign Setup & Launch</h3>
-                        <p>Professional campaign creation with optimized ad copy, targeting, and bid strategies for maximum ROI.</p>
-                    </div>
-                </div>
-                
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3>Optimization & Reporting</h3>
-                        <p>Continuous optimization based on performance data with detailed monthly reports and insights.</p>
-                    </div>
+                    <div class="step-number">3</div>
+                    <h3>Ongoing Optimization</h3>
+                    <p>We continuously monitor, test, and optimize your campaigns to improve performance and maximize your return on ad spend.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section id="contact" class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Scale Your Ecommerce Store?</h2>
-                <p>Get a free PPC audit and custom strategy to increase your revenue with profitable advertising campaigns.</p>
-                <a href="index.html#booking-section" class="btn btn-primary">Get Your Free PPC Audit</a>
-            </div>
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Scale Your PPC Campaigns?</h2>
+            <p>Get a free PPC audit and discover how we can improve your campaign performance and ROI.</p>
+            <a href="index.html#calendly-container" class="btn btn-primary">Get Your Free PPC Audit</a>
         </div>
     </section>
 
@@ -296,48 +389,64 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <img src="Logo.png" alt="Lumyx Agency" width="120" height="30">
-                        <h3>Lumyx Agency</h3>
-                    </div>
+                <div class="footer-logo">
+                    <img src="Logo.png" alt="Lumyx Agency" width="60" height="60">
+                    <h2>Lumyx Agency</h2>
                     <p>Scaling ecommerce and online businesses to 7-figures through proven marketing strategies.</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="ppc-management.html">PPC Management</a></li>
-                        <li><a href="index.html#services">SEO Services</a></li>
-                        <li><a href="index.html#services">Social Media Marketing</a></li>
-                        <li><a href="index.html#services">Conversion Optimization</a></li>
-                    </ul>
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <a href="index.html#services">All Services</a>
+                    <a href="ai-lead-generation.html">AI Lead Gen & Booking Agents</a>
+                    <a href="ppc-management.html">PPC Management</a>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="case-studies.html">Case Studies</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: hello@lumyx.co</p>
-                    <p>Phone: +1-248-238-2704</p>
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#portfolio">Portfolio</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="index.html#contact">Contact</a>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2025 Lumyx Agency. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- EXACT SAME MOBILE MENU JS FROM INDEX -->
+    <script>
+        // Mobile Menu - toggle sidebar and overlay
+        (function(){
+            const btn = document.getElementById('mobile-menu-btn');
+            const overlay = document.getElementById('mobile-nav-overlay');
+            const sidebar = document.getElementById('mobile-nav-sidebar');
+            const closeBtn = document.getElementById('mobile-nav-close');
+
+            function openMenu(){
+                overlay.classList.add('active');
+                sidebar.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMenu(){
+                overlay.classList.remove('active');
+                sidebar.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (btn && overlay && sidebar && closeBtn) {
+                btn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                overlay.addEventListener('click', function(e){ if (e.target === overlay) closeMenu(); });
+                // Close on ESC
+                document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+                // Close when navigating via sidebar links
+                sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+            }
+        })();
+    </script>
+    
     <script src="js/main.js" defer></script>
 </body>
-</html> 
+</html>
