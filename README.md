@@ -1,6 +1,6 @@
-# Lumyx Agency Website
+# Lumyx Consulting Website
 
-This repository contains the Lumyx Agency website, a modern digital marketing agency site built with HTML, CSS, and JavaScript.
+This repository contains the Lumyx Consulting website, a modern digital marketing agency site built with HTML, CSS, and JavaScript.
 
 ## Features
 
@@ -33,7 +33,7 @@ This website is deployed using GitHub Pages. Visit the live site at: [Your GitHu
 
 ## License
 
-© 2025 Lumyx Agency. All rights reserved.
+© 2025 Lumyx Consulting. All rights reserved.
 
 ## Security Features
 

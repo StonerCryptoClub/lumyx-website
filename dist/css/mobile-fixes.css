@@ -138,7 +138,14 @@
 
   /* Fix hero section */
   #home {
-    padding: 100px 20px 60px;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 70px 20px 80px !important;
+  }
+  
+  /* Ensure all service heroes have consistent spacing */
+  .service-hero {
+    padding: 90px 20px 80px !important;
   }
 
   .hero-content h1 {
@@ -177,6 +184,166 @@
     background: none !important; 
     -webkit-text-fill-color: #ffb020 !important; 
     color: #ffb020 !important; 
+  }
+
+  /* ===== FIX BREADCRUMBS POSITION - TOP LEFT CORNER ===== */
+  nav.breadcrumb {
+    position: absolute !important;
+    top: 20px !important;
+    left: 16px !important;
+    margin: 0 !important;
+    padding: 6px 14px !important;
+    border-radius: 10px !important;
+    background: rgba(12, 12, 18, 0.6) !important;
+    backdrop-filter: blur(8px) !important;
+    z-index: 20 !important;
+  }
+
+  nav.breadcrumb ol {
+    gap: 4px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .service-hero {
+    position: relative !important;
+    padding-top: 88px !important;
+  }
+
+  .service-hero nav.breadcrumb {
+    top: 18px !important;
+  }
+
+  main nav.breadcrumb + .blog-section {
+    margin-top: 72px !important;
+  }
+
+  .case-study-hero {
+    position: relative !important;
+    padding-top: 90px !important;
+  }
+
+  .case-study-hero .breadcrumb {
+    position: absolute !important;
+    top: 20px !important;
+    left: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 6px 14px !important;
+    border-radius: 10px !important;
+    background: rgba(12, 12, 18, 0.6) !important;
+    z-index: 20 !important;
+  }
+
+  .case-study-hero .breadcrumb i {
+    font-size: 0.7rem !important;
+  }
+
+  .case-study-hero .hero-content {
+    margin-top: 0 !important;
+  }
+
+  /* Blog hero breadcrumbs */
+  .blog-hero .breadcrumb,
+  .blog-hero nav[aria-label="breadcrumb"] {
+    top: 80px !important;
+  }
+
+  /* ===== COMPRESS CASE STUDIES / PORTFOLIO SECTION ===== */
+  .modern-portfolio-section,
+  #portfolio {
+    padding: 40px 16px !important;
+  }
+
+  .portfolio-header {
+    margin-bottom: 25px !important;
+  }
+
+  .portfolio-header h2 {
+    font-size: 1.8rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .portfolio-subtitle {
+    font-size: 0.95rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Portfolio filters */
+  .portfolio-filters {
+    margin-bottom: 25px !important;
+    gap: 8px !important;
+  }
+
+  .modern-filter-btn {
+    padding: 8px 14px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Portfolio grid - single column, more compact */
+  .modern-portfolio-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Portfolio cards - more compact */
+  .portfolio-item,
+  .modern-portfolio-item {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+  }
+
+  .portfolio-image-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: 190px !important;
+    padding-top: 0 !important;
+    overflow: hidden !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, rgba(30, 30, 35, 0.9), rgba(40, 40, 48, 0.9)) !important;
+  }
+
+  .portfolio-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .portfolio-image.placeholder,
+  .placeholder-image {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  .portfolio-content {
+    padding: 16px !important;
+  }
+
+  .portfolio-category {
+    font-size: 0.8rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .portfolio-title {
+    font-size: 1.2rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .portfolio-description {
+    font-size: 0.9rem !important;
+    margin-bottom: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  .portfolio-link {
+    font-size: 0.85rem !important;
+    padding: 8px 16px !important;
   }
 }
 

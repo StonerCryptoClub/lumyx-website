@@ -264,7 +264,7 @@ self.addEventListener('push', event => {
     };
     
     event.waitUntil(
-      self.registration.showNotification('Lumyx Agency', options)
+      self.registration.showNotification('Lumyx Consulting', options)
     );
   }
 });

@@ -1,0 +1,583 @@
+/* iPad-Specific Layout Fixes */
+/* Targets iPad Air (820px) and iPad Pro (834px, 1024px, 1366px) */
+/* DO NOT affect mobile (<768px) or desktop (>1024px) */
+
+/* ============================================
+   TABLET RANGE: 768px - 1024px
+   Fixes for iPad Air and iPad Pro Portrait
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  /* ===== FOOTER FIXES - CENTER ALIGNED ===== */
+  footer {
+    padding: 60px 40px 30px !important;
+    text-align: center !important;
+  }
+
+  .footer-content {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px 60px !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    align-items: start !important;
+  }
+
+  .footer-section {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+  }
+
+  .footer-section h3 {
+    font-size: 1.3rem !important;
+    margin-bottom: 16px !important;
+    text-align: center !important;
+  }
+
+  .footer-section p {
+    font-size: 0.95rem !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .footer-section ul {
+    font-size: 0.95rem !important;
+    list-style: none !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 10px !important;
+    text-align: center !important;
+  }
+
+  .footer-section ul li a {
+    display: inline-block !important;
+  }
+
+  .footer-bottom {
+    margin-top: 40px !important;
+    padding-top: 30px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .footer-bottom p {
+    text-align: center !important;
+    margin: 0 !important;
+  }
+
+  .footer-cta {
+    margin-left: 0 !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* ===== SERVICES GRID - TWO UP WITH CENTERED ODD CARD ===== */
+  .services-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+    max-width: 100% !important;
+    padding: 0 24px !important;
+    justify-items: stretch !important;
+  }
+
+  .services-grid .modern-service-card {
+    height: 100% !important;
+  }
+
+  .services-grid .modern-service-card:nth-last-child(1):nth-child(odd) {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    max-width: 520px !important;
+    width: 100% !important;
+  }
+
+  /* ===== PORTFOLIO / CASE STUDIES GRID ===== */
+  .modern-portfolio-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+    max-width: 100% !important;
+    padding: 0 24px !important;
+    justify-items: stretch !important;
+  }
+
+  .modern-portfolio-grid > * {
+    width: 100% !important;
+  }
+
+  .modern-portfolio-grid > *:nth-last-child(1):nth-child(odd) {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    max-width: 540px !important;
+    width: 100% !important;
+  }
+
+  .portfolio-container {
+    padding: 0 30px !important;
+  }
+
+  /* Portfolio section spacing */
+  .modern-portfolio-section {
+    padding: 50px 20px !important;
+  }
+
+  /* Portfolio cards sizing */
+  .portfolio-item,
+  .modern-portfolio-item {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Ensure portfolio images display properly */
+  .portfolio-image-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: 220px !important;
+    padding-top: 0 !important;
+    overflow: hidden !important;
+    background: linear-gradient(45deg, rgba(30, 30, 35, 0.95), rgba(40, 40, 45, 0.95)) !important;
+  }
+
+  .portfolio-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* SVG placeholder images */
+  .portfolio-image.placeholder,
+  .placeholder-image {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
+
+  /* ===== PROBLEM/SOLUTION GRID ===== */
+  .problem-solution-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .problem-side,
+  .solution-side {
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
+  }
+
+  /* ===== VALUE PROPOSITION CARDS ===== */
+  .value-props-grid,
+  .benefits-grid,
+  .features-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px !important;
+  }
+
+  /* Center third item if it exists */
+  .value-props-grid > :nth-child(3):last-child,
+  .benefits-grid > :nth-child(3):last-child,
+  .features-grid > :nth-child(3):last-child {
+    grid-column: 1 / -1 !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+  }
+
+  /* ===== HERO STATS ===== */
+  .hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px !important;
+    max-width: 600px !important;
+    margin: 30px auto !important;
+  }
+
+  /* ===== RESULTS SHOWCASE ===== */
+  .results-showcase {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px !important;
+  }
+
+  /* Center third item if it exists */
+  .results-showcase > :nth-child(3):last-child {
+    grid-column: 1 / -1 !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .modern-testimonial-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+  }
+
+  /* ===== CTA BUTTONS ===== */
+  .cta-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  .cta-buttons .btn {
+    flex: 0 1 auto !important;
+    min-width: 200px !important;
+  }
+
+  /* ===== HERO CONTENT ===== */
+  .hero-content {
+    max-width: 800px !important;
+    padding: 0 40px !important;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem !important;
+    max-width: 700px !important;
+  }
+
+  /* ===== BOOKING SECTION - BETTER CENTERING ===== */
+  .booking-section {
+    padding: 60px 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .booking-content {
+    max-width: 800px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .booking-info {
+    text-align: center !important;
+    margin-bottom: 40px !important;
+    max-width: 700px !important;
+  }
+
+  .booking-info h2 {
+    text-align: center !important;
+    margin-bottom: 15px !important;
+  }
+
+  .booking-info p {
+    text-align: center !important;
+  }
+
+  #calendly-container {
+    max-width: 750px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .booking-urgency {
+    text-align: center !important;
+    margin-top: 20px !important;
+  }
+
+  /* ===== SERVICE CARDS INTERNAL SPACING ===== */
+  .modern-service-card {
+    padding: 30px 20px !important;
+  }
+
+  .modern-service-card h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .service-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .service-features {
+    font-size: 0.9rem !important;
+  }
+
+  .service-features li {
+    margin-bottom: 8px !important;
+  }
+
+  .service-icon {
+    font-size: 2rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  .service-number {
+    font-size: 1rem !important;
+  }
+
+  .service-results .metric-number {
+    font-size: 2rem !important;
+  }
+
+  .service-results .metric-label {
+    font-size: 0.85rem !important;
+  }
+
+  /* ===== PORTFOLIO FILTERS ===== */
+  .portfolio-filters {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    justify-content: center !important;
+    padding: 0 30px !important;
+  }
+
+  .modern-filter-btn {
+    padding: 10px 20px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* ===== SECTION PADDING ===== */
+  section {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 30px !important;
+  }
+
+  /* Services Section specific */
+  .modern-services-section {
+    padding: 60px 20px !important;
+  }
+
+  .services-header {
+    text-align: center !important;
+    margin-bottom: 40px !important;
+    max-width: 800px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* ===== NEWSLETTER / LEAD MAGNET CARDS ===== */
+  .newsletter-benefits,
+  .lead-magnet-features {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 25px !important;
+  }
+
+  .newsletter-benefits > :nth-child(3):last-child,
+  .lead-magnet-features > :nth-child(3):last-child {
+    grid-column: 1 / -1 !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ============================================
+   LARGER TABLET / iPad Pro Landscape
+   1025px - 1366px
+   ============================================ */
+
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+  
+  /* Keep 3-column layouts but with better spacing */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 25px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+  }
+
+  .services-grid .modern-service-card:nth-child(3) {
+    grid-column: auto !important;
+    max-width: 100% !important;
+  }
+
+  .modern-portfolio-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 25px !important;
+  }
+
+  .modern-portfolio-grid > :nth-child(3):last-child {
+    grid-column: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Footer stays 2-column for better readability */
+  .footer-content {
+    grid-template-columns: 1fr 1fr !important;
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ============================================
+   CALENDLY WIDGET FIXES FOR iPAD
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  /* Calendly container styling */
+  .calendly-inline-widget {
+    min-width: 100% !important;
+    height: 700px !important;
+  }
+
+  /* Strategy Call Cards Styling */
+  .booking-benefits,
+  .call-benefits {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    max-width: 700px !important;
+    margin: 30px auto !important;
+  }
+
+  .benefit-card,
+  .call-benefit-card {
+    padding: 25px 20px !important;
+    text-align: center !important;
+  }
+}
+
+/* ============================================
+   HEADER FIXES FOR TABLETS
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  header {
+    padding: 15px 30px !important;
+  }
+
+  header .logo h1 {
+    font-size: 1.3rem !important;
+  }
+
+  header nav {
+    display: flex !important;
+    gap: 25px !important;
+  }
+
+  header nav a {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ============================================
+   PROOF SECTION FIXES
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  .proof-section {
+    max-width: 800px !important;
+    margin: 40px auto 0 !important;
+  }
+
+  .proof-section h3 {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+  }
+}
+
+/* ============================================
+   BLOG GRID FOR TABLETS
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  .blog-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 30px !important;
+  }
+
+  /* If there are 3 posts, center the third */
+  .blog-grid > :nth-child(3):last-child {
+    grid-column: 1 / -1 !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* ============================================
+   FAQ SECTION FOR TABLETS
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  .faq-container {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    padding: 0 30px !important;
+  }
+}
+
+/* ============================================
+   SOCIAL PROOF / TRUST INDICATORS
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  .trust-indicators {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  .proof-avatars {
+    justify-content: center !important;
+  }
+}
+
+/* ============================================
+   SERVICES GUARANTEE SECTION
+   ============================================ */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  
+  .services-guarantee {
+    max-width: 700px !important;
+    margin: 40px auto !important;
+    padding: 30px !important;
+  }
+
+  .guarantee-content h3 {
+    font-size: 1.6rem !important;
+  }
+
+  .guarantee-content p {
+    font-size: 1.05rem !important;
+  }
+}
+

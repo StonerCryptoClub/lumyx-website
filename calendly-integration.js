@@ -101,7 +101,7 @@ window.addEventListener('calendly.event_scheduled', function(e) {
     // Send confirmation email to client
     const clientEmailParams = {
         to_email: invitee.email,
-        from_name: "Lumyx Agency",
+        from_name: "Lumyx Consulting",
         to_name: invitee.name,
         subject: "Your Strategy Call Confirmation",
         message: `Your strategy call has been scheduled for ${formattedDate} at ${formattedTime}.`,
@@ -186,7 +186,7 @@ window.confirmBooking = async function() {
         // Send confirmation email to client
         const clientEmailParams = {
             to_email: email,
-            from_name: "Lumyx Agency",
+            from_name: "Lumyx Consulting",
             to_name: name,
             subject: "Your Strategy Call Confirmation",
             message: `Your strategy call has been scheduled for ${formattedDate} at ${formattedTime}.`,

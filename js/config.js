@@ -1,4 +1,4 @@
-// Configuration for Lumyx Agency
+// Configuration for Lumyx Consulting
 window.config = {
     contentful: {
         spaceId: '74kxarv2y1kp',

@@ -1,7 +1,7 @@
 {
   "name": "lumyx-agency-website",
   "version": "1.0.0",
-  "description": "Lumyx Agency Website",
+  "description": "Lumyx Consulting Website",
   "main": "index.js",
   "scripts": {
     "start": "npx serve -s",
@@ -18,7 +18,7 @@
     "marketing",
     "web development"
   ],
-  "author": "Lumyx Agency",
+  "author": "Lumyx Consulting",
   "license": "UNLICENSED",
   "dependencies": {
     "contentful": "^10.6.16"
