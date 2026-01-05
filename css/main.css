@@ -24,6 +24,11 @@ html, body {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
+
+/* Scroll offset for fixed header */
+section[id] {
+  scroll-margin-top: 70px;
+}
 body {
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
