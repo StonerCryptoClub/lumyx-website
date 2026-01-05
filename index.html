@@ -6523,6 +6523,25 @@
               eventId: event.uuid
           };
           
+          // Track Google Ads Conversion
+          if (typeof gtag !== 'undefined') {
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-17852608393/eRqMCNemk90bEInf5MBC',
+                  'transaction_id': event.uuid,
+                  'value': 497.0,
+                  'currency': 'USD'
+              });
+              
+              // Also send a custom event to Google Analytics
+              gtag('event', 'calendly_booking', {
+                  'event_category': 'Booking',
+                  'event_label': 'Strategy Call Booked',
+                  'value': 497
+              });
+              
+              console.log('Google Ads conversion tracked for booking:', event.uuid);
+          }
+          
           try {
               // Import the database functions
               const { addBooking } = await import('./js/database.js');
