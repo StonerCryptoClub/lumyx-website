@@ -91,30 +91,63 @@ window.contentfulHelpers = {
             const response = await client.getEntries({
                 content_type: 'caseStudies',
                 'fields.slug': slug,
-                include: 2
+                include: 10 // Increase to ensure all linked assets are included
             });
 
-            console.log('Contentful response:', response);
+            console.log('📊 Contentful response:', response);
+            console.log('📸 Includes:', response.includes);
 
             if (response.items.length) {
                 const study = response.items[0];
-                console.log('Found study in Contentful:', study);
+                console.log('✅ Found study in Contentful:', study);
+                console.log('📸 Study fields:', study.fields);
+                
+                // If image is a reference, try to resolve it from includes
+                const fields = study.fields;
+                if (fields.featuredImage?.sys?.id && response.includes?.Asset) {
+                    const imageAsset = response.includes.Asset.find(
+                        asset => asset.sys.id === fields.featuredImage.sys.id
+                    );
+                    if (imageAsset) {
+                        console.log('📸 Resolved featuredImage from includes:', imageAsset);
+                        fields.featuredImage = imageAsset;
+                    }
+                }
+                if (fields.thumbnail?.sys?.id && response.includes?.Asset) {
+                    const imageAsset = response.includes.Asset.find(
+                        asset => asset.sys.id === fields.thumbnail.sys.id
+                    );
+                    if (imageAsset) {
+                        console.log('📸 Resolved thumbnail from includes:', imageAsset);
+                        fields.thumbnail = imageAsset;
+                    }
+                }
+                if (fields.heroImage?.sys?.id && response.includes?.Asset) {
+                    const imageAsset = response.includes.Asset.find(
+                        asset => asset.sys.id === fields.heroImage.sys.id
+                    );
+                    if (imageAsset) {
+                        console.log('📸 Resolved heroImage from includes:', imageAsset);
+                        fields.heroImage = imageAsset;
+                    }
+                }
+                
                 return study;
             }
 
             // If not found in Contentful, check placeholders
-            console.log('Looking for placeholder with slug:', slug);
+            console.log('⚠️ Not in Contentful, looking for placeholder with slug:', slug);
             const placeholder = placeholders.find(p => p.fields.slug === slug);
             if (placeholder) {
-                console.log('Found placeholder:', placeholder);
+                console.log('📝 Found placeholder:', placeholder);
                 return placeholder;
             }
 
             // If not found anywhere, return null
-            console.error('No case study found with slug:', slug);
+            console.error('❌ No case study found with slug:', slug);
             return null;
         } catch (error) {
-            console.error('Error fetching case study:', error);
+            console.error('❌ Error fetching case study:', error);
             
             // On error, try placeholders as fallback
             const placeholder = placeholders.find(p => p.fields.slug === slug);

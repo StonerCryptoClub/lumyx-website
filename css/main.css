@@ -253,7 +253,7 @@ header .logo img {
   width: 140px;
   height: auto;
   display: block;
-  margin-right: -8px;
+  margin-right: -35px;
 }
 
 header .logo h1 {
@@ -293,7 +293,7 @@ header .logo h1 {
     width: 75px !important;
     height: auto !important;
     margin: 0 !important;
-    margin-right: -6px !important;
+    margin-right: -20px !important;
     padding: 0 !important;
     flex-shrink: 0 !important;
     display: block !important;

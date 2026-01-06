@@ -9,10 +9,108 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Main Styles -->
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/main.css?v=4.3">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/portfolio.css?v=2.0">
+    <link rel="stylesheet" href="../css/mobile-fixes.css?v=20251103a">
+    <link rel="stylesheet" href="../css/ipad-fixes.css?v=1.2">
+    <link rel="stylesheet" href="../css/desktop-optimizations.css?v=1.2">
     <link rel="stylesheet" href="../css/case-studies.css">
+    
+    <style>
+        /* Case Study Page Navigation */
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 50px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .page-header .logo img {
+            width: 50px;
+            height: auto;
+        }
+        
+        .page-header .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .page-header nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .page-header nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .page-header nav a:hover {
+            color: #FFA500;
+        }
+        
+        .header-spacer {
+            height: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 15px 20px;
+            }
+            
+            .page-header nav {
+                display: none;
+            }
+            
+            .page-header .logo h1 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="page-header">
+        <a href="../index.html" class="logo">
+            <img src="../Logo.png" alt="Lumyx Consulting">
+            <h1>Lumyx Consulting</h1>
+        </a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#booking-section">Contact</a>
+            <a href="../blog.html">Blog</a>
+        </nav>
+    </header>
+    <div class="header-spacer"></div>
+    
     <header class="case-study-hero">
         <div class="container">
             <div class="breadcrumb">
