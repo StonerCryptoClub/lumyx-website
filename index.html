@@ -6542,6 +6542,12 @@
               console.log('Google Ads conversion tracked for booking:', event.uuid);
           }
           
+          // Track Meta Pixel Schedule Event
+          if (typeof fbq !== 'undefined') {
+              fbq('track', 'Schedule');
+              console.log('Meta Pixel Schedule event tracked for booking:', event.uuid);
+          }
+          
           try {
               // Import the database functions
               const { addBooking } = await import('./js/database.js');
