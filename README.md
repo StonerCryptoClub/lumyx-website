@@ -33,7 +33,7 @@ This website is deployed using GitHub Pages. Visit the live site at: [Your GitHu
 
 ## License
 
-© 2025 Lumyx Consulting. All rights reserved.
+© 2026 Lumyx Consulting. All rights reserved.
 
 ## Security Features
 
