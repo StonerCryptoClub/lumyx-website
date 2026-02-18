@@ -265,14 +265,17 @@
       // Yield to main thread between analytics loads
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Task 2: Microsoft Clarity with background priority
-      await scheduleAnalyticsTask(() => {
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      // Task 2: Microsoft Clarity - only load if project ID is configured
+      const clarityId = "YOUR_CLARITY_PROJECT_ID";
+      if (clarityId && clarityId !== "YOUR_CLARITY_PROJECT_ID") {
+        await scheduleAnalyticsTask(() => {
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "YOUR_CLARITY_PROJECT_ID");
-      });
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", clarityId);
+        });
+      }
 
       // Yield again
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -6735,7 +6738,7 @@
   <header>
     <a href="/" class="logo">
       <img src="Logo.png" alt="Lumyx Consulting - Marketing Strategy & AI Automation" width="160" height="auto" fetchpriority="high">
-      <h1>Lumyx Consulting</h1>
+      <span class="logo-text">Lumyx Consulting</span>
     </a>
     <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
       <i class="fas fa-bars fa-solid" aria-hidden="true"></i>

@@ -142,6 +142,16 @@
   to = "/"
   status = 301
 
+[[redirects]]
+  from = "/seo-services.html"
+  to = "/seo-services"
+  status = 301
+
+[[redirects]]
+  from = "/seo-services"
+  to = "/seo-services.html"
+  status = 200
+
 # Redirect old domain variations
 [[redirects]]
   from = "http://lumyxagency.com/*"

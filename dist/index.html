@@ -36,28 +36,36 @@
   <meta name="author" content="Lumyx Consulting" />
   <meta name="robots" content="index, follow" />
   
-  <!-- Local Business Schema -->
+  <!-- Consolidated Organization Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-          "@type": "Organization",
-      "name": "Lumyx Consulting",
-      "image": "https://lumyx.co/Logo.png",
-      "description": "Strategic marketing consulting firm specializing in business growth through expert consulting, performance advertising, and AI workflow implementation to enhance profits.",
-      "telephone": "(248) 238-2704",
-      "email": "Lumyxagency@gmail.com",
-      "url": "https://lumyx.co",
-      "serviceArea": {
-        "@type": "Place",
-        "name": "Worldwide"
-      },
+    "@type": "Organization",
+    "name": "Lumyx Consulting",
+    "image": "https://lumyx.co/Logo.png",
+    "logo": "https://lumyx.co/Logo.png",
+    "description": "Strategic marketing consulting firm specializing in business growth through expert consulting, performance advertising, and AI workflow implementation to enhance profits.",
+    "url": "https://lumyx.co",
+    "telephone": "(248) 238-2704",
+    "email": "Lumyxagency@gmail.com",
+    "foundingDate": "2023",
     "priceRange": "$$",
+    "serviceArea": {
+      "@type": "Place",
+      "name": "Worldwide"
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
       "reviewCount": "25"
     },
     "openingHours": "Mo-Fr 09:00-18:00",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "(248) 238-2704",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    },
     "sameAs": [
       "https://www.instagram.com/lumyxgrowth",
       "https://www.linkedin.com/company/lumyx-agency"
@@ -66,62 +74,42 @@
       "@type": "OfferCatalog",
       "name": "Digital Marketing Services",
       "itemListElement": [
-                    {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Performance PPC Campaigns",
-                "description": "Conversion-optimized Google Ads and Facebook Ads management for e-commerce, coaching, and service businesses"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "AI Automation Systems",
-                "description": "Intelligent automation for instant lead response, automatic prospect qualification, and unlimited scaling"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Conversion Rate Optimization",
-                "description": "Data-driven testing and optimization to multiply revenue for online businesses"
-              }
-            },
-            {
-              "@type": "Service",
-              "name": "High-Ticket Marketing",
-              "description": "Complete marketing solutions for coaching programs, course creators, and service businesses"
-            }
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Performance PPC Campaigns",
+            "description": "Conversion-optimized Google Ads and Facebook Ads management for e-commerce, coaching, and service businesses"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Automation Systems",
+            "description": "Intelligent automation for instant lead response, automatic prospect qualification, and unlimited scaling"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Conversion Rate Optimization",
+            "description": "Data-driven testing and optimization to multiply revenue for online businesses"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "High-Ticket Marketing",
+            "description": "Complete marketing solutions for coaching programs, course creators, and service businesses"
+          }
+        }
       ]
     }
   }
   </script>
-  
-  <!-- Organization Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-          "name": "Lumyx Ecommerce Marketing Agency",
-      "url": "https://lumyx.co",
-      "logo": "https://lumyx.co/Logo.png",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "(248) 238-2704",
-        "contactType": "customer service",
-        "availableLanguage": "English"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Lumyx Team"
-      },
-      "foundingDate": "2023",
-            "description": "Leading ecommerce marketing agency with proven 312% ROI results, specializing in Shopify marketing, ecommerce PPC, and conversion optimization for online businesses worldwide."
-    }
-    </script>
 
     <!-- FAQ Schema for Competitive Advantage -->
     <script type="application/ld+json">
@@ -131,18 +119,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What makes Lumyx different from other ecommerce marketing agencies?",
+          "name": "What makes Lumyx different from other marketing agencies?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Unlike other agencies, we guarantee 312% average ROI increase within 90 days or you don't pay. We specialize in data-driven strategies for Shopify stores, online businesses, and SaaS companies with proven results and transparent reporting."
+            "text": "We specialize in turning leads into revenue for e-commerce, coaching, and service businesses using conversion-optimized PPC campaigns and intelligent automation systems. Our clients typically multiply their revenue by 3x+ with our instant lead response and automatic prospect qualification systems."
           }
         },
         {
           "@type": "Question", 
-          "name": "How much do ecommerce marketing services cost?",
+          "name": "How much do your marketing and automation services cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our ecommerce marketing services start at $2,500/month and include PPC management, conversion optimization, and growth strategies. Most clients see 3-5x return on investment within 60 days."
+            "text": "Our performance marketing and automation services start at $2,500/month and include PPC management, conversion optimization, and intelligent automation systems. Most clients see 3x+ revenue growth within 90 days."
           }
         },
         {
@@ -277,14 +265,17 @@
       // Yield to main thread between analytics loads
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Task 2: Microsoft Clarity with background priority
-      await scheduleAnalyticsTask(() => {
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      // Task 2: Microsoft Clarity - only load if project ID is configured
+      const clarityId = "YOUR_CLARITY_PROJECT_ID";
+      if (clarityId && clarityId !== "YOUR_CLARITY_PROJECT_ID") {
+        await scheduleAnalyticsTask(() => {
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.defer=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "YOUR_CLARITY_PROJECT_ID");
-      });
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", clarityId);
+        });
+      }
 
       // Yield again
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -1303,6 +1294,7 @@
         position: relative;
         margin: 0;
         padding: 0;
+        scroll-margin-top: 70px;
     }
 
     .booking-content {
@@ -1659,6 +1651,7 @@
         margin-right: 0;
         width: 100vw;
         margin-left: calc(-50vw + 50%);
+        scroll-margin-top: 70px;
     }
 
     .services-header {
@@ -1869,27 +1862,27 @@
     .services-guarantee {
         text-align: center;
         max-width: 900px;
-        margin: 60px auto 0 auto;
-        padding: 50px 40px;
+        margin: 30px auto 0 auto;
+        padding: 30px 30px;
         background: rgba(0, 200, 83, 0.1);
         border: 1px solid rgba(0, 200, 83, 0.3);
-        border-radius: 25px;
+        border-radius: 20px;
         backdrop-filter: blur(10px);
         box-shadow: 0 10px 30px rgba(0, 200, 83, 0.2);
     }
 
     .guarantee-content h3 {
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #00C853;
-        margin-bottom: 25px;
+        margin-bottom: 12px;
         font-weight: 800;
         line-height: 1.2;
     }
 
     .guarantee-content p {
-        font-size: 1.2rem;
+        font-size: 0.95rem;
         color: rgba(255, 255, 255, 0.9);
-        line-height: 1.7;
+        line-height: 1.5;
         margin: 0;
         max-width: 700px;
         margin-left: auto;
@@ -1903,6 +1896,7 @@
             width: 100vw;
             margin: 0;
             margin-left: calc(-50vw + 50%);
+            scroll-margin-top: 70px;
         }
 
         .portfolio-container {
@@ -2277,6 +2271,7 @@
             width: 100vw;
             margin: 0;
             margin-left: calc(-50vw + 50%);
+            scroll-margin-top: 70px;
         }
 
         .contact-background {
@@ -2841,6 +2836,7 @@
       width: 100vw;
       margin: 0;
       margin-left: calc(-50vw + 50%);
+      scroll-margin-top: 80px;
     }
 
     .problem-solution-content {
@@ -3310,6 +3306,143 @@
 
     /* Comprehensive Responsive Design */
     
+    /* Desktop Optimizations (1200px+) - Services Section Compact */
+    @media (min-width: 1200px) {
+        .modern-services-section {
+            padding: 35px 5% 20px;
+            scroll-margin-top: 70px;
+        }
+        
+        .services-header {
+            margin-bottom: 15px;
+        }
+        
+        .services-header h2 {
+            font-size: 1.9rem;
+            margin-bottom: 6px;
+        }
+        
+        .services-subtitle {
+            font-size: 0.82rem;
+            line-height: 1.35;
+        }
+        
+        .services-grid {
+            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 10px;
+        }
+        
+        .modern-service-card {
+            padding: 15px 14px 14px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .service-icon {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 10px;
+        }
+        
+        .service-icon i {
+            font-size: 1.2rem;
+        }
+        
+        .modern-service-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            line-height: 1.15;
+        }
+        
+        .service-desc {
+            font-size: 0.78rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .service-results {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .metric-number {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+        
+        .metric-label {
+            font-size: 0.7rem;
+        }
+        
+        .service-features {
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+        
+        .service-features li {
+            padding: 2px 0;
+            font-size: 0.75rem;
+            gap: 6px;
+            line-height: 1.3;
+        }
+        
+        .service-features i {
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .service-btn {
+            padding: 8px 12px;
+            font-size: 0.75rem;
+        }
+        
+        .service-btn-secondary {
+            padding: 8px 12px;
+            font-size: 0.75rem;
+        }
+        
+        .service-cta {
+            margin-top: 0;
+            gap: 8px !important;
+        }
+        
+        .modern-service-card.featured {
+            transform: scale(1.03);
+        }
+        
+        .service-number {
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+            top: 12px;
+            right: 12px;
+        }
+        
+        .featured-badge {
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            top: -10px;
+        }
+        
+        .services-guarantee {
+            margin: 12px auto 0 auto !important;
+            padding: 12px 18px;
+            border-radius: 15px;
+        }
+        
+        .guarantee-content h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .guarantee-content p {
+            font-size: 0.76rem;
+            line-height: 1.35;
+        }
+    }
+    
     /* Extra Large Screens (1440px+) */
     @media (min-width: 1440px) {
         .booking-content,
@@ -3330,6 +3463,92 @@
         
         .hero-subtitle {
             font-size: 1.5rem;
+        }
+        
+        /* Slightly increase services section for XL screens */
+        .modern-services-section {
+            padding: 40px 5% 45px;
+        }
+        
+        .services-header h2 {
+            font-size: 2.4rem;
+        }
+        
+        .services-subtitle {
+            font-size: 0.95rem;
+        }
+        
+        .services-grid {
+            gap: 20px;
+        }
+        
+        .modern-service-card {
+            padding: 22px 20px;
+        }
+        
+        .service-icon {
+            width: 52px;
+            height: 52px;
+        }
+        
+        .modern-service-card h3 {
+            font-size: 1.3rem;
+        }
+        
+        .service-desc {
+            font-size: 0.88rem;
+        }
+        
+        .service-features li {
+            font-size: 0.82rem;
+            padding: 3px 0;
+        }
+        
+        .metric-number {
+            font-size: 1.7rem;
+        }
+    }
+    
+    /* Ultra Wide Screens (1920px+) */
+    @media (min-width: 1920px) {
+        .modern-services-section {
+            padding: 50px 5% 55px;
+        }
+        
+        .services-header h2 {
+            font-size: 2.6rem;
+        }
+        
+        .services-subtitle {
+            font-size: 1rem;
+        }
+        
+        .services-grid {
+            gap: 25px;
+            max-width: 1800px;
+        }
+        
+        .modern-service-card {
+            padding: 26px 22px;
+        }
+        
+        .service-icon {
+            width: 55px;
+            height: 55px;
+        }
+        
+        .modern-service-card h3 {
+            font-size: 1.4rem;
+        }
+        
+        .service-desc {
+            font-size: 0.92rem;
+            line-height: 1.4;
+        }
+        
+        .service-features li {
+            font-size: 0.88rem;
+            padding: 4px 0;
         }
     }
     
@@ -6307,6 +6526,31 @@
               eventId: event.uuid
           };
           
+          // Track Google Ads Conversion
+          if (typeof gtag !== 'undefined') {
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-17852608393/eRqMCNemk90bEInf5MBC',
+                  'transaction_id': event.uuid,
+                  'value': 497.0,
+                  'currency': 'USD'
+              });
+              
+              // Also send a custom event to Google Analytics
+              gtag('event', 'calendly_booking', {
+                  'event_category': 'Booking',
+                  'event_label': 'Strategy Call Booked',
+                  'value': 497
+              });
+              
+              console.log('Google Ads conversion tracked for booking:', event.uuid);
+          }
+          
+          // Track Meta Pixel Schedule Event
+          if (typeof fbq !== 'undefined') {
+              fbq('track', 'Schedule');
+              console.log('Meta Pixel Schedule event tracked for booking:', event.uuid);
+          }
+          
           try {
               // Import the database functions
               const { addBooking } = await import('./js/database.js');
@@ -6494,7 +6738,7 @@
   <header>
     <a href="/" class="logo">
       <img src="Logo.png" alt="Lumyx Consulting - Marketing Strategy & AI Automation" width="160" height="auto" fetchpriority="high">
-      <h1>Lumyx Consulting</h1>
+      <span class="logo-text">Lumyx Consulting</span>
     </a>
     <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
       <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
@@ -6512,7 +6756,7 @@
         </div>
       </div>
       <a href="index.html#portfolio">Portfolio</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="index.html#booking-section">Contact</a>
       <a href="blog.html">Blog</a>
     </nav>
   </header>
@@ -6533,7 +6777,7 @@
       <a href="ai-lead-generation.html" class="mobile-nav-link">AI Lead Gen & Booking Agents</a>
       <a href="ppc-management.html" class="mobile-nav-link">PPC Management</a>
       <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
-      <a href="#contact" class="mobile-nav-link">Contact</a>
+      <a href="#booking-section" class="mobile-nav-link">Contact</a>
       <a href="blog.html" class="mobile-nav-link">Blog</a>
       <a href="faq.html" class="mobile-nav-link">FAQ</a>
     </div>
@@ -6666,7 +6910,7 @@
 
 
     <!-- Booking Calendar Section -->
-    <section class="booking-section" id="booking-section" style="margin-bottom: 100px !important;">
+    <section class="booking-section" id="booking-section">
       <div class="booking-content">
         <div class="booking-info">
           <div class="booking-header">
@@ -6830,7 +7074,7 @@
         </div>
       </div>
         
-        <div class="services-guarantee" style="margin-top: 30px;">
+        <div class="services-guarantee">
             <div class="guarantee-content">
                 <h3>🚀 The Lumyx Consulting Guarantee</h3>
                 <p>We're so confident in our strategic approach, if you don't see measurable improvements in your marketing ROI within 90 days, we'll refund every penny.</p>
@@ -7081,7 +7325,7 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#portfolio">Case Studies</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#booking-section">Contact</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/sitemap.xml" target="_blank">Sitemap</a></li>

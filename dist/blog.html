@@ -58,7 +58,7 @@
       "@type": "Blog",
       "name": "Lumyx Consulting Blog",
       "description": "Expert insights on digital marketing, web development, and SEO strategies",
-      "url": "https://lumyxagency.com/blog",
+      "url": "https://lumyx.co/blog",
       "publisher": {
         "@type": "Organization",
         "name": "Lumyx Consulting",
@@ -72,9 +72,31 @@
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://lumyxagency.com/blog"
+        "@id": "https://lumyx.co/blog"
       }
     }
+  </script>
+  
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lumyx.co/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://lumyx.co/blog"
+      }
+    ]
+  }
   </script>
 
   <!-- Google Font -->

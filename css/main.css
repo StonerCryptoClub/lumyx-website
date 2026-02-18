@@ -256,7 +256,7 @@ header .logo img {
   margin-right: -35px;
 }
 
-header .logo h1 {
+header .logo .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
   color: #ffffff;
@@ -299,7 +299,7 @@ header .logo h1 {
     display: block !important;
   }
   
-  header .logo h1 {
+  header .logo .logo-text {
     font-size: 1.25rem !important;
     margin: 0 !important;
     margin-left: -2px !important;
