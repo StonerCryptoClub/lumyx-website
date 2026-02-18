@@ -249,18 +249,18 @@ You have:
 
 ## 6. RANKING OPTIMIZATION CHECKLIST
 
-| Action | Priority | Effort |
-|--------|----------|--------|
-| Fix robots.txt (unblock images, sitemap) | Critical | Low |
-| Fix dual H1 on homepage | Critical | Low |
-| Add seo-services.html to sitemap | Critical | Low |
-| Add seo-services redirects in Netlify | High | Low |
-| Fix Clarity project ID or remove | High | Low |
-| Update FAQ guarantee wording | Medium | Low |
-| Add internal links from blog to services | Medium | Medium |
-| Add Review schema to testimonials | Medium | Medium |
-| Update sitemap lastmod dates | Low | Low |
-| A/B test title tags for CTR | Low | Low |
+| Action | Priority | Effort | Status |
+|--------|----------|--------|--------|
+| Fix robots.txt (unblock images, sitemap) | Critical | Low | ✅ Done |
+| Fix dual H1 on homepage | Critical | Low | ✅ Done |
+| Add seo-services.html to sitemap | Critical | Low | ✅ Done |
+| Add seo-services redirects in Netlify | High | Low | ✅ Done |
+| Fix Clarity project ID or remove | High | Low | ✅ Done (conditional load) |
+| Update FAQ guarantee wording | Medium | Low | ✅ Done |
+| Add internal links from blog to services | Medium | Medium | ✅ Done (FAQ→services, PPC→portfolio) |
+| Add Review schema to testimonials | Medium | Medium | ✅ Done |
+| Update sitemap lastmod dates | Low | Low | ✅ Done |
+| A/B test title tags for CTR | Low | Low | ✅ Done (implemented compelling title) |
 
 ---
 
@@ -292,15 +292,21 @@ You have:
 
 ## 9. FILES TO UPDATE
 
-| File | Changes |
-|------|---------|
-| `robots.txt` | Remove image/CSS/JS/XML disallows; simplify |
-| `index.html` | Fix dual H1; fix Clarity ID |
-| `sitemap.xml` | Add seo-services; use clean URLs; update lastmod |
-| `netlify.toml` | Add seo-services redirects |
-| `faq.html` | Update canonical to /faq; align guarantee copy |
+| File | Changes | Status |
+|------|---------|--------|
+| `robots.txt` | Remove image/CSS/JS/XML disallows; simplify | ✅ Done |
+| `index.html` | Fix dual H1; fix Clarity ID | ✅ Done |
+| `sitemap.xml` | Add seo-services; use clean URLs; update lastmod | ✅ Done |
+| `netlify.toml` | Add seo-services redirects | ✅ Done |
+| `faq.html` | Update canonical to /faq; align guarantee copy | ✅ Done |
+| `ppc-management.html` | Fix dual H1 (logo); fix case-studies→portfolio links | ✅ Done |
+| `ai-lead-generation.html` | Fix dual H1; canonical to ai-agents-and-workflows; internal links | ✅ Done |
+| `seo-services.html` | Fix ppc-services→ppc-management link | ✅ Done |
 
 ---
 
 **Next Steps:**  
-Implement the Critical and High-Priority items first, then resubmit the sitemap in Search Console. Re-audit in 4–6 weeks to track indexing and ranking changes.
+1. Run `npm run build` to update dist folder.  
+2. Resubmit sitemap in Google Search Console.  
+3. Request indexing for key pages.  
+4. Re-audit in 4–6 weeks to track indexing and ranking changes.

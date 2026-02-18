@@ -32,6 +32,9 @@ function copyFiles() {
     const filesToCopy = [
         'index.html',
         'ai-lead-generation.html',
+        'ppc-management.html',
+        'seo-services.html',
+        'faq.html',
         'blog.html',
         'case-study.html',
         'blog-post.html',
