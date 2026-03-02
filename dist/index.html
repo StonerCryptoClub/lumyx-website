@@ -43,7 +43,12 @@
     "@type": "Organization",
     "name": "Lumyx Consulting",
     "image": "https://lumyx.co/Logo.png",
-    "logo": "https://lumyx.co/Logo.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lumyx.co/Logo.png",
+      "width": 512,
+      "height": 512
+    },
     "description": "Strategic marketing consulting firm specializing in business growth through expert consulting, performance advertising, and AI workflow implementation to enhance profits.",
     "url": "https://lumyx.co",
     "telephone": "(248) 238-2704",
@@ -397,6 +402,18 @@
     <link rel="stylesheet" href="css/animations.css">
   </noscript>
 
+  <!-- Favicon & Site Icon - Required for Google search logo -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileImage" content="/favicon-32x32.png">
+  <meta name="theme-color" content="#FFA500">
+
   <!-- Preload critical resources -->
   <link rel="preload" href="js/main.js" as="script">
   <link rel="preload" href="Logo.png" as="image">
@@ -421,6 +438,9 @@
   <link rel="prefetch" href="/blog.html">
   <link rel="prefetch" href="/case-study.html">
   
+  <!-- Hero lead form + VSL logic -->
+  <script defer src="js/hero-form.js"></script>
+
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
   <script defer src="js/production-logger.js"></script>
@@ -963,136 +983,34 @@
 
     /* Header styles removed - using main.css instead */
 
-    /* Hero Section */
+    /* =============================================
+       HERO SECTION — Two-column VSL + Form layout
+       ============================================= */
     #home {
       position: relative;
       background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 0;
+      padding: 90px 0 24px;
       will-change: transform;
       transform: translateZ(0);
       overflow: hidden;
       margin-bottom: 0;
-      border-bottom: none;
-    }
-    
-    /* Mobile hero optimization */
-    @media screen and (max-width: 768px) {
-      #home {
-        height: auto;
-        min-height: 100vh;
-        padding: 120px 20px 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .hero-content {
-        max-width: 100%;
-        width: 100%;
-      }
-      
-      .hero-content h1 {
-        font-size: clamp(2rem, 5vw, 2.8rem);
-        line-height: 1.2;
-        margin-bottom: 20px;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-        max-width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      
-      .hero-cta-section {
-        margin: 40px 0;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-      }
-      
-      .btn {
-        width: 100%;
-        max-width: 320px;
-      }
-      
-      .hero-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin: 40px auto 20px;
-        max-width: 400px;
-      }
-      
-      .stat-item {
-        padding: 20px 15px;
-      }
-      
-      .stat-number {
-        font-size: 2.2rem;
-      }
-      
-      .stat-label {
-        font-size: 0.95rem;
-      }
-    }
-    
-    @media screen and (max-width: 480px) {
-      #home {
-        padding: 100px 15px 60px;
-        min-height: 90vh;
-      }
-      
-      .hero-content h1 {
-        font-size: clamp(1.8rem, 6vw, 2.5rem);
-      }
-      
-      .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: 25px;
-      }
-      
-      .hero-stats {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        max-width: 300px;
-      }
-      
-      .stat-item {
-        padding: 15px 10px;
-      }
-      
-      .stat-number {
-        font-size: 2rem;
-      }
     }
     #home::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+      inset: 0;
+      background: linear-gradient(45deg, rgba(0,0,0,0.75), rgba(0,0,0,0.5));
       z-index: 1;
     }
     #home::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.05)"/></svg>');
+      inset: 0;
+      background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,255,255,0.04)"/></svg>');
       opacity: 0.5;
       z-index: 2;
     }
@@ -1100,99 +1018,304 @@
       position: relative;
       z-index: 3;
       width: 100%;
-      max-width: 1000px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
       box-sizing: border-box;
     }
-    /* Hero Badge */
+
+    /* --- Hero Top: badge + title --- */
+    .hero-top {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 28px;
+    }
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      background: linear-gradient(135deg, rgba(255, 165, 0, 0.15), rgba(255, 69, 0, 0.15));
-      border: 1px solid rgba(255, 165, 0, 0.5);
+      background: linear-gradient(135deg, rgba(255,165,0,0.15), rgba(255,69,0,0.15));
+      border: 1px solid rgba(255,165,0,0.5);
       border-radius: 50px;
-      padding: 12px 24px;
-      margin-bottom: 28px;
+      padding: 9px 22px;
+      margin-bottom: 18px;
       backdrop-filter: blur(15px);
-      box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+      box-shadow: 0 4px 15px rgba(255,165,0,0.2);
     }
-
     .badge-text {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       color: var(--primary-orange);
       font-weight: 700;
       letter-spacing: 0.5px;
     }
-
-    /* Hero Title */
+    .hero-title-box {
+      background: rgba(10,10,20,0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,165,0,0.18);
+      border-radius: 18px;
+      padding: 28px 60px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(255,165,0,0.12) inset;
+      display: inline-block;
+      max-width: 100%;
+    }
     #home h1 {
-      font-size: clamp(2.2rem, 4.5vw, 4rem);
-      margin-bottom: 20px;
+      font-size: clamp(1.7rem, 3.2vw, 2.9rem);
+      margin: 0;
       color: #ffffff;
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.02em;
-      position: relative;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
     }
-
-    .gradient-text {
-      background: none;
-      -webkit-text-fill-color: initial;
-      color: var(--primary-orange);
-    }
-    
-    /* Subtle glow for hero highlight */
     .glow-accent {
       color: var(--primary-orange);
-      text-shadow: 0 0 12px rgba(255, 165, 0, 0.25), 0 0 28px rgba(255, 165, 0, 0.15);
+      text-shadow: 0 0 12px rgba(255,165,0,0.25), 0 0 28px rgba(255,165,0,0.15);
+    }
+    .gradient-text { color: var(--primary-orange); }
+
+    /* --- Hero Grid --- */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+      align-items: start;
+      margin-bottom: 28px;
     }
 
-    /* Hero Subtitle */
-    .hero-subtitle {
-      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-      margin-bottom: 30px;
-      color: rgba(255, 255, 255, 0.85);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-      font-weight: 400;
+    /* --- VSL Column --- */
+    .hero-vsl-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    /* Hero CTA Section */
-    .hero-cta-section {
+    .vsl-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(10,10,20,0.7);
+      border: 1px solid rgba(255,165,0,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .vsl-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .vsl-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(15,15,30,0.9), rgba(26,26,46,0.9));
+    }
+    .vsl-placeholder-inner {
+      text-align: center;
+      padding: 24px;
+    }
+    .vsl-play-ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255,165,0,0.15);
+      border: 2px solid rgba(255,165,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.6rem;
+      color: var(--primary-orange);
+    }
+    .vsl-coming-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .vsl-coming-sub {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
       margin: 0;
-      padding-bottom: 0;
+      line-height: 1.5;
     }
-
-    .cta-buttons {
+    .vsl-social-proof {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .proof-avatars {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .proof-avatars img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid var(--primary-orange);
+      object-fit: cover;
+    }
+    .proof-text {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+    }
+    .vsl-trust {
       display: flex;
       gap: 20px;
-      justify-content: center;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-      align-items: center;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
     }
-    
-    @media (max-width: 768px) {
-      .cta-buttons {
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 25px;
-      }
-      
-      .cta-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-      }
+    .vsl-trust i {
+      color: var(--primary-orange);
+      margin-right: 5px;
+    }
+
+    /* --- Form Column --- */
+    .hero-form-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-form-card {
+      background: rgba(10,10,20,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,165,0,0.2);
+      border-radius: 18px;
+      padding: 28px 30px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    }
+    .form-card-header h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .form-card-header p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      margin: 0 0 20px;
+      line-height: 1.5;
+    }
+    .hf-group {
+      margin-bottom: 12px;
+    }
+    .hf-group input,
+    .hf-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.92rem;
+      font-family: 'Montserrat', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+    }
+    .hf-group input::placeholder { color: rgba(255,255,255,0.45); }
+    .hf-group select { color: rgba(255,255,255,0.7); cursor: pointer; }
+    .hf-group select option { background: #1a1a2e; color: #fff; }
+    .hf-group input:focus,
+    .hf-group select:focus {
+      border-color: rgba(255,165,0,0.6);
+      background: rgba(255,165,0,0.05);
+    }
+    .hf-error {
+      font-size: 0.85rem;
+      color: #ff6b6b;
+      margin-bottom: 10px;
+      min-height: 0;
+      display: none;
+    }
+    .hf-error.visible { display: block; }
+    .hf-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #FFA500, #FF6B00);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(255,165,0,0.35);
+      position: relative;
+      margin-top: 4px;
+    }
+    .hf-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,165,0,0.5); }
+    .hf-submit:active { transform: translateY(0); }
+    .hf-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .hf-btn-loading { display: none; }
+    .hf-submit.loading .hf-btn-text { display: none; }
+    .hf-submit.loading .hf-btn-loading { display: inline; }
+    .hf-disclaimer {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin: 10px 0 0;
+    }
+
+    /* --- Stats Bar --- */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      width: 100%;
+      background: rgba(10,10,20,0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,165,0,0.15);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .stat-item {
+      padding: 18px 16px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFA500, #1E90FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+
+    /* --- Responsive --- */
+    @media screen and (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      #home { padding: 100px 0 24px; }
+      .hero-title-box { padding: 22px 28px; }
+      #home h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+    }
+    @media screen and (max-width: 600px) {
+      #home { padding: 88px 0 20px; }
+      #home .hero-content { padding: 0 16px; }
+      .hero-title-box { padding: 18px 20px; border-radius: 14px; }
+      .hero-form-card { padding: 22px 18px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.07); }
+      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.07); border-right: none; }
+      .stat-number { font-size: 1.5rem; }
     }
 
     .btn {
@@ -2921,6 +3044,18 @@
       margin-bottom: 30px;
       font-weight: 700;
       text-align: center;
+    }
+
+    .problem-heading {
+      color: rgba(255, 107, 107, 0.95) !important;
+      border-bottom: 2px solid rgba(255, 107, 107, 0.35);
+      padding-bottom: 14px;
+    }
+
+    .solution-heading {
+      color: rgba(100, 220, 140, 0.95) !important;
+      border-bottom: 2px solid rgba(100, 220, 140, 0.35);
+      padding-bottom: 14px;
     }
 
     .problem-list, .solution-list {
@@ -6801,6 +6936,8 @@
   </div>
 
   <!-- Home Section -->
+  <!-- VSL YouTube URL: paste your YouTube URL here once filmed -->
+  <script>const VSL_YOUTUBE_URL = '';</script>
   <section id="home" class="hero-load-animation">
     <div class="floating-elements">
       <div class="floating-element" style="top: 20%; left: 10%;"></div>
@@ -6809,48 +6946,99 @@
       <div class="floating-element" style="top: 80%; right: 25%;"></div>
     </div>
     <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-text">🚀 Strategic Marketing Consulting for Growth</span>
-      </div>
-      <h1>Expert Marketing Consulting<br>+ <span class="glow-accent">Proven Implementation</span><br>= Enhanced Profits</h1>
-      <p class="hero-subtitle">We're a performance marketing agency and conversion rate optimization specialist. We consult with businesses to develop strategic marketing plans, then implement high-performance advertising campaigns and AI workflows to enhance profits and scale operations efficiently. Strategy meets execution.</p>
-      
-      <div class="hero-cta-section">
-        <div class="cta-buttons">
-          <a href="#booking-section" class="btn btn-primary" data-scroll-target="#calendly-container">
-            <span>Get Your Free Strategy Call</span>
-            <small>Worth $497 - Limited Time</small>
-          </a>
-          <a href="#portfolio" class="btn btn-secondary">
-            <i class="fas fa-play"></i>
-            Watch Success Stories
-          </a>
+
+      <!-- Badge + Headline (full-width, centered) -->
+      <div class="hero-top">
+        <div class="hero-badge">
+          <span class="badge-text">Strategic Marketing Consulting for Growth</span>
         </div>
-        
-        <div class="social-proof">
-          <div class="proof-avatars">
-            <img src="images/testimonials/alex.svg" alt="Alex - Happy Shopify Store Owner" loading="lazy">
-            <img src="images/testimonials/maria.svg" alt="Maria - Satisfied E-commerce Business Owner" loading="lazy">
-            <img src="images/testimonials/james.svg" alt="James - Successful Online Business Owner" loading="lazy">
-            <span class="proof-text">Join 25+ successful clients</span>
-          </div>
-          <div class="trust-indicators">
-            <div class="trust-item">
-              <i class="fas fa-star"></i>
-              <span>4.9/5 Rating</span>
-            </div>
-            <div class="trust-item">
-              <i class="fas fa-shield-alt"></i>
-              <span>100% Satisfaction Guarantee</span>
-            </div>
-          </div>
+        <div class="hero-title-box">
+          <h1>Expert Marketing Consulting + <span class="glow-accent">Proven Implementation</span> = Enhanced Profits</h1>
         </div>
       </div>
 
+      <!-- Two-column: VSL left, Form right -->
+      <div class="hero-grid">
+
+        <!-- Left: VSL Video -->
+        <div class="hero-vsl-col">
+          <div class="vsl-wrapper" id="vsl-wrapper">
+            <!-- Placeholder shown until VSL_YOUTUBE_URL is set -->
+            <div class="vsl-placeholder" id="vsl-placeholder">
+              <div class="vsl-placeholder-inner">
+                <div class="vsl-play-ring">
+                  <i class="fas fa-play"></i>
+                </div>
+                <p class="vsl-coming-label">Strategy Session Preview</p>
+                <p class="vsl-coming-sub">Video walkthrough coming soon — see exactly how we 3X client revenue</p>
+              </div>
+            </div>
+          </div>
+          <div class="vsl-social-proof">
+            <div class="proof-avatars">
+              <img src="images/testimonials/alex.svg" alt="Client Alex" loading="lazy">
+              <img src="images/testimonials/maria.svg" alt="Client Maria" loading="lazy">
+              <img src="images/testimonials/james.svg" alt="Client James" loading="lazy">
+              <span class="proof-text">Joined by 25+ businesses</span>
+            </div>
+            <div class="vsl-trust">
+              <span><i class="fas fa-star"></i> 4.9/5 Rating</span>
+              <span><i class="fas fa-shield-alt"></i> Satisfaction Guaranteed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Lead Capture Form -->
+        <div class="hero-form-col">
+          <div class="hero-form-card">
+            <div class="form-card-header">
+              <h3>Book Your Free Strategy Call</h3>
+              <p>Tell us about your business — we'll reach out within 24 hours to confirm your 30-minute session.</p>
+            </div>
+            <form id="hero-lead-form" novalidate>
+              <div class="hf-group">
+                <input type="text" id="hf-name" name="name" placeholder="Full Name" required autocomplete="name">
+              </div>
+              <div class="hf-group">
+                <input type="email" id="hf-email" name="email" placeholder="Email Address" required autocomplete="email">
+              </div>
+              <div class="hf-group">
+                <input type="tel" id="hf-phone" name="phone" placeholder="Phone Number" required autocomplete="tel">
+              </div>
+              <div class="hf-group">
+                <input type="text" id="hf-business" name="business" placeholder="Business Name" required autocomplete="organization">
+              </div>
+              <div class="hf-group">
+                <select id="hf-service" name="service" required>
+                  <option value="" disabled selected>Services Interested In</option>
+                  <option value="PPC Management & Google Ads">PPC Management &amp; Google Ads</option>
+                  <option value="SEO Services">SEO Services</option>
+                  <option value="AI Lead Generation & Booking Agents">AI Lead Generation &amp; Booking Agents</option>
+                  <option value="Marketing Strategy & Consulting">Marketing Strategy &amp; Consulting</option>
+                  <option value="Social Media Advertising">Social Media Advertising</option>
+                  <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
+                  <option value="Full-Service Growth Package">Full-Service Growth Package</option>
+                </select>
+              </div>
+              <div class="hf-error" id="hf-error" role="alert"></div>
+              <button type="submit" class="hf-submit" id="hf-submit">
+                <span class="hf-btn-text">Get My Free Strategy Call &rarr;</span>
+                <span class="hf-btn-loading" aria-hidden="true">
+                  <i class="fas fa-circle-notch fa-spin"></i> Sending...
+                </span>
+              </button>
+              <p class="hf-disclaimer">No spam. No pitch. Just a focused 30-min growth session.</p>
+            </form>
+          </div>
+        </div>
+
+      </div><!-- end hero-grid -->
+
+      <!-- Stats bar -->
       <div class="hero-stats">
         <div class="stat-item">
           <div class="stat-number">312%</div>
-          <div class="stat-label">Average Revenue Increase</div>
+          <div class="stat-label">Avg. Revenue Increase</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">90</div>
@@ -6865,7 +7053,8 @@
           <div class="stat-label">Generated for Clients</div>
         </div>
       </div>
-    </div>
+
+    </div><!-- end hero-content -->
     <div class="scroll-indicator">
       <span>Scroll to see how we do it</span>
       <i class="fas fa-chevron-down"></i>
@@ -6882,7 +7071,7 @@
 
         <div class="problem-solution-grid">
           <div class="problem-side">
-            <h3>❌ What Other Consultants Do</h3>
+            <h3 class="problem-heading">What Other Consultants Do</h3>
             <ul class="problem-list">
               <li>Create fancy decks then hand off and leave</li>
               <li>Use generic templates for every client</li>
@@ -6893,7 +7082,7 @@
             </div>
 
           <div class="solution-side">
-            <h3>✅ The Lumyx Consulting Approach</h3>
+            <h3 class="solution-heading">The Lumyx Consulting Approach</h3>
             <ul class="solution-list">
               <li>Develop custom strategy then execute it with you</li>
               <li>Tailor solutions to your specific business needs</li>
@@ -6932,7 +7121,7 @@
         <div class="booking-info">
           <div class="booking-header">
             <div class="booking-badge">
-              <span class="urgency-text">🔥 LIMITED TIME: Free Strategy Session</span>
+              <span class="urgency-text">LIMITED TIME: Free Strategy Session</span>
             </div>
             <h2>Get Your Free $497 Strategy Call</h2>
             <p class="booking-subtitle">In just 30 minutes, we'll show you exactly how to scale your business to 7-figures. No pitch, just value.</p>
@@ -7093,7 +7282,7 @@
         
         <div class="services-guarantee">
             <div class="guarantee-content">
-                <h3>🚀 The Lumyx Consulting Guarantee</h3>
+                <h3>The Lumyx Consulting Guarantee</h3>
                 <p>We're so confident in our strategic approach, if you don't see measurable improvements in your marketing ROI within 90 days, we'll refund every penny.</p>
         </div>
       </div>

@@ -53,7 +53,15 @@ function copyFiles() {
         'mailchimp-thank-you.html',
         'newsletter-popup.html',
         'portfolio-section.html',
-        'Logo.png'
+        'Logo.png',
+        'favicon.ico',  // 48x48 regenerated from Logo.png
+        'favicon-16x16.png',
+        'favicon-32x32.png',
+        'favicon-48x48.png',
+        'apple-touch-icon.png',
+        'android-chrome-192.png',
+        'android-chrome-512.png',
+        'site.webmanifest'
     ];
     
     // Copy individual files
