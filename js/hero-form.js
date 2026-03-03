@@ -12,7 +12,7 @@
  */
 
 const GOOGLE_SHEETS_WEBHOOK =
-  'https://script.google.com/macros/s/AKfycbxGXQQjusPhkFBfSd1FneQwpKp_QZD_wtK7hbsPfMrpHt9gVho_-OY2LJxG9lE-Xj5WAQ/exec';
+  'https://script.google.com/macros/s/AKfycbxRtLFk9cpaiUzgtvk6v0exaIIh_As7prvmOT4qD5l_nlFhz7kPIKva_sHA_oRP0iEd/exec';
 
 // Inject VSL iframe if URL is set
 (function initVSL() {
@@ -40,6 +40,16 @@ function extractYouTubeId(url) {
 
 // Form handling
 document.addEventListener('DOMContentLoaded', function () {
+  const headlineLine = document.querySelector('.hero-headline-line');
+  if (headlineLine) {
+    // Trigger after first paint so the center-out animation is visible.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        headlineLine.classList.add('is-visible');
+      });
+    });
+  }
+
   const form = document.getElementById('hero-lead-form');
   if (!form) return;
 
@@ -70,13 +80,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const payload = { name, email, phone, business, service };
 
+    let submitSucceeded = false;
+    const originalBtnText = submitBtn.querySelector('.hf-btn-text')?.textContent || 'Get My Free Strategy Call ->';
+
     try {
-      await fetch(GOOGLE_SHEETS_WEBHOOK, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+      // Prevent indefinite "Sending..." state if the request hangs.
+      const timeoutMs = 12000;
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout')), timeoutMs);
       });
+
+      await Promise.race([
+        fetch(GOOGLE_SHEETS_WEBHOOK, {
+          method: 'POST',
+          mode: 'no-cors',
+          // Keep request "simple" for Apps Script web app endpoints.
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }),
+        timeoutPromise,
+      ]);
+      submitSucceeded = true;
 
       // Store lead data for potential use on booking page
       try {
@@ -89,15 +113,23 @@ document.addEventListener('DOMContentLoaded', function () {
         bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      // Update button to success state
-      submitBtn.classList.remove('loading');
-      submitBtn.disabled = false;
       const btnText = submitBtn.querySelector('.hf-btn-text');
       if (btnText) btnText.textContent = 'Done! Scroll down to book your call';
 
     } catch (err) {
-      setLoading(false);
       showError('Something went wrong. Please try again or email us directly.');
+    } finally {
+      // Always clear loading state so user never gets stuck.
+      setLoading(false);
+
+      if (submitSucceeded) {
+        const btnText = submitBtn.querySelector('.hf-btn-text');
+        if (btnText) {
+          setTimeout(() => {
+            btnText.textContent = originalBtnText;
+          }, 3500);
+        }
+      }
     }
   });
 

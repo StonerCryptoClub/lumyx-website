@@ -439,7 +439,7 @@
   <link rel="prefetch" href="/case-study.html">
   
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js"></script>
+  <script defer src="js/hero-form.js?v=20260303a"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -993,7 +993,7 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 96px 0 32px;
+      padding: 112px 0 32px;
       overflow: hidden;
     }
     #home::before {
@@ -1019,6 +1019,7 @@
       max-width: 100%;
       margin: 0 auto;
       padding: 0 48px;
+      padding-bottom: 22px;
       display: flex;
       flex-direction: column;
       gap: 22px;
@@ -1028,6 +1029,7 @@
     /* ---- Row 1: Badge + Headline ---- */
     .hero-top {
       text-align: center;
+      margin-top: 4px;
     }
     .hero-badge {
       display: inline-flex;
@@ -1047,13 +1049,36 @@
       text-transform: uppercase;
     }
     .hero-headline {
-      font-size: clamp(1.6rem, 2.8vw, 2.8rem);
+      font-size: clamp(1.45rem, 2.25vw, 2.45rem);
       font-weight: 800;
       color: #ffffff;
       line-height: 1.2;
       letter-spacing: -0.02em;
       margin: 0;
-      white-space: nowrap;
+      white-space: normal;
+      text-wrap: balance;
+      width: 100%;
+      max-width: 100%;
+    }
+    /* Remove legacy hero line from older CSS rules */
+    #home h1::after {
+      content: none !important;
+      display: none !important;
+    }
+    .hero-headline-line {
+      display: block;
+      width: min(96%, 1180px);
+      height: 2px;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg, rgba(255,165,0,0.12), rgba(255,165,0,0.98), rgba(255,165,0,0.12));
+      transform: scaleX(0);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 850ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease;
+    }
+    .hero-headline-line.is-visible {
+      transform: scaleX(1);
+      opacity: 1;
     }
     @media (max-width: 1200px) {
       .hero-headline { white-space: normal; font-size: clamp(1.4rem, 3vw, 2.2rem); }
@@ -1125,13 +1150,23 @@
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 18px 22px;
+      padding: 20px 24px;
     }
     .hero-explainer p {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       color: rgba(255,255,255,0.75);
-      line-height: 1.65;
-      margin: 0 0 12px;
+      line-height: 1.68;
+      margin: 0 0 10px;
+    }
+    .hero-explainer-list {
+      margin: 0 0 12px 18px;
+      padding: 0;
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      line-height: 1.72;
+    }
+    .hero-explainer-list li {
+      margin-bottom: 7px;
     }
     .hero-learn-link {
       font-size: 0.88rem;
@@ -1147,7 +1182,7 @@
 
     /* Social proof */
     .vsl-social-proof { display: flex; flex-direction: column; gap: 8px; }
-    .proof-avatars { display: flex; align-items: center; gap: 8px; }
+    .proof-avatars { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .proof-avatars img {
       width: 32px; height: 32px; border-radius: 50%;
       border: 2px solid var(--primary-orange); object-fit: cover;
@@ -1155,18 +1190,34 @@
     .proof-text { font-size: 0.85rem; color: rgba(255,255,255,0.75); font-weight: 500; }
     .vsl-trust { display: flex; gap: 18px; font-size: 0.82rem; color: rgba(255,255,255,0.6); }
     .vsl-trust i { color: var(--primary-orange); margin-right: 4px; }
+    .proof-avatars-inline .proof-sep {
+      color: rgba(255,255,255,0.35);
+      margin: 0 2px;
+      font-size: 0.8rem;
+    }
+    .proof-avatars-inline .proof-chip {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.72);
+      white-space: nowrap;
+    }
+    .proof-avatars-inline .proof-chip i {
+      color: var(--primary-orange);
+      margin-right: 4px;
+    }
 
     /* ---- Form column: LIGHT THEME ---- */
-    .hero-form-col { display: flex; flex-direction: column; }
+    .hero-form-col { display: flex; flex-direction: column; gap: 14px; }
     .hero-form-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 28px 28px 24px;
+      padding: 26px 26px 18px;
       box-shadow: 0 16px 56px rgba(0,0,0,0.35);
-      height: 100%;
+      height: auto;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
+      align-self: flex-start;
+      border: 1px solid rgba(255,255,255,0.75);
     }
     .form-eyebrow {
       font-size: 0.75rem;
@@ -1180,15 +1231,15 @@
       font-size: 1.3rem;
       font-weight: 800;
       color: #111;
-      margin: 0 0 6px;
+      margin: 0 0 4px;
     }
     .form-subheading {
       font-size: 0.85rem;
       color: #666;
-      margin: 0 0 18px;
+      margin: 0 0 14px;
       line-height: 1.5;
     }
-    .hf-group { margin-bottom: 10px; }
+    .hf-group { margin-bottom: 9px; }
     .hf-group input,
     .hf-group select {
       width: 100%;
@@ -1245,7 +1296,7 @@
       font-size: 0.75rem;
       color: #999;
       text-align: center;
-      margin: 10px 0 0;
+      margin: 8px 0 0;
     }
 
     /* ---- Row 3: Stats Bar ---- */
@@ -1258,6 +1309,10 @@
       border-radius: 14px;
       overflow: hidden;
     }
+    .hero-form-col .hero-stats {
+      width: 100%;
+      margin-top: 16px;
+    }
     .stat-item {
       padding: 16px 12px;
       text-align: center;
@@ -1267,10 +1322,9 @@
     .stat-number {
       font-size: 1.8rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #FFA500, #1E90FF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #ffb642;
+      background: none;
+      -webkit-text-fill-color: #ffb642;
       line-height: 1;
       margin-bottom: 4px;
     }
@@ -1279,15 +1333,21 @@
     /* ---- Responsive ---- */
     @media screen and (max-width: 960px) {
       .hero-grid { grid-template-columns: 1fr; }
-      #home { padding: 96px 0 28px; }
+      #home { padding: 102px 0 28px; }
       .hero-headline { font-size: clamp(1.3rem, 4.5vw, 2rem) !important; white-space: normal !important; }
       .hero-form-card { height: auto; }
     }
     @media screen and (max-width: 600px) {
-      #home { padding: 84px 0 20px; }
+      #home { padding: 90px 0 20px; }
       #home .hero-content { padding: 0 20px; gap: 16px; }
       .hero-headline { font-size: clamp(1.15rem, 5.5vw, 1.6rem) !important; }
-      .hero-form-card { padding: 22px 18px 18px; }
+      .hero-form-card { padding: 22px 18px 14px; }
+      .proof-avatars-inline {
+        gap: 6px;
+      }
+      .proof-avatars-inline .proof-chip {
+        font-size: 0.76rem;
+      }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
       .stat-item:nth-child(3),
@@ -2876,7 +2936,7 @@
     /* Scroll Indicator */
     .scroll-indicator {
       position: absolute;
-      bottom: 10px;
+      bottom: 4px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -6753,6 +6813,111 @@
   <link rel="stylesheet" href="css/value-card.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="css/main.css?v=4.3">
 
+  <!-- Final desktop hero override: force full-width VSL layout -->
+  <style>
+    /* Modernized metrics card panel under form */
+    #home .hero-metrics {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 8px !important;
+      background: transparent !important;
+      border: none !important;
+      backdrop-filter: none !important;
+      padding: 0 !important;
+      margin-top: 18px !important;
+      overflow: visible !important;
+    }
+
+    #home .hero-metrics .stat-item {
+      background: linear-gradient(180deg, rgba(20, 22, 30, 0.95), rgba(15, 17, 24, 0.95)) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 10px !important;
+      padding: 13px 10px 12px !important;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28) !important;
+      transition: transform 0.18s ease, border-color 0.18s ease !important;
+    }
+
+    #home .hero-metrics .stat-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 182, 66, 0.4) !important;
+    }
+
+    #home .hero-metrics .stat-number {
+      font-size: 1.7rem !important;
+      font-weight: 800 !important;
+      color: #ffb642 !important;
+      letter-spacing: -0.01em;
+      margin-bottom: 5px !important;
+    }
+
+    #home .hero-metrics .stat-label {
+      font-size: 0.72rem !important;
+      color: rgba(255, 255, 255, 0.74) !important;
+      font-weight: 600 !important;
+      line-height: 1.25 !important;
+    }
+
+    @media (max-width: 600px) {
+      #home .hero-metrics {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    #home .hero-headline-line {
+      width: min(96%, 1180px) !important;
+      margin: 10px auto 0 !important;
+    }
+
+    #home .hero-stats .stat-number {
+      color: #ffb642 !important;
+      background: none !important;
+      -webkit-text-fill-color: #ffb642 !important;
+    }
+
+    #home .hero-stats .stat-label {
+      color: rgba(255,255,255,0.72) !important;
+    }
+
+    @media (min-width: 1025px) {
+      #home {
+        padding-top: 118px !important;
+        padding-bottom: 28px !important;
+      }
+
+      #home .hero-content {
+        width: 95vw !important;
+        max-width: 1800px !important;
+        padding: 0 1.2vw !important;
+        gap: 18px !important;
+      }
+
+      #home .hero-grid {
+        grid-template-columns: minmax(0, 1.9fr) minmax(360px, 1fr) !important;
+        gap: 26px !important;
+        width: 100% !important;
+      }
+
+      #home .hero-vsl-col,
+      #home .hero-form-col {
+        width: 100% !important;
+      }
+
+      #home .vsl-wrapper {
+        min-height: 420px !important;
+      }
+
+      #home .hero-headline {
+        font-size: clamp(1.55rem, 1.95vw, 2.55rem) !important;
+      }
+
+      #home .hero-form-card {
+        min-height: 0 !important;
+        height: auto !important;
+      }
+    }
+  </style>
+
   <!-- Mobile-specific optimizations for FCP/LCP improvement -->
   <style>
     /* Mobile-first critical CSS for faster FCP */
@@ -6926,9 +7091,10 @@
       <!-- Row 1: Badge + Single-line headline -->
       <div class="hero-top">
         <div class="hero-badge">
-          <span class="badge-text">Performance Marketing &amp; AI Automation Agency</span>
+          <span class="badge-text">Performance Marketing &amp; Consulting Services</span>
         </div>
         <h1 class="hero-headline">Expert Marketing Consulting + <span class="glow-accent">Proven Implementation</span> = Enhanced Profits</h1>
+        <span class="hero-headline-line" aria-hidden="true"></span>
       </div>
 
       <!-- Row 2: Two columns -->
@@ -6952,21 +7118,25 @@
 
           <!-- What we do -->
           <div class="hero-explainer">
-            <p>We work with ecommerce brands, service businesses, and high-ticket offers to design and run marketing systems that compound — ad campaigns, AI automation, and conversion strategy all under one roof.</p>
+            <p>We build growth systems that turn attention into booked calls and revenue. From ad strategy to automation, you get one expert team executing end-to-end.</p>
+            <ul class="hero-explainer-list">
+              <li>Paid media strategy and campaign execution</li>
+              <li>AI follow-up and nuture workflows that recover missed leads</li>
+              <li>Conversion optimization across your full funnel</li>
+            </ul>
             <a href="#services" class="hero-learn-link">See what we do <i class="fas fa-arrow-right"></i></a>
           </div>
 
           <!-- Social proof -->
           <div class="vsl-social-proof">
-            <div class="proof-avatars">
+            <div class="proof-avatars proof-avatars-inline">
               <img src="images/testimonials/alex.svg" alt="Client Alex" loading="lazy">
               <img src="images/testimonials/maria.svg" alt="Client Maria" loading="lazy">
               <img src="images/testimonials/james.svg" alt="Client James" loading="lazy">
               <span class="proof-text">Joined by 25+ growing businesses</span>
-            </div>
-            <div class="vsl-trust">
-              <span><i class="fas fa-star"></i> 4.9/5 Rating</span>
-              <span><i class="fas fa-shield-alt"></i> Satisfaction Guaranteed</span>
+              <span class="proof-sep">|</span>
+              <span class="proof-chip"><i class="fas fa-star"></i> 4.9/5 Rating</span>
+              <span class="proof-chip"><i class="fas fa-shield-alt"></i> Satisfaction Guaranteed</span>
             </div>
           </div>
 
@@ -7015,29 +7185,29 @@
               <p class="hf-disclaimer">No spam. No pitch. Just a focused growth session.</p>
             </form>
           </div>
+
+          <!-- Stats moved under form box -->
+          <div class="hero-stats hero-metrics">
+            <div class="stat-item">
+              <div class="stat-number">1.8X</div>
+              <div class="stat-label">Avg. Revenue Increase</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">90</div>
+              <div class="stat-label">Days to Results</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">20+</div>
+              <div class="stat-label">Success Stories</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">$2M+</div>
+              <div class="stat-label">Generated for Clients</div>
+            </div>
+          </div>
         </div><!-- end form col -->
 
       </div><!-- end hero-grid -->
-
-      <!-- Row 3: Stats bar -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number">312%</div>
-          <div class="stat-label">Avg. Revenue Increase</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">90</div>
-          <div class="stat-label">Days to Results</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">25+</div>
-          <div class="stat-label">Success Stories</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">$2M+</div>
-          <div class="stat-label">Generated for Clients</div>
-        </div>
-      </div>
 
     </div><!-- end hero-content -->
     <div class="scroll-indicator">
