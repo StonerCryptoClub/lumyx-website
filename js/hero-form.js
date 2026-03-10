@@ -15,21 +15,29 @@ const GOOGLE_SHEETS_WEBHOOK =
   'https://script.google.com/macros/s/AKfycbxRtLFk9cpaiUzgtvk6v0exaIIh_As7prvmOT4qD5l_nlFhz7kPIKva_sHA_oRP0iEd/exec';
 
 // Inject VSL iframe if URL is set
-(function initVSL() {
-  if (typeof VSL_YOUTUBE_URL === 'undefined' || !VSL_YOUTUBE_URL) return;
+function initVSL() {
+  const vslUrl =
+    (typeof window !== 'undefined' && window.VSL_YOUTUBE_URL)
+      ? String(window.VSL_YOUTUBE_URL).trim()
+      : '';
+  if (!vslUrl) return;
+
   const wrapper = document.getElementById('vsl-wrapper');
   if (!wrapper) return;
+
+  const videoId = extractYouTubeId(vslUrl);
+  if (!videoId) return;
+
   const placeholder = document.getElementById('vsl-placeholder');
   if (placeholder) placeholder.remove();
+
   const iframe = document.createElement('iframe');
-  const videoId = extractYouTubeId(VSL_YOUTUBE_URL);
-  if (!videoId) return;
   iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&showinfo=0`;
   iframe.title = 'Lumyx Consulting Strategy Overview';
   iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
   iframe.allowFullscreen = true;
   wrapper.appendChild(iframe);
-})();
+}
 
 function extractYouTubeId(url) {
   const match = url.match(
@@ -40,6 +48,9 @@ function extractYouTubeId(url) {
 
 // Form handling
 document.addEventListener('DOMContentLoaded', function () {
+  // Initialize VSL after DOM is fully ready.
+  initVSL();
+
   const headlineLine = document.querySelector('.hero-headline-line');
   if (headlineLine) {
     // Trigger after first paint so the center-out animation is visible.
