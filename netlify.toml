@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  command = "cp index.html dist/index.html && cp js/hero-form.js dist/js/hero-form.js"
+  publish = "dist"
 
 # Disable Next.js plugin completely
 [build.environment]
@@ -7,7 +8,8 @@
 
 # Production context
 [context.production]
-  publish = "."
+  command = "cp index.html dist/index.html && cp js/hero-form.js dist/js/hero-form.js"
+  publish = "dist"
 
 [[headers]]
   for = "/*"
