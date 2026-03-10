@@ -1,5 +1,5 @@
 [build]
-  command = "cp index.html dist/index.html && cp js/hero-form.js dist/js/hero-form.js"
+  command = "cp index.html dist/index.html && cp js/hero-form.js dist/js/hero-form.js && cp netlify.toml dist/netlify.toml"
   publish = "dist"
 
 # Disable Next.js plugin completely
@@ -8,7 +8,7 @@
 
 # Production context
 [context.production]
-  command = "cp index.html dist/index.html && cp js/hero-form.js dist/js/hero-form.js"
+  command = "cp index.html dist/index.html && cp js/hero-form.js dist/js/hero-form.js && cp netlify.toml dist/netlify.toml"
   publish = "dist"
 
 [[headers]]
