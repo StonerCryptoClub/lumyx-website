@@ -37,6 +37,19 @@ function initVSL() {
   iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
   iframe.allowFullscreen = true;
   wrapper.appendChild(iframe);
+
+  // Click-to-play overlay (50% opacity hint)
+  const overlay = document.createElement('div');
+  overlay.className = 'vsl-click-overlay';
+  overlay.innerHTML = `
+    <div class="vsl-overlay-play"><i class="fas fa-play"></i></div>
+    <p class="vsl-overlay-label">Click to Learn More</p>
+  `;
+  overlay.addEventListener('click', function () {
+    overlay.classList.add('hiding');
+    setTimeout(() => overlay.remove(), 380);
+  });
+  wrapper.appendChild(overlay);
 }
 
 function extractYouTubeId(url) {

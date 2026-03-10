@@ -439,7 +439,7 @@
   <link rel="prefetch" href="/case-study.html">
   
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js?v=20260303a"></script>
+  <script defer src="js/hero-form.js?v=20260310b"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -1113,8 +1113,53 @@
       border: 1px solid rgba(255,165,0,0.25);
       box-shadow: 0 12px 48px rgba(0,0,0,0.6);
       flex-shrink: 0;
+      position: relative;
     }
     .vsl-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
+    /* Click-to-play overlay */
+    .vsl-click-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 20, 0.50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      cursor: pointer;
+      border-radius: 14px;
+      transition: opacity 0.35s ease, background 0.25s ease;
+      backdrop-filter: blur(2px);
+    }
+    .vsl-click-overlay:hover { background: rgba(10, 10, 20, 0.35); }
+    .vsl-click-overlay.hiding { opacity: 0; pointer-events: none; }
+    .vsl-overlay-play {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      color: #fff;
+      background: rgba(255,165,0,0.28);
+      backdrop-filter: blur(6px);
+      margin-bottom: 14px;
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+    .vsl-click-overlay:hover .vsl-overlay-play {
+      transform: scale(1.12);
+      background: rgba(255,165,0,0.5);
+    }
+    .vsl-overlay-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+    }
     .vsl-placeholder {
       width: 100%;
       height: 100%;
