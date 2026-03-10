@@ -392,6 +392,14 @@
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   
+  <!-- Critical inline styles: prevent logo FOUC before main.css loads -->
+  <style>
+    header .logo { text-decoration: none; color: inherit; }
+    header .logo .logo-text { color: #ffffff; font-weight: 700; }
+    header { background: #0a0a0f; }
+    body { background: #0a0a0f; }
+  </style>
+
   <!-- Optimized CSS loading for mobile FCP improvement -->
   <link rel="preload" href="css/main.css?v=2.4" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
