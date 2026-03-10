@@ -1,5 +1,5 @@
 [build]
-  publish = "dist"
+  publish = "."
 
 # Disable Next.js plugin completely
 [build.environment]
@@ -7,7 +7,7 @@
 
 # Production context
 [context.production]
-  publish = "dist"
+  publish = "."
 
 [[headers]]
   for = "/*"
