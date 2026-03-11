@@ -114,72 +114,42 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!service)  { showFieldError('hf-service', serviceEl);   hasError = true; }
     if (hasError) return;
 
-    setLoading(true);
-    hideError();
+    const payload = { name, email, phone, business, service, timestamp: new Date().toISOString() };
 
-    const payload = { name, email, phone, business, service };
-
-    let submitSucceeded = false;
-    const originalBtnText = submitBtn.querySelector('.hf-btn-text')?.textContent || 'Get My Free Strategy Call ->';
-
+    // Fire-and-forget to Google Sheets — no-cors means we can never read the
+    // response, so we never await it. Always redirect the user immediately.
     try {
-      // Prevent indefinite "Sending..." state if the request hangs.
-      const timeoutMs = 12000;
-      const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Request timeout')), timeoutMs);
+      fetch(GOOGLE_SHEETS_WEBHOOK, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload),
+        keepalive: true,
       });
+    } catch (_) { /* silent — sheet logging is best-effort */ }
 
-      await Promise.race([
-        fetch(GOOGLE_SHEETS_WEBHOOK, {
-          method: 'POST',
-          mode: 'no-cors',
-          // Keep request "simple" for Apps Script web app endpoints.
-          body: JSON.stringify(payload),
-          keepalive: true,
-        }),
-        timeoutPromise,
-      ]);
-      submitSucceeded = true;
+    // Store lead locally
+    try { sessionStorage.setItem('lumyx_lead', JSON.stringify(payload)); } catch (_) {}
 
-      // Store lead data for potential use on booking page
-      try {
-        sessionStorage.setItem('lumyx_lead', JSON.stringify(payload));
-      } catch (_) {}
+    // Show success state immediately
+    const btnText = submitBtn.querySelector('.hf-btn-text');
+    if (btnText) btnText.textContent = 'Booked! Scroll down to confirm your call';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.85';
 
-      // Scroll to Calendly booking section
+    // Scroll to Calendly
+    setTimeout(function () {
       const bookingSection = document.getElementById('booking-section');
       if (bookingSection) {
         bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-
-      const btnText = submitBtn.querySelector('.hf-btn-text');
-      if (btnText) btnText.textContent = 'Done! Scroll down to book your call';
-
-    } catch (err) {
-      showError('Something went wrong. Please try again or email us directly.');
-    } finally {
-      // Always clear loading state so user never gets stuck.
-      setLoading(false);
-
-      if (submitSucceeded) {
-        const btnText = submitBtn.querySelector('.hf-btn-text');
-        if (btnText) {
-          setTimeout(() => {
-            btnText.textContent = originalBtnText;
-          }, 3500);
-        }
-      }
-    }
+      // Re-enable button after redirect so form is reusable
+      setTimeout(function () {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '';
+        if (btnText) btnText.textContent = 'Get My Free Strategy Call \u2192';
+      }, 4000);
+    }, 600);
   });
-
-  function setLoading(state) {
-    submitBtn.disabled = state;
-    if (state) {
-      submitBtn.classList.add('loading');
-    } else {
-      submitBtn.classList.remove('loading');
-    }
-  }
 
   function showError(msg) {
     errorBox.textContent = msg;
