@@ -447,7 +447,7 @@
   <link rel="prefetch" href="/case-study.html">
   
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js?v=20260310b"></script>
+  <script defer src="js/hero-form.js?v=20260311a"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -1317,13 +1317,32 @@
       background: #fff;
       box-shadow: 0 0 0 3px rgba(255,165,0,0.1);
     }
+    /* Global form error (bottom of form) */
     .hf-error {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: #e53e3e;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       display: none;
+      padding: 0;
+      background: none;
+      border: none;
     }
     .hf-error.visible { display: block; }
+    /* Per-field inline error */
+    .hf-field-error {
+      display: none;
+      font-size: 0.72rem;
+      color: #e53e3e;
+      margin-top: 3px;
+      padding: 0;
+      line-height: 1.3;
+    }
+    .hf-field-error.visible { display: block; }
+    .hf-group input.hf-invalid,
+    .hf-group select.hf-invalid {
+      border-color: #e53e3e !important;
+      box-shadow: 0 0 0 2px rgba(229,62,62,0.12) !important;
+    }
     .hf-submit {
       width: 100%;
       background: linear-gradient(135deg, #FFA500 0%, #FF6B00 100%);
@@ -7205,19 +7224,23 @@
             </div>
             <form id="hero-lead-form" novalidate>
               <div class="hf-group">
-                <input type="text" id="hf-name" name="name" placeholder="Full Name" required autocomplete="name">
+                <input type="text" id="hf-name" name="name" placeholder="Full Name" autocomplete="name">
+                <span class="hf-field-error" id="hf-err-name">Please enter your full name.</span>
               </div>
               <div class="hf-group">
-                <input type="email" id="hf-email" name="email" placeholder="Email Address" required autocomplete="email">
+                <input type="email" id="hf-email" name="email" placeholder="Email Address" autocomplete="email">
+                <span class="hf-field-error" id="hf-err-email">Please enter a valid email address.</span>
               </div>
               <div class="hf-group">
-                <input type="tel" id="hf-phone" name="phone" placeholder="Phone Number" required autocomplete="tel">
+                <input type="tel" id="hf-phone" name="phone" placeholder="Phone Number" autocomplete="tel">
+                <span class="hf-field-error" id="hf-err-phone">Please enter your phone number.</span>
               </div>
               <div class="hf-group">
-                <input type="text" id="hf-business" name="business" placeholder="Business Name" required autocomplete="organization">
+                <input type="text" id="hf-business" name="business" placeholder="Business Name" autocomplete="organization">
+                <span class="hf-field-error" id="hf-err-business">Please enter your business name.</span>
               </div>
               <div class="hf-group">
-                <select id="hf-service" name="service" required>
+                <select id="hf-service" name="service">
                   <option value="" disabled selected>Services Interested In</option>
                   <option value="PPC Management & Google Ads">PPC Management &amp; Google Ads</option>
                   <option value="SEO Services">SEO Services</option>
@@ -7227,6 +7250,7 @@
                   <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
                   <option value="Full-Service Growth Package">Full-Service Growth Package</option>
                 </select>
+                <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
               </div>
               <div class="hf-error" id="hf-error" role="alert"></div>
               <button type="submit" class="hf-submit" id="hf-submit">

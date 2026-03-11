@@ -80,24 +80,39 @@ document.addEventListener('DOMContentLoaded', function () {
   const submitBtn = document.getElementById('hf-submit');
   const errorBox = document.getElementById('hf-error');
 
+  // Clear per-field error when user starts typing
+  ['hf-name','hf-email','hf-phone','hf-business','hf-service'].forEach(function(id) {
+    const el = form.querySelector('#' + id);
+    if (el) el.addEventListener('input', function() { clearFieldError(id); });
+  });
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const name     = form.querySelector('#hf-name').value.trim();
-    const email    = form.querySelector('#hf-email').value.trim();
-    const phone    = form.querySelector('#hf-phone').value.trim();
-    const business = form.querySelector('#hf-business').value.trim();
-    const service  = form.querySelector('#hf-service').value;
+    const nameEl     = form.querySelector('#hf-name');
+    const emailEl    = form.querySelector('#hf-email');
+    const phoneEl    = form.querySelector('#hf-phone');
+    const businessEl = form.querySelector('#hf-business');
+    const serviceEl  = form.querySelector('#hf-service');
 
-    // Validation
-    if (!name || !email || !phone || !business || !service) {
-      showError('Please fill in all fields before submitting.');
-      return;
-    }
-    if (!isValidEmail(email)) {
-      showError('Please enter a valid email address.');
-      return;
-    }
+    const name     = nameEl.value.trim();
+    const email    = emailEl.value.trim();
+    const phone    = phoneEl.value.trim();
+    const business = businessEl.value.trim();
+    const service  = serviceEl.value;
+
+    // Clear all previous errors
+    clearAllFieldErrors();
+    hideError();
+
+    // Per-field validation
+    let hasError = false;
+    if (!name)     { showFieldError('hf-name', nameEl);     hasError = true; }
+    if (!email || !isValidEmail(email)) { showFieldError('hf-email', emailEl); hasError = true; }
+    if (!phone)    { showFieldError('hf-phone', phoneEl);   hasError = true; }
+    if (!business) { showFieldError('hf-business', businessEl); hasError = true; }
+    if (!service)  { showFieldError('hf-service', serviceEl);   hasError = true; }
+    if (hasError) return;
 
     setLoading(true);
     hideError();
@@ -178,5 +193,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function showFieldError(fieldId, inputEl) {
+    const errEl = document.getElementById('hf-err-' + fieldId.replace('hf-', ''));
+    if (errEl) errEl.classList.add('visible');
+    if (inputEl) inputEl.classList.add('hf-invalid');
+  }
+
+  function clearFieldError(fieldId) {
+    const errEl = document.getElementById('hf-err-' + fieldId.replace('hf-', ''));
+    if (errEl) errEl.classList.remove('visible');
+    const inputEl = form.querySelector('#' + fieldId);
+    if (inputEl) inputEl.classList.remove('hf-invalid');
+  }
+
+  function clearAllFieldErrors() {
+    form.querySelectorAll('.hf-field-error').forEach(function(el) { el.classList.remove('visible'); });
+    form.querySelectorAll('.hf-invalid').forEach(function(el) { el.classList.remove('hf-invalid'); });
   }
 });
