@@ -54,6 +54,7 @@ function copyFiles() {
         'newsletter-popup.html',
         'portfolio-section.html',
         'Logo.png',
+        'google-search-logo.png',
         'favicon.ico',  // 48x48 regenerated from Logo.png
         'favicon-16x16.png',
         'favicon-32x32.png',
