@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Strategy Insights – Lumyx Agency</title>
+  <meta name="description" content="Join 500+ business owners getting exclusive digital marketing insights, proven strategies, and real case studies delivered to their inbox every week.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange:      #FFA500;
+      --orange-dark: #e69400;
+      --orange-glow: rgba(255, 165, 0, 0.18);
+      --bg:          #08080f;
+      --bg-card:     #101019;
+      --bg-input:    #16161f;
+      --border:      rgba(255,255,255,0.08);
+      --text:        #f0f0f5;
+      --muted:       rgba(255,255,255,0.55);
+      --blue-glow:   rgba(65, 105, 225, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ── Background glow blobs ── */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+      bottom: -200px; left: -150px;
+    }
+    body::after {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+      top: -100px; right: -100px;
+    }
+
+    /* ── Nav bar ── */
+    .topbar {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-logo {
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--text); text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .topbar-logo span { color: var(--orange); }
+
+    .topbar-back {
+      font-size: 0.85rem; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .topbar-back:hover { color: var(--text); }
+
+    /* ── Page wrapper ── */
+    .page {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 60px 20px;
+    }
+
+    /* ── Two-column layout ── */
+    .layout {
+      width: 100%; max-width: 1080px;
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 64px;
+      align-items: center;
+    }
+
+    /* ── Left: pitch ── */
+    .pitch { display: flex; flex-direction: column; gap: 32px; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(255, 165, 0, 0.3);
+      color: var(--orange);
+      padding: 7px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600;
+      width: fit-content;
+      letter-spacing: 0.3px;
+    }
+    .badge i { font-size: 0.75rem; }
+
+    .pitch h1 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+    .pitch h1 .highlight { color: var(--orange); }
+
+    .pitch .sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* Social proof row */
+    .social-proof {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: fit-content;
+    }
+    .avatars { display: flex; }
+    .avatars span {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 2px solid var(--bg);
+      background: linear-gradient(135deg, #1E3A8A, #0EA5E9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; color: #fff;
+      margin-left: -8px;
+    }
+    .avatars span:first-child { margin-left: 0; }
+    .sp-text { font-size: 0.85rem; }
+    .sp-text strong { color: var(--orange); }
+    .sp-text small { display: block; color: var(--muted); font-size: 0.75rem; margin-top: 1px; }
+
+    /* Benefits list */
+    .benefits { display: flex; flex-direction: column; gap: 16px; }
+
+    .benefit {
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .benefit-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--orange-glow);
+      border: 1px solid rgba(255,165,0,0.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange); font-size: 0.9rem;
+    }
+    .benefit-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+    .benefit-body p  { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Right: form card ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .card-header { margin-bottom: 28px; }
+    .card-header h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
+    .card-header p  { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem; font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+    .form-group label .req { color: var(--orange); margin-left: 2px; }
+
+    .form-group input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,165,0,0.12);
+    }
+
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .phone-wrap {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .phone-wrap input { text-align: center; }
+    .phone-sep { color: var(--muted); font-size: 1rem; flex-shrink: 0; }
+
+    .field-error {
+      font-size: 0.75rem; color: #f87171;
+      margin-top: 4px; display: none;
+    }
+
+    .alert {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+    }
+    .alert-err { background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.3); color: #f87171; }
+
+    .submit-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      border: none; border-radius: 12px;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      box-shadow: 0 8px 30px rgba(255,165,0,0.35);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,165,0,0.5);
+    }
+    .submit-btn:active:not(:disabled) { transform: translateY(0); }
+    .submit-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 0.75rem; color: var(--muted);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+    .disclaimer i { color: var(--orange); margin-right: 3px; }
+
+    /* ── Success state ── */
+    .success-state {
+      display: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 20px 0 10px;
+    }
+    .success-ring {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 0 12px var(--orange-glow);
+    }
+    .success-ring i { font-size: 2rem; color: #000; }
+    .success-state h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .success-state p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; max-width: 320px; }
+    .success-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 24px;
+      background: rgba(255,165,0,0.1);
+      border: 1px solid rgba(255,165,0,0.3);
+      color: var(--orange);
+      padding: 10px 22px; border-radius: 50px;
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .success-back:hover { background: rgba(255,165,0,0.18); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.78rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; gap: 40px; }
+      .topbar { padding: 16px 20px; }
+      .page { padding: 40px 16px; }
+      .card { padding: 28px 24px; }
+      .pitch h1 { font-size: 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top nav -->
+  <nav class="topbar">
+    <a href="/" class="topbar-logo">Lumyx<span>Agency</span></a>
+    <a href="/" class="topbar-back"><i class="fas fa-arrow-left"></i> Back to site</a>
+  </nav>
+
+  <div class="page">
+    <div class="layout">
+
+      <!-- LEFT: pitch -->
+      <div class="pitch">
+        <div class="badge"><i class="fas fa-bolt"></i> Free — No Credit Card Required</div>
+
+        <h1>Stay <span class="highlight">Ahead</span> of<br>the Competition.</h1>
+
+        <p class="sub">
+          Get exclusive insights, proven strategies, and real case studies delivered straight to your inbox.
+          Join 500+ business owners who are scaling faster with our methods.
+        </p>
+
+        <!-- Social proof -->
+        <div class="social-proof">
+          <div class="avatars">
+            <span>JM</span><span>SR</span><span>AK</span><span>TL</span><span>+</span>
+          </div>
+          <div class="sp-text">
+            <strong>500+ subscribers</strong>
+            <small>business owners &amp; marketers</small>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="benefits">
+          <div class="benefit">
+            <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="benefit-body">
+              <h4>Weekly Marketing Insights</h4>
+              <p>Real strategies that drive measurable ROI — no fluff, no theory.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="benefit-body">
+              <h4>Real Case Studies</h4>
+              <p>See exactly how we helped businesses scale with data &amp; results.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit-icon"><i class="fas fa-bell"></i></div>
+            <div class="benefit-body">
+              <h4>Algorithm &amp; Trend Alerts</h4>
+              <p>Be the first to know about shifts that affect your business.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit-icon"><i class="fas fa-gift"></i></div>
+            <div class="benefit-body">
+              <h4>Exclusive Subscriber Offers</h4>
+              <p>Early-bird rates and priority access — subscriber-only perks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: form card -->
+      <div class="card">
+
+        <!-- Success (hidden) -->
+        <div class="success-state" id="successState">
+          <div class="success-ring"><i class="fas fa-check"></i></div>
+          <h3>You're In!</h3>
+          <p>Your first insights are on the way. Check your inbox — and your spam folder just in case.</p>
+          <a href="/" class="success-back"><i class="fas fa-arrow-left"></i> Back to Lumyx</a>
+        </div>
+
+        <!-- Form (visible) -->
+        <div id="formWrap">
+          <div class="card-header">
+            <h2>Get Free Strategy Insights</h2>
+            <p>Free insights worth $497 &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Unsubscribe anytime</p>
+          </div>
+
+          <div class="alert alert-err" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i> Something went wrong. Please try again.
+          </div>
+
+          <form id="ghlForm" novalidate>
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required>
+              <div class="field-error" id="emailErr">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Phone Number</label>
+              <div class="phone-wrap">
+                <input type="text" id="phoneArea"    inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" style="width:70px" autocomplete="tel-area-code">
+                <span class="phone-sep">–</span>
+                <input type="text" id="phoneDetail1" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" style="width:70px">
+                <span class="phone-sep">–</span>
+                <input type="text" id="phoneDetail2" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="####" style="width:85px">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Your company name" autocomplete="organization">
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <i class="fas fa-paper-plane"></i>
+              <span id="btnText">Get Free Insights</span>
+            </button>
+
+            <p class="disclaimer">
+              <i class="fas fa-lock"></i>
+              We respect your privacy. Your info is never shared with third parties.
+            </p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Lumyx Agency. All rights reserved.
+  </footer>
+
+  <script>
+    const WEBHOOK = 'https://services.leadconnectorhq.com/hooks/yrcYgS03BFe8fHYJOaTx/webhook-trigger/013f481f-3d30-44fa-81b9-c39b3617d3cc';
+
+    // Auto-advance phone fields
+    ['phoneArea', 'phoneDetail1'].forEach((id, i) => {
+      const next = ['phoneDetail1', 'phoneDetail2'][i];
+      document.getElementById(id).addEventListener('input', function () {
+        if (this.value.length >= parseInt(this.maxLength)) {
+          document.getElementById(next).focus();
+        }
+      });
+    });
+
+    document.getElementById('ghlForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const email     = document.getElementById('email').value.trim();
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const area      = document.getElementById('phoneArea').value.trim();
+      const d1        = document.getElementById('phoneDetail1').value.trim();
+      const d2        = document.getElementById('phoneDetail2').value.trim();
+      const company   = document.getElementById('company').value.trim();
+      const phone     = [area, d1, d2].filter(Boolean).join('');
+
+      // Validate email
+      const emailErr = document.getElementById('emailErr');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailErr.style.display = 'block';
+        document.getElementById('email').focus();
+        return;
+      }
+      emailErr.style.display = 'none';
+      document.getElementById('errorAlert').style.display = 'none';
+
+      // Loading state
+      const btn     = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      btn.disabled  = true;
+      btnText.textContent = 'Sending...';
+      btn.querySelector('i').className = 'fas fa-spinner fa-spin';
+
+      const payload = { email, firstName, lastName, phone, company };
+
+      try {
+        // GET + query params bypasses CORS preflight entirely — GHL explicitly supports this
+        const qs = new URLSearchParams({
+          email:     payload.email     || '',
+          firstName: payload.firstName || '',
+          lastName:  payload.lastName  || '',
+          phone:     payload.phone     || '',
+          company:   payload.company   || ''
+        }).toString();
+
+        await fetch(WEBHOOK + '?' + qs, {
+          method: 'GET',
+          mode:   'no-cors'
+        });
+
+        document.getElementById('formWrap').style.display    = 'none';
+        document.getElementById('successState').style.display = 'flex';
+
+      } catch (err) {
+        btn.disabled = false;
+        btnText.textContent = 'Get Free Insights';
+        btn.querySelector('i').className = 'fas fa-paper-plane';
+        document.getElementById('errorAlert').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
