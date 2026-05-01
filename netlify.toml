@@ -42,6 +42,16 @@
   for = "*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/newsletter"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/newsletter.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
     
 [[headers]]
   for = "*.js"
@@ -142,6 +152,16 @@
 [[redirects]]
   from = "/index.html"
   to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/mailchimp-form-custom.html"
+  to = "/newsletter.html"
+  status = 301
+
+[[redirects]]
+  from = "/mailchimp-form-custom"
+  to = "/newsletter.html"
   status = 301
 
 [[redirects]]

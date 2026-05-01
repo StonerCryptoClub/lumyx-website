@@ -1,4 +1,5 @@
 [build]
+  command = "cp index.html dist/index.html && cp newsletter.html dist/newsletter.html && cp js/hero-form.js dist/js/hero-form.js && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
   publish = "dist"
 
 # Disable Next.js plugin completely
@@ -7,13 +8,14 @@
 
 # Production context
 [context.production]
+  command = "cp index.html dist/index.html && cp newsletter.html dist/newsletter.html && cp js/hero-form.js dist/js/hero-form.js && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
   publish = "dist"
 
 [[headers]]
   for = "/*"
   [headers.values]
     # Content Security Policy
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://apis.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://assets.calendly.com https://calendly.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://cdn.contentful.com https://ctvmeaezvszekbljtuwe.supabase.co https://api.emailjs.com https://www.google-analytics.com https://www.clarity.ms https://calendly.com https://script.google.com https://www.youtube.com; frame-src 'self' https://calendly.com https://www.youtube.com https://youtube.com https://youtu.be; media-src 'self' https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self' https://eepurl.com https://script.google.com; frame-ancestors 'none';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://apis.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://assets.calendly.com https://calendly.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://cdn.contentful.com https://ctvmeaezvszekbljtuwe.supabase.co https://api.emailjs.com https://www.google-analytics.com https://www.clarity.ms https://calendly.com https://script.google.com https://www.youtube.com https://services.leadconnectorhq.com; frame-src 'self' https://calendly.com https://www.youtube.com https://youtube.com https://youtu.be; media-src 'self' https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self' https://eepurl.com https://script.google.com; frame-ancestors 'none';"
     
     # Prevent clickjacking
     X-Frame-Options = "DENY"
@@ -38,6 +40,16 @@
 
 [[headers]]
   for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/newsletter"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/newsletter.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
     
@@ -140,6 +152,16 @@
 [[redirects]]
   from = "/index.html"
   to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/mailchimp-form-custom.html"
+  to = "/newsletter.html"
+  status = 301
+
+[[redirects]]
+  from = "/mailchimp-form-custom"
+  to = "/newsletter.html"
   status = 301
 
 [[redirects]]
