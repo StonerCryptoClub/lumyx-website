@@ -1,18 +1,14 @@
 /**
  * Lumyx Hero Lead Form
  * - Validates fields client-side
- * - POSTs to Google Sheets via Apps Script webhook
+ * - POSTs to GHL through a Netlify function
  * - On success: stores lead in sessionStorage + smooth-scrolls to Calendly
  *
- * GOOGLE SHEETS SETUP (one-time):
- * 1. Go to https://script.google.com → New Project
- * 2. Paste the Apps Script from the README / plan doc
- * 3. Deploy → Web App → Anyone → copy URL
- * 4. Replace the WEBHOOK value below with your URL
+ * GHL SETUP:
+ * - Netlify env vars must include GHL_PRIVATE_INTEGRATION_TOKEN and GHL_LOCATION_ID
  */
 
-const GOOGLE_SHEETS_WEBHOOK =
-  'https://script.google.com/macros/s/AKfycbxRtLFk9cpaiUzgtvk6v0exaIIh_As7prvmOT4qD5l_nlFhz7kPIKva_sHA_oRP0iEd/exec';
+const STRATEGY_CALL_ENDPOINT = '/.netlify/functions/ghl-strategy-call';
 
 // Inject VSL iframe if URL is set
 function initVSL() {
@@ -116,16 +112,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const payload = { name, email, phone, business, service, timestamp: new Date().toISOString() };
 
-    // Fire-and-forget to Google Sheets — no-cors means we can never read the
-    // response, so we never await it. Always redirect the user immediately.
     try {
-      fetch(GOOGLE_SHEETS_WEBHOOK, {
+      const response = await fetch(STRATEGY_CALL_ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(payload),
-        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-    } catch (_) { /* silent — sheet logging is best-effort */ }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Strategy call submission failed');
+      }
+    } catch (err) {
+      console.error('Strategy call submission failed:', err);
+      showError('Something went wrong. Please try again or email us directly.');
+      return;
+    }
 
     // Store lead locally
     try { sessionStorage.setItem('lumyx_lead', JSON.stringify(payload)); } catch (_) {}
