@@ -1,6 +1,6 @@
-const GHL_WEBHOOK =
-  process.env.GHL_NEWSLETTER_WEBHOOK ||
-  'https://services.leadconnectorhq.com/hooks/yrcYgS03BFe8fHYJOaTx/webhook-trigger/013f481f-3d30-44fa-81b9-c39b3617d3cc';
+const GHL_CONTACTS_UPSERT_URL = 'https://services.leadconnectorhq.com/contacts/upsert';
+const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID || 'yrcYgS03BFe8fHYJOaTx';
+const GHL_PRIVATE_INTEGRATION_TOKEN = process.env.GHL_PRIVATE_INTEGRATION_TOKEN;
 
 const jsonHeaders = {
   'Content-Type': 'application/json',
@@ -37,18 +37,35 @@ exports.handler = async (event) => {
       };
     }
 
+    if (!GHL_PRIVATE_INTEGRATION_TOKEN) {
+      return {
+        statusCode: 500,
+        headers: jsonHeaders,
+        body: JSON.stringify({
+          error: 'GHL private integration token is not configured',
+          details: 'Set GHL_PRIVATE_INTEGRATION_TOKEN in Netlify environment variables.'
+        })
+      };
+    }
+
     const payload = {
+      locationId: GHL_LOCATION_ID,
       email: data.email,
       firstName: data.firstName || '',
       lastName: data.lastName || '',
       phone: data.phone || '',
-      company: data.company || '',
-      source: 'Lumyx newsletter page'
+      companyName: data.company || '',
+      source: 'Lumyx newsletter page',
+      tags: ['newsletter', 'website-lead']
     };
 
-    const ghlResponse = await fetch(GHL_WEBHOOK, {
+    const ghlResponse = await fetch(GHL_CONTACTS_UPSERT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${GHL_PRIVATE_INTEGRATION_TOKEN}`,
+        Version: '2021-07-28',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload)
     });
 
@@ -59,7 +76,7 @@ exports.handler = async (event) => {
         statusCode: 502,
         headers: jsonHeaders,
         body: JSON.stringify({
-          error: 'GHL webhook rejected the request',
+          error: 'GHL contacts API rejected the request',
           status: ghlResponse.status,
           details: ghlText
         })

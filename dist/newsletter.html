@@ -510,13 +510,15 @@
         });
 
         if (!response.ok) {
-          throw new Error('Newsletter submission failed');
+          const errorText = await response.text();
+          throw new Error(errorText || 'Newsletter submission failed');
         }
 
         document.getElementById('formWrap').style.display    = 'none';
         document.getElementById('successState').style.display = 'flex';
 
       } catch (err) {
+        console.error('Newsletter submission failed:', err);
         btn.disabled = false;
         btnText.textContent = 'Get Free Insights';
         btn.querySelector('i').className = 'fas fa-paper-plane';
