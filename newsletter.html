@@ -459,7 +459,7 @@
   </footer>
 
   <script>
-    const WEBHOOK = 'https://services.leadconnectorhq.com/hooks/yrcYgS03BFe8fHYJOaTx/webhook-trigger/013f481f-3d30-44fa-81b9-c39b3617d3cc';
+    const NEWSLETTER_ENDPOINT = '/.netlify/functions/ghl-newsletter';
 
     // Auto-advance phone fields
     ['phoneArea', 'phoneDetail1'].forEach((id, i) => {
@@ -503,19 +503,15 @@
       const payload = { email, firstName, lastName, phone, company };
 
       try {
-        // GET + query params bypasses CORS preflight entirely — GHL explicitly supports this
-        const qs = new URLSearchParams({
-          email:     payload.email     || '',
-          firstName: payload.firstName || '',
-          lastName:  payload.lastName  || '',
-          phone:     payload.phone     || '',
-          company:   payload.company   || ''
-        }).toString();
-
-        await fetch(WEBHOOK + '?' + qs, {
-          method: 'GET',
-          mode:   'no-cors'
+        const response = await fetch(NEWSLETTER_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
+
+        if (!response.ok) {
+          throw new Error('Newsletter submission failed');
+        }
 
         document.getElementById('formWrap').style.display    = 'none';
         document.getElementById('successState').style.display = 'flex';
