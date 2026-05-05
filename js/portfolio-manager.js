@@ -160,7 +160,12 @@ class PortfolioManager {
         try {
             // Wait for contentful helpers to be ready
             console.log('⏳ Waiting for Contentful helpers...');
-            await this.waitForContentful(isMobile ? 15 : 10); // Longer wait for mobile
+            const contentfulReady = await this.waitForContentful(isMobile ? 15 : 10); // Longer wait for mobile
+            this.contentfulHelpers = window.contentfulHelpers;
+
+            if (!contentfulReady || !this.contentfulHelpers?.getCaseStudies) {
+                throw new Error('Contentful helpers are not available');
+            }
             
             // Get case studies from Contentful
             console.log('📊 Loading case studies...');
@@ -199,6 +204,12 @@ class PortfolioManager {
         `;
     }
 
+    normalizeImageUrl(url) {
+        if (!url) return null;
+        if (url.startsWith('//')) return `https:${url}`;
+        return url;
+    }
+
     renderCaseStudies(studies) {
         if (!studies || studies.length === 0) {
             this.portfolioGrid.innerHTML = `
@@ -219,8 +230,9 @@ class PortfolioManager {
                 featuredImage
             } = study.fields || {};
 
-            const imageHtml = featuredImage?.fields?.file?.url
-                ? `<img src="${featuredImage.fields.file.url}" alt="${title}" class="portfolio-image">`
+            const imageUrl = this.normalizeImageUrl(featuredImage?.fields?.file?.url);
+            const imageHtml = imageUrl
+                ? `<img src="${imageUrl}" alt="${title}" class="portfolio-image" loading="lazy">`
                 : this.generatePlaceholderSVG(category);
 
             return `
@@ -463,9 +475,7 @@ class PortfolioManager {
 
     createCaseStudyCard(study) {
         const fields = study.fields || {};
-        const imageUrl = fields.featuredImage?.fields?.file?.url 
-            ? 'https:' + fields.featuredImage.fields.file.url
-            : null;
+        const imageUrl = this.normalizeImageUrl(fields.featuredImage?.fields?.file?.url);
 
         return `
             <article class="portfolio-item" data-category="${fields.category || 'Case Study'}">

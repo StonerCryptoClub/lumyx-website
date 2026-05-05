@@ -42,6 +42,7 @@ function initVSL() {
     <p class="vsl-overlay-label">Click to Learn More</p>
   `;
   overlay.addEventListener('click', function () {
+    document.body.classList.add('vsl-active');
     overlay.classList.add('hiding');
     setTimeout(() => overlay.remove(), 380);
   });
@@ -75,11 +76,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const submitBtn = document.getElementById('hf-submit');
   const errorBox = document.getElementById('hf-error');
+  const btnText = submitBtn ? submitBtn.querySelector('.hf-btn-text') : null;
+  const defaultButtonText = btnText ? btnText.textContent : 'Get My Free Strategy Call \u2192';
 
   // Clear per-field error when user starts typing
-  ['hf-name','hf-email','hf-phone','hf-business','hf-service'].forEach(function(id) {
+  ['hf-name','hf-email','hf-business','hf-service'].forEach(function(id) {
     const el = form.querySelector('#' + id);
-    if (el) el.addEventListener('input', function() { clearFieldError(id); });
+    if (el) {
+      const eventName = el.tagName === 'SELECT' ? 'change' : 'input';
+      el.addEventListener(eventName, function() {
+        clearFieldError(id);
+        hideError();
+      });
+    }
+  });
+
+  ['hf-phone-area', 'hf-phone-prefix', 'hf-phone-line'].forEach(function(id, index, fields) {
+    const el = form.querySelector('#' + id);
+    if (!el) return;
+
+    el.addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '');
+      clearFieldError('hf-phone');
+      hideError();
+
+      const nextId = fields[index + 1];
+      if (nextId && this.value.length >= Number(this.maxLength)) {
+        const next = form.querySelector('#' + nextId);
+        if (next) next.focus();
+      }
+    });
   });
 
   form.addEventListener('submit', async function (e) {
@@ -87,13 +113,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const nameEl     = form.querySelector('#hf-name');
     const emailEl    = form.querySelector('#hf-email');
-    const phoneEl    = form.querySelector('#hf-phone');
+    const phoneAreaEl = form.querySelector('#hf-phone-area');
+    const phonePrefixEl = form.querySelector('#hf-phone-prefix');
+    const phoneLineEl = form.querySelector('#hf-phone-line');
+    const phoneGroupEl = form.querySelector('#hf-phone-group');
     const businessEl = form.querySelector('#hf-business');
     const serviceEl  = form.querySelector('#hf-service');
 
     const name     = nameEl.value.trim();
     const email    = emailEl.value.trim();
-    const phone    = phoneEl.value.trim();
+    const phone    = [phoneAreaEl.value, phonePrefixEl.value, phoneLineEl.value].join('');
     const business = businessEl.value.trim();
     const service  = serviceEl.value;
 
@@ -105,12 +134,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let hasError = false;
     if (!name)     { showFieldError('hf-name', nameEl);     hasError = true; }
     if (!email || !isValidEmail(email)) { showFieldError('hf-email', emailEl); hasError = true; }
-    if (!phone)    { showFieldError('hf-phone', phoneEl);   hasError = true; }
+    if (!phone || !isValidPhone(phone)) { showFieldError('hf-phone', phoneGroupEl);   hasError = true; }
     if (!business) { showFieldError('hf-business', businessEl); hasError = true; }
     if (!service)  { showFieldError('hf-service', serviceEl);   hasError = true; }
-    if (hasError) return;
+    if (hasError) {
+      showError('Please fix the highlighted fields and try again.');
+      return;
+    }
 
     const payload = { name, email, phone, business, service, timestamp: new Date().toISOString() };
+
+    setLoading(true);
 
     try {
       const response = await fetch(STRATEGY_CALL_ENDPOINT, {
@@ -126,17 +160,14 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (err) {
       console.error('Strategy call submission failed:', err);
       showError('Something went wrong. Please try again or email us directly.');
+      setLoading(false);
       return;
     }
 
     // Store lead locally
     try { sessionStorage.setItem('lumyx_lead', JSON.stringify(payload)); } catch (_) {}
 
-    // Show success state immediately
-    const btnText = submitBtn.querySelector('.hf-btn-text');
-    if (btnText) btnText.textContent = 'Booked! Scroll down to confirm your call';
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.85';
+    setSuccess();
 
     // Scroll to Calendly
     setTimeout(function () {
@@ -146,12 +177,30 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       // Re-enable button after redirect so form is reusable
       setTimeout(function () {
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '';
-        if (btnText) btnText.textContent = 'Get My Free Strategy Call \u2192';
+        resetButton();
       }, 4000);
     }, 600);
   });
+
+  function setLoading(state) {
+    submitBtn.disabled = state;
+    submitBtn.classList.toggle('loading', state);
+    submitBtn.classList.remove('success');
+    if (btnText && state) btnText.textContent = defaultButtonText;
+  }
+
+  function setSuccess() {
+    submitBtn.classList.remove('loading');
+    submitBtn.classList.add('success');
+    submitBtn.disabled = true;
+    if (btnText) btnText.textContent = 'Saved! Scroll down to book your call';
+  }
+
+  function resetButton() {
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('loading', 'success');
+    if (btnText) btnText.textContent = defaultButtonText;
+  }
 
   function showError(msg) {
     errorBox.textContent = msg;
@@ -167,6 +216,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
+  function isValidPhone(phone) {
+    return phone.replace(/\D/g, '').length >= 10;
+  }
+
   function showFieldError(fieldId, inputEl) {
     const errEl = document.getElementById('hf-err-' + fieldId.replace('hf-', ''));
     if (errEl) errEl.classList.add('visible');
@@ -176,7 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function clearFieldError(fieldId) {
     const errEl = document.getElementById('hf-err-' + fieldId.replace('hf-', ''));
     if (errEl) errEl.classList.remove('visible');
-    const inputEl = form.querySelector('#' + fieldId);
+    const inputEl = fieldId === 'hf-phone'
+      ? form.querySelector('#hf-phone-group')
+      : form.querySelector('#' + fieldId);
     if (inputEl) inputEl.classList.remove('hf-invalid');
   }
 

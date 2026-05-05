@@ -84,29 +84,37 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Main Styles -->
+    <link rel="stylesheet" href="css/main.css?v=4.3">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/portfolio.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html">
-                    <img src="Logo.png" alt="Lumyx Consulting Logo - PPC Management Services" class="logo" loading="eager">
-                    <span class="site-name">Lumyx Consulting</span>
-                </a>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img src="Logo.png" alt="Lumyx Consulting - PPC Management Services" width="160" height="auto" fetchpriority="high">
+            <span class="logo-text">Lumyx Consulting</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars fa-solid" aria-hidden="true"></i>
+            <span class="hamburger-bars" aria-hidden="true"></span>
+        </button>
+        <nav aria-label="Main Navigation">
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <div class="nav-dropdown">
+                <a href="index.html#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-menu">
+                    <a href="ai-lead-generation.html">AI Lead Gen &amp; Booking Agents</a>
+                    <a href="ppc-management.html">PPC Management</a>
+                    <a href="index.html#services">All Services</a>
+                </div>
             </div>
-            <div class="nav-menu">
-                <a href="index.html#about">About</a>
-                <a href="index.html#services">Services</a>
-                <a href="case-study.html">Case Studies</a>
-                <a href="blog.html">Blog</a>
-                <a href="index.html#contact">Contact</a>
-                <a href="index.html#booking-section" class="cta-button">Book Consultation</a>
-            </div>
-        </div>
-    </nav>
+            <a href="index.html#portfolio">Portfolio</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="blog.html">Blog</a>
+        </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="service-hero">

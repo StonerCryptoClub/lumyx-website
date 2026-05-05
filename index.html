@@ -341,7 +341,7 @@
     };
 
     // Multiple interaction triggers with extended timeout for TBT optimization
-    const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove', 'wheel'];
+    const events = ['click', 'scroll', 'keydown', 'touchstart'];
     events.forEach(event => {
       document.addEventListener(event, triggerAnalytics, { 
         once: true, 
@@ -447,7 +447,7 @@
   <link rel="prefetch" href="/case-study.html">
   
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js?v=20260311b"></script>
+  <script defer src="js/hero-form.js?v=20260504a"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -604,8 +604,8 @@
         bookingObserver.observe(bookingSection);
       }
 
-      // Load scripts on ANY user interaction (much more aggressive)
-      const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove'];
+      // Load scripts only on meaningful interaction so hovering over the VSL doesn't stutter playback.
+      const events = ['click', 'scroll', 'keydown', 'touchstart'];
       const loadOnInteraction = () => {
         loadThirdPartyScripts();
         events.forEach(event => {
@@ -620,8 +620,8 @@
         });
       });
 
-      // Fallback timeout reduced to 2 seconds for faster loading
-      setTimeout(loadThirdPartyScripts, 2000);
+      // Keep the hero/VSL smooth first; third-party scripts can wait.
+      setTimeout(loadThirdPartyScripts, 8000);
     });
 
     // Performance monitoring for TBT optimization
@@ -1137,7 +1137,6 @@
       cursor: pointer;
       border-radius: 14px;
       transition: opacity 0.35s ease, background 0.25s ease;
-      backdrop-filter: blur(2px);
     }
     .vsl-click-overlay:hover { background: rgba(10, 10, 20, 0.35); }
     .vsl-click-overlay.hiding { opacity: 0; pointer-events: none; }
@@ -1152,7 +1151,6 @@
       font-size: 1.7rem;
       color: #fff;
       background: rgba(255,165,0,0.28);
-      backdrop-filter: blur(6px);
       margin-bottom: 14px;
       transition: transform 0.22s ease, background 0.22s ease;
     }
@@ -1198,37 +1196,117 @@
     .vsl-coming-label { font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0 0 8px; }
     .vsl-coming-sub { font-size: 0.88rem; color: rgba(255,255,255,0.55); margin: 0; line-height: 1.55; }
 
+    /* Keep YouTube/VSL playback smooth by pausing decorative GPU work once engaged. */
+    body.vsl-active .animated-bg,
+    body.vsl-active .floating-circle,
+    body.vsl-active #home .floating-elements,
+    body.vsl-active .star {
+      animation: none !important;
+      will-change: auto !important;
+    }
+
+    body.vsl-active #home .floating-elements {
+      display: none !important;
+    }
+
+    body.vsl-active .star {
+      opacity: 0.22 !important;
+    }
+
     /* Explainer text */
     .hero-explainer {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,165,0,0.14), transparent 36%),
+        linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 22px 24px 20px;
+      text-align: center;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .hero-explainer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,165,0,0.13), transparent 36%, rgba(65,105,225,0.08));
+      opacity: 0.6;
+    }
+    .hero-explainer > * {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-explainer-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: rgba(255,165,0,0.12);
+      border: 1px solid rgba(255,165,0,0.22);
+      color: #ffb642;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-explainer p {
-      font-size: 0.94rem;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.68;
-      margin: 0 0 10px;
+      max-width: 760px;
+      font-size: clamp(1.05rem, 1.55vw, 1.42rem);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.45;
+      margin: 0 auto 16px;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+    }
+    .hero-explainer p strong {
+      color: #ffb642;
     }
     .hero-explainer-list {
-      margin: 0 0 12px 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 16px;
       padding: 0;
-      color: rgba(255,255,255,0.72);
-      font-size: 1rem;
-      line-height: 1.72;
+      list-style: none;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.82rem;
+      line-height: 1.35;
     }
     .hero-explainer-list li {
-      margin-bottom: 7px;
+      display: flex;
+      align-items: flex-start;
+      text-align: left;
+      gap: 8px;
+      min-height: 54px;
+      padding: 11px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-explainer-list i {
+      color: #ffb642;
+      margin-top: 2px;
+      flex-shrink: 0;
     }
     .hero-learn-link {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 700;
-      color: var(--primary-orange);
+      color: #0f1117;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffb642, #ff7a00);
+      box-shadow: 0 12px 28px rgba(255,122,0,0.18);
+      margin: 0 auto;
       transition: gap 0.2s;
     }
     .hero-learn-link:hover { gap: 10px; }
@@ -1258,59 +1336,164 @@
       margin-right: 4px;
     }
 
-    /* ---- Form column: LIGHT THEME ---- */
+    /* ---- Form column: Newsletter-inspired light card ---- */
     .hero-form-col { display: flex; flex-direction: column; gap: 14px; }
     .hero-form-card {
       background: #ffffff;
-      border-radius: 16px;
-      padding: 26px 26px 18px;
-      box-shadow: 0 16px 56px rgba(0,0,0,0.35);
+      border-radius: 18px;
+      padding: 30px 32px 20px;
+      box-shadow: 0 18px 64px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.55);
       height: auto;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-self: flex-start;
-      border: 1px solid rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.82);
     }
-    .form-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--primary-orange);
+    .form-card-header {
+      text-align: center;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      position: relative;
+    }
+    .form-card-header::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 74px;
+      height: 3px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, rgba(255,165,0,0), #ff9f0a, rgba(255,106,0,0));
+    }
+    .form-card-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 10px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(255, 165, 0, 0.1);
+      border: 1px solid rgba(255, 165, 0, 0.22);
+      color: #d97706;
+      font-size: 0.66rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 0 0 6px;
+    }
+    .form-card-eyebrow i {
+      color: #ff8a00;
+      font-size: 0.7rem;
     }
     .form-card-header h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #111;
-      margin: 0 0 4px;
+      font-size: clamp(1.55rem, 1.9vw, 2rem);
+      font-weight: 900;
+      color: #111827;
+      margin: 0 0 9px;
+      letter-spacing: -0.035em;
+      line-height: 1.04;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .form-card-header h3 span {
+      display: block;
+      background: linear-gradient(135deg, #111827 10%, #ff7a00 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     .form-subheading {
-      font-size: 0.85rem;
-      color: #666;
-      margin: 0 0 14px;
-      line-height: 1.5;
+      font-size: 0.84rem;
+      color: #5f6674;
+      margin: 0 auto;
+      line-height: 1.42;
+      max-width: 380px;
+      font-family: 'Montserrat', sans-serif;
     }
-    .hf-group { margin-bottom: 9px; }
+    .form-subheading strong {
+      color: #111827;
+      font-weight: 800;
+    }
+    #hero-lead-form {
+      text-align: left;
+    }
+    .hf-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 10px;
+      row-gap: 0;
+    }
+    .hf-group { margin-bottom: 7px; }
+    .hf-label {
+      display: block;
+      margin: 0 0 5px;
+      color: #374151;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-align: left;
+    }
     .hf-group input,
     .hf-group select {
       width: 100%;
-      background: #f5f5f7;
-      border: 1.5px solid #e0e0e0;
-      border-radius: 9px;
-      padding: 11px 14px;
-      color: #111;
-      font-size: 0.9rem;
+      background: #f7f7fa;
+      border: 1px solid #d9dde7;
+      border-radius: 10px;
+      padding: 11px 13px;
+      color: #111827;
+      font-size: 0.8rem;
       font-family: 'Montserrat', sans-serif;
       outline: none;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       box-sizing: border-box;
+      appearance: none;
       -webkit-appearance: none;
     }
-    .hf-group input::placeholder { color: #aaa; }
-    .hf-group select { color: #555; cursor: pointer; }
+    .hf-group input::placeholder { color: #9ca3af; }
+    .hf-group select { color: #4b5563; cursor: pointer; padding-right: 42px; }
     .hf-group select option { background: #fff; color: #111; }
+    .hf-phone-field {
+      display: grid;
+      grid-template-columns: 1fr 10px 1fr 10px 1.2fr;
+      align-items: center;
+      gap: 6px;
+      width: min(100%, 360px);
+      margin: 0 auto;
+    }
+    .hf-phone-field input {
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      min-width: 0;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    .hf-phone-sep {
+      color: #9ca3af;
+      font-weight: 800;
+      font-size: 0.78rem;
+      line-height: 1;
+      text-align: center;
+    }
+    .hf-phone-field.hf-invalid input {
+      border-color: #e53e3e !important;
+      box-shadow: 0 0 0 2px rgba(229,62,62,0.12) !important;
+    }
+    .hf-select-wrap {
+      position: relative;
+    }
+    .hf-select-wrap::after {
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #f59e0b;
+      font-size: 0.72rem;
+      pointer-events: none;
+    }
     .hf-group input:focus,
     .hf-group select:focus {
       border-color: #FFA500;
@@ -1320,12 +1503,14 @@
     /* Global form error (bottom of form) */
     .hf-error {
       font-size: 0.78rem;
-      color: #e53e3e;
-      margin-bottom: 6px;
+      color: #b42318;
+      margin: 0 0 10px;
       display: none;
-      padding: 0;
-      background: none;
-      border: none;
+      padding: 10px 12px;
+      background: #fff1f0;
+      border: 1px solid #ffccc7;
+      border-radius: 10px;
+      line-height: 1.35;
     }
     .hf-error.visible { display: block; }
     /* Per-field inline error */
@@ -1348,27 +1533,57 @@
       background: linear-gradient(135deg, #FFA500 0%, #FF6B00 100%);
       border: none;
       border-radius: 10px;
-      padding: 14px 20px;
-      color: #fff;
-      font-size: 0.97rem;
-      font-weight: 700;
+      padding: 12px 18px;
+      color: #0b0b0b;
+      font-size: 0.84rem;
+      font-weight: 800;
       font-family: 'Montserrat', sans-serif;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 20px rgba(255,120,0,0.4);
-      margin-top: 6px;
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
     }
     .hf-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,120,0,0.55); }
     .hf-submit:active { transform: translateY(0); }
-    .hf-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
-    .hf-btn-loading { display: none; }
+    .hf-submit:disabled { opacity: 0.82; cursor: not-allowed; transform: none; }
+    .hf-submit.success {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      box-shadow: 0 4px 20px rgba(22,163,74,0.28);
+    }
+    .hf-btn-loading {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
     .hf-submit.loading .hf-btn-text { display: none; }
-    .hf-submit.loading .hf-btn-loading { display: inline; }
+    .hf-submit.loading .hf-btn-loading { display: inline-flex; }
     .hf-disclaimer {
-      font-size: 0.75rem;
-      color: #999;
+      font-size: 0.54rem;
+      color: #9aa1ad;
       text-align: center;
       margin: 8px 0 0;
+      line-height: 1.2;
+    }
+    .hf-phone-group-wrap .hf-label {
+      text-align: center;
+    }
+    #home .hero-form-card .hf-disclaimer {
+      display: block !important;
+      max-width: none !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      color: #9aa1ad !important;
+      font-size: 0.56rem !important;
+      font-weight: 500 !important;
+      line-height: 1.2 !important;
+      margin: 7px 0 0 !important;
+      text-shadow: none !important;
     }
 
     /* ---- Row 3: Stats Bar ---- */
@@ -1413,12 +1628,59 @@
       #home { padding: 90px 0 20px; }
       #home .hero-content { padding: 0 20px; gap: 16px; }
       .hero-headline { font-size: clamp(1.15rem, 5.5vw, 1.6rem) !important; }
-      .hero-form-card { padding: 22px 18px 14px; }
+      .hero-form-card { padding: 18px 15px 12px; }
+      .form-card-header {
+        margin-bottom: 16px;
+        padding-bottom: 14px;
+      }
+      .form-card-eyebrow {
+        font-size: 0.58rem;
+        padding: 5px 9px;
+        margin-bottom: 9px;
+      }
+      .form-card-header h3 {
+        font-size: clamp(1.4rem, 6vw, 1.7rem) !important;
+        line-height: 1.02 !important;
+        margin-bottom: 8px !important;
+      }
+      .form-subheading {
+        font-size: 0.78rem !important;
+        line-height: 1.38 !important;
+        max-width: 310px !important;
+      }
+      .hf-row { grid-template-columns: 1fr; gap: 0; }
+      .hf-phone-field {
+        grid-template-columns: 1fr auto 1fr auto 1fr;
+        gap: 5px;
+        max-width: none;
+      }
       .proof-avatars-inline {
         gap: 6px;
       }
       .proof-avatars-inline .proof-chip {
         font-size: 0.76rem;
+      }
+      .hero-explainer {
+        padding: 18px 16px;
+        border-radius: 16px;
+      }
+      .hero-explainer-kicker {
+        margin-bottom: 10px;
+        font-size: 0.62rem;
+      }
+      .hero-explainer p {
+        font-size: 1.12rem;
+        line-height: 1.45;
+        text-align: center;
+      }
+      .hero-explainer-list {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        font-size: 0.86rem;
+      }
+      .hero-explainer-list li {
+        min-height: 0;
+        padding: 10px 11px;
       }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
@@ -3087,198 +3349,403 @@
 
     /* Problem/Solution Section */
     .problem-solution-section {
-      padding: 60px 5% 50px;
-      background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 76px 5% 68px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,165,0,0.16), transparent 30%),
+        radial-gradient(circle at 82% 28%, rgba(65,105,225,0.16), transparent 34%),
+        linear-gradient(135deg, #0c0f1c 0%, #121a31 52%, #0b0d16 100%);
       width: 100vw;
       margin: 0;
       margin-left: calc(-50vw + 50%);
       scroll-margin-top: 80px;
     }
 
+    .problem-solution-section::before,
+    .problem-solution-section::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .problem-solution-section::before {
+      inset: 16px 5%;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), transparent 52%);
+    }
+
+    .problem-solution-section::after {
+      width: 420px;
+      height: 420px;
+      left: 50%;
+      top: 46%;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,165,0,0.1), transparent 68%);
+      filter: blur(4px);
+    }
+
     .problem-solution-content {
-      max-width: none;
-      margin: 0;
-      padding: 0 5%;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #F5F5F5;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 600px;
+      max-width: 1240px;
       margin: 0 auto;
-      line-height: 1.5;
+      padding: 0 5%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .problem-solution-section .section-header {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .ps-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgba(255,165,0,0.1);
+      border: 1px solid rgba(255,165,0,0.24);
+      color: #ffb642;
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .problem-solution-section .section-header h2 {
+      font-size: clamp(2.1rem, 4vw, 3.35rem);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+      margin: 0 0 14px;
+      color: #ffffff;
+      text-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    .problem-solution-section .section-subtitle {
+      font-size: clamp(0.98rem, 1.5vw, 1.14rem);
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 710px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
 
     .problem-solution-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      margin-bottom: 45px;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      margin: 0 auto 48px;
+      max-width: 1040px;
+      position: relative;
     }
 
-    .problem-side, .solution-side {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 50px 40px;
-      border-radius: 25px;
-      backdrop-filter: blur(10px);
-      min-height: 400px;
+    .problem-solution-grid::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 26px;
+      bottom: 26px;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(255,165,0,0.42), transparent);
+    }
+
+    .problem-solution-section .problem-side,
+    .problem-solution-section .solution-side {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      padding: 28px;
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.095), rgba(255,255,255,0.04)),
+        rgba(13,16,29,0.74);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .problem-side {
-      border: 1px solid rgba(255, 107, 107, 0.3);
+    .problem-solution-section .problem-side::before,
+    .problem-solution-section .solution-side::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.72;
+      pointer-events: none;
     }
 
-    .solution-side {
-      border: 1px solid rgba(0, 200, 83, 0.3);
+    .problem-solution-section .problem-side::before {
+      background: radial-gradient(circle at 14% 0%, rgba(255,90,90,0.18), transparent 38%);
     }
 
-    .problem-side h3, .solution-side h3 {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      font-weight: 700;
-      text-align: center;
+    .problem-solution-section .solution-side::before {
+      background: radial-gradient(circle at 86% 0%, rgba(255,165,0,0.2), transparent 40%);
+    }
+
+    .problem-solution-section .problem-side:hover,
+    .problem-solution-section .solution-side:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,165,0,0.32);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.42);
+    }
+
+    .ps-card-header,
+    .problem-list,
+    .solution-list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ps-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ps-card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .problem-side .ps-card-icon {
+      color: #ff7a7a;
+      background: rgba(255,90,90,0.12);
+      border: 1px solid rgba(255,90,90,0.22);
+    }
+
+    .solution-side .ps-card-icon {
+      color: #ffb642;
+      background: rgba(255,165,0,0.13);
+      border: 1px solid rgba(255,165,0,0.25);
+    }
+
+    .problem-solution-section .problem-side h3,
+    .problem-solution-section .solution-side h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      font-weight: 850;
+      text-align: left;
+      letter-spacing: -0.02em;
     }
 
     .problem-heading {
-      color: rgba(255, 107, 107, 0.95) !important;
-      border-bottom: 2px solid rgba(255, 107, 107, 0.35);
-      padding-bottom: 14px;
+      color: rgba(255, 150, 150, 0.98) !important;
+      border-bottom: 0;
+      padding-bottom: 0;
     }
 
     .solution-heading {
-      color: rgba(100, 220, 140, 0.95) !important;
-      border-bottom: 2px solid rgba(100, 220, 140, 0.35);
-      padding-bottom: 14px;
+      color: #ffcf75 !important;
+      border-bottom: 0;
+      padding-bottom: 0;
     }
 
-    .problem-list, .solution-list {
-      list-style: disc;
-      padding-left: 25px;
-      list-style-position: inside;
+    .ps-card-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255,255,255,0.52);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
-    .problem-list li, .solution-list li {
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: center;
+    .problem-list,
+    .solution-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
     }
 
-    .problem-list li:last-child, .solution-list li:last-child {
-      border-bottom: none;
+    .problem-list li,
+    .solution-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 13px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.18);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.88rem;
+      font-weight: 560;
+      line-height: 1.45;
+      text-align: left;
     }
 
-    /* Proof Section */
+    .problem-list li i,
+    .solution-list li i {
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .problem-list li i {
+      color: #ff7a7a;
+    }
+
+    .solution-list li i {
+      color: #ffb642;
+    }
+
     .proof-section {
       text-align: center;
-      margin-top: 35px;
-      padding-top: 25px;
+      margin-top: 0;
+      padding-top: 10px;
+      position: relative;
+    }
+
+    .proof-section::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 34px;
+      margin: 0 auto 18px;
+      background: linear-gradient(180deg, rgba(255,165,0,0.5), transparent);
     }
 
     .proof-section h3 {
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      color: var(--primary-orange);
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin: 0 0 24px;
+      color: #ffb642;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 850;
+      letter-spacing: -0.02em;
       line-height: 1.2;
     }
 
     .results-showcase {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
+      grid-template-columns: repeat(3, minmax(180px, 220px));
+      justify-content: center;
+      justify-items: stretch;
+      gap: 16px;
+      width: fit-content;
+      max-width: 100%;
       margin: 0 auto;
     }
 
-    .result-item {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 35px 28px;
-      border-radius: 20px;
-      border: 2px solid rgba(255, 165, 0, 0.3);
-      backdrop-filter: blur(15px);
-      transition: all 0.4s ease;
-      text-align: center !important;
+    .problem-solution-section .result-item {
       position: relative;
+      min-height: 132px;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      min-height: 160px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .result-item::before { content: ''; position: absolute; inset: 0; background: none; opacity: 0; transition: opacity 0.3s ease; }
-
-    .result-item:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: var(--primary-orange);
-      box-shadow: 0 25px 50px rgba(255, 165, 0, 0.4);
-    }
-
-    .result-item:hover::before {
-      opacity: 1;
-    }
-
-    .result-item .result-number {
-      text-align: center !important;
-      display: block;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 22px;
       width: 100%;
-      font-size: 3.5rem;
-      font-weight: 900;
+      border-radius: 18px;
+      border: 1px solid rgba(255,165,0,0.2);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.035)),
+        rgba(11,14,26,0.78);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+      text-align: left !important;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .problem-solution-section .result-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(255,165,0,0.18), transparent 48%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .problem-solution-section .result-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,165,0,0.42);
+      box-shadow: 0 28px 70px rgba(255,165,0,0.12), 0 18px 50px rgba(0,0,0,0.34);
+    }
+
+    .metric-label {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.52);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .problem-solution-section .result-item .result-number {
+      position: relative;
+      z-index: 1;
+      width: auto;
+      display: block;
+      margin: 0;
       color: #ffffff;
-      margin-bottom: 10px;
+      font-size: clamp(2.2rem, 4vw, 3.1rem);
+      line-height: 0.9;
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      text-align: left !important;
+    }
+
+    .problem-solution-section .result-item .result-desc {
       position: relative;
-      z-index: 2;
-      line-height: 1;
+      z-index: 1;
+      width: auto;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.78rem;
+      line-height: 1.35;
+      font-weight: 650;
+      text-align: left !important;
     }
 
-    .result-item .result-desc {
-      text-align: center !important;
-      display: block;
-      width: 100%;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.9);
-      line-height: 1.4;
-      position: relative;
-      z-index: 2;
+    .js-reveals .ps-reveal,
+    .js-reveals .ps-card,
+    .js-reveals .proof-metric {
+      opacity: 0;
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .result-item:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary-orange);
-      box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2);
+    .js-reveals .ps-reveal { transform: translateY(22px); }
+    .js-reveals .ps-card-left { transform: translateX(-34px); }
+    .js-reveals .ps-card-right { transform: translateX(34px); }
+    .js-reveals .proof-metric { transform: translateY(28px); transition-delay: var(--reveal-delay, 0ms); }
+
+    .js-reveals .ps-reveal.visible,
+    .js-reveals .ps-card.visible,
+    .js-reveals .proof-metric.visible {
+      opacity: 1;
+      transform: translate(0, 0);
     }
 
-    .result-number { font-size: 4rem; font-weight: 900; color: #ffffff; margin-bottom: 8px; text-align: center; }
-
-    .result-desc {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 1.4;
-      text-align: center;
+    @media (prefers-reduced-motion: reduce) {
+      .js-reveals .ps-reveal,
+      .js-reveals .ps-card,
+      .js-reveals .proof-metric {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
     .about-values {
       margin-top: 60px;
@@ -6724,6 +7191,55 @@
       margin: 0 auto;
       padding: 0 5%;
     }
+
+    /* Final modern proof-section overrides after legacy full-width rules */
+    .problem-solution-section {
+      padding: 76px 0 68px !important;
+    }
+
+    .problem-solution-section .problem-solution-content {
+      max-width: 1240px !important;
+      padding: 0 5% !important;
+    }
+
+    .problem-solution-section .results-showcase {
+      grid-template-columns: repeat(3, minmax(180px, 220px)) !important;
+      justify-content: center !important;
+      width: fit-content !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    @media (max-width: 768px) {
+      .problem-solution-section {
+        padding: 56px 0 52px !important;
+      }
+
+      .problem-solution-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+        margin-bottom: 34px !important;
+      }
+
+      .problem-solution-grid::before {
+        display: none;
+      }
+
+      .problem-solution-section .problem-side,
+      .problem-solution-section .solution-side {
+        padding: 22px !important;
+      }
+
+      .ps-card-header {
+        align-items: flex-start;
+      }
+
+      .results-showcase {
+        grid-template-columns: 1fr !important;
+        max-width: 420px !important;
+        width: 100% !important;
+      }
+    }
     
     /* Small screen optimization */
     @media (max-width: 480px) {
@@ -6951,7 +7467,7 @@
       color: rgba(255,255,255,0.72) !important;
     }
 
-    @media (min-width: 1025px) {
+    @media (min-width: 961px) {
       #home {
         padding-top: 118px !important;
         padding-bottom: 28px !important;
@@ -6965,14 +7481,19 @@
       }
 
       #home .hero-grid {
-        grid-template-columns: minmax(0, 1.9fr) minmax(360px, 1fr) !important;
-        gap: 26px !important;
+        grid-template-columns: minmax(520px, 1.25fr) minmax(540px, 0.95fr) !important;
+        gap: 32px !important;
         width: 100% !important;
+        align-items: start !important;
       }
 
       #home .hero-vsl-col,
       #home .hero-form-col {
         width: 100% !important;
+      }
+
+      #home .hero-form-col {
+        align-items: center !important;
       }
 
       #home .vsl-wrapper {
@@ -6986,6 +7507,206 @@
       #home .hero-form-card {
         min-height: 0 !important;
         height: auto !important;
+        width: 100% !important;
+        max-width: 560px !important;
+        padding: 32px 34px 20px !important;
+      }
+
+      #home .form-card-header {
+        text-align: center !important;
+        margin-bottom: 18px !important;
+        padding-bottom: 14px !important;
+      }
+
+      #home .form-card-header h3 {
+        font-size: clamp(1.6rem, 1.8vw, 1.92rem) !important;
+        line-height: 1.05 !important;
+        margin-bottom: 8px !important;
+      }
+
+      #home .form-subheading {
+        font-size: 0.78rem !important;
+        line-height: 1.35 !important;
+        max-width: 360px !important;
+        margin: 0 auto 18px !important;
+        color: #6b7280 !important;
+      }
+
+      #home .hf-label {
+        font-size: 0.72rem !important;
+      }
+
+      #home .hf-group input,
+      #home .hf-group select {
+        min-height: 42px !important;
+        font-size: 0.84rem !important;
+      }
+
+      #home .hf-phone-field {
+        width: min(100%, 390px) !important;
+      }
+
+      #home .hf-submit {
+        min-height: 48px !important;
+        font-size: 0.9rem !important;
+      }
+
+      #home .hero-form-card .hf-disclaimer {
+        font-size: 0.58rem !important;
+        line-height: 1.2 !important;
+        margin-top: 7px !important;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      #home .hero-grid {
+        grid-template-columns: minmax(0, 1.85fr) minmax(430px, 0.95fr) !important;
+        gap: 32px !important;
+        align-items: start !important;
+      }
+
+      #home .hero-form-col {
+        align-items: center !important;
+        justify-self: center !important;
+        max-width: 460px !important;
+      }
+
+      #home .hero-form-card {
+        width: 100% !important;
+        max-width: 460px !important;
+        padding: 28px 30px 18px !important;
+      }
+
+      #home .form-card-header {
+        text-align: center !important;
+        margin-bottom: 18px !important;
+        padding-bottom: 14px !important;
+      }
+
+      #home .form-card-header h3 {
+        font-size: 1.46rem !important;
+        line-height: 1.08 !important;
+        margin-bottom: 8px !important;
+      }
+
+      #home .form-subheading {
+        font-size: 0.82rem !important;
+        line-height: 1.38 !important;
+        max-width: 390px !important;
+        margin: 0 auto 20px !important;
+      }
+
+      #home .hf-row {
+        column-gap: 14px !important;
+      }
+
+      #home .hf-group {
+        margin-bottom: 11px !important;
+      }
+
+      #home .hf-phone-field {
+        width: min(100%, 340px) !important;
+        grid-template-columns: 1fr 12px 1fr 12px 1.25fr !important;
+        gap: 7px !important;
+        margin: 0 auto !important;
+      }
+
+      #home .hf-group input,
+      #home .hf-group select {
+        min-height: 40px !important;
+      }
+
+      #home .hf-submit {
+        min-height: 44px !important;
+        margin-top: 6px !important;
+      }
+
+      #home .hero-form-col .hero-stats {
+        width: 100% !important;
+        max-width: 460px !important;
+        margin: 14px auto 0 !important;
+      }
+
+      #home .hero-form-card .hf-disclaimer {
+        font-size: 0.55rem !important;
+        line-height: 1.15 !important;
+        margin-top: 6px !important;
+      }
+    }
+
+    @media (min-width: 961px) {
+      #home .hero-grid {
+        grid-template-columns: minmax(0, 1.45fr) minmax(520px, 1fr) !important;
+        gap: 38px !important;
+      }
+
+      #home .hero-form-col {
+        width: 100% !important;
+        max-width: 560px !important;
+        align-items: center !important;
+      }
+
+      #home .hero-form-card {
+        width: 100% !important;
+        max-width: 560px !important;
+        min-height: 410px !important;
+        padding: 36px 38px 46px !important;
+      }
+
+      #home .form-card-header h3 {
+        font-size: 1.58rem !important;
+        margin-bottom: 8px !important;
+      }
+
+      #home .form-subheading {
+        font-size: 0.78rem !important;
+        max-width: 390px !important;
+        margin-bottom: 18px !important;
+      }
+
+      #home .hf-group input,
+      #home .hf-group select {
+        min-height: 43px !important;
+        font-size: 0.82rem !important;
+      }
+
+      #home .hf-phone-field {
+        width: min(100%, 390px) !important;
+      }
+
+      #home .hf-submit {
+        min-height: 47px !important;
+        font-size: 0.88rem !important;
+      }
+
+      #home .hero-form-col .hero-stats {
+        width: 100% !important;
+        max-width: 560px !important;
+        margin-top: 14px !important;
+      }
+
+      #home .hero-form-card .hf-disclaimer {
+        font-size: 0.54rem !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+      #home {
+        padding-top: 58px !important;
+      }
+
+      #home .hero-content {
+        gap: 14px !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #home {
+        padding-top: 34px !important;
+      }
+
+      #home .hero-top {
+        gap: 12px !important;
       }
     }
   </style>
@@ -7190,11 +7911,12 @@
 
           <!-- What we do -->
           <div class="hero-explainer">
-            <p>We build growth systems that turn attention into booked calls and revenue. From ad strategy to automation, you get one expert team executing end-to-end.</p>
+            <div class="hero-explainer-kicker"><i class="fas fa-bolt"></i> Built to convert attention</div>
+            <p><strong>From traffic to booked calls,</strong> we build the paid media, follow-up, and funnel systems that turn attention into revenue.</p>
             <ul class="hero-explainer-list">
-              <li>Paid media strategy and campaign execution</li>
-              <li>AI follow-up and nuture workflows that recover missed leads</li>
-              <li>Conversion optimization across your full funnel</li>
+              <li><i class="fas fa-bullseye"></i><span>Paid media strategy and campaign execution</span></li>
+              <li><i class="fas fa-robot"></i><span>AI follow-up and nurture workflows that recover missed leads</span></li>
+              <li><i class="fas fa-chart-line"></i><span>Conversion optimization across your full funnel</span></li>
             </ul>
             <a href="#services" class="hero-learn-link">See what we do <i class="fas fa-arrow-right"></i></a>
           </div>
@@ -7218,39 +7940,56 @@
         <div class="hero-form-col">
           <div class="hero-form-card">
             <div class="form-card-header">
-              <p class="form-eyebrow">Free 30-Minute Session</p>
-              <h3>Book Your Strategy Call</h3>
-              <p class="form-subheading">Tell us about your business and we'll reach out within 24 hours.</p>
+              <span class="form-card-eyebrow"><i class="fas fa-bolt"></i> Free Growth Audit</span>
+              <h3>Book Your <span>Growth Strategy Call</span></h3>
+              <p class="form-subheading"><strong>Get a clear next-step plan</strong> for more booked calls, stronger follow-up, and cleaner campaign ROI.</p>
             </div>
             <form id="hero-lead-form" novalidate>
-              <div class="hf-group">
-                <input type="text" id="hf-name" name="name" placeholder="Full Name" autocomplete="name">
-                <span class="hf-field-error" id="hf-err-name">Please enter your full name.</span>
+              <div class="hf-row">
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-name">Full Name</label>
+                  <input type="text" id="hf-name" name="name" placeholder="Jane Smith" autocomplete="name" aria-label="Full Name">
+                  <span class="hf-field-error" id="hf-err-name">Please enter your full name.</span>
+                </div>
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-email">Email Address</label>
+                  <input type="email" id="hf-email" name="email" placeholder="jane@company.com" autocomplete="email" aria-label="Email Address">
+                  <span class="hf-field-error" id="hf-err-email">Please enter a valid email address.</span>
+                </div>
               </div>
-              <div class="hf-group">
-                <input type="email" id="hf-email" name="email" placeholder="Email Address" autocomplete="email">
-                <span class="hf-field-error" id="hf-err-email">Please enter a valid email address.</span>
+              <div class="hf-group hf-phone-group-wrap">
+                <label class="hf-label" for="hf-phone-area">Phone Number</label>
+                <div class="hf-phone-field" id="hf-phone-group">
+                  <input type="text" id="hf-phone-area" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" autocomplete="tel-area-code" aria-label="Phone area code">
+                  <span class="hf-phone-sep">-</span>
+                  <input type="text" id="hf-phone-prefix" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" aria-label="Phone prefix">
+                  <span class="hf-phone-sep">-</span>
+                  <input type="text" id="hf-phone-line" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="####" aria-label="Phone line number">
+                </div>
+                <span class="hf-field-error" id="hf-err-phone">Please enter a valid phone number.</span>
               </div>
-              <div class="hf-group">
-                <input type="tel" id="hf-phone" name="phone" placeholder="Phone Number" autocomplete="tel">
-                <span class="hf-field-error" id="hf-err-phone">Please enter your phone number.</span>
-              </div>
-              <div class="hf-group">
-                <input type="text" id="hf-business" name="business" placeholder="Business Name" autocomplete="organization">
-                <span class="hf-field-error" id="hf-err-business">Please enter your business name.</span>
-              </div>
-              <div class="hf-group">
-                <select id="hf-service" name="service">
-                  <option value="" disabled selected>Services Interested In</option>
-                  <option value="PPC Management & Google Ads">PPC Management &amp; Google Ads</option>
-                  <option value="SEO Services">SEO Services</option>
-                  <option value="AI Lead Generation & Booking Agents">AI Lead Generation &amp; Booking Agents</option>
-                  <option value="Marketing Strategy & Consulting">Marketing Strategy &amp; Consulting</option>
-                  <option value="Social Media Advertising">Social Media Advertising</option>
-                  <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
-                  <option value="Full-Service Growth Package">Full-Service Growth Package</option>
-                </select>
-                <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
+              <div class="hf-row">
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-business">Business Name</label>
+                  <input type="text" id="hf-business" name="business" placeholder="Company name" autocomplete="organization" aria-label="Business Name">
+                  <span class="hf-field-error" id="hf-err-business">Please enter your business name.</span>
+                </div>
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-service">Growth Focus</label>
+                  <div class="hf-select-wrap">
+                    <select id="hf-service" name="service" aria-label="Services Interested In">
+                      <option value="" disabled selected>Select a focus</option>
+                      <option value="PPC Management & Google Ads">PPC Management &amp; Google Ads</option>
+                      <option value="SEO Services">SEO Services</option>
+                      <option value="AI Lead Generation & Booking Agents">AI Lead Generation &amp; Booking Agents</option>
+                      <option value="Marketing Strategy & Consulting">Marketing Strategy &amp; Consulting</option>
+                      <option value="Social Media Advertising">Social Media Advertising</option>
+                      <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
+                      <option value="Full-Service Growth Package">Full-Service Growth Package</option>
+                    </select>
+                  </div>
+                  <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
+                </div>
               </div>
               <div class="hf-error" id="hf-error" role="alert"></div>
               <button type="submit" class="hf-submit" id="hf-submit">
@@ -7259,7 +7998,7 @@
                   <i class="fas fa-circle-notch fa-spin"></i> Sending...
                 </span>
               </button>
-              <p class="hf-disclaimer">No spam. No pitch. Just a focused growth session.</p>
+              <p class="hf-disclaimer">Private review. No spam. No pressure.</p>
             </form>
           </div>
 
@@ -7296,47 +8035,57 @@
     <!-- Problem/Solution Section -->
     <section id="about" class="problem-solution-section animate-on-scroll section-reveal">
       <div class="problem-solution-content">
-        <div class="section-header">
+        <div class="section-header ps-reveal">
+          <span class="ps-eyebrow"><i class="fas fa-bolt"></i> Why Lumyx is different</span>
           <h2>Strategy Without Execution is Worthless</h2>
           <p class="section-subtitle">Most consultants give you a plan and disappear. We consult on strategy, then stay to implement and optimize until you see results.</p>
             </div>
 
         <div class="problem-solution-grid">
-          <div class="problem-side">
-            <h3 class="problem-heading">What Other Consultants Do</h3>
+          <div class="problem-side ps-card ps-card-left">
+            <div class="ps-card-header">
+              <span class="ps-card-icon"><i class="fas fa-file-powerpoint"></i></span>
+              <h3 class="problem-heading">What Other Consultants Do <span class="ps-card-subtitle">Strategy-only. No execution ownership.</span></h3>
+            </div>
             <ul class="problem-list">
-              <li>Create fancy decks then hand off and leave</li>
-              <li>Use generic templates for every client</li>
-              <li>Charge high fees with no accountability</li>
-              <li>Focus on theory, not implementation</li>
-              <li>Disappear after the initial engagement</li>
+              <li><i class="fas fa-times-circle"></i><span>Create fancy decks then hand off and leave</span></li>
+              <li><i class="fas fa-times-circle"></i><span>Use generic templates for every client</span></li>
+              <li><i class="fas fa-times-circle"></i><span>Charge high fees with no accountability</span></li>
+              <li><i class="fas fa-times-circle"></i><span>Focus on theory, not implementation</span></li>
+              <li><i class="fas fa-times-circle"></i><span>Disappear after the initial engagement</span></li>
             </ul>
             </div>
 
-          <div class="solution-side">
-            <h3 class="solution-heading">The Lumyx Consulting Approach</h3>
+          <div class="solution-side ps-card ps-card-right">
+            <div class="ps-card-header">
+              <span class="ps-card-icon"><i class="fas fa-rocket"></i></span>
+              <h3 class="solution-heading">The Lumyx Consulting Approach <span class="ps-card-subtitle">Bespoke strategy plus hands-on implementation.</span></h3>
+            </div>
             <ul class="solution-list">
-              <li>Develop custom strategy then execute it with you</li>
-              <li>Tailor solutions to your specific business needs</li>
-              <li>Guarantee measurable ROI within 90 days</li>
-              <li>Hands-on implementation of ads & AI workflows</li>
-              <li>Stay engaged until profits are enhanced</li>
+              <li><i class="fas fa-check-circle"></i><span>Develop custom strategy then execute it with you</span></li>
+              <li><i class="fas fa-check-circle"></i><span>Tailor solutions to your specific business needs</span></li>
+              <li><i class="fas fa-check-circle"></i><span>Guarantee measurable ROI within 90 days</span></li>
+              <li><i class="fas fa-check-circle"></i><span>Hands-on implementation of ads &amp; AI workflows</span></li>
+              <li><i class="fas fa-check-circle"></i><span>Stay engaged until profits are enhanced</span></li>
             </ul>
             </div>
           </div>
 
-        <div class="proof-section">
-          <h3>Here's Proof We Walk the Talk</h3>
+        <div class="proof-section ps-reveal">
+          <h3><i class="fas fa-chart-line"></i> Here's Proof We Walk the Talk</h3>
           <div class="results-showcase">
-            <div class="result-item">
+            <div class="result-item proof-metric" style="--reveal-delay: 0ms;">
+              <span class="metric-label">Revenue Lift</span>
               <div class="result-number">312%</div>
               <div class="result-desc">Average revenue increase for our clients</div>
             </div>
-            <div class="result-item">
+            <div class="result-item proof-metric" style="--reveal-delay: 100ms;">
+              <span class="metric-label">Pipeline Impact</span>
               <div class="result-number">$2M+</div>
               <div class="result-desc">Generated in client revenue</div>
             </div>
-            <div class="result-item">
+            <div class="result-item proof-metric" style="--reveal-delay: 200ms;">
+              <span class="metric-label">Client Trust</span>
               <div class="result-number">98%</div>
               <div class="result-desc">Client retention rate</div>
             </div>
@@ -7798,7 +8547,6 @@
   <script defer src="js/newsletter.js"></script>
   <script defer src="js/form-validation.js"></script>
   <script defer src="js/form-fix.js"></script>
-  <script defer src="js/performance-optimization.js"></script>
   
   <!-- Conversion tracking - Performance optimized -->
   <script defer src="js/conversion-tracking.js"></script>
@@ -7843,7 +8591,7 @@
     // Optimize star creation with a more efficient approach
     function createStars() {
       const starsContainer = document.querySelector('.stars-container');
-      const numberOfStars = 100; // Increased number of stars
+      const numberOfStars = 32;
       
       // Create stars in batches for better performance
       const batchSize = 20;
@@ -7906,9 +8654,8 @@
     `;
     document.head.appendChild(styleSheet);
 
-    // Initialize stars and recreate them on window resize
+    // Initialize stars once; recreating them during resize/devtools can stutter video playback.
     document.addEventListener('DOMContentLoaded', createStars);
-    window.addEventListener('resize', createStars);
 
     // Optimize scroll handling with throttling
     function throttle(func, limit) {
@@ -7937,9 +8684,6 @@
 
     // Mobile menu is handled in the DOMContentLoaded section below
 
-    // Initialize stars after DOM is loaded
-    document.addEventListener('DOMContentLoaded', createStars);
-
     // Optimize animations with Intersection Observer
     const observerOptions = {
       threshold: 0.1,
@@ -7962,10 +8706,12 @@
 
     // Initialize all animations and observers
     document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.classList.add('js-reveals');
+
       // Fade-in animation and section transitions
       const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px'
+        rootMargin: '0px 0px -8% 0px'
       };
 
       const observer = new IntersectionObserver((entries) => {
@@ -7977,7 +8723,7 @@
       }, observerOptions);
 
       // Observe all sections and fade-in elements
-      document.querySelectorAll('.fade-in, .services-section, .process-section, .team-section, .clients-section, .contact-section, .portfolio-section').forEach((element) => {
+      document.querySelectorAll('.fade-in, .services-section, .process-section, .team-section, .clients-section, .contact-section, .portfolio-section, .ps-reveal, .ps-card, .proof-metric').forEach((element) => {
         observer.observe(element);
       });
 
@@ -8460,7 +9206,6 @@
       // Load animation and performance scripts after page load
       const deferredScripts = [
         'js/animations.js',
-        'js/performance-optimization.js',
         'js/main.js',
         'js/form-validation.js',
         'js/form-fix.js',

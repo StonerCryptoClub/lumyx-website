@@ -66,11 +66,16 @@
     }
 
     .topbar-logo {
-      font-size: 1.3rem; font-weight: 800;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.08rem; font-weight: 800;
       color: var(--text); text-decoration: none;
       letter-spacing: -0.5px;
     }
-    .topbar-logo span { color: var(--orange); }
+    .topbar-logo img {
+      width: 28px; height: 28px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(255,165,0,0.25));
+    }
 
     .topbar-back {
       font-size: 0.85rem; color: var(--muted); text-decoration: none;
@@ -292,15 +297,6 @@
     }
     .success-back:hover { background: rgba(255,165,0,0.18); }
 
-    /* ── Footer ── */
-    footer {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.78rem; color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
     /* ── Responsive ── */
     @media (max-width: 860px) {
       .layout { grid-template-columns: 1fr; gap: 40px; }
@@ -319,7 +315,10 @@
 
   <!-- Top nav -->
   <nav class="topbar">
-    <a href="/" class="topbar-logo">Lumyx<span>Agency</span></a>
+    <a href="/" class="topbar-logo">
+      <img src="Logo.png" alt="Lumyx Consulting">
+      <span>Lumyx Consulting</span>
+    </a>
     <a href="/" class="topbar-back"><i class="fas fa-arrow-left"></i> Back to site</a>
   </nav>
 
@@ -453,10 +452,6 @@
 
     </div>
   </div>
-
-  <footer>
-    &copy; 2025 Lumyx Agency. All rights reserved.
-  </footer>
 
   <script>
     const NEWSLETTER_ENDPOINT = '/.netlify/functions/ghl-newsletter';

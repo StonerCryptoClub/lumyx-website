@@ -1,8 +1,54 @@
-// Initialize Contentful Client
-const client = contentful.createClient({
-    space: window.config.contentful.spaceId,
-    accessToken: window.config.contentful.accessToken
-});
+// Initialize Contentful after both the SDK and site config are available.
+let client = null;
+
+function initializeContentfulClient(attempt = 0) {
+    if (client) return true;
+
+    const contentfulConfig = window.config?.contentful;
+    if (window.contentful?.createClient && contentfulConfig?.spaceId && contentfulConfig?.accessToken) {
+        client = window.contentful.createClient({
+            space: contentfulConfig.spaceId,
+            accessToken: contentfulConfig.accessToken
+        });
+        console.log('🚀 Contentful client initialized');
+        return true;
+    }
+
+    if (attempt < 40) {
+        setTimeout(() => initializeContentfulClient(attempt + 1), 150);
+    } else {
+        console.error('❌ Contentful client could not initialize. SDK or config is missing.');
+    }
+
+    return false;
+}
+
+function resolveContentfulAsset(assetField, includedAssets = []) {
+    if (!assetField) return null;
+
+    if (assetField.fields?.file?.url) {
+        return assetField;
+    }
+
+    const assetId = assetField.sys?.id;
+    return includedAssets.find(asset => asset?.sys?.id === assetId) || null;
+}
+
+function withResolvedCaseStudyImages(study, includedAssets = []) {
+    if (!study?.fields) return study;
+
+    const featuredImage = resolveContentfulAsset(study.fields.featuredImage, includedAssets);
+    const thumbnail = resolveContentfulAsset(study.fields.thumbnail, includedAssets);
+    const heroImage = resolveContentfulAsset(study.fields.heroImage, includedAssets);
+
+    return {
+        ...study,
+        fields: {
+            ...study.fields,
+            featuredImage: featuredImage || thumbnail || heroImage || null
+        }
+    };
+}
 
 // Define placeholder case studies
 const placeholders = [
@@ -47,9 +93,14 @@ window.contentfulHelpers = {
     getCaseStudies: async () => {
         console.log('🔍 Loading case studies from Contentful...');
         try {
+            if (!initializeContentfulClient() || !client) {
+                throw new Error('Contentful client is not ready');
+            }
+
             const response = await client.getEntries({
                 content_type: 'caseStudies',
-                order: '-sys.createdAt'
+                order: '-sys.createdAt',
+                include: 10
             });
             
             console.log('📊 Contentful response:', response);
@@ -61,7 +112,7 @@ window.contentfulHelpers = {
             // Add real case studies first
             if (response && response.items && response.items.length > 0) {
                 console.log('✅ Found', response.items.length, 'real case studies');
-                finalStudies = [...response.items];
+                finalStudies = response.items.map(study => withResolvedCaseStudyImages(study, response.includes?.Asset));
             }
             
             // Fill remaining slots with placeholders (up to 3 total)
@@ -87,6 +138,10 @@ window.contentfulHelpers = {
     getCaseStudyBySlug: async (slug) => {
         console.log('🔍 Fetching case study by slug:', slug);
         try {
+            if (!initializeContentfulClient() || !client) {
+                throw new Error('Contentful client is not ready');
+            }
+
             // First try to get from Contentful
             const response = await client.getEntries({
                 content_type: 'caseStudies',
@@ -159,6 +214,10 @@ window.contentfulHelpers = {
     getBlogPosts: async () => {
         console.log('🔍 Loading blog posts from Contentful...');
         try {
+            if (!initializeContentfulClient() || !client) {
+                throw new Error('Contentful client is not ready');
+            }
+
             const response = await client.getEntries({
                 content_type: 'blogPost',
                 order: '-sys.createdAt'
@@ -184,6 +243,10 @@ window.contentfulHelpers = {
     getBlogPostBySlug: async (slug) => {
         console.log('🔍 Fetching blog post by slug:', slug);
         try {
+            if (!initializeContentfulClient() || !client) {
+                throw new Error('Contentful client is not ready');
+            }
+
             // First try to get from Contentful
             const response = await client.getEntries({
                 content_type: 'blogPost',
@@ -225,9 +288,10 @@ window.contentfulHelpers = {
     getPlaceholders: () => placeholders,
 
     // Check if Contentful is ready
-    isReady: () => !!client
+    isReady: () => initializeContentfulClient() && !!client
 };
 
 // Log initialization status
-console.log('🚀 Contentful client initialized:', window.contentfulHelpers.isReady());
+initializeContentfulClient();
+console.log('🚀 Contentful client ready:', window.contentfulHelpers.isReady());
 console.log('📋 Contentful helpers available:', Object.keys(window.contentfulHelpers)); 

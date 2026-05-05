@@ -392,6 +392,14 @@
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   
+  <!-- Critical inline styles: prevent logo FOUC before main.css loads -->
+  <style>
+    header .logo { text-decoration: none; color: inherit; }
+    header .logo .logo-text { color: #ffffff; font-weight: 700; }
+    header { background: #0a0a0f; }
+    body { background: #0a0a0f; }
+  </style>
+
   <!-- Optimized CSS loading for mobile FCP improvement -->
   <link rel="preload" href="css/main.css?v=2.4" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -439,7 +447,7 @@
   <link rel="prefetch" href="/case-study.html">
   
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js?v=20260303a"></script>
+  <script defer src="js/hero-form.js?v=20260504a"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -1113,8 +1121,53 @@
       border: 1px solid rgba(255,165,0,0.25);
       box-shadow: 0 12px 48px rgba(0,0,0,0.6);
       flex-shrink: 0;
+      position: relative;
     }
     .vsl-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
+    /* Click-to-play overlay */
+    .vsl-click-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 10, 20, 0.50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      cursor: pointer;
+      border-radius: 14px;
+      transition: opacity 0.35s ease, background 0.25s ease;
+      backdrop-filter: blur(2px);
+    }
+    .vsl-click-overlay:hover { background: rgba(10, 10, 20, 0.35); }
+    .vsl-click-overlay.hiding { opacity: 0; pointer-events: none; }
+    .vsl-overlay-play {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      color: #fff;
+      background: rgba(255,165,0,0.28);
+      backdrop-filter: blur(6px);
+      margin-bottom: 14px;
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+    .vsl-click-overlay:hover .vsl-overlay-play {
+      transform: scale(1.12);
+      background: rgba(255,165,0,0.5);
+    }
+    .vsl-overlay-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      margin: 0;
+    }
     .vsl-placeholder {
       width: 100%;
       height: 100%;
@@ -1209,94 +1262,214 @@
     .hero-form-col { display: flex; flex-direction: column; gap: 14px; }
     .hero-form-card {
       background: #ffffff;
-      border-radius: 16px;
-      padding: 26px 26px 18px;
-      box-shadow: 0 16px 56px rgba(0,0,0,0.35);
+      border-radius: 18px;
+      padding: 22px 24px 18px;
+      box-shadow: 0 18px 64px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.55);
       height: auto;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-self: flex-start;
-      border: 1px solid rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.82);
     }
     .form-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      background: rgba(255,165,0,0.12);
+      border: 1px solid rgba(255,165,0,0.28);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.68rem;
+      font-weight: 800;
       color: var(--primary-orange);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 0 0 6px;
+      letter-spacing: 0.8px;
+      margin: 0 auto 10px;
     }
     .form-card-header h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #111;
-      margin: 0 0 4px;
+      font-size: clamp(1.25rem, 1.65vw, 1.55rem);
+      font-weight: 900;
+      color: #111827;
+      margin: 0 0 6px;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+    }
+    .form-card-header h3 .title-accent {
+      color: var(--primary-orange);
     }
     .form-subheading {
-      font-size: 0.85rem;
-      color: #666;
+      font-size: 0.78rem;
+      color: #5f5f68;
       margin: 0 0 14px;
-      line-height: 1.5;
+      line-height: 1.45;
+    }
+    .hf-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
     .hf-group { margin-bottom: 9px; }
+    .hf-label {
+      display: block;
+      margin: 0 0 5px;
+      color: #374151;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
     .hf-group input,
     .hf-group select {
       width: 100%;
-      background: #f5f5f7;
-      border: 1.5px solid #e0e0e0;
+      background: #f7f7fa;
+      border: 1px solid #d9dde7;
       border-radius: 9px;
-      padding: 11px 14px;
+      padding: 9px 12px;
       color: #111;
-      font-size: 0.9rem;
+      font-size: 0.78rem;
       font-family: 'Montserrat', sans-serif;
       outline: none;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       box-sizing: border-box;
+      appearance: none;
       -webkit-appearance: none;
     }
-    .hf-group input::placeholder { color: #aaa; }
-    .hf-group select { color: #555; cursor: pointer; }
+    .hf-group input::placeholder { color: #9ca3af; }
+    .hf-group select { color: #4b5563; cursor: pointer; padding-right: 42px; }
     .hf-group select option { background: #fff; color: #111; }
+    .hf-phone-field {
+      display: grid;
+      grid-template-columns: 1fr 10px 1fr 10px 1.2fr;
+      align-items: center;
+      gap: 6px;
+      width: min(100%, 360px);
+      margin: 0 auto;
+    }
+    .hf-phone-field input {
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      min-width: 0;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    .hf-phone-sep {
+      color: #9ca3af;
+      font-weight: 800;
+      font-size: 0.78rem;
+      line-height: 1;
+      text-align: center;
+    }
+    .hf-phone-field.hf-invalid input {
+      border-color: #e53e3e !important;
+      box-shadow: 0 0 0 2px rgba(229,62,62,0.12) !important;
+    }
+    .hf-select-wrap {
+      position: relative;
+    }
+    .hf-select-wrap::after {
+      content: '\f078';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #f59e0b;
+      font-size: 0.72rem;
+      pointer-events: none;
+    }
     .hf-group input:focus,
     .hf-group select:focus {
       border-color: #FFA500;
       background: #fff;
       box-shadow: 0 0 0 3px rgba(255,165,0,0.1);
     }
+    /* Global form error (bottom of form) */
     .hf-error {
-      font-size: 0.82rem;
-      color: #e53e3e;
-      margin-bottom: 8px;
+      font-size: 0.78rem;
+      color: #b42318;
+      margin: 0 0 10px;
       display: none;
+      padding: 10px 12px;
+      background: #fff1f0;
+      border: 1px solid #ffccc7;
+      border-radius: 10px;
+      line-height: 1.35;
     }
     .hf-error.visible { display: block; }
+    /* Per-field inline error */
+    .hf-field-error {
+      display: none;
+      font-size: 0.72rem;
+      color: #e53e3e;
+      margin-top: 3px;
+      padding: 0;
+      line-height: 1.3;
+    }
+    .hf-field-error.visible { display: block; }
+    .hf-group input.hf-invalid,
+    .hf-group select.hf-invalid {
+      border-color: #e53e3e !important;
+      box-shadow: 0 0 0 2px rgba(229,62,62,0.12) !important;
+    }
     .hf-submit {
       width: 100%;
       background: linear-gradient(135deg, #FFA500 0%, #FF6B00 100%);
       border: none;
       border-radius: 10px;
-      padding: 14px 20px;
+      padding: 12px 18px;
       color: #fff;
-      font-size: 0.97rem;
+      font-size: 0.84rem;
       font-weight: 700;
       font-family: 'Montserrat', sans-serif;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 20px rgba(255,120,0,0.4);
       margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
     }
     .hf-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,120,0,0.55); }
     .hf-submit:active { transform: translateY(0); }
-    .hf-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
-    .hf-btn-loading { display: none; }
+    .hf-submit:disabled { opacity: 0.82; cursor: not-allowed; transform: none; }
+    .hf-submit.success {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      box-shadow: 0 4px 20px rgba(22,163,74,0.28);
+    }
+    .hf-btn-loading {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
     .hf-submit.loading .hf-btn-text { display: none; }
-    .hf-submit.loading .hf-btn-loading { display: inline; }
+    .hf-submit.loading .hf-btn-loading { display: inline-flex; }
     .hf-disclaimer {
-      font-size: 0.75rem;
-      color: #999;
+      font-size: 0.54rem;
+      color: #9aa1ad;
       text-align: center;
       margin: 8px 0 0;
+      line-height: 1.2;
+    }
+    .hf-phone-group-wrap .hf-label {
+      text-align: center;
+    }
+    #home .hero-form-card .hf-disclaimer {
+      display: block !important;
+      max-width: none !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      color: #9aa1ad !important;
+      font-size: 0.56rem !important;
+      font-weight: 500 !important;
+      line-height: 1.2 !important;
+      margin: 7px 0 0 !important;
+      text-shadow: none !important;
     }
 
     /* ---- Row 3: Stats Bar ---- */
@@ -1342,6 +1515,12 @@
       #home .hero-content { padding: 0 20px; gap: 16px; }
       .hero-headline { font-size: clamp(1.15rem, 5.5vw, 1.6rem) !important; }
       .hero-form-card { padding: 22px 18px 14px; }
+      .hf-row { grid-template-columns: 1fr; gap: 0; }
+      .hf-phone-field {
+        grid-template-columns: 1fr auto 1fr auto 1fr;
+        gap: 5px;
+        max-width: none;
+      }
       .proof-avatars-inline {
         gap: 6px;
       }
@@ -6879,7 +7058,7 @@
       color: rgba(255,255,255,0.72) !important;
     }
 
-    @media (min-width: 1025px) {
+    @media (min-width: 961px) {
       #home {
         padding-top: 118px !important;
         padding-bottom: 28px !important;
@@ -6893,14 +7072,19 @@
       }
 
       #home .hero-grid {
-        grid-template-columns: minmax(0, 1.9fr) minmax(360px, 1fr) !important;
-        gap: 26px !important;
+        grid-template-columns: minmax(520px, 1.25fr) minmax(540px, 0.95fr) !important;
+        gap: 32px !important;
         width: 100% !important;
+        align-items: start !important;
       }
 
       #home .hero-vsl-col,
       #home .hero-form-col {
         width: 100% !important;
+      }
+
+      #home .hero-form-col {
+        align-items: center !important;
       }
 
       #home .vsl-wrapper {
@@ -6914,6 +7098,184 @@
       #home .hero-form-card {
         min-height: 0 !important;
         height: auto !important;
+        width: 100% !important;
+        max-width: 560px !important;
+        padding: 32px 34px 20px !important;
+      }
+
+      #home .form-card-header {
+        text-align: center !important;
+        margin-bottom: 16px !important;
+      }
+
+      #home .form-card-header h3 {
+        font-size: clamp(1.8rem, 2vw, 2.15rem) !important;
+        line-height: 1.05 !important;
+        margin-bottom: 8px !important;
+      }
+
+      #home .form-subheading {
+        font-size: 0.78rem !important;
+        line-height: 1.35 !important;
+        max-width: 360px !important;
+        margin: 0 auto 18px !important;
+        color: #6b7280 !important;
+      }
+
+      #home .hf-label {
+        font-size: 0.72rem !important;
+      }
+
+      #home .hf-group input,
+      #home .hf-group select {
+        min-height: 42px !important;
+        font-size: 0.84rem !important;
+      }
+
+      #home .hf-phone-field {
+        width: min(100%, 390px) !important;
+      }
+
+      #home .hf-submit {
+        min-height: 48px !important;
+        font-size: 0.9rem !important;
+      }
+
+      #home .hero-form-card .hf-disclaimer {
+        font-size: 0.58rem !important;
+        line-height: 1.2 !important;
+        margin-top: 7px !important;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      #home .hero-grid {
+        grid-template-columns: minmax(0, 1.85fr) minmax(430px, 0.95fr) !important;
+        gap: 32px !important;
+        align-items: start !important;
+      }
+
+      #home .hero-form-col {
+        align-items: center !important;
+        justify-self: center !important;
+        max-width: 460px !important;
+      }
+
+      #home .hero-form-card {
+        width: 100% !important;
+        max-width: 460px !important;
+        padding: 28px 30px 18px !important;
+      }
+
+      #home .form-card-header {
+        text-align: center !important;
+        margin-bottom: 18px !important;
+      }
+
+      #home .form-card-header h3 {
+        font-size: 1.55rem !important;
+        line-height: 1.08 !important;
+        margin-bottom: 8px !important;
+      }
+
+      #home .form-subheading {
+        font-size: 0.82rem !important;
+        line-height: 1.38 !important;
+        max-width: 390px !important;
+        margin: 0 auto 20px !important;
+      }
+
+      #home .hf-row {
+        column-gap: 14px !important;
+      }
+
+      #home .hf-group {
+        margin-bottom: 11px !important;
+      }
+
+      #home .hf-phone-field {
+        width: min(100%, 340px) !important;
+        grid-template-columns: 1fr 12px 1fr 12px 1.25fr !important;
+        gap: 7px !important;
+        margin: 0 auto !important;
+      }
+
+      #home .hf-group input,
+      #home .hf-group select {
+        min-height: 40px !important;
+      }
+
+      #home .hf-submit {
+        min-height: 44px !important;
+        margin-top: 6px !important;
+      }
+
+      #home .hero-form-col .hero-stats {
+        width: 100% !important;
+        max-width: 460px !important;
+        margin: 14px auto 0 !important;
+      }
+
+      #home .hero-form-card .hf-disclaimer {
+        font-size: 0.55rem !important;
+        line-height: 1.15 !important;
+        margin-top: 6px !important;
+      }
+    }
+
+    @media (min-width: 961px) {
+      #home .hero-grid {
+        grid-template-columns: minmax(0, 1.45fr) minmax(520px, 1fr) !important;
+        gap: 38px !important;
+      }
+
+      #home .hero-form-col {
+        width: 100% !important;
+        max-width: 560px !important;
+        align-items: center !important;
+      }
+
+      #home .hero-form-card {
+        width: 100% !important;
+        max-width: 560px !important;
+        min-height: 410px !important;
+        padding: 36px 38px 46px !important;
+      }
+
+      #home .form-card-header h3 {
+        font-size: 1.72rem !important;
+        margin-bottom: 8px !important;
+      }
+
+      #home .form-subheading {
+        font-size: 0.78rem !important;
+        max-width: 390px !important;
+        margin-bottom: 18px !important;
+      }
+
+      #home .hf-group input,
+      #home .hf-group select {
+        min-height: 43px !important;
+        font-size: 0.82rem !important;
+      }
+
+      #home .hf-phone-field {
+        width: min(100%, 390px) !important;
+      }
+
+      #home .hf-submit {
+        min-height: 47px !important;
+        font-size: 0.88rem !important;
+      }
+
+      #home .hero-form-col .hero-stats {
+        width: 100% !important;
+        max-width: 560px !important;
+        margin-top: 14px !important;
+      }
+
+      #home .hero-form-card .hf-disclaimer {
+        font-size: 0.54rem !important;
       }
     }
   </style>
@@ -7147,33 +7509,55 @@
           <div class="hero-form-card">
             <div class="form-card-header">
               <p class="form-eyebrow">Free 30-Minute Session</p>
-              <h3>Book Your Strategy Call</h3>
-              <p class="form-subheading">Tell us about your business and we'll reach out within 24 hours.</p>
+              <h3>Book Your <span class="title-accent">Growth</span> Strategy Call</h3>
+              <p class="form-subheading">Tell us where you want to grow, and we’ll map the next best step within 24 hours.</p>
             </div>
             <form id="hero-lead-form" novalidate>
-              <div class="hf-group">
-                <input type="text" id="hf-name" name="name" placeholder="Full Name" required autocomplete="name">
+              <div class="hf-row">
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-name">Full Name</label>
+                  <input type="text" id="hf-name" name="name" placeholder="Jane Smith" autocomplete="name" aria-label="Full Name">
+                  <span class="hf-field-error" id="hf-err-name">Please enter your full name.</span>
+                </div>
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-email">Email Address</label>
+                  <input type="email" id="hf-email" name="email" placeholder="jane@company.com" autocomplete="email" aria-label="Email Address">
+                  <span class="hf-field-error" id="hf-err-email">Please enter a valid email address.</span>
+                </div>
               </div>
-              <div class="hf-group">
-                <input type="email" id="hf-email" name="email" placeholder="Email Address" required autocomplete="email">
+              <div class="hf-group hf-phone-group-wrap">
+                <label class="hf-label" for="hf-phone-area">Phone Number</label>
+                <div class="hf-phone-field" id="hf-phone-group">
+                  <input type="text" id="hf-phone-area" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" autocomplete="tel-area-code" aria-label="Phone area code">
+                  <span class="hf-phone-sep">-</span>
+                  <input type="text" id="hf-phone-prefix" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" aria-label="Phone prefix">
+                  <span class="hf-phone-sep">-</span>
+                  <input type="text" id="hf-phone-line" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="####" aria-label="Phone line number">
+                </div>
+                <span class="hf-field-error" id="hf-err-phone">Please enter a valid phone number.</span>
               </div>
-              <div class="hf-group">
-                <input type="tel" id="hf-phone" name="phone" placeholder="Phone Number" required autocomplete="tel">
-              </div>
-              <div class="hf-group">
-                <input type="text" id="hf-business" name="business" placeholder="Business Name" required autocomplete="organization">
-              </div>
-              <div class="hf-group">
-                <select id="hf-service" name="service" required>
-                  <option value="" disabled selected>Services Interested In</option>
-                  <option value="PPC Management & Google Ads">PPC Management &amp; Google Ads</option>
-                  <option value="SEO Services">SEO Services</option>
-                  <option value="AI Lead Generation & Booking Agents">AI Lead Generation &amp; Booking Agents</option>
-                  <option value="Marketing Strategy & Consulting">Marketing Strategy &amp; Consulting</option>
-                  <option value="Social Media Advertising">Social Media Advertising</option>
-                  <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
-                  <option value="Full-Service Growth Package">Full-Service Growth Package</option>
-                </select>
+              <div class="hf-row">
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-business">Business Name</label>
+                  <input type="text" id="hf-business" name="business" placeholder="Company name" autocomplete="organization" aria-label="Business Name">
+                  <span class="hf-field-error" id="hf-err-business">Please enter your business name.</span>
+                </div>
+                <div class="hf-group">
+                  <label class="hf-label" for="hf-service">Growth Focus</label>
+                  <div class="hf-select-wrap">
+                    <select id="hf-service" name="service" aria-label="Services Interested In">
+                      <option value="" disabled selected>Select a focus</option>
+                      <option value="PPC Management & Google Ads">PPC Management &amp; Google Ads</option>
+                      <option value="SEO Services">SEO Services</option>
+                      <option value="AI Lead Generation & Booking Agents">AI Lead Generation &amp; Booking Agents</option>
+                      <option value="Marketing Strategy & Consulting">Marketing Strategy &amp; Consulting</option>
+                      <option value="Social Media Advertising">Social Media Advertising</option>
+                      <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
+                      <option value="Full-Service Growth Package">Full-Service Growth Package</option>
+                    </select>
+                  </div>
+                  <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
+                </div>
               </div>
               <div class="hf-error" id="hf-error" role="alert"></div>
               <button type="submit" class="hf-submit" id="hf-submit">
@@ -7182,7 +7566,7 @@
                   <i class="fas fa-circle-notch fa-spin"></i> Sending...
                 </span>
               </button>
-              <p class="hf-disclaimer">No spam. No pitch. Just a focused growth session.</p>
+              <p class="hf-disclaimer">Private review. No spam. No pressure.</p>
             </form>
           </div>
 

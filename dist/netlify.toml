@@ -1,5 +1,5 @@
 [build]
-  command = "cp index.html dist/index.html && cp newsletter.html dist/newsletter.html && cp js/hero-form.js dist/js/hero-form.js && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
+  command = "mkdir -p dist/js dist/css && cp *.html dist/ && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
   publish = "dist"
 
 # Disable Next.js plugin completely
@@ -8,7 +8,7 @@
 
 # Production context
 [context.production]
-  command = "cp index.html dist/index.html && cp newsletter.html dist/newsletter.html && cp js/hero-form.js dist/js/hero-form.js && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
+  command = "mkdir -p dist/js dist/css && cp *.html dist/ && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
   publish = "dist"
 
 [[headers]]
