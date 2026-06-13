@@ -39,7 +39,7 @@ function initVSL() {
   overlay.className = 'vsl-click-overlay';
   overlay.innerHTML = `
     <div class="vsl-overlay-play"><i class="fas fa-play"></i></div>
-    <p class="vsl-overlay-label">Click to Learn More</p>
+    <p class="vsl-overlay-label">Watch the VSL</p>
   `;
   overlay.addEventListener('click', function () {
     document.body.classList.add('vsl-active');
@@ -47,6 +47,22 @@ function initVSL() {
     setTimeout(() => overlay.remove(), 380);
   });
   wrapper.appendChild(overlay);
+}
+
+// Wire up the hero "Watch the VSL" secondary CTA to scroll to the video and start it.
+function initWatchVslButton() {
+  const watchBtn = document.getElementById('hero-watch-vsl');
+  if (!watchBtn) return;
+  watchBtn.addEventListener('click', function () {
+    const wrapper = document.getElementById('vsl-wrapper');
+    if (wrapper) {
+      wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    const overlay = document.querySelector('.vsl-click-overlay');
+    if (overlay) {
+      setTimeout(() => overlay.click(), 350);
+    }
+  });
 }
 
 function extractYouTubeId(url) {
@@ -60,6 +76,7 @@ function extractYouTubeId(url) {
 document.addEventListener('DOMContentLoaded', function () {
   // Initialize VSL after DOM is fully ready.
   initVSL();
+  initWatchVslButton();
 
   const headlineLine = document.querySelector('.hero-headline-line');
   if (headlineLine) {
