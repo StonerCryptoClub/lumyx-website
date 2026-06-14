@@ -459,24 +459,18 @@
         }, index * 50); // Stagger loading to reduce blocking
       });
       
-      // Defer contentful and performance scripts more aggressively on mobile
+      // Defer Contentful client on mobile
       setTimeout(() => {
         const script1 = document.createElement('script');
         script1.src = 'js/contentful-client.js?v=20250116c';
         script1.defer = true;
         document.head.appendChild(script1);
-        
-        const script2 = document.createElement('script');
-        script2.src = 'js/performance-optimization.js';
-        script2.defer = true;
-        document.head.appendChild(script2);
       }, 200);
     } else {
       // Desktop: Load normally for optimal performance
       document.write('<script defer src="js/html-sanitizer.js"><\/script>');
       document.write('<script defer src="js/input-validator.js"><\/script>');
       document.write('<script defer src="js/contentful-client.js?v=20250116c"><\/script>');
-      document.write('<script defer src="js/performance-optimization.js"><\/script>');
     }
   </script>
   
@@ -942,11 +936,9 @@
       height: 100%;
       z-index: -2;
       opacity: 0.1;
-      background: 
+      background:
         linear-gradient(45deg, #1E90FF, #00CED1);
-      animation: gradientBG 15s ease infinite;
-      background-size: 400% 400%;
-      will-change: background-position;
+      background-size: 200% 200%;
       transform: translateZ(0);
     }
     @keyframes gradientBG {
@@ -6790,7 +6782,7 @@
       .problem-solution-grid {
         gap: 40px;
       }
-      
+       
       .newsletter-benefits {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 40px;
@@ -8914,16 +8906,10 @@
   </footer>
 
   <!-- Scripts - deferred to reduce render blocking -->
-  <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jQuery removed: no script on this page uses it. -->
   <script defer src="js/meta-pixel-events.js"></script>
   <script defer src="js/newsletter.js"></script>
   <script defer src="js/form-validation.js"></script>
-
-  <!-- Conversion tracking - Performance optimized -->
-  <script defer src="js/conversion-tracking.js"></script>
-  
-  <!-- Enhanced contact form - Conversion optimized -->
-  <script defer src="js/enhanced-contact-form.js"></script>
   
   <!-- DISABLED - Initialize Portfolio -->
   <script>
