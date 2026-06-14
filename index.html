@@ -373,7 +373,8 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//apis.google.com">
-  <link rel="dns-prefetch" href="//assets.calendly.com">
+  <link rel="dns-prefetch" href="//link.msgsndr.com">
+  <link rel="dns-prefetch" href="//api.leadconnectorhq.com">
   
   <!-- Preconnect to critical third-parties -->
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
@@ -502,40 +503,10 @@
       });
     };
 
-    // Break up Calendly loading into smaller tasks
-    const loadCalendlyChunked = async () => {
-      if (calendlyLoaded) return;
-      calendlyLoaded = true;
-
-      // Task 1: Load script
-      await scheduleTask(() => {
-        const calendlyScript = document.createElement('script');
-        calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
-        calendlyScript.async = true;
-        calendlyScript.defer = true;
-        document.head.appendChild(calendlyScript);
-      }, 'background');
-
-      // Task 2: Wait for script and initialize (with timeout)
-      await scheduleTask(() => {
-        let attempts = 0;
-        const initCalendly = () => {
-          if (typeof window.Calendly !== 'undefined') {
-            window.Calendly.initInlineWidget({
-              url: 'https://calendly.com/lumyxmarketing/30min',
-              parentElement: document.getElementById('calendly-container'),
-              prefill: {},
-              utm: {},
-              styles: { height: '650px' }
-            });
-          } else if (attempts < 20) {
-            attempts++;
-            setTimeout(initCalendly, 100);
-          }
-        };
-        setTimeout(initCalendly, 100);
-      }, 'background');
-    };
+    // Booking is now handled by the GoHighLevel (LeadConnector) iframe embed,
+    // which loads via https://link.msgsndr.com/js/form_embed.js. Calendly is no
+    // longer loaded here.
+    const loadCalendlyChunked = async () => {};
 
     // Ultra-aggressive intersection observer with large margins
     const bookingObserver = new IntersectionObserver((entries) => {
@@ -1509,6 +1480,10 @@
       align-items: center;
       justify-content: center;
       min-height: 44px;
+      height: 46px;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
     }
     .hf-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,120,0,0.55); }
     .hf-submit:active { transform: translateY(0); }
@@ -1521,7 +1496,10 @@
       display: none;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
+      line-height: 1;
     }
+    .hf-btn-text { white-space: nowrap; line-height: 1; }
     .hf-submit.loading .hf-btn-text { display: none; }
     .hf-submit.loading .hf-btn-loading { display: inline-flex; }
     .hf-disclaimer {
@@ -8150,6 +8128,81 @@
 
     /* Trim excess bottom padding on the Growth Audit calendar box */
     .booking-content .calendar-container { padding-bottom: 16px !important; }
+    .booking-guarantee {
+      margin: 20px 0 8px 0 !important;
+      padding: 18px 20px !important;
+      border-radius: 13px !important;
+    }
+    .booking-guarantee .guarantee-badge {
+      margin-bottom: 6px !important;
+      font-size: 0.98rem !important;
+    }
+    .booking-guarantee p {
+      font-size: 0.9rem !important;
+      line-height: 1.35 !important;
+    }
+
+    /* GoHighLevel booking widget: fixed-size box, scroll the widget inside it
+       (same behaviour as the old Calendly embed). */
+    .ghl-widget-shell {
+      width: 100%;
+      border-radius: 18px;
+      padding: 1px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.24), rgba(255,255,255,0.07));
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+      overflow: hidden;
+    }
+    .ghl-widget-shell::before {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+    #calendly-container,
+    .scheduling-section #calendly-container {
+      height: 820px !important;
+      max-height: 88vh;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+      background: #ffffff !important;
+      border-radius: 16px;
+    }
+    #calendly-container iframe {
+      display: block;
+      width: 100% !important;
+      border: none;
+      background: #ffffff;
+    }
+    #calendly-container::-webkit-scrollbar { width: 8px; }
+    #calendly-container::-webkit-scrollbar-track { background: rgba(7, 11, 22, 0.28); }
+    #calendly-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.32);
+      border-radius: 10px;
+    }
+    #calendly-container { scrollbar-width: thin; }
+    /* Keep the section header/badge clear of the fixed nav on anchor jumps */
+    .booking-section,
+    #booking-section,
+    #calendly-container { scroll-margin-top: 100px; }
+
+    /* Trim the oversized booking padding so the whole card (incl. the green
+       guarantee box) fits on one screen, and align both columns to the top. */
+    @media (min-width: 769px) {
+      .booking-content {
+        padding-top: 90px !important;
+        padding-bottom: 72px !important;
+        align-items: flex-start !important;
+      }
+    }
+    @media (max-width: 768px) {
+      #calendly-container,
+      .scheduling-section #calendly-container {
+        height: 500px !important;
+        max-height: 72vh;
+      }
+    }
 
     /* Refined editorial kicker instead of filled bubble */
     .positioning-section .ps-eyebrow,
@@ -8510,7 +8563,13 @@
             <h3>Book My Free Growth Audit</h3>
             <p>Select a time that works best for you</p>
         </div>
-          <div id="calendly-container" style="margin-bottom: 0;"></div>
+          <!-- GoHighLevel (LeadConnector) booking widget -->
+          <div class="ghl-widget-shell">
+            <div id="calendly-container" style="margin-bottom: 0;">
+              <iframe src="https://api.leadconnectorhq.com/widget/booking/d0prMwxo4qsyqutYVpCL" style="width: 100%; border: none;" scrolling="no" id="d0prMwxo4qsyqutYVpCL_1781470766128" title="Book your free growth audit"></iframe>
+            </div>
+          </div>
+          <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
           <div class="booking-urgency" style="margin-top: 12px; margin-bottom: 0;">
             <p><i class="fas fa-clock"></i> Limited audit slots open each week</p>

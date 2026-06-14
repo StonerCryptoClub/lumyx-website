@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Apply validation to each form
   forms.forEach(form => {
-    // Skip forms with 'novalidate' attribute
-    if (form.getAttribute('novalidate') === 'true') return;
+    // Skip forms that explicitly opt out of generic validation handling.
+    if (form.hasAttribute('novalidate')) return;
     
     // Add validation event listeners
     setupFormValidation(form);

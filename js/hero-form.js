@@ -9,6 +9,10 @@
  */
 
 const STRATEGY_CALL_ENDPOINT = '/.netlify/functions/ghl-strategy-call';
+const STRATEGY_CALL_WEBHOOK_ENDPOINT =
+  (typeof window !== 'undefined' && window.GHL_STRATEGY_WEBHOOK)
+    ? String(window.GHL_STRATEGY_WEBHOOK).trim()
+    : 'https://services.leadconnectorhq.com/hooks/yrcYgS03BFe8fHYJOaTx/webhook-trigger/013f481f-3d30-44fa-81b9-c39b3617d3cc';
 
 // Inject VSL iframe if URL is set
 function initVSL() {
@@ -164,19 +168,10 @@ document.addEventListener('DOMContentLoaded', function () {
     setLoading(true);
 
     try {
-      const response = await fetch(STRATEGY_CALL_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Strategy call submission failed');
-      }
+      await submitLeadToGhl(payload);
     } catch (err) {
       console.error('Strategy call submission failed:', err);
-      showError('Something went wrong. Please try again or email us directly.');
+      showError('Something went wrong. Please try again or message us directly.');
       setLoading(false);
       return;
     }
@@ -186,7 +181,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setSuccess();
 
-    // Scroll to Calendly
+    // Attempt to prefill the booking widget with captured details, then scroll.
+    prefillBookingWidget(payload);
+
+    // Scroll to booking section
     setTimeout(function () {
       const bookingSection = document.getElementById('booking-section');
       if (bookingSection) {
@@ -210,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.classList.remove('loading');
     submitBtn.classList.add('success');
     submitBtn.disabled = true;
-    if (btnText) btnText.textContent = 'Saved! Scroll down to book your call';
+    if (btnText) btnText.textContent = 'Saved! Continue below';
   }
 
   function resetButton() {
@@ -235,6 +233,68 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function isValidPhone(phone) {
     return phone.replace(/\D/g, '').length >= 10;
+  }
+
+  async function submitLeadToGhl(payload) {
+    // Primary path: secure server-side function (keeps private token off the client).
+    try {
+      const response = await fetch(STRATEGY_CALL_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) return;
+
+      const details = await response.text();
+      throw new Error(`Netlify strategy endpoint failed (${response.status}): ${details}`);
+    } catch (netlifyErr) {
+      // Fallback path: direct GHL webhook for reliability if function/env is not configured.
+      if (!STRATEGY_CALL_WEBHOOK_ENDPOINT) {
+        throw netlifyErr;
+      }
+
+      const webhookPayload = {
+        ...payload,
+        source: 'hero-lead-form',
+        page: (typeof window !== 'undefined' ? window.location.href : ''),
+        submittedAt: new Date().toISOString()
+      };
+
+      const webhookResponse = await fetch(STRATEGY_CALL_WEBHOOK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookPayload)
+      });
+
+      if (!webhookResponse.ok) {
+        const webhookDetails = await webhookResponse.text();
+        throw new Error(
+          `Webhook fallback failed (${webhookResponse.status}): ${webhookDetails}; original error: ${netlifyErr.message}`
+        );
+      }
+    }
+  }
+
+  function prefillBookingWidget(payload) {
+    const iframe = document.getElementById('d0prMwxo4qsyqutYVpCL_1781470766128');
+    if (!iframe || !iframe.src) return;
+
+    try {
+      const iframeUrl = new URL(iframe.src, window.location.origin);
+      iframeUrl.searchParams.set('name', payload.name || '');
+      iframeUrl.searchParams.set('email', payload.email || '');
+      iframeUrl.searchParams.set('phone', payload.phone || '');
+      iframeUrl.searchParams.set('business', payload.business || '');
+      iframeUrl.searchParams.set('service', payload.service || '');
+
+      const nextSrc = iframeUrl.toString();
+      if (iframe.src !== nextSrc) {
+        iframe.src = nextSrc;
+      }
+    } catch (_) {
+      // Ignore malformed src URL and keep normal booking flow.
+    }
   }
 
   function showFieldError(fieldId, inputEl) {
