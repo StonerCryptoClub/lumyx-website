@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Mailchimp script deferred for better performance -->
-  <script>
-    // Load Mailchimp after user interaction or 5 seconds
-    const loadMailchimp = () => {
-      !function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/658c23db9ba64ab753d154574/de13bc0fc5ec5a5b56cb40162.js");
-    };
-    
-    // Load on user interaction or after delay
-    ['click', 'scroll', 'keydown'].forEach(event => {
-      document.addEventListener(event, loadMailchimp, { once: true, passive: true });
-    });
-    setTimeout(loadMailchimp, 5000);
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
@@ -575,8 +562,7 @@
       scriptsLoaded = true;
 
       const scripts = [
-        'https://apis.google.com/js/api.js',
-        'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js'
+        'https://apis.google.com/js/api.js'
       ];
       
       // Load scripts with exponential backoff to reduce main thread impact
@@ -808,21 +794,6 @@
   <link rel="stylesheet" href="css/ipad-fixes.css?v=1.2">
   <!-- Desktop Optimizations -->
   <link rel="stylesheet" href="css/desktop-optimizations.css?v=1.2">
-  <!-- FullCalendar CSS - load async to reduce render blocking -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css"></noscript>
-  <!-- EmailJS - deferred for performance -->
-  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <!-- Configuration -->
-  <script defer src="js/env-loader.js"></script>
-  <!-- HTML Sanitizer -->
-  <script defer src="js/html-sanitizer.js"></script>
-  <!-- Input Validator -->
-  <script defer src="js/input-validator.js"></script>
-  <!-- Database Client -->
-
-  <!-- Mailchimp handled by optimized loading above -->
   <style>
     /* Base color variables */
     :root {
@@ -7329,10 +7300,8 @@
   <script defer src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   
-  <!-- Configuration -->
-  <script defer src="js/env-loader.js"></script>
-  <script defer src="js/html-sanitizer.js"></script>
-  <script defer src="js/input-validator.js"></script>
+  <!-- case-study-loader relies on env-loader, html-sanitizer and input-validator,
+       which are already loaded once near the top of the document. -->
   <script defer src="js/case-study-loader.js"></script>
   
   <!-- Canonical URL -->
@@ -7867,7 +7836,7 @@
       <span class="close-modal">&times;</span>
       <h3>Coming Soon!</h3>
       <p>We're working hard to bring you our social media presence. In the meantime, sign up for our newsletter to stay updated!</p>
-      <a href="https://eepurl.com/jdPU6E" class="subscribe-button" target="_blank">Subscribe to Newsletter</a>
+      <a href="/newsletter.html" class="subscribe-button">Subscribe to Newsletter</a>
     </div>
   </div>
   <div class="animated-bg"></div>
@@ -8949,8 +8918,7 @@
   <script defer src="js/meta-pixel-events.js"></script>
   <script defer src="js/newsletter.js"></script>
   <script defer src="js/form-validation.js"></script>
-  <script defer src="js/form-fix.js"></script>
-  
+
   <!-- Conversion tracking - Performance optimized -->
   <script defer src="js/conversion-tracking.js"></script>
   
@@ -9207,6 +9175,8 @@
 
       // Scheduling functionality
       const dayGrid = document.querySelector('.day-grid');
+      // Legacy custom scheduler is replaced by Calendly; bail out if its markup is absent.
+      if (!dayGrid) return;
       const today = new Date();
       const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       
@@ -9596,26 +9566,19 @@
 
     // Initialize email list manager
     const emailListManager = new EmailListManager();
-
-    // Initialize EmailJS with config
-    (function() {
-      emailjs.init(config.emailjs.publicKey);
-    })();
   </script>
   <!-- Defer non-critical scripts for better performance -->
   <script>
-    // Load remaining scripts after critical rendering
+    // Load remaining scripts after critical rendering.
+    // (form-validation, form-fix, newsletter and meta-pixel are already loaded
+    //  via deferred <script> tags above, so we only load the rest here to avoid
+    //  duplicate downloads and "already declared" errors.)
     window.addEventListener('load', function() {
-      // Load animation and performance scripts after page load
       const deferredScripts = [
         'js/animations.js',
-        'js/main.js',
-        'js/form-validation.js',
-        'js/form-fix.js',
-        'js/newsletter.js',
-        'js/meta-pixel-events.js'
+        'js/main.js'
       ];
-      
+
       deferredScripts.forEach(src => {
         const script = document.createElement('script');
         script.src = src;
