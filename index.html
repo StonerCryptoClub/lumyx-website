@@ -373,6 +373,7 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//apis.google.com">
+  <link rel="dns-prefetch" href="//widgets.leadconnectorhq.com">
   <link rel="dns-prefetch" href="//link.msgsndr.com">
   <link rel="dns-prefetch" href="//api.leadconnectorhq.com">
   
@@ -8186,6 +8187,8 @@
     .booking-section,
     #booking-section,
     #calendly-container { scroll-margin-top: 100px; }
+    /* Leave breathing room for GHL chat launcher in lower-right corner */
+    body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
 
     /* Trim the oversized booking padding so the whole card (incl. the green
        guarantee box) fits on one screen, and align both columns to the top. */
@@ -8938,6 +8941,8 @@
           <li><a href="#booking-section">Contact</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/faq">FAQ</a></li>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms-of-service.html">Terms of Service</a></li>
           <li><a href="/sitemap.xml" target="_blank">Sitemap</a></li>
         </ul>
       </div>
@@ -8956,7 +8961,7 @@
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2026 Lumyx Consulting. All rights reserved.</p>
+      <p>&copy; 2026 Lumyx Consulting. All rights reserved. <a href="/privacy-policy.html" class="footer-cta-link">Privacy Policy</a> | <a href="/terms-of-service.html" class="footer-cta-link">Terms of Service</a></p>
       <div class="footer-cta">
         <span>Ready to scale? </span>
         <a href="#booking-section" class="footer-cta-link" data-scroll-target="#calendly-container">Book your free call →</a>
@@ -8966,6 +8971,8 @@
 
   <!-- Scripts - deferred to reduce render blocking -->
   <!-- jQuery removed: no script on this page uses it. -->
+  <!-- GHL A2P chat widget -->
+  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35a237946a4896c23b767a" data-source="WEB_USER"></script>
   <script defer src="js/meta-pixel-events.js"></script>
   <script defer src="js/newsletter.js"></script>
   <script defer src="js/form-validation.js"></script>
