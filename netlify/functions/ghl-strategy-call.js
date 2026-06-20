@@ -68,6 +68,9 @@ exports.handler = async (event) => {
     const normalizedServiceTag = serviceTag(data.service);
     const tags = ['strategy-call', 'website-lead'];
     if (normalizedServiceTag) tags.push(`service-${normalizedServiceTag}`);
+    tags.push(data.smsConsent === true || data.smsConsent === 'true' || data.smsConsent === 'yes'
+      ? 'opted-in'
+      : 'opted-out');
 
     const payload = {
       locationId: GHL_LOCATION_ID,

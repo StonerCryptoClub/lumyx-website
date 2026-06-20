@@ -146,6 +146,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const phone    = [phoneAreaEl.value, phonePrefixEl.value, phoneLineEl.value].join('');
     const business = businessEl.value.trim();
     const service  = serviceEl.value;
+    const smsConsentEl = form.querySelector('#hf-sms-consent');
+    const smsConsent = smsConsentEl ? smsConsentEl.checked : false;
 
     // Clear all previous errors
     clearAllFieldErrors();
@@ -163,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const payload = { name, email, phone, business, service, timestamp: new Date().toISOString() };
+    const payload = { name, email, phone, business, service, smsConsent, timestamp: new Date().toISOString() };
 
     setLoading(true);
 

@@ -373,7 +373,6 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//apis.google.com">
-  <link rel="dns-prefetch" href="//widgets.leadconnectorhq.com">
   <link rel="dns-prefetch" href="//link.msgsndr.com">
   <link rel="dns-prefetch" href="//api.leadconnectorhq.com">
   
@@ -8129,6 +8128,38 @@
 
     /* Trim excess bottom padding on the Growth Audit calendar box */
     .booking-content .calendar-container { padding-bottom: 16px !important; }
+
+    /* A2P SMS consent checkbox */
+    .hf-sms-consent {
+      margin: 8px 0 6px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 9px;
+    }
+    .hf-sms-label {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+    .hf-sms-label input[type="checkbox"] {
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 15px;
+      height: 15px;
+      accent-color: #ff9f2f;
+      cursor: pointer;
+    }
+    .hf-sms-text {
+      font-size: 0.72rem;
+      color: #555e6d;
+      line-height: 1.45;
+    }
+    .hf-sms-text a {
+      color: #d97706;
+      text-decoration: underline;
+    }
     .booking-guarantee {
       margin: 20px 0 8px 0 !important;
       padding: 18px 20px !important;
@@ -8376,6 +8407,13 @@
                   </div>
                   <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
                 </div>
+              </div>
+              <!-- A2P SMS Consent Checkbox — required for GHL 10DLC compliance -->
+              <div class="hf-sms-consent">
+                <label class="hf-sms-label">
+                  <input type="checkbox" id="hf-sms-consent" name="smsConsent" value="yes">
+                  <span class="hf-sms-text">I consent to receive SMS texts from Lumyx Consulting including appointment reminders and service updates. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. Not required to submit. <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> &amp; <a href="/terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a>.</span>
+                </label>
               </div>
               <div class="hf-error" id="hf-error" role="alert"></div>
               <button type="submit" class="hf-submit" id="hf-submit">
@@ -8943,6 +8981,7 @@
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/privacy-policy.html">Privacy Policy</a></li>
           <li><a href="/terms-of-service.html">Terms of Service</a></li>
+          <li><a href="/sms-consent.html">SMS Consent</a></li>
           <li><a href="/sitemap.xml" target="_blank">Sitemap</a></li>
         </ul>
       </div>
@@ -8971,8 +9010,6 @@
 
   <!-- Scripts - deferred to reduce render blocking -->
   <!-- jQuery removed: no script on this page uses it. -->
-  <!-- GHL A2P chat widget -->
-  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35a237946a4896c23b767a" data-source="WEB_USER"></script>
   <script defer src="js/meta-pixel-events.js"></script>
   <script defer src="js/newsletter.js"></script>
   <script defer src="js/form-validation.js"></script>
