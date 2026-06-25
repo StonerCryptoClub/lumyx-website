@@ -146,8 +146,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const phone    = [phoneAreaEl.value, phonePrefixEl.value, phoneLineEl.value].join('');
     const business = businessEl.value.trim();
     const service  = serviceEl.value;
-    const smsConsentEl = form.querySelector('#hf-sms-consent');
-    const smsConsent = smsConsentEl ? smsConsentEl.checked : false;
+    const smsTransactionalEl = form.querySelector('#hf-sms-transactional');
+    const smsMarketingEl = form.querySelector('#hf-sms-marketing');
+    const smsTransactional = smsTransactionalEl ? smsTransactionalEl.checked : false;
+    const smsMarketing = smsMarketingEl ? smsMarketingEl.checked : false;
+    const smsConsent = smsTransactional || smsMarketing;
 
     // Clear all previous errors
     clearAllFieldErrors();
@@ -165,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const payload = { name, email, phone, business, service, smsConsent, timestamp: new Date().toISOString() };
+    const payload = { name, email, phone, business, service, smsConsent, smsTransactional, smsMarketing, timestamp: new Date().toISOString() };
 
     setLoading(true);
 

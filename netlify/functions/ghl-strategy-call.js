@@ -66,11 +66,15 @@ exports.handler = async (event) => {
 
     const { firstName, lastName } = splitName(data.name);
     const normalizedServiceTag = serviceTag(data.service);
+    const isTrue = (v) => v === true || v === 'true' || v === 'yes';
+    const marketingIn = isTrue(data.smsMarketing);
+    const transactionalIn = isTrue(data.smsTransactional);
+    const anyConsent = marketingIn || transactionalIn || isTrue(data.smsConsent);
+
     const tags = ['strategy-call', 'website-lead'];
     if (normalizedServiceTag) tags.push(`service-${normalizedServiceTag}`);
-    tags.push(data.smsConsent === true || data.smsConsent === 'true' || data.smsConsent === 'yes'
-      ? 'opted-in'
-      : 'opted-out');
+    tags.push(anyConsent ? 'opted-in' : 'opted-out');
+    if (marketingIn) tags.push('marketing-opted-in');
 
     const payload = {
       locationId: GHL_LOCATION_ID,

@@ -8129,7 +8129,7 @@
     /* Trim excess bottom padding on the Growth Audit calendar box */
     .booking-content .calendar-container { padding-bottom: 16px !important; }
 
-    /* A2P SMS consent checkbox */
+    /* A2P SMS consent checkboxes (two: non-marketing + marketing) */
     .hf-sms-consent {
       margin: 8px 0 6px;
       padding: 10px 12px;
@@ -8142,6 +8142,11 @@
       gap: 9px;
       align-items: flex-start;
       cursor: pointer;
+    }
+    .hf-sms-label + .hf-sms-label {
+      margin-top: 9px;
+      padding-top: 9px;
+      border-top: 1px solid rgba(0,0,0,0.08);
     }
     .hf-sms-label input[type="checkbox"] {
       margin-top: 3px;
@@ -8156,7 +8161,15 @@
       color: #555e6d;
       line-height: 1.45;
     }
-    .hf-sms-text a {
+    .hf-sms-legal {
+      margin: 9px 0 0 !important;
+      font-size: 0.72rem !important;
+      color: #555e6d !important;
+      line-height: 1.45 !important;
+      font-weight: 400 !important;
+    }
+    .hf-sms-text a,
+    .hf-sms-legal a {
       color: #d97706;
       text-decoration: underline;
     }
@@ -8408,12 +8421,17 @@
                   <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
                 </div>
               </div>
-              <!-- A2P SMS Consent Checkbox — required for GHL 10DLC compliance -->
+              <!-- A2P SMS Consent — two separate checkboxes (non-marketing + marketing), unchecked + optional per GHL/CTIA 10DLC -->
               <div class="hf-sms-consent">
                 <label class="hf-sms-label">
-                  <input type="checkbox" id="hf-sms-consent" name="smsConsent" value="yes">
-                  <span class="hf-sms-text">I consent to receive transactional and conversational SMS messages from Lumyx Consulting at the phone number provided, including appointment reminders, scheduling and follow-up, and service updates. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out. Consent is not a condition of purchase and is not required to submit this form. See our <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> &amp; <a href="/terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a>.</span>
+                  <input type="checkbox" id="hf-sms-transactional" name="smsTransactional" value="yes">
+                  <span class="hf-sms-text">I consent to receive non-marketing text messages from Lumyx Consulting about appointment reminders, scheduling, and service updates. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
                 </label>
+                <label class="hf-sms-label">
+                  <input type="checkbox" id="hf-sms-marketing" name="smsMarketing" value="yes">
+                  <span class="hf-sms-text">I consent to receive marketing text messages, about special offers, discounts, and service updates, from Lumyx Consulting at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+                </label>
+                <p class="hf-sms-legal">Consent is not a condition of purchase and is not required to submit this form. See our <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> &amp; <a href="/terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a>.</p>
               </div>
               <div class="hf-error" id="hf-error" role="alert"></div>
               <button type="submit" class="hf-submit" id="hf-submit">
