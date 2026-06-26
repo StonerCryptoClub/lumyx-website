@@ -25,17 +25,25 @@
 
   function deriveChannel(data, referrer) {
     var s = String(data.utm_source || '').toLowerCase();
-    if (data.fbclid || /facebook|fb|meta|instagram|^ig$/.test(s)) return 'meta';
-    if (data.gclid || /google|adwords|gads/.test(s)) return 'google';
-    if (data.ttclid || /tiktok/.test(s)) return 'tiktok';
+    var m = String(data.utm_medium || '').toLowerCase();
+
+    // Meta: fbclid click ID or any recognisable Meta source/medium
+    if (data.fbclid || /facebook|fb|meta|instagram|ig/.test(s) || /paid.?social|cpc/.test(m) && /facebook|instagram|fb/.test(s)) return 'meta';
+    // Google: gclid click ID or Google Ads source strings
+    if (data.gclid || /^google$|adwords|google.?ads|gads|pmax|google.?shopping/.test(s)) return 'google';
+    // TikTok
+    if (data.ttclid || /tiktok|tik.?tok/.test(s)) return 'tiktok';
+    // Bing
     if (data.msclkid || /bing|microsoft/.test(s)) return 'bing';
+    // Any other explicit source — slug it
     if (s) return s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
+    // Fallback: infer from HTTP referrer
     var ref = String(referrer || '').toLowerCase();
-    if (/facebook|instagram/.test(ref)) return 'meta';
-    if (/google/.test(ref)) return 'google';
-    if (/bing/.test(ref)) return 'bing';
-    if (/tiktok/.test(ref)) return 'tiktok';
+    if (/facebook\.com|instagram\.com|fb\.me/.test(ref)) return 'meta';
+    if (/google\.com/.test(ref)) return 'google';
+    if (/bing\.com/.test(ref)) return 'bing';
+    if (/tiktok\.com/.test(ref)) return 'tiktok';
     return ref ? 'referral' : 'direct';
   }
 
