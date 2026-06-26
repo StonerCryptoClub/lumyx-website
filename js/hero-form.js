@@ -188,6 +188,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setSuccess();
 
+    // Fire GA4 + Google Ads conversion events on successful lead submission.
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        event_category: 'lead_form',
+        event_label: service,
+        source_channel: (typeof window.getLumyxAttribution === 'function') ? (window.getLumyxAttribution().channel || 'direct') : 'direct'
+      });
+      gtag('event', 'conversion', { send_to: 'G-N8CNQ6Y358' });
+    }
+
     // Attempt to prefill the booking widget with captured details, then scroll.
     prefillBookingWidget(payload);
 
