@@ -71,10 +71,23 @@ exports.handler = async (event) => {
     const transactionalIn = isTrue(data.smsTransactional);
     const anyConsent = marketingIn || transactionalIn || isTrue(data.smsConsent);
 
+    const attribution = (data.attribution && typeof data.attribution === 'object') ? data.attribution : {};
+    const slug = (v) => String(v || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    const channel = slug(attribution.channel) || 'direct';
+
     const tags = ['strategy-call', 'website-lead'];
     if (normalizedServiceTag) tags.push(`service-${normalizedServiceTag}`);
     tags.push(anyConsent ? 'opted-in' : 'opted-out');
     if (marketingIn) tags.push('marketing-opted-in');
+    tags.push(`source-${channel}`);
+
+    const utmBits = [];
+    if (attribution.utm_source) utmBits.push(`src:${attribution.utm_source}`);
+    if (attribution.utm_medium) utmBits.push(`med:${attribution.utm_medium}`);
+    if (attribution.utm_campaign) utmBits.push(`camp:${attribution.utm_campaign}`);
+    if (attribution.utm_content) utmBits.push(`content:${attribution.utm_content}`);
+    if (attribution.utm_term) utmBits.push(`term:${attribution.utm_term}`);
+    const attributionSummary = utmBits.length ? ` | ${utmBits.join(' ')}` : '';
 
     const payload = {
       locationId: GHL_LOCATION_ID,
@@ -84,7 +97,7 @@ exports.handler = async (event) => {
       email: data.email,
       phone: data.phone,
       companyName: data.business,
-      source: `Lumyx strategy call form - ${data.service}`,
+      source: `Lumyx strategy call form - ${data.service}${attributionSummary}`,
       tags
     };
 

@@ -168,7 +168,9 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const payload = { name, email, phone, business, service, smsConsent, smsTransactional, smsMarketing, timestamp: new Date().toISOString() };
+    const attribution = (typeof window.getLumyxAttribution === 'function') ? window.getLumyxAttribution() : {};
+
+    const payload = { name, email, phone, business, service, smsConsent, smsTransactional, smsMarketing, attribution, timestamp: new Date().toISOString() };
 
     setLoading(true);
 
