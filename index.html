@@ -7,13 +7,14 @@
   <!-- CSRF Protection -->
   <meta name="csrf-token" content="{{csrf_token}}">
   
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) — GA4 + Google Ads -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N8CNQ6Y358"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-N8CNQ6Y358');
+    gtag('config', 'AW-17052600393');
   </script>
   
   <!-- SEO Meta Tags - Online Business Focus 2026 -->
@@ -436,6 +437,9 @@
   
   <!-- Ad attribution capture (UTMs + click IDs) -->
   <script defer src="js/utm-tracking.js?v=20260626a"></script>
+
+  <!-- GHL calendar booking → GA4 + Google Ads conversion listener -->
+  <script defer src="js/ghl-booking-tracker.js?v=20260626a"></script>
 
   <!-- Hero lead form + VSL logic -->
   <script defer src="js/hero-form.js?v=20260626a"></script>
