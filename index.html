@@ -7894,9 +7894,9 @@
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      margin-top: 18px;
+      margin-top: 20px;
     }
     #home .hero-cta-primary {
       display: inline-flex;
@@ -8314,7 +8314,6 @@
       #home .hero-content { gap: 12px !important; }
       #home .hero-top { margin-top: 0 !important; }
       #home .hero-badge { margin-bottom: 10px !important; }
-      #home .hero-cta-row { margin-top: 14px !important; }
       #home .hero-form-card { min-height: 0 !important; padding-top: 26px !important; padding-bottom: 18px !important; }
     }
   </style>
@@ -8369,6 +8368,14 @@
               <span class="proof-chip"><i class="fas fa-star"></i> 4.8/5 Rating</span>
               <span class="proof-chip"><i class="fas fa-shield-alt"></i> 98% Client Retention</span>
             </div>
+          </div>
+
+          <!-- CTAs under the VSL column -->
+          <div class="hero-cta-row">
+            <a href="#booking-section" class="hero-cta-primary" data-scroll-target="#calendly-container">Get My Free Growth Audit <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <button type="button" class="hero-cta-secondary" id="hero-watch-vsl">
+              <span class="hero-cta-play"><i class="fas fa-play" aria-hidden="true"></i></span> Watch the VSL
+            </button>
           </div>
 
         </div><!-- end vsl col -->
@@ -8472,15 +8479,8 @@
           </div>
         </div><!-- end form col -->
 
-      </div><!-- end hero-grid -->
 
-      <!-- Hero CTAs at the bottom -->
-      <div class="hero-cta-row">
-        <a href="#booking-section" class="hero-cta-primary" data-scroll-target="#calendly-container">Get My Free Growth Audit <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-        <button type="button" class="hero-cta-secondary" id="hero-watch-vsl">
-          <span class="hero-cta-play"><i class="fas fa-play" aria-hidden="true"></i></span> Watch the VSL
-        </button>
-      </div>
+      </div><!-- end hero-grid -->
 
     </div><!-- end hero-content -->
     <div class="scroll-indicator">
