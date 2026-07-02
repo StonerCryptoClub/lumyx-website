@@ -101,22 +101,22 @@
 # Semantic URL structure - Clean URLs without .html
 [[redirects]]
   from = "/ai-agents-and-workflows"
-  to = "/ai-lead-generation.html"
-  status = 200
+  to = "/ai-lead-generation"
+  status = 301
 
 [[redirects]]
   from = "/ai-lead-generation.html"
-  to = "/ai-agents-and-workflows"
+  to = "/ai-lead-generation"
   status = 301
 
 [[redirects]]
   from = "/ai-lead-generation"
-  to = "/ai-agents-and-workflows"
-  status = 301
+  to = "/ai-lead-generation.html"
+  status = 200
 
 [[redirects]]
   from = "/ai-agents"
-  to = "/ai-agents-and-workflows"
+  to = "/ai-lead-generation"
   status = 301
 
 [[redirects]]

@@ -438,11 +438,14 @@
   <!-- Ad attribution capture (UTMs + click IDs) -->
   <script defer src="js/utm-tracking.js?v=20260626a"></script>
 
+  <!-- Google Ads lead conversions fire only after form submit or booking confirmation -->
+  <script defer src="js/google-conversion-events.js?v=20260702a"></script>
+
   <!-- GHL calendar booking → GA4 + Google Ads conversion listener -->
-  <script defer src="js/ghl-booking-tracker.js?v=20260626a"></script>
+  <script defer src="js/ghl-booking-tracker.js?v=20260702a"></script>
 
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js?v=20260626a"></script>
+  <script defer src="js/hero-form.js?v=20260702a"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -6767,7 +6770,7 @@
       .problem-solution-grid {
         gap: 40px;
       }
-       
+
       .newsletter-benefits {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 40px;
@@ -7285,66 +7288,6 @@
   <link rel="canonical" href="https://lumyx.co/">
 
 
-
-  <!-- Calendly booking events handler (optimized) -->
-  <script>
-      // Handle Calendly booking events with optimized loading
-      window.addEventListener('calendly.event_scheduled', async function(e) {
-          const event = e.data.payload.event;
-          const invitee = e.data.payload.invitee;
-          
-          // Format date and time
-          const eventDate = new Date(event.start_time);
-          const bookingData = {
-              email: invitee.email,
-              name: invitee.name,
-              phone: invitee.phone || null,
-              date: eventDate.toISOString().split('T')[0],
-              time: eventDate.toLocaleTimeString('en-US', { hour12: false }),
-              callType: 'zoom',
-              eventId: event.uuid
-          };
-          
-          // Track Google Ads Conversion
-          if (typeof gtag !== 'undefined') {
-              gtag('event', 'conversion', {
-                  'send_to': 'AW-17852608393/eRqMCNemk90bEInf5MBC',
-                  'transaction_id': event.uuid,
-                  'value': 497.0,
-                  'currency': 'USD'
-              });
-              
-              // Also send a custom event to Google Analytics
-              gtag('event', 'calendly_booking', {
-                  'event_category': 'Booking',
-                  'event_label': 'Strategy Call Booked',
-                  'value': 497
-              });
-              
-              console.log('Google Ads conversion tracked for booking:', event.uuid);
-          }
-          
-          // Track Meta Pixel Schedule Event
-          if (typeof fbq !== 'undefined') {
-              fbq('track', 'Schedule');
-              console.log('Meta Pixel Schedule event tracked for booking:', event.uuid);
-          }
-          
-          try {
-              // Import the database functions
-              const { addBooking } = await import('./js/database.js');
-              
-              // Store the booking
-              const result = await addBooking(bookingData);
-              
-              if (!result.success) {
-                  console.error('Failed to store booking:', result.error);
-              }
-          } catch (error) {
-              console.error('Error processing booking:', error);
-          }
-      });
-  </script>
 
   <!-- Remove debug console statements and replace with proper error handling -->
   <script>

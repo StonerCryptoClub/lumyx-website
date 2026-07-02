@@ -141,7 +141,6 @@ function minifyJavaScript() {
         // Simple minification: remove comments and extra whitespace
         content = content
             .replace(/\/\*[\s\S]*?\*\//g, '') // Remove block comments
-            .replace(/\/\/.*$/gm, '') // Remove line comments
             .replace(/\s+/g, ' ') // Replace multiple spaces with single space
             .trim();
         

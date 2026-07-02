@@ -188,15 +188,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setSuccess();
 
-    // Fire GA4 generate_lead + Google Ads conversion on successful hero form submit.
-    if (typeof gtag === 'function') {
-      gtag('event', 'generate_lead', {
-        event_category: 'lead_form',
-        event_label: service,
-        source_channel: (typeof window.getLumyxAttribution === 'function') ? (window.getLumyxAttribution().channel || 'direct') : 'direct'
+    // Fire lead conversion only after the lead has been accepted by GHL.
+    if (typeof window.lumyxTrackLeadConversion === 'function') {
+      window.lumyxTrackLeadConversion('lead_form', {
+        service: service,
+        email: email,
+        form_location: window.location.pathname
       });
-      // Google Ads "Book appointment" conversion (shared ID — covers both lead + booking)
-      gtag('event', 'conversion', { send_to: 'AW-17052600393/eRqMCNemk90bEInf5MBC' });
     }
 
     // Attempt to prefill the booking widget with captured details, then scroll.

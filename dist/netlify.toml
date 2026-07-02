@@ -1,5 +1,5 @@
 [build]
-  command = "mkdir -p dist/js dist/css && cp *.html dist/ && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
+  command = "mkdir -p dist/js dist/css && cp *.html dist/ && cp sitemap.xml dist/sitemap.xml && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
   publish = "dist"
 
 # Disable Next.js plugin completely
@@ -8,14 +8,14 @@
 
 # Production context
 [context.production]
-  command = "mkdir -p dist/js dist/css && cp *.html dist/ && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
+  command = "mkdir -p dist/js dist/css && cp *.html dist/ && cp sitemap.xml dist/sitemap.xml && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
   publish = "dist"
 
 [[headers]]
   for = "/*"
   [headers.values]
     # Content Security Policy
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://apis.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://assets.calendly.com https://calendly.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://cdn.contentful.com https://ctvmeaezvszekbljtuwe.supabase.co https://api.emailjs.com https://www.google-analytics.com https://www.clarity.ms https://calendly.com https://script.google.com https://www.youtube.com https://services.leadconnectorhq.com; frame-src 'self' https://calendly.com https://www.youtube.com https://youtube.com https://youtu.be; media-src 'self' https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self' https://eepurl.com https://script.google.com; frame-ancestors 'none';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://apis.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://assets.calendly.com https://calendly.com https://link.msgsndr.com https://widgets.leadconnectorhq.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://cdn.contentful.com https://ctvmeaezvszekbljtuwe.supabase.co https://www.google-analytics.com https://www.clarity.ms https://calendly.com https://script.google.com https://www.youtube.com https://services.leadconnectorhq.com https://api.leadconnectorhq.com https://link.msgsndr.com https://widgets.leadconnectorhq.com; frame-src 'self' https://calendly.com https://api.leadconnectorhq.com https://link.msgsndr.com https://widgets.leadconnectorhq.com https://www.youtube.com https://youtube.com https://youtu.be; media-src 'self' https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com; frame-ancestors 'none';"
     
     # Prevent clickjacking
     X-Frame-Options = "DENY"
@@ -101,22 +101,22 @@
 # Semantic URL structure - Clean URLs without .html
 [[redirects]]
   from = "/ai-agents-and-workflows"
-  to = "/ai-lead-generation.html"
-  status = 200
+  to = "/ai-lead-generation"
+  status = 301
 
 [[redirects]]
   from = "/ai-lead-generation.html"
-  to = "/ai-agents-and-workflows"
+  to = "/ai-lead-generation"
   status = 301
 
 [[redirects]]
   from = "/ai-lead-generation"
-  to = "/ai-agents-and-workflows"
-  status = 301
+  to = "/ai-lead-generation.html"
+  status = 200
 
 [[redirects]]
   from = "/ai-agents"
-  to = "/ai-agents-and-workflows"
+  to = "/ai-lead-generation"
   status = 301
 
 [[redirects]]
@@ -137,6 +137,16 @@
 [[redirects]]
   from = "/faq"
   to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms-of-service"
+  to = "/terms-of-service.html"
   status = 200
 
 [[redirects]]

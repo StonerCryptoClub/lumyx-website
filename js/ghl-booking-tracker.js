@@ -48,19 +48,10 @@
     if (fired) return;
     fired = true;
 
-    // GA4 book_appointment event
-    if (typeof gtag === 'function') {
-      gtag('event', 'book_appointment', {
-        event_category: 'booking',
+    if (typeof window.lumyxTrackLeadConversion === 'function') {
+      window.lumyxTrackLeadConversion('booking', {
         event_label: 'ghl_calendar',
-        source_channel: (typeof window.getLumyxAttribution === 'function')
-          ? (window.getLumyxAttribution().channel || 'direct')
-          : 'direct'
-      });
-
-      // Google Ads conversion
-      gtag('event', 'conversion', {
-        send_to: 'AW-17052600393/eRqMCNemk90bEInf5MBC'
+        form_location: window.location.pathname
       });
     }
   }

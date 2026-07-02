@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Mailchimp script deferred for better performance -->
-  <script>
-    // Load Mailchimp after user interaction or 5 seconds
-    const loadMailchimp = () => {
-      !function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/658c23db9ba64ab753d154574/de13bc0fc5ec5a5b56cb40162.js");
-    };
-    
-    // Load on user interaction or after delay
-    ['click', 'scroll', 'keydown'].forEach(event => {
-      document.addEventListener(event, loadMailchimp, { once: true, passive: true });
-    });
-    setTimeout(loadMailchimp, 5000);
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
   <!-- CSRF Protection -->
   <meta name="csrf-token" content="{{csrf_token}}">
   
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) — GA4 + Google Ads -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N8CNQ6Y358"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-N8CNQ6Y358');
+    gtag('config', 'AW-17052600393');
   </script>
   
   <!-- SEO Meta Tags - Online Business Focus 2026 -->
-  <title>3X Your Revenue in 90 Days | Marketing Consulting & AI Automation | Lumyx</title>
-  <meta name="description" content="Top-rated marketing consulting agency for 2026. We build custom ad campaigns, AI automation workflows, and growth strategies that 3X revenue within 90 days. Free strategy call." />
-  <meta name="keywords" content="marketing consulting 2026, AI automation agency, PPC management services, performance marketing agency, conversion rate optimization, business growth consulting, digital marketing consultant, AI workflows" />
+  <title>Lumyx | Performance Marketing Agency for Funnels, Ads, and Growth</title>
+  <meta name="description" content="Lumyx helps businesses grow with performance marketing, funnel optimization, CRM workflows, follow-up systems, and AI-enhanced execution." />
+  <meta name="keywords" content="performance marketing agency, paid media management, funnel optimization, landing page conversion, CRM automation, follow-up systems, conversion strategy, AI-enhanced marketing" />
   <meta name="author" content="Lumyx Consulting" />
   <meta name="robots" content="index, follow" />
   
@@ -226,8 +214,8 @@
   <meta property="og:site_name" content="Lumyx Consulting" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lumyx.co/" />
-  <meta property="og:title" content="3X Your Revenue in 90 Days | Marketing Consulting & AI Automation | Lumyx" />
-  <meta property="og:description" content="Top-rated marketing consulting agency for 2026. We build custom ad campaigns, AI automation workflows, and growth strategies that 3X revenue within 90 days. Free strategy call." />
+  <meta property="og:title" content="Lumyx | Performance Marketing Agency for Funnels, Ads, and Growth" />
+  <meta property="og:description" content="Lumyx helps businesses grow with performance marketing, funnel optimization, CRM workflows, follow-up systems, and AI-enhanced execution." />
   <meta property="og:image" content="https://lumyx.co/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -238,8 +226,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@lumyxagency" />
   <meta name="twitter:url" content="https://lumyx.co/" />
-  <meta name="twitter:title" content="3X Your Revenue in 90 Days | Marketing Consulting & AI Automation | Lumyx" />
-  <meta name="twitter:description" content="Top-rated marketing agency for 2026. Custom ad campaigns, AI automation, and growth strategies that 3X revenue in 90 days. Free strategy call—book today." />
+  <meta name="twitter:title" content="Lumyx | Performance Marketing Agency for Funnels, Ads, and Growth" />
+  <meta name="twitter:description" content="Lumyx helps businesses grow with performance marketing, funnel optimization, CRM workflows, follow-up systems, and AI-enhanced execution." />
   <meta name="twitter:image" content="https://lumyx.co/images/og-image.jpg" />
   <meta name="twitter:image:alt" content="Lumyx Performance Marketing Agency - AI Automation & PPC Campaigns" />
   
@@ -341,7 +329,7 @@
     };
 
     // Multiple interaction triggers with extended timeout for TBT optimization
-    const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove', 'wheel'];
+    const events = ['click', 'scroll', 'keydown', 'touchstart'];
     events.forEach(event => {
       document.addEventListener(event, triggerAnalytics, { 
         once: true, 
@@ -386,7 +374,8 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//apis.google.com">
-  <link rel="dns-prefetch" href="//assets.calendly.com">
+  <link rel="dns-prefetch" href="//link.msgsndr.com">
+  <link rel="dns-prefetch" href="//api.leadconnectorhq.com">
   
   <!-- Preconnect to critical third-parties -->
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
@@ -446,8 +435,17 @@
   <link rel="prefetch" href="/blog.html">
   <link rel="prefetch" href="/case-study.html">
   
+  <!-- Ad attribution capture (UTMs + click IDs) -->
+  <script defer src="js/utm-tracking.js?v=20260626a"></script>
+
+  <!-- Google Ads lead conversions fire only after form submit or booking confirmation -->
+  <script defer src="js/google-conversion-events.js?v=20260702a"></script>
+
+  <!-- GHL calendar booking → GA4 + Google Ads conversion listener -->
+  <script defer src="js/ghl-booking-tracker.js?v=20260702a"></script>
+
   <!-- Hero lead form + VSL logic -->
-  <script defer src="js/hero-form.js?v=20260504a"></script>
+  <script defer src="js/hero-form.js?v=20260702a"></script>
 
   <!-- Optimized script loading for mobile critical path reduction -->
   <script defer src="js/env-loader.js"></script>
@@ -472,24 +470,18 @@
         }, index * 50); // Stagger loading to reduce blocking
       });
       
-      // Defer contentful and performance scripts more aggressively on mobile
+      // Defer Contentful client on mobile
       setTimeout(() => {
         const script1 = document.createElement('script');
         script1.src = 'js/contentful-client.js?v=20250116c';
         script1.defer = true;
         document.head.appendChild(script1);
-        
-        const script2 = document.createElement('script');
-        script2.src = 'js/performance-optimization.js';
-        script2.defer = true;
-        document.head.appendChild(script2);
       }, 200);
     } else {
       // Desktop: Load normally for optimal performance
       document.write('<script defer src="js/html-sanitizer.js"><\/script>');
       document.write('<script defer src="js/input-validator.js"><\/script>');
       document.write('<script defer src="js/contentful-client.js?v=20250116c"><\/script>');
-      document.write('<script defer src="js/performance-optimization.js"><\/script>');
     }
   </script>
   
@@ -521,40 +513,10 @@
       });
     };
 
-    // Break up Calendly loading into smaller tasks
-    const loadCalendlyChunked = async () => {
-      if (calendlyLoaded) return;
-      calendlyLoaded = true;
-
-      // Task 1: Load script
-      await scheduleTask(() => {
-        const calendlyScript = document.createElement('script');
-        calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
-        calendlyScript.async = true;
-        calendlyScript.defer = true;
-        document.head.appendChild(calendlyScript);
-      }, 'background');
-
-      // Task 2: Wait for script and initialize (with timeout)
-      await scheduleTask(() => {
-        let attempts = 0;
-        const initCalendly = () => {
-          if (typeof window.Calendly !== 'undefined') {
-            window.Calendly.initInlineWidget({
-              url: 'https://calendly.com/lumyxmarketing/30min',
-              parentElement: document.getElementById('calendly-container'),
-              prefill: {},
-              utm: {},
-              styles: { height: '650px' }
-            });
-          } else if (attempts < 20) {
-            attempts++;
-            setTimeout(initCalendly, 100);
-          }
-        };
-        setTimeout(initCalendly, 100);
-      }, 'background');
-    };
+    // Booking is now handled by the GoHighLevel (LeadConnector) iframe embed,
+    // which loads via https://link.msgsndr.com/js/form_embed.js. Calendly is no
+    // longer loaded here.
+    const loadCalendlyChunked = async () => {};
 
     // Ultra-aggressive intersection observer with large margins
     const bookingObserver = new IntersectionObserver((entries) => {
@@ -575,8 +537,7 @@
       scriptsLoaded = true;
 
       const scripts = [
-        'https://apis.google.com/js/api.js',
-        'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js'
+        'https://apis.google.com/js/api.js'
       ];
       
       // Load scripts with exponential backoff to reduce main thread impact
@@ -604,8 +565,8 @@
         bookingObserver.observe(bookingSection);
       }
 
-      // Load scripts on ANY user interaction (much more aggressive)
-      const events = ['click', 'scroll', 'keydown', 'touchstart', 'mousemove'];
+      // Load scripts only on meaningful interaction so hovering over the VSL doesn't stutter playback.
+      const events = ['click', 'scroll', 'keydown', 'touchstart'];
       const loadOnInteraction = () => {
         loadThirdPartyScripts();
         events.forEach(event => {
@@ -620,8 +581,8 @@
         });
       });
 
-      // Fallback timeout reduced to 2 seconds for faster loading
-      setTimeout(loadThirdPartyScripts, 2000);
+      // Keep the hero/VSL smooth first; third-party scripts can wait.
+      setTimeout(loadThirdPartyScripts, 8000);
     });
 
     // Performance monitoring for TBT optimization
@@ -808,21 +769,6 @@
   <link rel="stylesheet" href="css/ipad-fixes.css?v=1.2">
   <!-- Desktop Optimizations -->
   <link rel="stylesheet" href="css/desktop-optimizations.css?v=1.2">
-  <!-- FullCalendar CSS - load async to reduce render blocking -->
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/main.min.css"></noscript>
-  <!-- EmailJS - deferred for performance -->
-  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <!-- Configuration -->
-  <script defer src="js/env-loader.js"></script>
-  <!-- HTML Sanitizer -->
-  <script defer src="js/html-sanitizer.js"></script>
-  <!-- Input Validator -->
-  <script defer src="js/input-validator.js"></script>
-  <!-- Database Client -->
-
-  <!-- Mailchimp handled by optimized loading above -->
   <style>
     /* Base color variables */
     :root {
@@ -971,11 +917,9 @@
       height: 100%;
       z-index: -2;
       opacity: 0.1;
-      background: 
+      background:
         linear-gradient(45deg, #1E90FF, #00CED1);
-      animation: gradientBG 15s ease infinite;
-      background-size: 400% 400%;
-      will-change: background-position;
+      background-size: 200% 200%;
       transform: translateZ(0);
     }
     @keyframes gradientBG {
@@ -1137,7 +1081,6 @@
       cursor: pointer;
       border-radius: 14px;
       transition: opacity 0.35s ease, background 0.25s ease;
-      backdrop-filter: blur(2px);
     }
     .vsl-click-overlay:hover { background: rgba(10, 10, 20, 0.35); }
     .vsl-click-overlay.hiding { opacity: 0; pointer-events: none; }
@@ -1152,7 +1095,6 @@
       font-size: 1.7rem;
       color: #fff;
       background: rgba(255,165,0,0.28);
-      backdrop-filter: blur(6px);
       margin-bottom: 14px;
       transition: transform 0.22s ease, background 0.22s ease;
     }
@@ -1198,37 +1140,117 @@
     .vsl-coming-label { font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0 0 8px; }
     .vsl-coming-sub { font-size: 0.88rem; color: rgba(255,255,255,0.55); margin: 0; line-height: 1.55; }
 
+    /* Keep YouTube/VSL playback smooth by pausing decorative GPU work once engaged. */
+    body.vsl-active .animated-bg,
+    body.vsl-active .floating-circle,
+    body.vsl-active #home .floating-elements,
+    body.vsl-active .star {
+      animation: none !important;
+      will-change: auto !important;
+    }
+
+    body.vsl-active #home .floating-elements {
+      display: none !important;
+    }
+
+    body.vsl-active .star {
+      opacity: 0.22 !important;
+    }
+
     /* Explainer text */
     .hero-explainer {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,165,0,0.14), transparent 36%),
+        linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 22px 24px 20px;
+      text-align: center;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .hero-explainer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,165,0,0.13), transparent 36%, rgba(65,105,225,0.08));
+      opacity: 0.6;
+    }
+    .hero-explainer > * {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-explainer-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: rgba(255,165,0,0.12);
+      border: 1px solid rgba(255,165,0,0.22);
+      color: #ffb642;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-explainer p {
-      font-size: 0.94rem;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.68;
-      margin: 0 0 10px;
+      max-width: 760px;
+      font-size: clamp(1.05rem, 1.55vw, 1.42rem);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.45;
+      margin: 0 auto 16px;
+      font-weight: 650;
+      letter-spacing: -0.025em;
+    }
+    .hero-explainer p strong {
+      color: #ffb642;
     }
     .hero-explainer-list {
-      margin: 0 0 12px 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 16px;
       padding: 0;
-      color: rgba(255,255,255,0.72);
-      font-size: 1rem;
-      line-height: 1.72;
+      list-style: none;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.82rem;
+      line-height: 1.35;
     }
     .hero-explainer-list li {
-      margin-bottom: 7px;
+      display: flex;
+      align-items: flex-start;
+      text-align: left;
+      gap: 8px;
+      min-height: 54px;
+      padding: 11px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-explainer-list i {
+      color: #ffb642;
+      margin-top: 2px;
+      flex-shrink: 0;
     }
     .hero-learn-link {
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 700;
-      color: var(--primary-orange);
+      color: #0f1117;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffb642, #ff7a00);
+      box-shadow: 0 12px 28px rgba(255,122,0,0.18);
+      margin: 0 auto;
       transition: gap 0.2s;
     }
     .hero-learn-link:hover { gap: 10px; }
@@ -1258,12 +1280,12 @@
       margin-right: 4px;
     }
 
-    /* ---- Form column: LIGHT THEME ---- */
+    /* ---- Form column: Newsletter-inspired light card ---- */
     .hero-form-col { display: flex; flex-direction: column; gap: 14px; }
     .hero-form-card {
       background: #ffffff;
       border-radius: 18px;
-      padding: 22px 24px 18px;
+      padding: 30px 32px 20px;
       box-shadow: 0 18px 64px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.55);
       height: auto;
       box-sizing: border-box;
@@ -1272,62 +1294,98 @@
       align-self: flex-start;
       border: 1px solid rgba(255,255,255,0.82);
     }
-    .form-eyebrow {
+    .form-card-header {
+      text-align: center;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      position: relative;
+    }
+    .form-card-header::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 74px;
+      height: 3px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, rgba(255,165,0,0), #ff9f0a, rgba(255,106,0,0));
+    }
+    .form-card-eyebrow {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: fit-content;
-      background: rgba(255,165,0,0.12);
-      border: 1px solid rgba(255,165,0,0.28);
+      gap: 7px;
+      margin-bottom: 10px;
+      padding: 6px 11px;
       border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.68rem;
-      font-weight: 800;
-      color: var(--primary-orange);
+      background: rgba(255, 165, 0, 0.1);
+      border: 1px solid rgba(255, 165, 0, 0.22);
+      color: #d97706;
+      font-size: 0.66rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin: 0 auto 10px;
+    }
+    .form-card-eyebrow i {
+      color: #ff8a00;
+      font-size: 0.7rem;
     }
     .form-card-header h3 {
-      font-size: clamp(1.25rem, 1.65vw, 1.55rem);
+      font-size: clamp(1.55rem, 1.9vw, 2rem);
       font-weight: 900;
       color: #111827;
-      margin: 0 0 6px;
+      margin: 0 0 9px;
       letter-spacing: -0.035em;
-      line-height: 1.12;
+      line-height: 1.04;
+      font-family: 'Montserrat', sans-serif;
     }
-    .form-card-header h3 .title-accent {
-      color: var(--primary-orange);
+    .form-card-header h3 span {
+      display: block;
+      background: linear-gradient(135deg, #111827 10%, #ff7a00 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     .form-subheading {
-      font-size: 0.78rem;
-      color: #5f5f68;
-      margin: 0 0 14px;
-      line-height: 1.45;
+      font-size: 0.84rem;
+      color: #5f6674;
+      margin: 0 auto;
+      line-height: 1.42;
+      max-width: 380px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .form-subheading strong {
+      color: #111827;
+      font-weight: 800;
+    }
+    #hero-lead-form {
+      text-align: left;
     }
     .hf-row {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      column-gap: 10px;
+      row-gap: 0;
     }
-    .hf-group { margin-bottom: 9px; }
+    .hf-group { margin-bottom: 7px; }
     .hf-label {
       display: block;
       margin: 0 0 5px;
       color: #374151;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       letter-spacing: 0.01em;
+      text-align: left;
     }
     .hf-group input,
     .hf-group select {
       width: 100%;
       background: #f7f7fa;
       border: 1px solid #d9dde7;
-      border-radius: 9px;
-      padding: 9px 12px;
-      color: #111;
-      font-size: 0.78rem;
+      border-radius: 10px;
+      padding: 11px 13px;
+      color: #111827;
+      font-size: 0.8rem;
       font-family: 'Montserrat', sans-serif;
       outline: none;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
@@ -1420,18 +1478,22 @@
       border: none;
       border-radius: 10px;
       padding: 12px 18px;
-      color: #fff;
+      color: #0b0b0b;
       font-size: 0.84rem;
-      font-weight: 700;
+      font-weight: 800;
       font-family: 'Montserrat', sans-serif;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 4px 20px rgba(255,120,0,0.4);
-      margin-top: 6px;
+      margin-top: 4px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 44px;
+      height: 46px;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
     }
     .hf-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,120,0,0.55); }
     .hf-submit:active { transform: translateY(0); }
@@ -1444,7 +1506,10 @@
       display: none;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
+      line-height: 1;
     }
+    .hf-btn-text { white-space: nowrap; line-height: 1; }
     .hf-submit.loading .hf-btn-text { display: none; }
     .hf-submit.loading .hf-btn-loading { display: inline-flex; }
     .hf-disclaimer {
@@ -1514,7 +1579,26 @@
       #home { padding: 90px 0 20px; }
       #home .hero-content { padding: 0 20px; gap: 16px; }
       .hero-headline { font-size: clamp(1.15rem, 5.5vw, 1.6rem) !important; }
-      .hero-form-card { padding: 22px 18px 14px; }
+      .hero-form-card { padding: 18px 15px 12px; }
+      .form-card-header {
+        margin-bottom: 16px;
+        padding-bottom: 14px;
+      }
+      .form-card-eyebrow {
+        font-size: 0.58rem;
+        padding: 5px 9px;
+        margin-bottom: 9px;
+      }
+      .form-card-header h3 {
+        font-size: clamp(1.4rem, 6vw, 1.7rem) !important;
+        line-height: 1.02 !important;
+        margin-bottom: 8px !important;
+      }
+      .form-subheading {
+        font-size: 0.78rem !important;
+        line-height: 1.38 !important;
+        max-width: 310px !important;
+      }
       .hf-row { grid-template-columns: 1fr; gap: 0; }
       .hf-phone-field {
         grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -1526,6 +1610,28 @@
       }
       .proof-avatars-inline .proof-chip {
         font-size: 0.76rem;
+      }
+      .hero-explainer {
+        padding: 18px 16px;
+        border-radius: 16px;
+      }
+      .hero-explainer-kicker {
+        margin-bottom: 10px;
+        font-size: 0.62rem;
+      }
+      .hero-explainer p {
+        font-size: 1.12rem;
+        line-height: 1.45;
+        text-align: center;
+      }
+      .hero-explainer-list {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        font-size: 0.86rem;
+      }
+      .hero-explainer-list li {
+        min-height: 0;
+        padding: 10px 11px;
       }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2) { border-right: none; }
@@ -3194,198 +3300,403 @@
 
     /* Problem/Solution Section */
     .problem-solution-section {
-      padding: 60px 5% 50px;
-      background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(22, 33, 62, 0.95));
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 76px 5% 68px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,165,0,0.16), transparent 30%),
+        radial-gradient(circle at 82% 28%, rgba(65,105,225,0.16), transparent 34%),
+        linear-gradient(135deg, #0c0f1c 0%, #121a31 52%, #0b0d16 100%);
       width: 100vw;
       margin: 0;
       margin-left: calc(-50vw + 50%);
       scroll-margin-top: 80px;
     }
 
+    .problem-solution-section::before,
+    .problem-solution-section::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .problem-solution-section::before {
+      inset: 16px 5%;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), transparent 52%);
+    }
+
+    .problem-solution-section::after {
+      width: 420px;
+      height: 420px;
+      left: 50%;
+      top: 46%;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,165,0,0.1), transparent 68%);
+      filter: blur(4px);
+    }
+
     .problem-solution-content {
-      max-width: none;
-      margin: 0;
-      padding: 0 5%;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #F5F5F5;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 600px;
+      max-width: 1240px;
       margin: 0 auto;
-      line-height: 1.5;
+      padding: 0 5%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .problem-solution-section .section-header {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .ps-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgba(255,165,0,0.1);
+      border: 1px solid rgba(255,165,0,0.24);
+      color: #ffb642;
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .problem-solution-section .section-header h2 {
+      font-size: clamp(2.1rem, 4vw, 3.35rem);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+      margin: 0 0 14px;
+      color: #ffffff;
+      text-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    .problem-solution-section .section-subtitle {
+      font-size: clamp(0.98rem, 1.5vw, 1.14rem);
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 710px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
 
     .problem-solution-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      margin-bottom: 45px;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      margin: 0 auto 48px;
+      max-width: 1040px;
+      position: relative;
     }
 
-    .problem-side, .solution-side {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 50px 40px;
-      border-radius: 25px;
-      backdrop-filter: blur(10px);
-      min-height: 400px;
+    .problem-solution-grid::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 26px;
+      bottom: 26px;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(255,165,0,0.42), transparent);
+    }
+
+    .problem-solution-section .problem-side,
+    .problem-solution-section .solution-side {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      padding: 28px;
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.095), rgba(255,255,255,0.04)),
+        rgba(13,16,29,0.74);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .problem-side {
-      border: 1px solid rgba(255, 107, 107, 0.3);
+    .problem-solution-section .problem-side::before,
+    .problem-solution-section .solution-side::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.72;
+      pointer-events: none;
     }
 
-    .solution-side {
-      border: 1px solid rgba(0, 200, 83, 0.3);
+    .problem-solution-section .problem-side::before {
+      background: radial-gradient(circle at 14% 0%, rgba(255,90,90,0.18), transparent 38%);
     }
 
-    .problem-side h3, .solution-side h3 {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      font-weight: 700;
-      text-align: center;
+    .problem-solution-section .solution-side::before {
+      background: radial-gradient(circle at 86% 0%, rgba(255,165,0,0.2), transparent 40%);
+    }
+
+    .problem-solution-section .problem-side:hover,
+    .problem-solution-section .solution-side:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,165,0,0.32);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.42);
+    }
+
+    .ps-card-header,
+    .problem-list,
+    .solution-list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ps-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ps-card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .problem-side .ps-card-icon {
+      color: #ff7a7a;
+      background: rgba(255,90,90,0.12);
+      border: 1px solid rgba(255,90,90,0.22);
+    }
+
+    .solution-side .ps-card-icon {
+      color: #ffb642;
+      background: rgba(255,165,0,0.13);
+      border: 1px solid rgba(255,165,0,0.25);
+    }
+
+    .problem-solution-section .problem-side h3,
+    .problem-solution-section .solution-side h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      font-weight: 850;
+      text-align: left;
+      letter-spacing: -0.02em;
     }
 
     .problem-heading {
-      color: rgba(255, 107, 107, 0.95) !important;
-      border-bottom: 2px solid rgba(255, 107, 107, 0.35);
-      padding-bottom: 14px;
+      color: rgba(255, 150, 150, 0.98) !important;
+      border-bottom: 0;
+      padding-bottom: 0;
     }
 
     .solution-heading {
-      color: rgba(100, 220, 140, 0.95) !important;
-      border-bottom: 2px solid rgba(100, 220, 140, 0.35);
-      padding-bottom: 14px;
+      color: #ffcf75 !important;
+      border-bottom: 0;
+      padding-bottom: 0;
     }
 
-    .problem-list, .solution-list {
-      list-style: disc;
-      padding-left: 25px;
-      list-style-position: inside;
+    .ps-card-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255,255,255,0.52);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
-    .problem-list li, .solution-list li {
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: center;
+    .problem-list,
+    .solution-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
     }
 
-    .problem-list li:last-child, .solution-list li:last-child {
-      border-bottom: none;
+    .problem-list li,
+    .solution-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 13px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.18);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.88rem;
+      font-weight: 560;
+      line-height: 1.45;
+      text-align: left;
     }
 
-    /* Proof Section */
+    .problem-list li i,
+    .solution-list li i {
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .problem-list li i {
+      color: #ff7a7a;
+    }
+
+    .solution-list li i {
+      color: #ffb642;
+    }
+
     .proof-section {
       text-align: center;
-      margin-top: 35px;
-      padding-top: 25px;
+      margin-top: 0;
+      padding-top: 10px;
+      position: relative;
+    }
+
+    .proof-section::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 34px;
+      margin: 0 auto 18px;
+      background: linear-gradient(180deg, rgba(255,165,0,0.5), transparent);
     }
 
     .proof-section h3 {
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      color: var(--primary-orange);
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin: 0 0 24px;
+      color: #ffb642;
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 850;
+      letter-spacing: -0.02em;
       line-height: 1.2;
     }
 
     .results-showcase {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
+      grid-template-columns: repeat(3, minmax(180px, 220px));
+      justify-content: center;
+      justify-items: stretch;
+      gap: 16px;
+      width: fit-content;
+      max-width: 100%;
       margin: 0 auto;
     }
 
-    .result-item {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 35px 28px;
-      border-radius: 20px;
-      border: 2px solid rgba(255, 165, 0, 0.3);
-      backdrop-filter: blur(15px);
-      transition: all 0.4s ease;
-      text-align: center !important;
+    .problem-solution-section .result-item {
       position: relative;
+      min-height: 132px;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      min-height: 160px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .result-item::before { content: ''; position: absolute; inset: 0; background: none; opacity: 0; transition: opacity 0.3s ease; }
-
-    .result-item:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: var(--primary-orange);
-      box-shadow: 0 25px 50px rgba(255, 165, 0, 0.4);
-    }
-
-    .result-item:hover::before {
-      opacity: 1;
-    }
-
-    .result-item .result-number {
-      text-align: center !important;
-      display: block;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 22px;
       width: 100%;
-      font-size: 3.5rem;
-      font-weight: 900;
+      border-radius: 18px;
+      border: 1px solid rgba(255,165,0,0.2);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.035)),
+        rgba(11,14,26,0.78);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+      text-align: left !important;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .problem-solution-section .result-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0%, rgba(255,165,0,0.18), transparent 48%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .problem-solution-section .result-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,165,0,0.42);
+      box-shadow: 0 28px 70px rgba(255,165,0,0.12), 0 18px 50px rgba(0,0,0,0.34);
+    }
+
+    .metric-label {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.52);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .problem-solution-section .result-item .result-number {
+      position: relative;
+      z-index: 1;
+      width: auto;
+      display: block;
+      margin: 0;
       color: #ffffff;
-      margin-bottom: 10px;
+      font-size: clamp(2.2rem, 4vw, 3.1rem);
+      line-height: 0.9;
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      text-align: left !important;
+    }
+
+    .problem-solution-section .result-item .result-desc {
       position: relative;
-      z-index: 2;
-      line-height: 1;
+      z-index: 1;
+      width: auto;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.78rem;
+      line-height: 1.35;
+      font-weight: 650;
+      text-align: left !important;
     }
 
-    .result-item .result-desc {
-      text-align: center !important;
-      display: block;
-      width: 100%;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.9);
-      line-height: 1.4;
-      position: relative;
-      z-index: 2;
+    .js-reveals .ps-reveal,
+    .js-reveals .ps-card,
+    .js-reveals .proof-metric {
+      opacity: 0;
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .result-item:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary-orange);
-      box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2);
+    .js-reveals .ps-reveal { transform: translateY(22px); }
+    .js-reveals .ps-card-left { transform: translateX(-34px); }
+    .js-reveals .ps-card-right { transform: translateX(34px); }
+    .js-reveals .proof-metric { transform: translateY(28px); transition-delay: var(--reveal-delay, 0ms); }
+
+    .js-reveals .ps-reveal.visible,
+    .js-reveals .ps-card.visible,
+    .js-reveals .proof-metric.visible {
+      opacity: 1;
+      transform: translate(0, 0);
     }
 
-    .result-number { font-size: 4rem; font-weight: 900; color: #ffffff; margin-bottom: 8px; text-align: center; }
-
-    .result-desc {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 1.4;
-      text-align: center;
+    @media (prefers-reduced-motion: reduce) {
+      .js-reveals .ps-reveal,
+      .js-reveals .ps-card,
+      .js-reveals .proof-metric {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
     .about-values {
       margin-top: 60px;
@@ -6459,7 +6770,7 @@
       .problem-solution-grid {
         gap: 40px;
       }
-      
+
       .newsletter-benefits {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 40px;
@@ -6831,6 +7142,110 @@
       margin: 0 auto;
       padding: 0 5%;
     }
+
+    /* Final modern proof-section overrides after legacy full-width rules */
+    .problem-solution-section {
+      padding: 76px 0 68px !important;
+    }
+
+    .problem-solution-section .problem-solution-content {
+      max-width: 1240px !important;
+      padding: 0 5% !important;
+    }
+
+    .problem-solution-section .results-showcase {
+      grid-template-columns: repeat(3, minmax(180px, 220px)) !important;
+      justify-content: center !important;
+      width: fit-content !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    @media (max-width: 768px) {
+      .problem-solution-section {
+        padding: 56px 0 52px !important;
+      }
+
+      .problem-solution-section::before,
+      .problem-solution-section::after {
+        display: none;
+      }
+
+      .problem-solution-grid {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+        margin-bottom: 34px !important;
+      }
+
+      .problem-solution-grid::before {
+        display: none;
+      }
+
+      .problem-solution-section .problem-side,
+      .problem-solution-section .solution-side {
+        padding: 22px !important;
+      }
+
+      .ps-card-header {
+        align-items: flex-start;
+      }
+
+      .problem-solution-section .proof-section::before {
+        display: none;
+      }
+
+      .problem-solution-section .proof-section h3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        max-width: min(92vw, 420px);
+        margin-top: 10px !important;
+        margin-bottom: 24px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: center;
+      }
+
+      .problem-solution-section .proof-section h3 i {
+        width: 38px;
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: rgba(255,165,0,0.12);
+        border: 1px solid rgba(255,165,0,0.28);
+        font-size: 1rem;
+      }
+
+      .problem-solution-section .results-showcase {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+        max-width: 360px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        overflow: visible !important;
+      }
+
+      .problem-solution-section .result-item {
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        min-height: 132px !important;
+        padding: 20px !important;
+        text-align: center !important;
+      }
+
+      .problem-solution-section .metric-label,
+      .problem-solution-section .result-item .result-number,
+      .problem-solution-section .result-item .result-desc {
+        width: 100% !important;
+        text-align: center !important;
+      }
+    }
     
     /* Small screen optimization */
     @media (max-width: 480px) {
@@ -6865,76 +7280,14 @@
   <script defer src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   
-  <!-- Configuration -->
-  <script defer src="js/env-loader.js"></script>
-  <script defer src="js/html-sanitizer.js"></script>
-  <script defer src="js/input-validator.js"></script>
+  <!-- case-study-loader relies on env-loader, html-sanitizer and input-validator,
+       which are already loaded once near the top of the document. -->
   <script defer src="js/case-study-loader.js"></script>
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://lumyx.co/">
 
 
-
-  <!-- Calendly booking events handler (optimized) -->
-  <script>
-      // Handle Calendly booking events with optimized loading
-      window.addEventListener('calendly.event_scheduled', async function(e) {
-          const event = e.data.payload.event;
-          const invitee = e.data.payload.invitee;
-          
-          // Format date and time
-          const eventDate = new Date(event.start_time);
-          const bookingData = {
-              email: invitee.email,
-              name: invitee.name,
-              phone: invitee.phone || null,
-              date: eventDate.toISOString().split('T')[0],
-              time: eventDate.toLocaleTimeString('en-US', { hour12: false }),
-              callType: 'zoom',
-              eventId: event.uuid
-          };
-          
-          // Track Google Ads Conversion
-          if (typeof gtag !== 'undefined') {
-              gtag('event', 'conversion', {
-                  'send_to': 'AW-17852608393/eRqMCNemk90bEInf5MBC',
-                  'transaction_id': event.uuid,
-                  'value': 497.0,
-                  'currency': 'USD'
-              });
-              
-              // Also send a custom event to Google Analytics
-              gtag('event', 'calendly_booking', {
-                  'event_category': 'Booking',
-                  'event_label': 'Strategy Call Booked',
-                  'value': 497
-              });
-              
-              console.log('Google Ads conversion tracked for booking:', event.uuid);
-          }
-          
-          // Track Meta Pixel Schedule Event
-          if (typeof fbq !== 'undefined') {
-              fbq('track', 'Schedule');
-              console.log('Meta Pixel Schedule event tracked for booking:', event.uuid);
-          }
-          
-          try {
-              // Import the database functions
-              const { addBooking } = await import('./js/database.js');
-              
-              // Store the booking
-              const result = await addBooking(bookingData);
-              
-              if (!result.success) {
-                  console.error('Failed to store booking:', result.error);
-              }
-          } catch (error) {
-              console.error('Error processing booking:', error);
-          }
-      });
-  </script>
 
   <!-- Remove debug console statements and replace with proper error handling -->
   <script>
@@ -7105,11 +7458,12 @@
 
       #home .form-card-header {
         text-align: center !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 18px !important;
+        padding-bottom: 14px !important;
       }
 
       #home .form-card-header h3 {
-        font-size: clamp(1.8rem, 2vw, 2.15rem) !important;
+        font-size: clamp(1.6rem, 1.8vw, 1.92rem) !important;
         line-height: 1.05 !important;
         margin-bottom: 8px !important;
       }
@@ -7170,10 +7524,11 @@
       #home .form-card-header {
         text-align: center !important;
         margin-bottom: 18px !important;
+        padding-bottom: 14px !important;
       }
 
       #home .form-card-header h3 {
-        font-size: 1.55rem !important;
+        font-size: 1.46rem !important;
         line-height: 1.08 !important;
         margin-bottom: 8px !important;
       }
@@ -7243,7 +7598,7 @@
       }
 
       #home .form-card-header h3 {
-        font-size: 1.72rem !important;
+        font-size: 1.58rem !important;
         margin-bottom: 8px !important;
       }
 
@@ -7276,6 +7631,26 @@
 
       #home .hero-form-card .hf-disclaimer {
         font-size: 0.54rem !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+      #home {
+        padding-top: 58px !important;
+      }
+
+      #home .hero-content {
+        gap: 14px !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #home {
+        padding-top: 34px !important;
+      }
+
+      #home .hero-top {
+        gap: 12px !important;
       }
     }
   </style>
@@ -7353,6 +7728,9 @@
   <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <!-- VSL (YouTube) resource hints - facade loads the embed only on click -->
+  <link rel="dns-prefetch" href="//www.youtube.com">
+  <link rel="dns-prefetch" href="//i.ytimg.com">
   
   <!-- Preload critical above-the-fold image for mobile -->
   <link rel="preload" href="Logo.png" as="image" media="(max-width: 768px)">
@@ -7378,7 +7756,7 @@
       <span class="close-modal">&times;</span>
       <h3>Coming Soon!</h3>
       <p>We're working hard to bring you our social media presence. In the meantime, sign up for our newsletter to stay updated!</p>
-      <a href="https://eepurl.com/jdPU6E" class="subscribe-button" target="_blank">Subscribe to Newsletter</a>
+      <a href="/newsletter.html" class="subscribe-button">Subscribe to Newsletter</a>
     </div>
   </div>
   <div class="animated-bg"></div>
@@ -7441,8 +7819,448 @@
   </div>
 
   <!-- Home Section -->
-  <!-- ✏️ PASTE YOUR YOUTUBE URL BELOW ONCE FILMED -->
   <script>window.VSL_YOUTUBE_URL = 'https://youtu.be/3ygHNgqRVJo';</script>
+
+  <!-- ===== Lumyx 2026 refresh: hero CTAs, positioning, growth method, services ===== -->
+  <style id="lumyx-2026-refresh">
+    /* --- Hero subheadline + CTAs --- */
+    #home .hero-subheadline {
+      max-width: 820px;
+      margin: 12px auto 0;
+      font-size: clamp(0.95rem, 1.15vw, 1.12rem);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+      font-weight: 500;
+      text-align: center;
+    }
+    #home .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 20px;
+    }
+    #home .hero-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: #14110a;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      box-shadow: 0 14px 34px rgba(255,165,0,0.32);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+    }
+    #home .hero-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(255,165,0,0.45);
+      color: #14110a;
+    }
+    #home .hero-cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.24);
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+    #home .hero-cta-secondary:hover {
+      border-color: rgba(255,165,0,0.6);
+      background: rgba(255,165,0,0.12);
+      transform: translateY(-2px);
+    }
+    #home .hero-cta-play {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-orange);
+      color: #14110a;
+      font-size: 0.62rem;
+      padding-left: 2px;
+    }
+    #home .vsl-microcopy {
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.7);
+      margin: 0 auto;
+      max-width: 640px;
+    }
+
+    /* --- Positioning cards (Most Agencies Stop Too Early) --- */
+    .positioning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .positioning-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 30px 28px;
+      text-align: left;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .positioning-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,165,0,0.45);
+      box-shadow: 0 22px 48px rgba(0,0,0,0.4);
+    }
+    .positioning-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+      color: #14110a;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 26px rgba(255,165,0,0.28);
+    }
+    .positioning-card h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 10px;
+    }
+    .positioning-card p {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.74);
+      margin: 0;
+    }
+
+    /* --- Growth Method steps --- */
+    .growth-steps {
+      list-style: none;
+      counter-reset: none;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0;
+      position: relative;
+    }
+    .growth-step {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 26px 20px 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .growth-step:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,165,0,0.45);
+      box-shadow: 0 20px 44px rgba(0,0,0,0.4);
+    }
+    .growth-step-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--primary-orange);
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+    .growth-step-body h3 {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .growth-step-body p {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.72);
+      margin: 0;
+    }
+
+    /* --- Services: all 5 cards in one compact row --- */
+    #services .services-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+      gap: 16px;
+      max-width: 1340px;
+      align-items: stretch;
+    }
+    #services .modern-service-card {
+      min-width: 0;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      transform: none;
+      border-radius: 16px;
+    }
+    #services .modern-service-card.featured { transform: none; }
+    #services .modern-service-card:hover,
+    #services .modern-service-card.featured:hover { transform: translateY(-8px); }
+    #services .service-number { top: 14px; right: 14px; width: 32px; height: 32px; font-size: 0.95rem; }
+    #services .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+    #services .service-icon i { font-size: 1.2rem; }
+    #services .modern-service-card h3 {
+      font-size: 1.04rem;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+    #services .service-desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    #services .service-results { margin: 0 0 14px; }
+    #services .service-results .metric-number { font-size: 1.6rem; }
+    #services .service-features { margin-bottom: 16px; }
+    #services .service-features li { font-size: 0.8rem; margin-bottom: 7px; }
+    #services .service-cta { margin-top: auto; }
+    #services .service-cta .service-btn,
+    #services .service-cta .service-btn-secondary { font-size: 0.8rem; padding: 10px 12px; width: 100%; text-align: center; }
+    #services .featured-badge { font-size: 0.66rem; padding: 6px 14px; }
+
+    /* --- Responsive --- */
+    @media (max-width: 1180px) {
+      #services .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; max-width: 880px; }
+    }
+    @media (max-width: 900px) {
+      .positioning-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .growth-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; }
+    }
+    @media (max-width: 760px) {
+      #services .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; max-width: 560px; }
+    }
+    @media (max-width: 520px) {
+      .growth-steps { grid-template-columns: 1fr; max-width: 380px; }
+      #services .services-grid { grid-template-columns: 1fr !important; max-width: 380px; }
+      #home .hero-cta-row { flex-direction: column; }
+      #home .hero-cta-primary,
+      #home .hero-cta-secondary { width: 100%; justify-content: center; }
+    }
+
+    /* --- Polish positioning + growth-method sections --- */
+    .positioning-section::before,
+    .positioning-section::after,
+    .growth-method-section::before,
+    .growth-method-section::after { content: none !important; display: none !important; }
+
+    .positioning-section,
+    .growth-method-section {
+      background:
+        radial-gradient(circle at 50% -8%, rgba(255,165,0,0.06), transparent 42%),
+        linear-gradient(180deg, #0b0e1a 0%, #0d1120 60%, #0b0e18 100%) !important;
+      padding: 60px 5% 80px !important;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .positioning-section .section-header,
+    .growth-method-section .section-header { margin-bottom: 44px !important; }
+
+    /* Trim excess bottom padding on the Growth Audit calendar box */
+    .booking-content .calendar-container { padding-bottom: 16px !important; }
+
+    /* A2P SMS consent checkboxes (two: non-marketing + marketing) */
+    .hf-sms-consent {
+      margin: 8px 0 6px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 9px;
+    }
+    .hf-sms-label {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+    .hf-sms-label + .hf-sms-label {
+      margin-top: 9px;
+      padding-top: 9px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .hf-sms-label input[type="checkbox"] {
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 15px;
+      height: 15px;
+      accent-color: #ff9f2f;
+      cursor: pointer;
+    }
+    .hf-sms-text {
+      font-size: 0.72rem;
+      color: #555e6d;
+      line-height: 1.45;
+    }
+    .hf-sms-legal {
+      margin: 9px 0 0 !important;
+      font-size: 0.72rem !important;
+      color: #555e6d !important;
+      line-height: 1.45 !important;
+      font-weight: 400 !important;
+    }
+    .hf-sms-text a,
+    .hf-sms-legal a {
+      color: #d97706;
+      text-decoration: underline;
+    }
+    .booking-guarantee {
+      margin: 20px 0 8px 0 !important;
+      padding: 18px 20px !important;
+      border-radius: 13px !important;
+    }
+    .booking-guarantee .guarantee-badge {
+      margin-bottom: 6px !important;
+      font-size: 0.98rem !important;
+    }
+    .booking-guarantee p {
+      font-size: 0.9rem !important;
+      line-height: 1.35 !important;
+    }
+
+    /* GoHighLevel booking widget: fixed-size box, scroll the widget inside it
+       (same behaviour as the old Calendly embed). */
+    .ghl-widget-shell {
+      width: 100%;
+      border-radius: 18px;
+      padding: 1px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.24), rgba(255,255,255,0.07));
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+      overflow: hidden;
+    }
+    .ghl-widget-shell::before {
+      content: "";
+      display: block;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+    #calendly-container,
+    .scheduling-section #calendly-container {
+      height: 820px !important;
+      max-height: 88vh;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+      background: #ffffff !important;
+      border-radius: 16px;
+    }
+    #calendly-container iframe {
+      display: block;
+      width: 100% !important;
+      border: none;
+      background: #ffffff;
+    }
+    #calendly-container::-webkit-scrollbar { width: 8px; }
+    #calendly-container::-webkit-scrollbar-track { background: rgba(7, 11, 22, 0.28); }
+    #calendly-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.32);
+      border-radius: 10px;
+    }
+    #calendly-container { scrollbar-width: thin; }
+    /* Keep the section header/badge clear of the fixed nav on anchor jumps */
+    .booking-section,
+    #booking-section,
+    #calendly-container { scroll-margin-top: 100px; }
+    /* Leave breathing room for GHL chat launcher in lower-right corner */
+    body { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+
+    /* Trim the oversized booking padding so the whole card (incl. the green
+       guarantee box) fits on one screen, and align both columns to the top. */
+    @media (min-width: 769px) {
+      .booking-content {
+        padding-top: 90px !important;
+        padding-bottom: 72px !important;
+        align-items: flex-start !important;
+      }
+    }
+    @media (max-width: 768px) {
+      #calendly-container,
+      .scheduling-section #calendly-container {
+        height: 500px !important;
+        max-height: 72vh;
+      }
+    }
+
+    /* Refined editorial kicker instead of filled bubble */
+    .positioning-section .ps-eyebrow,
+    .growth-method-section .ps-eyebrow {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin-bottom: 16px !important;
+      color: #ffb642 !important;
+      font-size: 0.76rem !important;
+      letter-spacing: 0.24em !important;
+      gap: 9px !important;
+    }
+    .positioning-section .ps-eyebrow i,
+    .growth-method-section .ps-eyebrow i { font-size: 0.8rem; }
+
+    /* --- Polished icon chips for the Growth Audit feature list (site-wide upgrade) --- */
+    .booking-feature i {
+      width: 46px !important;
+      height: 46px !important;
+      min-width: 46px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 13px !important;
+      background: linear-gradient(135deg, rgba(255,165,0,0.20), rgba(255,140,0,0.07)) !important;
+      border: 1px solid rgba(255,165,0,0.32) !important;
+      color: #ffb642 !important;
+      font-size: 1.1rem !important;
+      margin-top: 2px !important;
+    }
+    .booking-guarantee .guarantee-badge i {
+      color: #ffb642;
+    }
+
+    /* --- Compact the contact ("Ready to Scale") section --- */
+    .modern-contact-section .contact-background { padding: 60px 5% 52px !important; }
+    .modern-contact-section .contact-header { margin-bottom: 38px !important; }
+    .modern-contact-section .contact-header h2 { font-size: clamp(1.8rem, 3vw, 2.4rem) !important; margin-bottom: 12px !important; }
+    .modern-contact-section .contact-header p { font-size: 1.02rem !important; }
+    .modern-contact-section .contact-content { gap: 34px !important; }
+    .modern-contact-section .contact-info-grid { gap: 20px !important; }
+    .modern-contact-section .contact-info-item { padding: 26px 24px !important; border-radius: 16px !important; }
+    .modern-contact-section .contact-icon { width: 58px !important; height: 58px !important; margin: 0 auto 16px !important; }
+    .modern-contact-section .contact-icon i { font-size: 1.45rem !important; }
+    .modern-contact-section .contact-details h4 { font-size: 1.1rem !important; margin-bottom: 6px !important; }
+    .modern-contact-section .contact-details p { font-size: 1rem !important; margin-bottom: 5px !important; }
+    .modern-contact-section .contact-cta-section { padding: 34px 28px !important; border-radius: 18px !important; }
+    .modern-contact-section .cta-content h3 { font-size: 1.5rem !important; margin-bottom: 12px !important; }
+    .modern-contact-section .cta-content p { font-size: 1.02rem !important; margin-bottom: 22px !important; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+    /* Raise hero content and keep it on one screen on desktop */
+    @media (min-width: 961px) {
+      #home { padding-top: 104px !important; padding-bottom: 16px !important; align-items: flex-start !important; }
+      #home .hero-content { gap: 12px !important; }
+      #home .hero-top { margin-top: 0 !important; }
+      #home .hero-badge { margin-bottom: 10px !important; }
+      #home .hero-form-card { min-height: 0 !important; padding-top: 26px !important; padding-bottom: 18px !important; }
+    }
+  </style>
+
   <section id="home" class="hero-load-animation">
     <div class="floating-elements">
       <div class="floating-element" style="top: 20%; left: 10%;"></div>
@@ -7450,13 +8268,14 @@
     </div>
     <div class="hero-content">
 
-      <!-- Row 1: Badge + Single-line headline -->
+      <!-- Row 1: Badge + headline + subheadline + CTAs -->
       <div class="hero-top">
         <div class="hero-badge">
-          <span class="badge-text">Performance Marketing &amp; Consulting Services</span>
+          <span class="badge-text">Performance Marketing Agency</span>
         </div>
-        <h1 class="hero-headline">Expert Marketing Consulting + <span class="glow-accent">Proven Implementation</span> = Enhanced Profits</h1>
+        <h1 class="hero-headline">Where Strategy, Media, and Execution <span class="glow-accent">Turn Into Revenue</span></h1>
         <span class="hero-headline-line" aria-hidden="true"></span>
+        <p class="hero-subheadline">We help businesses attract better prospects, convert more opportunities, and follow up faster through paid media, funnel optimization, CRM automation, and practical AI integrations.</p>
       </div>
 
       <!-- Row 2: Two columns -->
@@ -7472,22 +8291,14 @@
                 <div class="vsl-play-ring">
                   <i class="fas fa-play"></i>
                 </div>
-                <p class="vsl-coming-label">Watch: How We 3X Client Revenue</p>
-                <p class="vsl-coming-sub">Your strategy session walkthrough drops here — film coming soon</p>
+                <p class="vsl-coming-label">Watch the Lumyx Growth Process</p>
+                <p class="vsl-coming-sub">Press play to see how it all fits together</p>
               </div>
             </div>
           </div>
 
-          <!-- What we do -->
-          <div class="hero-explainer">
-            <p>We build growth systems that turn attention into booked calls and revenue. From ad strategy to automation, you get one expert team executing end-to-end.</p>
-            <ul class="hero-explainer-list">
-              <li>Paid media strategy and campaign execution</li>
-              <li>AI follow-up and nuture workflows that recover missed leads</li>
-              <li>Conversion optimization across your full funnel</li>
-            </ul>
-            <a href="#services" class="hero-learn-link">See what we do <i class="fas fa-arrow-right"></i></a>
-          </div>
+          <!-- VSL microcopy -->
+          <p class="vsl-microcopy">See how Lumyx connects strategy, paid media, funnels, follow-up, and AI-enhanced execution into one growth process.</p>
 
           <!-- Social proof -->
           <div class="vsl-social-proof">
@@ -7495,11 +8306,19 @@
               <img src="images/testimonials/alex.svg" alt="Client Alex" loading="lazy">
               <img src="images/testimonials/maria.svg" alt="Client Maria" loading="lazy">
               <img src="images/testimonials/james.svg" alt="Client James" loading="lazy">
-              <span class="proof-text">Joined by 25+ growing businesses</span>
+              <span class="proof-text">Trusted by 20+ growing businesses</span>
               <span class="proof-sep">|</span>
-              <span class="proof-chip"><i class="fas fa-star"></i> 4.9/5 Rating</span>
-              <span class="proof-chip"><i class="fas fa-shield-alt"></i> Satisfaction Guaranteed</span>
+              <span class="proof-chip"><i class="fas fa-star"></i> 4.8/5 Rating</span>
+              <span class="proof-chip"><i class="fas fa-shield-alt"></i> 98% Client Retention</span>
             </div>
+          </div>
+
+          <!-- CTAs under the VSL column -->
+          <div class="hero-cta-row">
+            <a href="#booking-section" class="hero-cta-primary" data-scroll-target="#calendly-container">Get My Free Growth Audit <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <button type="button" class="hero-cta-secondary" id="hero-watch-vsl">
+              <span class="hero-cta-play"><i class="fas fa-play" aria-hidden="true"></i></span> Watch the VSL
+            </button>
           </div>
 
         </div><!-- end vsl col -->
@@ -7508,9 +8327,9 @@
         <div class="hero-form-col">
           <div class="hero-form-card">
             <div class="form-card-header">
-              <p class="form-eyebrow">Free 30-Minute Session</p>
-              <h3>Book Your <span class="title-accent">Growth</span> Strategy Call</h3>
-              <p class="form-subheading">Tell us where you want to grow, and we’ll map the next best step within 24 hours.</p>
+              <span class="form-card-eyebrow"><i class="fas fa-bolt"></i> Free Growth Audit</span>
+              <h3>Get My <span>Free Growth Audit</span></h3>
+              <p class="form-subheading"><strong>A clear breakdown</strong> of what is working, what is leaking revenue, and what to fix first across your marketing and follow-up.</p>
             </div>
             <form id="hero-lead-form" novalidate>
               <div class="hf-row">
@@ -7559,37 +8378,50 @@
                   <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
                 </div>
               </div>
+              <!-- A2P SMS Consent — two separate checkboxes (non-marketing + marketing), unchecked + optional per GHL/CTIA 10DLC -->
+              <div class="hf-sms-consent">
+                <label class="hf-sms-label">
+                  <input type="checkbox" id="hf-sms-transactional" name="smsTransactional" value="yes">
+                  <span class="hf-sms-text">I consent to receive non-marketing text messages from Lumyx Consulting about appointment reminders, scheduling, and service updates. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+                </label>
+                <label class="hf-sms-label">
+                  <input type="checkbox" id="hf-sms-marketing" name="smsMarketing" value="yes">
+                  <span class="hf-sms-text">I consent to receive marketing text messages, about special offers, discounts, and service updates, from Lumyx Consulting at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+                </label>
+                <p class="hf-sms-legal">Consent is not a condition of purchase and is not required to submit this form. See our <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> &amp; <a href="/terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a>.</p>
+              </div>
               <div class="hf-error" id="hf-error" role="alert"></div>
               <button type="submit" class="hf-submit" id="hf-submit">
-                <span class="hf-btn-text">Get My Free Strategy Call &rarr;</span>
+                <span class="hf-btn-text">Book My Free Growth Audit &rarr;</span>
                 <span class="hf-btn-loading" aria-hidden="true">
                   <i class="fas fa-circle-notch fa-spin"></i> Sending...
                 </span>
               </button>
-              <p class="hf-disclaimer">Private review. No spam. No pressure.</p>
+              <p class="hf-disclaimer">No pressure. Just a clear breakdown of what is working, what is leaking revenue, and what to fix first.</p>
             </form>
           </div>
 
-          <!-- Stats moved under form box -->
+          <!-- Proof strip under form box -->
           <div class="hero-stats hero-metrics">
             <div class="stat-item">
-              <div class="stat-number">1.8X</div>
-              <div class="stat-label">Avg. Revenue Increase</div>
+              <div class="stat-number">$2M+</div>
+              <div class="stat-label">Generated for Clients</div>
             </div>
             <div class="stat-item">
-              <div class="stat-number">90</div>
-              <div class="stat-label">Days to Results</div>
+              <div class="stat-number">4.8x</div>
+              <div class="stat-label">Avg. ROAS</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Client Retention</div>
             </div>
             <div class="stat-item">
               <div class="stat-number">20+</div>
               <div class="stat-label">Success Stories</div>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">$2M+</div>
-              <div class="stat-label">Generated for Clients</div>
-            </div>
           </div>
         </div><!-- end form col -->
+
 
       </div><!-- end hero-grid -->
 
@@ -7600,56 +8432,82 @@
     </div>
   </section>
 
-    <!-- Problem/Solution Section -->
-    <section id="about" class="problem-solution-section animate-on-scroll section-reveal">
+    <!-- Positioning Section -->
+    <section id="about" class="problem-solution-section positioning-section animate-on-scroll section-reveal">
       <div class="problem-solution-content">
-        <div class="section-header">
-          <h2>Strategy Without Execution is Worthless</h2>
-          <p class="section-subtitle">Most consultants give you a plan and disappear. We consult on strategy, then stay to implement and optimize until you see results.</p>
-            </div>
+        <div class="section-header ps-reveal">
+          <span class="ps-eyebrow"><i class="fas fa-bolt"></i> Why Lumyx is different</span>
+          <h2>Most Agencies Stop Too Early</h2>
+          <p class="section-subtitle">Traffic alone does not grow a business. Leads still need to be captured, qualified, followed up with, nurtured, and converted. Lumyx focuses on the full revenue path, combining strategy, paid media, landing pages, CRM workflows, and AI-supported execution to help more opportunities turn into real business.</p>
+        </div>
 
-        <div class="problem-solution-grid">
-          <div class="problem-side">
-            <h3 class="problem-heading">What Other Consultants Do</h3>
-            <ul class="problem-list">
-              <li>Create fancy decks then hand off and leave</li>
-              <li>Use generic templates for every client</li>
-              <li>Charge high fees with no accountability</li>
-              <li>Focus on theory, not implementation</li>
-              <li>Disappear after the initial engagement</li>
-            </ul>
-            </div>
-
-          <div class="solution-side">
-            <h3 class="solution-heading">The Lumyx Consulting Approach</h3>
-            <ul class="solution-list">
-              <li>Develop custom strategy then execute it with you</li>
-              <li>Tailor solutions to your specific business needs</li>
-              <li>Guarantee measurable ROI within 90 days</li>
-              <li>Hands-on implementation of ads & AI workflows</li>
-              <li>Stay engaged until profits are enhanced</li>
-            </ul>
-            </div>
+        <div class="positioning-grid ps-reveal">
+          <div class="positioning-card">
+            <span class="positioning-icon"><i class="fas fa-bullseye"></i></span>
+            <h3>Better Demand</h3>
+            <p>Campaigns built to attract the right audience, not just generate cheap clicks.</p>
           </div>
-
-        <div class="proof-section">
-          <h3>Here's Proof We Walk the Talk</h3>
-          <div class="results-showcase">
-            <div class="result-item">
-              <div class="result-number">312%</div>
-              <div class="result-desc">Average revenue increase for our clients</div>
-            </div>
-            <div class="result-item">
-              <div class="result-number">$2M+</div>
-              <div class="result-desc">Generated in client revenue</div>
-            </div>
-            <div class="result-item">
-              <div class="result-number">98%</div>
-              <div class="result-desc">Client retention rate</div>
-            </div>
+          <div class="positioning-card">
+            <span class="positioning-icon"><i class="fas fa-filter"></i></span>
+            <h3>Cleaner Conversion</h3>
+            <p>Funnels and landing pages designed to move visitors toward action with less friction.</p>
+          </div>
+          <div class="positioning-card">
+            <span class="positioning-icon"><i class="fas fa-bolt"></i></span>
+            <h3>Faster Follow-Up</h3>
+            <p>Automation and AI-enhanced workflows that help teams respond faster, nurture better, and miss fewer opportunities.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- The Lumyx Growth Method -->
+    <section id="growth-method" class="problem-solution-section growth-method-section animate-on-scroll section-reveal">
+      <div class="problem-solution-content">
+        <div class="section-header ps-reveal">
+          <span class="ps-eyebrow"><i class="fas fa-route"></i> How Lumyx works</span>
+          <h2>The Lumyx Growth Method</h2>
+          <p class="section-subtitle">A clear, repeatable process that connects strategy, paid media, funnels, and follow-up into one system built for revenue.</p>
         </div>
+
+        <ol class="growth-steps ps-reveal">
+          <li class="growth-step">
+            <div class="growth-step-num">01</div>
+            <div class="growth-step-body">
+              <h3>Diagnose</h3>
+              <p>We audit your current marketing, website, funnel, and follow-up process to find the biggest growth constraints.</p>
+            </div>
+          </li>
+          <li class="growth-step">
+            <div class="growth-step-num">02</div>
+            <div class="growth-step-body">
+              <h3>Build</h3>
+              <p>We create the campaign structure, landing pages, tracking, automations, and conversion assets needed to support growth.</p>
+            </div>
+          </li>
+          <li class="growth-step">
+            <div class="growth-step-num">03</div>
+            <div class="growth-step-body">
+              <h3>Launch</h3>
+              <p>We execute across the channels and systems that make the most sense for your business.</p>
+            </div>
+          </li>
+          <li class="growth-step">
+            <div class="growth-step-num">04</div>
+            <div class="growth-step-body">
+              <h3>Optimize</h3>
+              <p>We use performance data to improve creative, targeting, funnel flow, follow-up, and conversion rates.</p>
+            </div>
+          </li>
+          <li class="growth-step">
+            <div class="growth-step-num">05</div>
+            <div class="growth-step-body">
+              <h3>Scale</h3>
+              <p>Once the system is working, we increase volume while protecting efficiency and lead quality.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
 
 
@@ -7660,41 +8518,41 @@
         <div class="booking-info">
           <div class="booking-header">
             <div class="booking-badge">
-              <span class="urgency-text">LIMITED TIME: Free Strategy Session</span>
+              <span class="urgency-text">Free Growth Audit</span>
             </div>
-            <h2>Get Your Free $497 Strategy Call</h2>
-            <p class="booking-subtitle">In just 30 minutes, we'll show you exactly how to scale your business to 7-figures. No pitch, just value.</p>
+            <h2>Get a Free Growth Audit</h2>
+            <p class="booking-subtitle">We'll review your current marketing, website, funnel, and follow-up process to identify where leads are dropping off and where Lumyx can help create more qualified opportunities.</p>
             </div>
 
           <div class="value-proposition">
-            <h3>What You'll Get On This Call:</h3>
+            <h3>What Your Growth Audit Covers:</h3>
             <div class="booking-features">
               <div class="booking-feature">
-              <i class="fas fa-chart-line"></i>
+              <i class="fas fa-bullseye"></i>
                 <div class="feature-text">
-                  <span class="feature-title">Revenue Roadmap</span>
-                  <span class="feature-desc">Custom strategy to 3x your revenue in 90 days</span>
+                  <span class="feature-title">Demand &amp; Paid Media</span>
+                  <span class="feature-desc">Where your campaigns attract the right prospects, and where spend is being wasted</span>
             </div>
               </div>
               <div class="booking-feature">
-                <i class="fas fa-bullseye"></i>
+                <i class="fas fa-filter"></i>
                 <div class="feature-text">
-                  <span class="feature-title">Competitor Analysis</span>
-                  <span class="feature-desc">See exactly what your competitors are doing wrong</span>
+                  <span class="feature-title">Funnel &amp; Conversion</span>
+                  <span class="feature-desc">The points in your funnel and landing pages where visitors drop off</span>
                 </div>
               </div>
               <div class="booking-feature">
-                <i class="fas fa-rocket"></i>
+                <i class="fas fa-robot"></i>
                 <div class="feature-text">
-                  <span class="feature-title">Quick Wins</span>
-                  <span class="feature-desc">3 strategies you can implement today for instant results</span>
+                  <span class="feature-title">Follow-Up &amp; CRM</span>
+                  <span class="feature-desc">How fast leads are handled and where follow-up is leaking revenue</span>
                 </div>
               </div>
               <div class="booking-feature">
-                <i class="fas fa-gift"></i>
+                <i class="fas fa-list-check"></i>
                 <div class="feature-text">
-                  <span class="feature-title">Bonus Resources</span>
-                  <span class="feature-desc">Free tools & templates worth $1,497</span>
+                  <span class="feature-title">Priority Fix List</span>
+                  <span class="feature-desc">A clear breakdown of what is working and what to fix first</span>
                 </div>
               </div>
             </div>
@@ -7702,22 +8560,28 @@
 
           <div class="booking-guarantee">
             <div class="guarantee-badge">
-              <i class="fas fa-trophy"></i>
-              <span>Proven Results Discussion</span>
+              <i class="fas fa-shield-alt"></i>
+              <span>No pressure, no obligation</span>
             </div>
-            <p>We'll show you exactly how we've helped similar businesses achieve 200%+ growth and discuss how we can replicate these results for your business.</p>
+            <p>This is a working session, not a pitch. You'll leave with a clear view of what is working, what is leaking revenue, and what to fix first.</p>
             </div>
           </div>
           
         <div class="calendar-container">
           <div class="calendar-header">
-            <h3>Choose Your Time</h3>
+            <h3>Book My Free Growth Audit</h3>
             <p>Select a time that works best for you</p>
         </div>
-          <div id="calendly-container" style="margin-bottom: 0;"></div>
+          <!-- GoHighLevel (LeadConnector) booking widget -->
+          <div class="ghl-widget-shell">
+            <div id="calendly-container" style="margin-bottom: 0;">
+              <iframe src="https://api.leadconnectorhq.com/widget/booking/d0prMwxo4qsyqutYVpCL" style="width: 100%; border: none;" scrolling="no" id="d0prMwxo4qsyqutYVpCL_1781470766128" title="Book your free growth audit"></iframe>
+            </div>
+          </div>
+          <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
           <div class="booking-urgency" style="margin-top: 12px; margin-bottom: 0;">
-            <p><i class="fas fa-clock"></i> Only 5 spots available this week</p>
+            <p><i class="fas fa-clock"></i> Limited audit slots open each week</p>
       </div>
         </div>
       </div>
@@ -7726,103 +8590,113 @@
     <!-- Services Section -->
     <section class="modern-services-section" id="services">
         <div class="services-header">
-          <h2>Strategic Marketing Consulting & Implementation</h2>
-          <p class="services-subtitle">We consult with businesses on marketing strategy, then implement proven systems combining performance advertising, SEO, and AI workflows to enhance profits and scale operations. <a href="/blog.html" style="color: #00d4ff;">Read our latest insights</a> on business growth strategies.</p>
+          <span class="ps-eyebrow"><i class="fas fa-layer-group"></i> What we do</span>
+          <h2>Built Around Outcomes, Not Deliverables</h2>
+          <p class="services-subtitle">We connect strategy, paid media, funnels, follow-up, and practical AI into one revenue path. <a href="/blog.html" style="color: #00d4ff;">Read our latest insights</a> on performance marketing and growth.</p>
         </div>
         
         <div class="services-grid">
-            <div class="modern-service-card">
+            <div class="modern-service-card featured">
+                <div class="featured-badge">Most Popular</div>
                 <div class="service-number">01</div>
           <div class="service-icon">
-            <i class="fas fa-chart-line"></i>
+            <i class="fas fa-bullseye"></i>
           </div>
-                <h3><a href="seo-services.html" style="color: inherit; text-decoration: none;">SEO & Product Optimization</a></h3>
-                <p class="service-desc">Complete <a href="seo-services.html" style="color: #00d4ff;">SEO for online stores</a> including product page optimization, category structure, and technical SEO. We help Shopify and WooCommerce stores rank higher and drive organic sales.</p>
-                
-                <div class="service-results">
-                    <div class="result-metric">
-                        <span class="metric-number">285%</span>
-                        <span class="metric-label">Organic Traffic Increase</span>
-                    </div>
-                </div>
+                <h3><a href="ppc-management.html" style="color: inherit; text-decoration: none;">Paid Media and Campaign Strategy</a></h3>
+                <p class="service-desc">Launch and optimize campaigns designed to generate qualified opportunities, not vanity metrics.</p>
 
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i>Product Page SEO Optimization</li>
-                    <li><i class="fas fa-check"></i>Category & Collection Page SEO</li>
-                    <li><i class="fas fa-check"></i>Technical SEO for Ecommerce</li>
-                    <li><i class="fas fa-check"></i>Schema Markup for Products</li>
-                    <li><i class="fas fa-check"></i>Shopify & WooCommerce SEO</li>
-                    <li><i class="fas fa-check"></i>Local SEO for Online Stores</li>
+                    <li><i class="fas fa-check"></i>Google &amp; Meta campaign management</li>
+                    <li><i class="fas fa-check"></i>Audience and offer strategy</li>
+                    <li><i class="fas fa-check"></i>Creative testing and budget pacing</li>
             </ul>
 
                 <div class="service-cta">
-                    <a href="#booking-section" class="service-btn primary" data-scroll-target="#calendly-container">Scale My Ads</a>
+                    <a href="ppc-management.html" class="service-btn">Learn More About PPC</a>
             </div>
           </div>
 
-            <div class="modern-service-card featured">
-                <div class="featured-badge">Most Popular</div>
+            <div class="modern-service-card">
                 <div class="service-number">02</div>
           <div class="service-icon">
-                    <i class="fas fa-rocket"></i>
+                    <i class="fas fa-filter"></i>
           </div>
-                <h3><a href="ppc-management.html" style="color: inherit; text-decoration: none;">PPC Management - Google Ads & Shopping Campaigns</a></h3>
-                <p class="service-desc">Specialized <a href="ppc-management.html" style="color: #00d4ff;">PPC management</a> for online stores including Google Shopping, Facebook/Instagram ads, and retargeting campaigns. We optimize for ROAS with advanced product feed management and dynamic remarketing.</p>
-                
-                <div class="service-results">
-                    <div class="result-metric">
-                        <span class="metric-number">4.8x</span>
-                        <span class="metric-label">Avg ROAS</span>
-                    </div>
-                </div>
+                <h3>Funnel and Landing Page Optimization</h3>
+                <p class="service-desc">Improve the path from visitor to lead with pages built around clarity, trust, and conversion.</p>
 
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i>Google Shopping Campaign Management</li>
-                    <li><i class="fas fa-check"></i>Facebook & Instagram Ads for Ecommerce</li>
-                    <li><i class="fas fa-check"></i>Product Feed Optimization</li>
-                    <li><i class="fas fa-check"></i>Dynamic Remarketing & Retargeting</li>
-                    <li><i class="fas fa-check"></i>Shopify Plus Integration & Setup</li>
-                    <li><i class="fas fa-check"></i>Multi-Platform Campaign Management</li>
+                    <li><i class="fas fa-check"></i>Landing page design and copy</li>
+                    <li><i class="fas fa-check"></i>Funnel flow and friction removal</li>
+                    <li><i class="fas fa-check"></i><a href="seo-services.html" style="color: inherit; text-decoration: none;">Search visibility and on-page SEO</a></li>
             </ul>
 
-                <div class="service-cta" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                    <a href="ppc-management.html" class="service-btn">Learn More About PPC</a>
-                    <a href="#booking-section" class="service-btn-secondary" data-scroll-target="#calendly-container">Get Started</a>
-            </div>
+                <div class="service-cta">
+                    <a href="#booking-section" class="service-btn" data-scroll-target="#calendly-container">Get a Free Growth Audit</a>
           </div>
+        </div>
 
             <div class="modern-service-card">
                 <div class="service-number">03</div>
           <div class="service-icon">
                     <i class="fas fa-robot"></i>
           </div>
-                <h3><a href="ai-lead-generation.html" style="color: inherit; text-decoration: none;">AI Workflows & Intelligent Agents</a></h3>
-                <p class="service-desc">Custom <a href="ai-lead-generation.html" style="color: #00d4ff;">AI workflows and automation agents</a> that handle lead qualification, customer communication, and business operations 24/7. Scale your team's capacity without adding headcount.</p>
-                
-                <div class="service-results">
-                    <div class="result-metric">
-                        <span class="metric-number">10x</span>
-                        <span class="metric-label">Team Capacity Increase</span>
-                    </div>
-                </div>
+                <h3><a href="ai-lead-generation.html" style="color: inherit; text-decoration: none;">CRM, Automation, and Follow-Up</a></h3>
+                <p class="service-desc">Create cleaner systems for lead handling, nurturing, reminders, and pipeline visibility.</p>
 
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i>AI Lead Qualification & Booking Agents</li>
-                    <li><i class="fas fa-check"></i>Automated Customer Support Systems</li>
-                    <li><i class="fas fa-check"></i>Custom Workflow Automation</li>
-                    <li><i class="fas fa-check"></i>CRM Integration & Data Management</li>
+                    <li><i class="fas fa-check"></i>CRM setup and pipeline structure</li>
+                    <li><i class="fas fa-check"></i>Automated nurture and reminders</li>
+                    <li><i class="fas fa-check"></i>Lead routing and response speed</li>
+            </ul>
+
+                <div class="service-cta">
+                    <a href="ai-lead-generation.html" class="service-btn">Explore Follow-Up Systems</a>
+          </div>
+        </div>
+
+            <div class="modern-service-card">
+                <div class="service-number">04</div>
+          <div class="service-icon">
+                    <i class="fas fa-microchip"></i>
+          </div>
+                <h3><a href="ai-lead-generation.html" style="color: inherit; text-decoration: none;">AI Services and Integrations</a></h3>
+                <p class="service-desc">Use practical AI tools and workflows to support faster response times, better follow-up, and more efficient operations.</p>
+
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i>AI-enhanced lead qualification</li>
+                    <li><i class="fas fa-check"></i>Workflow and operations automation</li>
+                    <li><i class="fas fa-check"></i>Tool integration across your stack</li>
             </ul>
 
                 <div class="service-cta">
                     <a href="ai-lead-generation.html" class="service-btn">Explore AI Solutions</a>
           </div>
         </div>
+
+            <div class="modern-service-card">
+                <div class="service-number">05</div>
+          <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+          </div>
+                <h3>Conversion Strategy</h3>
+                <p class="service-desc">Identify where prospects drop off and improve the messaging, offer, and user journey that moves them forward.</p>
+
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i>Offer and messaging refinement</li>
+                    <li><i class="fas fa-check"></i>Drop-off analysis across the funnel</li>
+                    <li><i class="fas fa-check"></i>Data-driven testing and iteration</li>
+            </ul>
+
+                <div class="service-cta">
+                    <a href="#booking-section" class="service-btn" data-scroll-target="#calendly-container">Get a Free Growth Audit</a>
+          </div>
+        </div>
       </div>
         
         <div class="services-guarantee">
             <div class="guarantee-content">
-                <h3>The Lumyx Consulting Guarantee</h3>
-                <p>We're so confident in our strategic approach, if you don't see measurable improvements in your marketing ROI within 90 days, we'll refund every penny.</p>
+                <h3>How We Think About Results</h3>
+                <p>Results vary by business, offer, market, and execution. Our focus is building the marketing infrastructure and optimization process needed to improve performance over time.</p>
         </div>
       </div>
     </section>
@@ -7850,7 +8724,7 @@
         <div class="testimonials-container">
             <div class="testimonials-header">
       <h2>What Our Clients Say</h2>
-                <p class="testimonials-subtitle">Don't just take our word for it - hear from businesses we've scaled</p>
+                <p class="testimonials-subtitle">Real results from businesses we've helped attract, convert, and follow up with more qualified opportunities.</p>
             </div>
             <div class="modern-testimonial-grid">
                 <div class="modern-testimonial-item">
@@ -8038,10 +8912,10 @@
                     
                     <div class="contact-cta-section">
                         <div class="cta-content">
-                            <h3>Ready to Transform Your Business?</h3>
-                            <p>Schedule a free strategy call and discover how we can help you scale to 7-figures.</p>
-                            <a href="#booking-section" class="modern-cta-button">
-                                <span>Schedule Your Free Call</span>
+                            <h3>Ready to Find Where Revenue Is Leaking?</h3>
+                            <p>Book a free Growth Audit and get a clear breakdown of what is working, what is leaking revenue, and what to fix first.</p>
+                            <a href="#booking-section" class="modern-cta-button" data-scroll-target="#calendly-container">
+                                <span>Book My Free Growth Audit</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
           </div>
@@ -8073,6 +8947,8 @@
           <li><a href="#booking-section">Contact</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="/faq">FAQ</a></li>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms-of-service.html">Terms of Service</a></li>
           <li><a href="/sitemap.xml" target="_blank">Sitemap</a></li>
         </ul>
       </div>
@@ -8091,7 +8967,7 @@
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2026 Lumyx Consulting. All rights reserved.</p>
+      <p>&copy; 2026 Lumyx Consulting. All rights reserved. <a href="/privacy-policy.html" class="footer-cta-link">Privacy Policy</a> | <a href="/terms-of-service.html" class="footer-cta-link">Terms of Service</a></p>
       <div class="footer-cta">
         <span>Ready to scale? </span>
         <a href="#booking-section" class="footer-cta-link" data-scroll-target="#calendly-container">Book your free call →</a>
@@ -8100,18 +8976,10 @@
   </footer>
 
   <!-- Scripts - deferred to reduce render blocking -->
-  <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jQuery removed: no script on this page uses it. -->
   <script defer src="js/meta-pixel-events.js"></script>
   <script defer src="js/newsletter.js"></script>
   <script defer src="js/form-validation.js"></script>
-  <script defer src="js/form-fix.js"></script>
-  <script defer src="js/performance-optimization.js"></script>
-  
-  <!-- Conversion tracking - Performance optimized -->
-  <script defer src="js/conversion-tracking.js"></script>
-  
-  <!-- Enhanced contact form - Conversion optimized -->
-  <script defer src="js/enhanced-contact-form.js"></script>
   
   <!-- DISABLED - Initialize Portfolio -->
   <script>
@@ -8150,7 +9018,7 @@
     // Optimize star creation with a more efficient approach
     function createStars() {
       const starsContainer = document.querySelector('.stars-container');
-      const numberOfStars = 100; // Increased number of stars
+      const numberOfStars = 32;
       
       // Create stars in batches for better performance
       const batchSize = 20;
@@ -8213,9 +9081,8 @@
     `;
     document.head.appendChild(styleSheet);
 
-    // Initialize stars and recreate them on window resize
+    // Initialize stars once; recreating them during resize/devtools can stutter video playback.
     document.addEventListener('DOMContentLoaded', createStars);
-    window.addEventListener('resize', createStars);
 
     // Optimize scroll handling with throttling
     function throttle(func, limit) {
@@ -8244,9 +9111,6 @@
 
     // Mobile menu is handled in the DOMContentLoaded section below
 
-    // Initialize stars after DOM is loaded
-    document.addEventListener('DOMContentLoaded', createStars);
-
     // Optimize animations with Intersection Observer
     const observerOptions = {
       threshold: 0.1,
@@ -8269,10 +9133,12 @@
 
     // Initialize all animations and observers
     document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.classList.add('js-reveals');
+
       // Fade-in animation and section transitions
       const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px'
+        rootMargin: '0px 0px -8% 0px'
       };
 
       const observer = new IntersectionObserver((entries) => {
@@ -8284,7 +9150,7 @@
       }, observerOptions);
 
       // Observe all sections and fade-in elements
-      document.querySelectorAll('.fade-in, .services-section, .process-section, .team-section, .clients-section, .contact-section, .portfolio-section').forEach((element) => {
+      document.querySelectorAll('.fade-in, .services-section, .process-section, .team-section, .clients-section, .contact-section, .portfolio-section, .ps-reveal, .ps-card, .proof-metric').forEach((element) => {
         observer.observe(element);
       });
 
@@ -8365,6 +9231,8 @@
 
       // Scheduling functionality
       const dayGrid = document.querySelector('.day-grid');
+      // Legacy custom scheduler is replaced by Calendly; bail out if its markup is absent.
+      if (!dayGrid) return;
       const today = new Date();
       const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       
@@ -8754,27 +9622,19 @@
 
     // Initialize email list manager
     const emailListManager = new EmailListManager();
-
-    // Initialize EmailJS with config
-    (function() {
-      emailjs.init(config.emailjs.publicKey);
-    })();
   </script>
   <!-- Defer non-critical scripts for better performance -->
   <script>
-    // Load remaining scripts after critical rendering
+    // Load remaining scripts after critical rendering.
+    // (form-validation, form-fix, newsletter and meta-pixel are already loaded
+    //  via deferred <script> tags above, so we only load the rest here to avoid
+    //  duplicate downloads and "already declared" errors.)
     window.addEventListener('load', function() {
-      // Load animation and performance scripts after page load
       const deferredScripts = [
         'js/animations.js',
-        'js/performance-optimization.js',
-        'js/main.js',
-        'js/form-validation.js',
-        'js/form-fix.js',
-        'js/newsletter.js',
-        'js/meta-pixel-events.js'
+        'js/main.js'
       ];
-      
+
       deferredScripts.forEach(src => {
         const script = document.createElement('script');
         script.src = src;
