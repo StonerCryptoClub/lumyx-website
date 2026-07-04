@@ -208,12 +208,6 @@ html {
 
 .hero-content h1 {
   animation: fadeInUp 0.8s ease-out forwards;
-  background: linear-gradient(120deg, #ff6b6b, #4ecdc4, #45b7d1);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: gradientFlow 8s ease infinite;
 }
 
 .hero-content p {

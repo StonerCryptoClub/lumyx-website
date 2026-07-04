@@ -7685,37 +7685,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <style>
-    /* Font display optimization for mobile FCP */
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap; /* Critical for mobile FCP */
-      src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-      src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa25L7.woff2') format('woff2');
-    }
-    @font-face {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 700;
-      font-display: swap;
-      src: url('https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2JL7.woff2') format('woff2');
-    }
-  </style>
-  
-  <!-- Fallback font loading -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-  </noscript>
+  <!-- Inter font removed in Phase 1: it was downloaded but never applied
+       (body renders via the system-ui stack). Display uses Montserrat. -->
 
   <!-- Optimize Font Awesome loading for mobile -->
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
@@ -7736,6 +7707,75 @@
   <link rel="preload" href="Logo.png" as="image" media="(max-width: 768px)">
 
   <!-- Minimal critical CSS - only for performance, no layout changes -->
+
+  <!-- =========================================================
+       LUMYX DESIGN TOKENS (Phase 1) — single source of truth.
+       Placed last so it wins source-order ties. Legacy vars are
+       preserved at their exact prior values; new semantic tokens
+       are additive and used for consistency fixes only.
+       ========================================================= -->
+  <style id="lumyx-design-tokens">
+    :root {
+      /* Surface ramp (unified dark) */
+      --bg: #111114;
+      --surface: #17171c;
+      --surface-2: #1f1f26;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+
+      /* Ink ramp */
+      --ink: #ffffff;
+      --ink-muted: rgba(255, 255, 255, 0.72);
+      --ink-subtle: rgba(255, 255, 255, 0.55);
+
+      /* Accent (amber) — kept identical to legacy values */
+      --accent: #FFA500;
+      --accent-bright: #FFD700;
+      --accent-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+
+      /* Type system */
+      --font-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      /* Legacy aliases — unchanged values, now centralized */
+      --primary-orange: var(--accent);
+      --primary-orange-light: var(--accent-bright);
+      --text-light: var(--ink);
+    }
+
+    /* --- Fix: neutralize dead coral/teal gradient left on the hero H1.
+       It was overridden to white already; this removes the cruft cleanly. --- */
+    .hero-content h1,
+    #home .hero-headline {
+      background: none !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
+      -webkit-text-fill-color: var(--ink) !important;
+      color: var(--ink) !important;
+      animation: none !important;
+    }
+    #home .hero-headline .glow-accent {
+      -webkit-text-fill-color: var(--accent) !important;
+      color: var(--accent) !important;
+    }
+
+    /* --- Fix: gradient-text form header -> solid (removes banned pattern). --- */
+    .form-card-header h3 span {
+      background: none !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
+      -webkit-text-fill-color: var(--accent) !important;
+      color: var(--accent) !important;
+    }
+
+    /* --- Fix: unify the testimonials palette with the rest of the page
+       (was navy #1a1a2e -> #22333e, the lone drifted section). --- */
+    .modern-testimonials-section {
+      background:
+        radial-gradient(120% 90% at 50% 0%, rgba(255, 165, 0, 0.05) 0%, transparent 55%),
+        var(--bg) !important;
+    }
+  </style>
 </head>
 <body>
   <!-- Failsafe loader remover script has been removed -->
