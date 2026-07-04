@@ -109,7 +109,8 @@
   .featured-badge {
     padding: 6px 15px !important;
     font-size: 0.75rem !important;
-    top: 12px !important;
+    top: -14px !important;          /* straddle the card's top edge (ribbon), not overlap the icon */
+    white-space: nowrap !important; /* keep "Most Popular" on one line */
   }
 
   /* ===== SERVICES GUARANTEE - MORE COMPACT ===== */
