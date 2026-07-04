@@ -7775,6 +7775,45 @@
         radial-gradient(120% 90% at 50% 0%, rgba(255, 165, 0, 0.05) 0%, transparent 55%),
         var(--bg) !important;
     }
+
+    /* --- Fix: retint decorative quote glyph from off-palette blue to accent. --- */
+    .testimonial-quote::before,
+    .modern-testimonial-item .quote-mark {
+      color: rgba(255, 165, 0, 0.12) !important;
+    }
+
+    /* =========================================================
+       ADAPT (Phase 2): touch targets to WCAG minimums.
+       Primary controls -> 44x44 (AAA 2.5.5); text links -> 24px (AA 2.5.8).
+       ========================================================= */
+    .mobile-menu-btn,
+    .mobile-nav-close {
+      min-width: 44px !important;
+      min-height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .modern-filter-btn {
+      min-height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .view-project {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    /* Footer + nav text links: guarantee a >=24px tap height (AA). */
+    footer a,
+    .footer-links a,
+    .footer-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+    }
   </style>
 </head>
 <body>
