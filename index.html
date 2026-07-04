@@ -7786,11 +7786,12 @@
        ADAPT (Phase 2): touch targets to WCAG minimums.
        Primary controls -> 44x44 (AAA 2.5.5); text links -> 24px (AA 2.5.8).
        ========================================================= */
+    /* Sizing only — visibility stays controlled by main.css
+       (hidden >=993px, shown on mobile). Do NOT set display here. */
     .mobile-menu-btn,
     .mobile-nav-close {
       min-width: 44px !important;
       min-height: 44px !important;
-      display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
     }
