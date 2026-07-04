@@ -9,6 +9,43 @@
   --bg-light: #2a2a2a;
   --container-padding: 20px;
   --shadow-soft: 0 0 12px rgba(255, 165, 0, 0.15), 0 0 28px rgba(255, 165, 0, 0.08);
+
+  /* --- Lumyx design tokens (Phase 2) — shared across all pages ---
+     Semantic layer built on the legacy vars above (unchanged values).
+     Phases 3+ migrate hard-coded values onto these. */
+  --bg: #111114;
+  --surface: #17171c;
+  --surface-2: #1f1f26;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --ink: #ffffff;
+  --ink-muted: rgba(255, 255, 255, 0.72);
+  --ink-subtle: rgba(255, 255, 255, 0.55);
+  --accent: var(--primary-orange);
+  --accent-bright: var(--primary-orange-light);
+  --accent-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+  --font-display: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- Touch-target minimums, site-wide (WCAG 2.5.5 / 2.5.8) ---
+   Sizing only; visibility of the hamburger stays controlled by the
+   responsive rules below. Never set `display` on .mobile-menu-btn here. */
+.mobile-menu-btn,
+.mobile-nav-close,
+.modern-filter-btn {
+  min-height: 44px;
+}
+.mobile-menu-btn,
+.mobile-nav-close {
+  min-width: 44px;
+}
+footer a,
+.footer-links a,
+.footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
 }
 
 /* Reset & Base Styles */
