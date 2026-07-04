@@ -10,6 +10,11 @@ yarn.lock
 
 # Build output
 build/
+dist/
+.next/
+
+# Claude Code local tooling (skills, agents, launch config)
+.claude/
 
 # IDE and editor files
 .idea/
