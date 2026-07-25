@@ -1,5 +1,7 @@
 {
   "rewrites": [
+    { "source": "/v2", "destination": "/v2/index.html" },
+    { "source": "/v2/blog", "destination": "/v2/blog.html" },
     { "source": "/blog.html", "destination": "/blog.html" },
     { "source": "/mailchimp-form-custom.html", "destination": "/mailchimp-form-custom.html" },
     { "source": "/case-study.html", "destination": "/case-study.html" },

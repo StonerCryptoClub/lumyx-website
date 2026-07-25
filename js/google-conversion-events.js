@@ -1,15 +1,26 @@
 /**
- * Lumyx Google conversion events
+ * Lumyx Google conversion events + A/B test variant tracking
  *
  * Page views should stay as Google Ads/GA4 config calls only.
  * Lead conversions should fire only after a successful form submission or
  * confirmed booking signal.
+ *
+ * All events now include 'variant' parameter for A/B testing (v1 vs v2)
  */
 (function () {
   'use strict';
 
-  var GOOGLE_ADS_LEAD_SEND_TO = 'AW-17052600393/eRqMCNemk90bEInf5MBC';
+  var GOOGLE_ADS_LEAD_SEND_TO = 'AW-17852608393/5N5kCO_t3MocEInf5MBC';
   var SESSION_DEDUPE_KEY = 'lumyx_google_lead_conversion_fired';
+
+  // Detect which variant user is viewing (v1 = current, v2 = new)
+  function getVariant() {
+    const pathname = window.location.pathname;
+    if (pathname.startsWith('/v2')) {
+      return 'v2'; // New design version
+    }
+    return 'v1'; // Original live version
+  }
 
   function safeSessionGet(key) {
     try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
@@ -32,6 +43,7 @@
     var details = metadata || {};
     var conversionSource = source || 'lead';
     var transactionId = details.transaction_id || details.eventId || details.email || '';
+    var variant = getVariant();
 
     if (typeof window.gtag !== 'function') return false;
 
@@ -39,7 +51,8 @@
       event_category: conversionSource === 'booking' ? 'booking' : 'lead_form',
       event_label: details.event_label || details.service || conversionSource,
       source_channel: details.source_channel || getAttributionChannel(),
-      form_location: details.form_location || window.location.pathname
+      form_location: details.form_location || window.location.pathname,
+      variant: variant
     });
 
     // Avoid counting the same visitor twice if they submit the form and book
@@ -49,7 +62,8 @@
     safeSessionSet(SESSION_DEDUPE_KEY, String(Date.now()));
 
     var conversionPayload = {
-      send_to: GOOGLE_ADS_LEAD_SEND_TO
+      send_to: GOOGLE_ADS_LEAD_SEND_TO,
+      variant: variant
     };
 
     if (transactionId) {
@@ -59,4 +73,6 @@
     window.gtag('event', 'conversion', conversionPayload);
     return true;
   };
+
+  console.log('A/B Variant:', getVariant());
 })();
