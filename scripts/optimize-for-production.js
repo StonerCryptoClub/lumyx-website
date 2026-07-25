@@ -141,12 +141,61 @@ function minifyJavaScript() {
         // Simple minification: remove comments and extra whitespace
         content = content
             .replace(/\/\*[\s\S]*?\*\//g, '') // Remove block comments
-            .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+            .replace(/\/\/.*$/gm, stripJavaScriptLineComments) // Remove line comments without touching URL strings
+            // Preserve newlines so any remaining line comments cannot swallow
+            // following code, while still compacting horizontal whitespace.
+            .replace(/[ \t\r\f\v]+/g, ' ')
+            .split('\n')
+            .map(line => line.trim())
+            .filter(Boolean)
+            .join('\n')
             .trim();
         
         fs.writeFileSync(filePath, content);
         console.log(`Minified ${file}`);
     });
+}
+
+function stripJavaScriptLineComments(match, offset, source) {
+    var inSingle = false;
+    var inDouble = false;
+    var inTemplate = false;
+    var escaped = false;
+
+    for (var i = 0; i < offset; i++) {
+        var ch = source[i];
+
+        if (escaped) {
+            escaped = false;
+            continue;
+        }
+
+        if (ch === '\\') {
+            escaped = inSingle || inDouble || inTemplate;
+            continue;
+        }
+
+        if (inSingle) {
+            if (ch === "'") inSingle = false;
+            continue;
+        }
+
+        if (inDouble) {
+            if (ch === '"') inDouble = false;
+            continue;
+        }
+
+        if (inTemplate) {
+            if (ch === '`') inTemplate = false;
+            continue;
+        }
+
+        if (ch === "'") inSingle = true;
+        else if (ch === '"') inDouble = true;
+        else if (ch === '`') inTemplate = true;
+    }
+
+    return inSingle || inDouble || inTemplate ? match : '';
 }
 
 // Minify CSS files
