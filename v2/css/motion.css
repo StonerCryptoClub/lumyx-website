@@ -28,6 +28,16 @@
   .js-motion .tl-note { opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
   .js-motion .tl-note.is-in { opacity: 1; }
 
+  @media (max-width: 640px) {
+    .js-motion .tl-event__card,
+    .js-motion .tl-event--l .tl-event__card {
+      transform: translateY(12px);
+    }
+    .js-motion .tl-event.is-in .tl-event__card {
+      transform: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .js-motion .tl-event__card, .js-motion .tl-note { opacity: 1; transform: none; transition: opacity 150ms linear; }
   }
