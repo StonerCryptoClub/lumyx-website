@@ -720,6 +720,53 @@
     .services__grid { grid-template-columns: 1fr; }
     .hero-proof-strip { grid-template-columns: 1fr 1fr; gap: var(--sp-3) var(--sp-2); }
     .hero-proof-strip .metric + .metric::before { content: none; }
+    .page-hero { padding-block: clamp(34px, 8vw, 48px) clamp(42px, 10vw, 60px); }
+    .page-hero__grid { gap: var(--sp-4); }
+    .page-hero__code { width: 100%; justify-content: space-between; gap: 10px; margin-bottom: var(--sp-2); }
+    .page-hero h1 { font-size: clamp(2.35rem, 12vw, 3.4rem); line-height: 0.96; letter-spacing: -0.045em; margin-bottom: var(--sp-2); }
+    .page-hero__lead { font-size: clamp(1rem, 4.8vw, 1.14rem); line-height: 1.55; margin-bottom: var(--sp-3); }
+    .page-hero__cta { gap: 10px; margin-bottom: var(--sp-3); }
+    .page-hero__cta .btn {
+      width: 100%;
+      justify-content: center;
+      min-height: 48px;
+      padding-inline: 16px;
+      gap: 8px;
+      font-size: clamp(0.88rem, 4vw, 0.96rem);
+      line-height: 1.08;
+      white-space: nowrap;
+    }
+    .page-hero__cta .btn .icon { flex: none; }
+    .page-hero .hero-proof-strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      max-width: none;
+      margin-top: var(--sp-3);
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      background: oklch(0.99 0.008 80 / 0.76);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .page-hero .hero-proof-strip .metric {
+      min-width: 0;
+      padding: 13px 14px 12px;
+    }
+    .page-hero .hero-proof-strip .metric:nth-child(odd) { border-right: 1px solid var(--border); }
+    .page-hero .hero-proof-strip .metric:nth-child(-n + 2) { border-bottom: 1px solid var(--border); }
+    .page-hero .hero-proof-strip .metric__num {
+      display: block;
+      font-size: clamp(1.38rem, 7vw, 1.75rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+    }
+    .page-hero .hero-proof-strip .metric__label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      line-height: 1.15;
+    }
     .contact-routes { grid-template-columns: 1fr; }
     .contact-route { padding-inline: 0; }
     .contact-route + .contact-route { border-left: none; border-top: 1px solid var(--border); }
@@ -735,6 +782,7 @@
   }
   @media (max-width: 400px) {
     .hero-proof-strip { grid-template-columns: 1fr; }
+    .page-hero .hero-proof-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   /* =========================================================

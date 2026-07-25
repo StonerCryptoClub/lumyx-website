@@ -218,6 +218,13 @@
   .nav-dropdown__menu a::after { content: none; }
   .nav-dropdown__menu a:hover { background: var(--accent-wash); color: var(--accent-deep); }
 
+  @media (max-width: 360px) {
+    .nav-bar { gap: var(--sp-2); min-height: 64px; }
+    .brand { gap: 8px; }
+    .brand img { height: 28px; }
+    .brand__word { font-size: 0.98rem; white-space: nowrap; }
+  }
+
   .menu-btn { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border); border-radius: var(--r-sm); color: var(--ink); }
 
   /* Mobile drawer = console (mirror of the form card) */
