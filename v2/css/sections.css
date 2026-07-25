@@ -736,4 +736,36 @@
   @media (max-width: 400px) {
     .hero-proof-strip { grid-template-columns: 1fr; }
   }
+
+  /* =========================================================
+     MOBILE REFINEMENT PASS  (phones, ≤640px)
+     Every rule below is max-width guarded, so desktop/tablet
+     ≥641px is never affected. Shared file → applies to the
+     homepage AND every v2 subpage (ppc, follow-up, blog).
+     Goal: quieter hero backdrop, tighter vertical rhythm,
+     denser hero top, comfortable form controls.
+     ========================================================= */
+  @media (max-width: 640px) {
+    /* Trim the section-padding floor. 72px min is heavy on a phone where
+       every section already fills the fold; this tightens the whole page
+       rhythm at once (also reaches the subpages via the shared token). */
+    :root { --section-pad: clamp(52px, 11vw, 76px); }
+
+    /* Hero backdrop: the growth-curve SVG is authored 1200×500. Stretched to
+       78% of a ~2800px stacked hero it slice-crops into a distorted smear.
+       Cap it to a real backdrop band sitting behind the headline only. */
+    .hero-viz { height: clamp(220px, 46vw + 140px, 320px); opacity: 0.8; }
+    .hero__grid { background-size: 36px 36px; }
+
+    /* Denser hero top: the 1.36rem display sub wraps to ~6 lines and the
+       block reads airy. Step the sub down to body size and pull the stack in. */
+    .hero { padding-block: clamp(28px, 7vw, 44px) var(--section-pad); }
+    .hero-top { margin-bottom: var(--sp-3); }
+    .hero-sub { font-size: var(--text-base); }
+    .hero-grid { gap: var(--sp-4); }
+
+    /* Consent checkboxes: 18px native boxes sit below a comfortable tap
+       floor and misalign with the multi-line legal copy beside them. */
+    .hf-sms-label input[type="checkbox"] { width: 22px; height: 22px; flex: none; margin-top: 2px; }
+  }
 }

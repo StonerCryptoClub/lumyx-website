@@ -576,6 +576,42 @@
   <script defer src="/js/analytics.js"></script>
   <script defer src="/js/meta-pixel-events.js"></script>
   <script defer src="/js/form-validation.js"></script>
-  <script defer src="/v2/js/v2.js"></script>
+  <script defer src="/v2/js/meridian.js"></script>
+
+  <!-- v2 VSL play-on-click enhancement.
+       The shared hero-form.js mounts a YouTube facade + click overlay, but the
+       overlay click only *reveals* a static poster (no autoplay), which reads as
+       "nothing happens". Here we reload the iframe with autoplay=1 on the click
+       gesture so one tap actually starts the video. Scoped to v2 — the live root
+       site's hero-form.js is untouched. -->
+  <script>
+    (function () {
+      function wireAutoplay() {
+        var wrapper = document.getElementById('vsl-wrapper');
+        if (!wrapper) return false;
+        var overlay = wrapper.querySelector('.vsl-click-overlay');
+        var iframe = wrapper.querySelector('iframe');
+        if (!overlay || !iframe) return false;
+        overlay.addEventListener('click', function () {
+          try {
+            var url = new URL(iframe.src);
+            url.searchParams.set('autoplay', '1');
+            url.searchParams.set('rel', '0');
+            iframe.src = url.toString();
+          } catch (e) {}
+        }, { capture: true, once: true });
+        return true;
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        // hero-form.js mounts the facade during its own DOMContentLoaded pass;
+        // retry briefly until the overlay+iframe exist, then wire once.
+        var tries = 0;
+        (function attempt() {
+          if (wireAutoplay() || tries++ > 20) return;
+          setTimeout(attempt, 100);
+        })();
+      });
+    })();
+  </script>
 </body>
 </html>
