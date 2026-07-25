@@ -1,0 +1,77 @@
+/* ============================================================
+   Lumyx B — Layer 1: Design Tokens
+   The ONLY place raw values live. Sections consume semantics.
+   Ref: BLUEPRINT.md §5
+   ============================================================ */
+
+@layer tokens {
+  :root {
+    /* ---- Surfaces: daylight ramp (warm-tinted toward amber, chroma <=0.01 — NOT cream) ---- */
+    --bg:             oklch(0.975 0.004 75);   /* ~ #F8F7F4 page ground        */
+    --surface:        oklch(0.995 0.002 75);   /* ~ #FEFEFD cards              */
+    --surface-sunken: oklch(0.955 0.005 75);   /* quiet alt-section ground     */
+    --ink-panel:      oklch(0.205 0.012 60);   /* ~ #1C1815 dark form + footer */
+    --ink-panel-2:    oklch(0.255 0.014 60);   /* raised surface on the panel  */
+
+    /* ---- Ink ramp (warm near-black, never pure gray) ---- */
+    --ink:            oklch(0.235 0.012 60);   /* headings ~ #221E1A           */
+    --ink-body:       oklch(0.32 0.010 60);    /* body 9.5:1 on --bg           */
+    --ink-muted:      oklch(0.45 0.008 60);    /* captions 5.2:1               */
+    --ink-on-dark:    oklch(0.97 0.004 75);    /* text on ink-panel/footer     */
+    --ink-on-dark-mut:oklch(0.74 0.006 75);    /* muted text on ink-panel      */
+
+    /* ---- Amber system (the inversion rule) ---- */
+    --accent-fill:    #FFA500;                 /* fills/surfaces only, NEVER text on light */
+    --accent-bright:  #FFD700;
+    --accent-text:    oklch(0.50 0.13 65);     /* ~ #9A5B00 links/accents — 4.6:1 on --bg */
+    --accent-deep:    oklch(0.42 0.12 60);     /* hover state — 6:1            */
+    --accent-gradient: linear-gradient(135deg, #FFD700, #FFA500); /* primary CTA ONLY */
+    --accent-wash:    oklch(0.94 0.035 80);    /* amber-tinted chip/hover ground */
+    --accent-on-dark: oklch(0.86 0.14 80);     /* amber that reads on ink-panel */
+
+    /* ---- Drenched band (used by exactly one section) ---- */
+    --drench-bg:      oklch(0.78 0.155 75);    /* saturated amber field        */
+    --drench-ink:     oklch(0.22 0.05 60);     /* dark-amber ink on it — 7.8:1 */
+    --drench-line:    oklch(0.66 0.14 70);     /* hairline on the band         */
+
+    /* ---- Error (must NOT look like brand amber) ---- */
+    --error:          oklch(0.55 0.16 25);     /* error text on light          */
+    --error-on-dark:  oklch(0.78 0.13 25);     /* ~ #FFB3A6-family on ink-panel */
+
+    /* ---- Structure ---- */
+    --border:         oklch(0.88 0.006 75);    /* hairlines                    */
+    --border-strong:  oklch(0.78 0.008 75);
+    --border-on-dark: oklch(0.32 0.010 60);
+    --shadow-sm:  0 1px 2px oklch(0.2 0.01 60 / 0.06);
+    --shadow-md:  0 6px 24px -8px oklch(0.2 0.01 60 / 0.14);
+    --shadow-lg:  0 24px 60px -20px oklch(0.2 0.01 60 / 0.22);
+    --shadow-cta: 0 10px 28px -6px oklch(0.72 0.15 75 / 0.45);
+
+    /* ---- Type ---- */
+    --font-display: 'Montserrat', system-ui, sans-serif;   /* 800 for display */
+    --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Spline Sans Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; /* data annotations only */
+    /* scale ratio 1.28, body fixed 1.0625rem/1.65 */
+    --text-xs: 0.8125rem;  --text-sm: 0.9375rem;  --text-base: 1.0625rem;
+    --text-lg: 1.36rem;    --text-xl: 1.74rem;
+    --text-2xl: clamp(2.1rem, 1.4rem + 2.2vw, 3rem);        /* h2 */
+    --text-hero: clamp(2.4rem, 1.6rem + 3.4vw, 4.2rem);     /* h1 */
+    --lh-tight: 1.08;  --lh-snug: 1.25;  --lh-body: 1.65;
+
+    /* ---- Space (24px rhythm base) ---- */
+    --sp-1: 6px; --sp-2: 12px; --sp-3: 24px; --sp-4: 48px; --sp-5: 96px;
+    --section-pad: clamp(72px, 5vw + 40px, 128px);
+    --gutter: clamp(20px, 4vw, 48px);
+    --measure: 65ch;
+    --maxw: 1200px;
+
+    /* ---- Radii / motion ---- */
+    --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-pill: 999px;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);             /* out-quint */
+    --dur-fast: 180ms; --dur-base: 420ms; --dur-hero: 700ms;
+    --rise: 20px;
+
+    /* ---- Z scale (semantic, no 9999s) ---- */
+    --z-nav: 100; --z-overlay: 200; --z-drawer: 300;
+  }
+}

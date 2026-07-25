@@ -1,0 +1,102 @@
+/* ============================================================
+   Lumyx B — Layer 5: Motion
+   Doctrine: content visible by default. Only when JS adds
+   `.js-motion` to <html> do initial (hidden) states apply, so
+   there is zero blank-section risk without JS.
+   transform / opacity / clip-path only. No bounce. Ref: §8
+   ============================================================ */
+
+@layer motion {
+
+  /* ---------- Scroll reveals ---------- */
+  .js-motion .reveal {
+    opacity: 0;
+    transform: translateY(var(--rise));
+    transition: opacity var(--dur-base) var(--ease-out),
+                transform var(--dur-base) var(--ease-out);
+    transition-delay: calc(var(--stagger-i, 0) * 60ms);
+  }
+  .js-motion .reveal.is-in { opacity: 1; transform: none; }
+
+  /* ---------- Hero load choreography (~900ms, runs once) ---------- */
+  .js-motion .hero .chip,
+  .js-motion .hero h1 .hl-line,
+  .js-motion .hero-sub,
+  .js-motion .hero-vsl-col,
+  .js-motion .hero-form-col,
+  .js-motion .hero-proof-strip {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  .js-motion.hero-ready .hero .chip,
+  .js-motion.hero-ready .hero h1 .hl-line,
+  .js-motion.hero-ready .hero-sub,
+  .js-motion.hero-ready .hero-vsl-col,
+  .js-motion.hero-ready .hero-form-col,
+  .js-motion.hero-ready .hero-proof-strip {
+    opacity: 1;
+    transform: none;
+    transition: opacity var(--dur-hero) var(--ease-out),
+                transform var(--dur-hero) var(--ease-out);
+  }
+  .js-motion.hero-ready .hero .chip { transition-delay: 60ms; }
+  .js-motion.hero-ready .hero h1 .hl-line:nth-child(1) { transition-delay: 120ms; }
+  .js-motion.hero-ready .hero h1 .hl-line:nth-child(2) { transition-delay: 200ms; }
+  .js-motion.hero-ready .hero-sub { transition-delay: 280ms; }
+  .js-motion.hero-ready .hero-vsl-col { transition-delay: 340ms; }
+  .js-motion.hero-ready .hero-form-col { transition-delay: 400ms; }
+  .js-motion.hero-ready .hero-proof-strip { transition-delay: 480ms; }
+
+  /* ---------- Hero signature: the curve draws itself on load ---------- */
+  .js-motion .hero-viz__curve {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .js-motion .hero-viz__node,
+  .js-motion .hero-viz__area { opacity: 0; }
+  .js-motion.hero-ready .hero-viz__curve {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1500ms var(--ease-out) 200ms;
+  }
+  .js-motion.hero-ready .hero-viz__area {
+    opacity: 0.55;
+    transition: opacity 900ms var(--ease-out) 900ms;
+  }
+  .js-motion.hero-ready .hero-viz__node {
+    opacity: 1;
+    transition: opacity 400ms var(--ease-out);
+  }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(1) { transition-delay: 700ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(2) { transition-delay: 1000ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(3) { transition-delay: 1300ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(4) { transition-delay: 1550ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(5) { transition-delay: 1750ms; }
+
+  /* ---------- Proof band wipe ---------- */
+  .js-motion .proof-band__inner {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path var(--dur-hero) var(--ease-out);
+  }
+  .js-motion .proof-band.is-in .proof-band__inner { clip-path: inset(0 0 0 0); }
+
+  /* ---------- Reduced motion: crossfade only, static rail, final counters ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .js-motion .reveal,
+    .js-motion .hero .chip,
+    .js-motion .hero h1 .hl-line,
+    .js-motion .hero-sub,
+    .js-motion .hero-vsl-col,
+    .js-motion .hero-form-col,
+    .js-motion .hero-proof-strip {
+      transform: none;
+      transition: opacity 150ms linear;
+    }
+    .js-motion .proof-band__inner { clip-path: none; transition: opacity 150ms linear; }
+    .js-motion .hero-viz__curve { stroke-dashoffset: 0; transition: none; }
+    .js-motion .hero-viz__node, .js-motion .hero-viz__area { opacity: 1; transition: none; }
+    .rail__fill { transition: none; }
+    .step__num, .step h3 { transition: none; }
+    .btn, .btn-primary:hover, .hf-submit:hover, .card--interactive:hover, .service:hover { transition: none; transform: none; }
+  }
+}

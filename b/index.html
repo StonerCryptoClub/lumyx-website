@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google tag (gtag.js) — GA4 + Google Ads (verbatim from A) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N8CNQ6Y358"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-N8CNQ6Y358');
+    gtag('config', 'AW-17852608393');
+  </script>
+
+  <title>Lumyx | The Full Revenue Path — Performance Marketing That Follows Through</title>
+  <meta name="description" content="Lumyx connects strategy, paid media, funnels, CRM follow-up, and practical AI into one revenue system. Book a free Growth Audit." />
+  <!-- B is an A/B test surface: keep it out of the index while testing -->
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://lumyx.co/b/" />
+
+  <!-- Montserrat display (800 added for hero); body is the fast system stack -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" /></noscript>
+
+  <!-- Cascade mirrors dependency direction: tokens -> base -> components -> sections -> motion -->
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/sections.css" />
+  <link rel="stylesheet" href="./css/motion.css" />
+
+  <!-- Motion doctrine: content is visible by default; only when this class is present do initial states apply. Set before paint to avoid a flash. -->
+  <script>document.documentElement.classList.add('js-motion');</script>
+
+  <!-- VSL source consumed by hero-form.js facade logic -->
+  <script>window.VSL_YOUTUBE_URL = 'https://youtu.be/3ygHNgqRVJo';</script>
+</head>
+<body>
+  <a class="skip-link" href="#home">Skip to content</a>
+
+  <!-- ============================================================
+       Bespoke icon system — hand-drawn on a 24px grid, 1.75 stroke.
+       Referenced with <use>. No icon-font dependency.
+       ============================================================ -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2 4 14h7l-1 8 9-12h-7z" />
+    </symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="i-funnel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 5h17l-6.5 7.5V20l-4 1.5v-9z" />
+    </symbol>
+    <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 7h9M4 12h9M4 17h6M16 15.5l1.8 1.8L21 13.6" />
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3 5 6v5c0 4.2 3 7.4 7 8.5 4-1.1 7-4.3 7-8.5V6z" /><path d="M9 12l2 2 4-4.2" />
+    </symbol>
+    <symbol id="i-hub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 12 5 7M12 12l7-5M12 12v8" /><circle cx="12" cy="12" r="2.3" /><circle cx="5" cy="6.4" r="1.9" /><circle cx="19" cy="6.4" r="1.9" /><circle cx="12" cy="20.5" r="1.9" />
+    </symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="6" width="12" height="12" rx="2.2" /><rect x="9.5" y="9.5" width="5" height="5" rx="1" /><path d="M9 6V3M15 6V3M9 21v-3M15 21v-3M6 9H3M6 15H3M21 9h-3M21 15h-3" />
+    </symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4v16h16" /><path d="M7 15l3.5-4 3 2.2L20 6" /><path d="M20 6h-3.5M20 6v3.5" />
+    </symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M6 6h5v6.2c0 2.8-1.6 4.7-4.6 5.8l-.8-1.7c1.7-.7 2.6-1.7 2.7-3.1H6zM14 6h5v6.2c0 2.8-1.6 4.7-4.6 5.8l-.8-1.7c1.7-.7 2.6-1.7 2.7-3.1H14z" />
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M12 3.4l2.6 5.3 5.8.9-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.2-4.1 5.8-.9z" />
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M19.5 15.4a12.2 12.2 0 0 1-4-.7 1.1 1.1 0 0 0-1.1.3l-1.6 1.6a15.3 15.3 0 0 1-6.1-6.1L8.2 8.9a1.1 1.1 0 0 0 .3-1.1 12.2 12.2 0 0 1-.7-4A1.1 1.1 0 0 0 6.7 2.7H4.2a1.1 1.1 0 0 0-1.1 1.1A17.4 17.4 0 0 0 20.2 20.9a1.1 1.1 0 0 0 1.1-1.1v-2.5a1.1 1.1 0 0 0-1.1-1.1z" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2.2" /><path d="M3.5 7.5l8.5 5.6 8.5-5.6" />
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.2" /><path d="M3.5 9.5h17M8 3v4M16 3v4" /><path d="M8.5 14.5l2 2 3.5-3.5" />
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" />
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 12h14M13 6l6 6-6 6" />
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9.5l6 6 6-6" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 12.5l4.5 4.5L20 6.5" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M8 5.2v13.6a1 1 0 0 0 1.5.86l11-6.8a1 1 0 0 0 0-1.72l-11-6.8A1 1 0 0 0 8 5.2z" />
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 7h16M4 12h16M4 17h10" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="5" /><circle cx="12" cy="12" r="3.8" /><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="2.4" /><path d="M8 10.5V16M8 7.4v.05M12 16v-3.2a2.1 2.1 0 0 1 4.2 0V16" /><circle cx="8" cy="7.4" r="0.4" fill="currentColor" stroke="none" />
+    </symbol>
+  </svg>
+
+  <!-- ============================================================ HEADER ============================================================ -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-bar">
+      <a href="/" class="brand" aria-label="Lumyx Consulting — home">
+        <img src="../Logo.png" alt="" width="140" height="34" fetchpriority="high" />
+        <span class="brand__word">Lumyx</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <div class="nav-dropdown">
+          <a href="#services" class="dropdown-toggle" aria-haspopup="true">Services <svg class="icon" aria-hidden="true"><use href="#i-chevron" /></svg></a>
+          <div class="nav-dropdown__menu">
+            <a href="/ai-lead-generation.html">AI Lead Gen &amp; Booking Agents</a>
+            <a href="/ppc-management.html">PPC Management</a>
+            <a href="#services">All Services</a>
+          </div>
+        </div>
+        <a href="#growth-method">Method</a>
+        <a href="#testimonials">Results</a>
+        <a href="#booking-section" data-scroll-target="#calendly-container">Book Audit</a>
+      </nav>
+
+      <button class="menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav-sidebar">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu" /></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer (ink-panel, mirror of the form card) -->
+  <div class="drawer-overlay" id="mobile-nav-overlay"></div>
+  <aside class="drawer on-dark" id="mobile-nav-sidebar" aria-label="Menu">
+    <div class="drawer__head">
+      <h2>Menu</h2>
+      <button class="drawer__close" id="mobile-nav-close" aria-label="Close menu"><svg class="icon" aria-hidden="true"><use href="#i-close" /></svg></button>
+    </div>
+    <a href="#home" class="mobile-nav-link">Home</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#services" class="mobile-nav-link">Services</a>
+    <a href="/ai-lead-generation.html" class="mobile-nav-link">AI Lead Gen &amp; Booking Agents</a>
+    <a href="/ppc-management.html" class="mobile-nav-link">PPC Management</a>
+    <a href="#growth-method" class="mobile-nav-link">Growth Method</a>
+    <a href="#testimonials" class="mobile-nav-link">Results</a>
+    <a href="#booking-section" class="mobile-nav-link" data-scroll-target="#calendly-container">Book Audit</a>
+  </aside>
+
+  <main>
+    <!-- ============================================================ HERO ============================================================ -->
+    <section class="hero" id="home">
+      <!-- Live instrument: engineered grid + cursor spotlight + a revenue curve that plots itself. -->
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__spotlight" aria-hidden="true"></div>
+      <div class="hero-viz" aria-hidden="true">
+        <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="viz-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFA500" stop-opacity="0.34" />
+              <stop offset="1" stop-color="#FFA500" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path class="hero-viz__area" d="M120 388 C260 380 300 320 400 306 C500 292 560 272 660 244 C780 210 820 172 900 144 C990 112 1030 90 1090 74 L1090 470 L120 470 Z" />
+          <path class="hero-viz__curve" pathLength="1" d="M120 388 C260 380 300 320 400 306 C500 292 560 272 660 244 C780 210 820 172 900 144 C990 112 1030 90 1090 74" />
+          <circle class="hero-viz__node" cx="120" cy="388" r="7" />
+          <circle class="hero-viz__node" cx="400" cy="306" r="7" />
+          <circle class="hero-viz__node" cx="660" cy="244" r="7" />
+          <circle class="hero-viz__node" cx="900" cy="144" r="7" />
+          <circle class="hero-viz__node" cx="1090" cy="74" r="9" />
+          <text class="hero-viz__axislabel" x="120" y="410">t₀ · audit</text>
+          <text class="hero-viz__axislabel" x="1048" y="58">revenue ▲</text>
+        </svg>
+      </div>
+
+      <div class="container">
+        <div class="hero-top">
+          <span class="status-chip"><span class="status-dot" aria-hidden="true"></span> The full revenue <b>system</b></span>
+          <h1>
+            <span class="hl-line">Where strategy, media &amp; execution</span>
+            <span class="hl-line accent">turn into revenue</span>
+          </h1>
+          <p class="hero-sub">We help businesses attract better prospects, convert more opportunities, and follow up faster — through paid media, funnel optimization, CRM automation, and practical AI integrations.</p>
+        </div>
+
+        <div class="hero-grid">
+          <!-- VSL column -->
+          <div class="hero-vsl-col">
+            <div class="vsl-wrapper" id="vsl-wrapper">
+              <div class="vsl-placeholder" id="vsl-placeholder">
+                <div class="vsl-placeholder-inner">
+                  <span class="vsl-play-ring"><svg class="icon" aria-hidden="true"><use href="#i-play" /></svg></span>
+                  <p class="vsl-coming-label">Watch the Lumyx growth process</p>
+                  <p class="vsl-coming-sub">Press play to see how it all fits together</p>
+                </div>
+              </div>
+            </div>
+            <p class="vsl-microcopy">See how Lumyx connects strategy, paid media, funnels, follow-up, and AI-enhanced execution into one growth process.</p>
+
+            <div class="vsl-proof">
+              <span class="vsl-proof__avatars">
+                <img src="../images/testimonials/alex.svg" alt="Client, Alex" loading="lazy" width="38" height="38" />
+                <img src="../images/testimonials/maria.svg" alt="Client, Maria" loading="lazy" width="38" height="38" />
+                <img src="../images/testimonials/james.svg" alt="Client, James" loading="lazy" width="38" height="38" />
+              </span>
+              <span class="vsl-proof__text">Trusted by 20+ growing businesses</span>
+              <span class="chip">★ 4.8 / 5 rating</span>
+              <span class="chip">98% retention</span>
+            </div>
+
+            <div class="hero-cta-row">
+              <a href="#booking-section" class="btn btn-primary" data-scroll-target="#calendly-container">Get my free Growth Audit <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+              <button type="button" class="btn btn-secondary" id="hero-watch-vsl"><svg class="icon" aria-hidden="true"><use href="#i-play" /></svg> Watch the VSL</button>
+            </div>
+          </div>
+
+          <!-- Form column: the inverted focal point -->
+          <div class="hero-form-col">
+            <div class="hero-form-card on-dark">
+              <span class="form-eyebrow"><span class="status-dot" aria-hidden="true"></span> Free Growth Audit</span>
+              <h3>Get my <span>free Growth Audit</span></h3>
+              <p class="form-subheading">A clear breakdown of what is working, what is leaking revenue, and what to fix first across your marketing and follow-up.</p>
+
+              <form id="hero-lead-form" novalidate>
+                <div class="hf-row">
+                  <div class="hf-group">
+                    <label class="field-label" for="hf-name">Full name</label>
+                    <input class="field" type="text" id="hf-name" name="name" placeholder="Jane Smith" autocomplete="name" />
+                    <span class="hf-field-error" id="hf-err-name">Please enter your full name.</span>
+                  </div>
+                  <div class="hf-group">
+                    <label class="field-label" for="hf-email">Email address</label>
+                    <input class="field" type="email" id="hf-email" name="email" placeholder="jane@company.com" autocomplete="email" />
+                    <span class="hf-field-error" id="hf-err-email">Please enter a valid email address.</span>
+                  </div>
+                </div>
+
+                <div class="hf-group hf-phone-group-wrap">
+                  <label class="field-label" for="hf-phone-area">Phone number</label>
+                  <div class="hf-phone-field" id="hf-phone-group">
+                    <input class="field" type="text" id="hf-phone-area" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" autocomplete="tel-area-code" aria-label="Phone area code" />
+                    <span class="hf-phone-sep">–</span>
+                    <input class="field" type="text" id="hf-phone-prefix" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="###" aria-label="Phone prefix" />
+                    <span class="hf-phone-sep">–</span>
+                    <input class="field" type="text" id="hf-phone-line" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="####" aria-label="Phone line number" />
+                  </div>
+                  <span class="hf-field-error" id="hf-err-phone">Please enter a valid phone number.</span>
+                </div>
+
+                <div class="hf-row">
+                  <div class="hf-group">
+                    <label class="field-label" for="hf-business">Business name</label>
+                    <input class="field" type="text" id="hf-business" name="business" placeholder="Company name" autocomplete="organization" />
+                    <span class="hf-field-error" id="hf-err-business">Please enter your business name.</span>
+                  </div>
+                  <div class="hf-group">
+                    <label class="field-label" for="hf-service">Growth focus</label>
+                    <div class="hf-select-wrap">
+                      <select class="field" id="hf-service" name="service">
+                        <option value="" disabled selected>Select a focus</option>
+                        <option value="PPC Management &amp; Google Ads">PPC Management &amp; Google Ads</option>
+                        <option value="SEO Services">SEO Services</option>
+                        <option value="AI Lead Generation &amp; Booking Agents">AI Lead Generation &amp; Booking Agents</option>
+                        <option value="Marketing Strategy &amp; Consulting">Marketing Strategy &amp; Consulting</option>
+                        <option value="Social Media Advertising">Social Media Advertising</option>
+                        <option value="Conversion Rate Optimization">Conversion Rate Optimization</option>
+                        <option value="Full-Service Growth Package">Full-Service Growth Package</option>
+                      </select>
+                    </div>
+                    <span class="hf-field-error" id="hf-err-service">Please select a service.</span>
+                  </div>
+                </div>
+
+                <div class="hf-sms-consent">
+                  <label class="hf-sms-label">
+                    <input type="checkbox" id="hf-sms-transactional" name="smsTransactional" value="yes" />
+                    <span class="hf-sms-text">I consent to receive non-marketing text messages from Lumyx Consulting about appointment reminders, scheduling, and service updates. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+                  </label>
+                  <label class="hf-sms-label">
+                    <input type="checkbox" id="hf-sms-marketing" name="smsMarketing" value="yes" />
+                    <span class="hf-sms-text">I consent to receive marketing text messages, about special offers, discounts, and service updates, from Lumyx Consulting at the phone number provided. Message frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</span>
+                  </label>
+                  <p class="hf-sms-legal">Consent is not a condition of purchase and is not required to submit this form. See our <a href="/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> &amp; <a href="/terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a>.</p>
+                </div>
+
+                <div class="hf-error" id="hf-error" role="alert"></div>
+
+                <button type="submit" class="hf-submit" id="hf-submit">
+                  <span class="hf-btn-text">Book my free Growth Audit <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></span>
+                  <span class="hf-btn-loading" aria-hidden="true"><span class="spinner"></span> Sending…</span>
+                </button>
+                <p class="hf-disclaimer">No pressure. Just a clear breakdown of what is working, what is leaking revenue, and what to fix first.</p>
+              </form>
+            </div>
+
+            <!-- Compact inline proof strip (the band restates this at scale mid-page) -->
+            <div class="hero-proof-strip">
+              <div class="metric"><span class="metric__num" data-count="2" data-prefix="$" data-suffix="M+">$2M+</span><span class="metric__label">Generated for clients</span></div>
+              <div class="metric"><span class="metric__num" data-count="4.8" data-decimals="1" data-suffix="x">4.8x</span><span class="metric__label">Avg. ROAS</span></div>
+              <div class="metric"><span class="metric__num" data-count="98" data-suffix="%">98%</span><span class="metric__label">Client retention</span></div>
+              <div class="metric"><span class="metric__num" data-count="20" data-suffix="+">20+</span><span class="metric__label">Success stories</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ POSITIONING ============================================================ -->
+    <section class="positioning section" id="about">
+      <div class="container">
+        <div class="positioning__head reveal">
+          <span class="kicker">Why Lumyx is different</span>
+          <h2>Most agencies stop too early</h2>
+          <p>Traffic alone does not grow a business. Leads still need to be captured, qualified, followed up with, nurtured, and converted. Lumyx focuses on the full revenue path — strategy, paid media, landing pages, CRM workflows, and AI-supported execution — so more opportunities turn into real business.</p>
+        </div>
+
+        <div class="pillars">
+          <!-- FIG.01 — targeting scatter converging on the right audience -->
+          <div class="pillar reveal">
+            <figure class="figure">
+              <svg class="figure__viz" viewBox="0 0 200 112" role="img" aria-label="Scatter plot of prospects converging on a targeted audience zone">
+                <g class="viz-ink">
+                  <circle cx="22" cy="82" r="2.4" /><circle cx="40" cy="34" r="2.4" /><circle cx="34" cy="60" r="2.4" /><circle cx="58" cy="48" r="2.4" /><circle cx="52" cy="86" r="2.4" /><circle cx="74" cy="70" r="2.4" /><circle cx="70" cy="30" r="2.4" /><circle cx="92" cy="52" r="2.4" /><circle cx="96" cy="88" r="2.4" />
+                </g>
+                <rect class="viz-amber-stroke" x="128" y="34" width="52" height="48" rx="4" />
+                <line class="viz-amber-stroke" x1="154" y1="26" x2="154" y2="90" opacity="0.5" /><line class="viz-amber-stroke" x1="120" y1="58" x2="188" y2="58" opacity="0.5" />
+                <g class="viz-amber-fill">
+                  <circle cx="150" cy="50" r="3" /><circle cx="164" cy="60" r="3" /><circle cx="156" cy="68" r="3" /><circle cx="170" cy="46" r="3" /><circle cx="146" cy="64" r="3" />
+                </g>
+              </svg>
+              <figcaption class="figure__cap"><span class="data-label">FIG.01 · Demand</span><span class="data-label"><span class="lede">targeted</span></span></figcaption>
+            </figure>
+            <h3>Better demand</h3>
+            <p>Campaigns built to attract the right audience, not just generate cheap clicks.</p>
+          </div>
+
+          <!-- FIG.02 — funnel narrowing through the conversion path -->
+          <div class="pillar reveal">
+            <figure class="figure">
+              <svg class="figure__viz" viewBox="0 0 200 112" role="img" aria-label="Funnel chart narrowing from visitors to conversions">
+                <rect class="viz-amber-fill" x="20" y="16" width="160" height="16" rx="3" opacity="0.95" />
+                <rect class="viz-amber-fill" x="41" y="40" width="118" height="16" rx="3" opacity="0.78" />
+                <rect class="viz-amber-fill" x="61" y="64" width="78" height="16" rx="3" opacity="0.6" />
+                <rect class="viz-amber-fill" x="78" y="88" width="44" height="16" rx="3" opacity="0.9" />
+              </svg>
+              <figcaption class="figure__cap"><span class="data-label">FIG.02 · Conversion</span><span class="data-label"><span class="lede">&minus;friction</span></span></figcaption>
+            </figure>
+            <h3>Cleaner conversion</h3>
+            <p>Funnels and landing pages designed to move visitors toward action with less friction.</p>
+          </div>
+
+          <!-- FIG.03 — response time dropping after follow-up automation -->
+          <div class="pillar reveal">
+            <figure class="figure">
+              <svg class="figure__viz" viewBox="0 0 200 112" role="img" aria-label="Line chart of response time dropping sharply then holding low">
+                <path class="viz-axis" d="M26 18 V96 H184" fill="none" />
+                <path class="viz-amber-line" d="M34 36 L68 44 L96 80 L134 88 L182 90" />
+                <circle class="viz-node" cx="96" cy="80" r="4" /><circle class="viz-node" cx="182" cy="90" r="4" />
+              </svg>
+              <figcaption class="figure__cap"><span class="data-label">FIG.03 · Follow-up</span><span class="data-label"><span class="lede">faster</span></span></figcaption>
+            </figure>
+            <h3>Faster follow-up</h3>
+            <p>Automation and AI-enhanced workflows that help teams respond faster, nurture better, and miss fewer opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ GROWTH METHOD ============================================================ -->
+    <section class="method section" id="growth-method">
+      <div class="container method__grid">
+        <div class="method__aside reveal">
+          <span class="kicker">How Lumyx works</span>
+          <h2>The Lumyx Growth Method</h2>
+          <p>A clear, repeatable process that connects strategy, paid media, funnels, and follow-up into one system built for revenue.</p>
+        </div>
+
+        <ol class="rail">
+          <div class="rail__track" aria-hidden="true"><span class="rail__fill"></span></div>
+          <li class="step reveal">
+            <span class="step__num">01</span>
+            <h3>Diagnose</h3>
+            <p>We audit your current marketing, website, funnel, and follow-up process to find the biggest growth constraints.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">02</span>
+            <h3>Build</h3>
+            <p>We create the campaign structure, landing pages, tracking, automations, and conversion assets needed to support growth.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">03</span>
+            <h3>Launch</h3>
+            <p>We execute across the channels and systems that make the most sense for your business.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">04</span>
+            <h3>Optimize</h3>
+            <p>We use performance data to improve creative, targeting, funnel flow, follow-up, and conversion rates.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">05</span>
+            <h3>Scale</h3>
+            <p>Once the system is working, we increase volume while protecting efficiency and lead quality.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================ ★ PROOF BAND ============================================================ -->
+    <section class="proof-band" aria-label="Results">
+      <span class="proof-band__grid" aria-hidden="true"></span>
+      <div class="container proof-band__inner">
+        <p class="proof-band__lead">The numbers behind the system — tracked, not estimated.</p>
+        <div class="proof-band__grid-metrics">
+          <div class="metric"><span class="metric__num" data-count="2" data-prefix="$" data-suffix="M+">$2M+</span><span class="metric__label">Generated in client revenue</span></div>
+          <div class="metric"><span class="metric__num" data-count="4.8" data-decimals="1" data-suffix="x">4.8x</span><span class="metric__label">Average return on ad spend</span></div>
+          <div class="metric"><span class="metric__num" data-count="98" data-suffix="%">98%</span><span class="metric__label">Client retention rate</span></div>
+          <div class="metric"><span class="metric__num" data-count="20" data-suffix="+">20+</span><span class="metric__label">Businesses scaled on the system</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ BOOKING ============================================================ -->
+    <section class="booking section" id="booking-section">
+      <div class="container booking__grid">
+        <div class="booking__head reveal">
+          <span class="status-chip"><span class="status-dot" aria-hidden="true"></span> Free Growth Audit</span>
+          <h2>Get a free Growth Audit</h2>
+          <p>We'll review your current marketing, website, funnel, and follow-up process to identify where leads are dropping off and where Lumyx can help create more qualified opportunities.</p>
+
+          <p class="booking__cover-title">What your Growth Audit covers</p>
+          <div class="booking-features">
+            <div class="booking-feature">
+              <span class="idx-badge">01</span>
+              <span class="feature-text"><span class="booking-feature__title">Demand &amp; paid media</span><span class="booking-feature__desc">Where your campaigns attract the right prospects, and where spend is being wasted.</span></span>
+            </div>
+            <div class="booking-feature">
+              <span class="idx-badge">02</span>
+              <span class="feature-text"><span class="booking-feature__title">Funnel &amp; conversion</span><span class="booking-feature__desc">The points in your funnel and landing pages where visitors drop off.</span></span>
+            </div>
+            <div class="booking-feature">
+              <span class="idx-badge">03</span>
+              <span class="feature-text"><span class="booking-feature__title">Follow-up &amp; CRM</span><span class="booking-feature__desc">How fast leads are handled and where follow-up is leaking revenue.</span></span>
+            </div>
+            <div class="booking-feature">
+              <span class="idx-badge">04</span>
+              <span class="feature-text"><span class="booking-feature__title">Priority fix list</span><span class="booking-feature__desc">A clear breakdown of what is working and what to fix first.</span></span>
+            </div>
+          </div>
+
+          <div class="guarantee-panel">
+            <span class="guarantee-panel__badge">No pressure, no obligation</span>
+            <p>This is a working session, not a pitch. You'll leave with a clear view of what is working, what is leaking revenue, and what to fix first.</p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="card calendar-card">
+            <div class="calendar-card__head">
+              <h3>Book my free Growth Audit</h3>
+              <p>Select a time that works best for you.</p>
+            </div>
+            <div class="ghl-shell">
+              <div class="ghl-skeleton" aria-hidden="true"><span class="spinner"></span><span>Loading available times…</span></div>
+              <div id="calendly-container">
+                <iframe src="https://api.leadconnectorhq.com/widget/booking/d0prMwxo4qsyqutYVpCL" style="width:100%;border:none;" scrolling="no" id="d0prMwxo4qsyqutYVpCL_1781470766128" title="Book your free growth audit"></iframe>
+              </div>
+            </div>
+            <p class="booking-urgency"><span class="status-dot" aria-hidden="true"></span> Limited audit slots open each week</p>
+          </div>
+        </div>
+      </div>
+      <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+    </section>
+
+    <!-- ============================================================ SERVICES ============================================================ -->
+    <section class="services section" id="services">
+      <div class="container">
+        <div class="services__head reveal">
+          <span class="kicker">What we do</span>
+          <h2>Built around outcomes, not deliverables</h2>
+          <p>We connect strategy, paid media, funnels, follow-up, and practical AI into one revenue path. <a href="/blog.html">Read our latest insights</a> on performance marketing and growth.</p>
+        </div>
+
+        <div class="services__grid">
+          <article class="service service--featured card--interactive reveal">
+            <div class="service__meta"><span class="service__code">S·01 — Paid media</span><span class="chip">Most popular</span></div>
+            <h3><a href="/ppc-management.html">Paid media &amp; campaign strategy</a></h3>
+            <p class="service__desc">Launch and optimize campaigns designed to generate qualified opportunities, not vanity metrics.</p>
+            <ul class="service__features">
+              <li><span class="tick" aria-hidden="true"></span> Google &amp; Meta campaign management</li>
+              <li><span class="tick" aria-hidden="true"></span> Audience and offer strategy</li>
+              <li><span class="tick" aria-hidden="true"></span> Creative testing and budget pacing</li>
+            </ul>
+            <div class="service__cta"><a href="/ppc-management.html" class="btn-text">Learn more about PPC <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a></div>
+          </article>
+
+          <article class="service reveal">
+            <div class="service__meta"><span class="service__code">S·02 — Funnels</span><span class="data-label">CRO</span></div>
+            <h3>Funnel &amp; landing page optimization</h3>
+            <p class="service__desc">Improve the path from visitor to lead with pages built around clarity, trust, and conversion.</p>
+            <ul class="service__features">
+              <li><span class="tick" aria-hidden="true"></span> Landing page design and copy</li>
+              <li><span class="tick" aria-hidden="true"></span> Funnel flow and friction removal</li>
+              <li><span class="tick" aria-hidden="true"></span> <a href="/seo-services.html">Search visibility and on-page SEO</a></li>
+            </ul>
+            <div class="service__cta"><a href="#booking-section" class="btn-text" data-scroll-target="#calendly-container">Get a free Growth Audit <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a></div>
+          </article>
+
+          <article class="service reveal">
+            <div class="service__meta"><span class="service__code">S·03 — CRM</span><span class="data-label">Follow-up</span></div>
+            <h3><a href="/ai-lead-generation.html">CRM, automation &amp; follow-up</a></h3>
+            <p class="service__desc">Create cleaner systems for lead handling, nurturing, reminders, and pipeline visibility.</p>
+            <ul class="service__features">
+              <li><span class="tick" aria-hidden="true"></span> CRM setup and pipeline structure</li>
+              <li><span class="tick" aria-hidden="true"></span> Automated nurture and reminders</li>
+              <li><span class="tick" aria-hidden="true"></span> Lead routing and response speed</li>
+            </ul>
+            <div class="service__cta"><a href="/ai-lead-generation.html" class="btn-text">Explore follow-up systems <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a></div>
+          </article>
+
+          <article class="service reveal">
+            <div class="service__meta"><span class="service__code">S·04 — AI</span><span class="data-label">Ops</span></div>
+            <h3><a href="/ai-lead-generation.html">AI services &amp; integrations</a></h3>
+            <p class="service__desc">Use practical AI tools and workflows to support faster response times, better follow-up, and more efficient operations.</p>
+            <ul class="service__features">
+              <li><span class="tick" aria-hidden="true"></span> AI-enhanced lead qualification</li>
+              <li><span class="tick" aria-hidden="true"></span> Workflow and operations automation</li>
+              <li><span class="tick" aria-hidden="true"></span> Tool integration across your stack</li>
+            </ul>
+            <div class="service__cta"><a href="/ai-lead-generation.html" class="btn-text">Explore AI solutions <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a></div>
+          </article>
+
+          <article class="service reveal">
+            <div class="service__meta"><span class="service__code">S·05 — Conversion</span><span class="data-label">CRO</span></div>
+            <h3>Conversion strategy</h3>
+            <p class="service__desc">Identify where prospects drop off and improve the messaging, offer, and user journey that moves them forward.</p>
+            <ul class="service__features">
+              <li><span class="tick" aria-hidden="true"></span> Offer and messaging refinement</li>
+              <li><span class="tick" aria-hidden="true"></span> Drop-off analysis across the funnel</li>
+              <li><span class="tick" aria-hidden="true"></span> Data-driven testing and iteration</li>
+            </ul>
+            <div class="service__cta"><a href="#booking-section" class="btn-text" data-scroll-target="#calendly-container">Get a free Growth Audit <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a></div>
+          </article>
+        </div>
+
+        <div class="services-note reveal">
+          <h3>How we think about results</h3>
+          <p>Results vary by business, offer, market, and execution. Our focus is building the marketing infrastructure and optimization process needed to improve performance over time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ TESTIMONIALS ============================================================ -->
+    <section class="testimonials section" id="testimonials">
+      <div class="container">
+        <div class="testimonials__head reveal">
+          <h2>What our clients say</h2>
+          <p>Real results from businesses we've helped attract, convert, and follow up with more qualified opportunities.</p>
+        </div>
+
+        <div class="testi-grid">
+          <article class="card testi reveal">
+            <span class="testi__quote-icon" aria-hidden="true">&ldquo;</span>
+            <p class="testi__body">Lumyx developed our entire marketing strategy and then executed it flawlessly. We saw a 43% drop in cost per acquisition within the first month, and our demo signups doubled. They completely exceeded our expectations.</p>
+            <span class="testi__result"><span class="chip"><strong>43%</strong> cost reduction</span></span>
+            <div class="testi__author">
+              <img src="../images/testimonials/alex.svg" alt="Alex Thompson" loading="lazy" width="46" height="46" />
+              <div><h4>Alex Thompson</h4><p>Head of Growth, CloudStack</p></div>
+              <span class="testi__stars" aria-label="5 out of 5 stars"><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg></span>
+            </div>
+          </article>
+
+          <article class="card testi testi--featured reveal">
+            <span class="testi__quote-icon" aria-hidden="true">&ldquo;</span>
+            <p class="testi__body">Our website was stuck in 2010 until Lumyx stepped in. They rebuilt everything from scratch, focusing on mobile-first design. The new site loads in under 2 seconds and our bounce rate dropped by 35%.</p>
+            <span class="testi__result"><span class="chip"><strong>35%</strong> bounce rate drop</span></span>
+            <div class="testi__author">
+              <img src="../images/testimonials/maria.svg" alt="Maria Rodriguez" loading="lazy" width="46" height="46" />
+              <div><h4>Maria Rodriguez</h4><p>Director of Digital, RetailPro</p></div>
+              <span class="testi__stars" aria-label="5 out of 5 stars"><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg></span>
+            </div>
+          </article>
+
+          <article class="card testi reveal">
+            <span class="testi__quote-icon" aria-hidden="true">&ldquo;</span>
+            <p class="testi__body">What sets Lumyx apart is their deep understanding of conversion funnels. They completely revamped our email sequences and landing pages. Our trial-to-paid conversion jumped from 12% to 28%.</p>
+            <span class="testi__result"><span class="chip"><strong>133%</strong> conversion boost</span></span>
+            <div class="testi__author">
+              <img src="../images/testimonials/james.svg" alt="James Chen" loading="lazy" width="46" height="46" />
+              <div><h4>James Chen</h4><p>Founder, MarketFlow</p></div>
+              <span class="testi__stars" aria-label="5 out of 5 stars"><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg><svg class="icon" aria-hidden="true"><use href="#i-star" /></svg></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ NEWSLETTER BAND ============================================================ -->
+    <section class="newsletter-band on-dark" aria-label="Newsletter">
+      <div class="container newsletter-band__inner">
+        <div class="newsletter-band__copy">
+          <h2>Stay ahead of the competition</h2>
+          <p>Proven strategies and real case studies, straight to your inbox. No spam — unsubscribe anytime.</p>
+        </div>
+        <a href="/newsletter.html" class="btn btn-primary" target="_blank" rel="noopener">Get free strategy insights <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+      </div>
+    </section>
+
+    <!-- ============================================================ CONTACT ============================================================ -->
+    <section class="contact section" id="contact">
+      <div class="container">
+        <div class="contact__head reveal">
+          <h2>Ready to scale your business?</h2>
+          <p>Get in touch and let's discuss how we can help you achieve your growth goals.</p>
+        </div>
+
+        <div class="contact-routes">
+          <div class="contact-route reveal">
+            <span class="mono-tag">Tel</span>
+            <h3>Call us</h3>
+            <a class="contact-route__value" href="tel:+12482382704">(248) 238-2704</a>
+            <p class="contact-route__meta">Available Mon–Fri, 9AM–6PM EST</p>
+          </div>
+          <div class="contact-route reveal">
+            <span class="mono-tag">Eml</span>
+            <h3>Email us</h3>
+            <a class="contact-route__value" href="mailto:Lumyxagency@gmail.com">Lumyxagency@gmail.com</a>
+            <p class="contact-route__meta">We respond within 24 hours</p>
+          </div>
+          <div class="contact-route reveal">
+            <span class="mono-tag">Cal</span>
+            <h3>Book a call</h3>
+            <a class="contact-route__value" href="#booking-section" data-scroll-target="#calendly-container">Free 30-min strategy session</a>
+            <p class="contact-route__meta">Discuss your growth goals</p>
+          </div>
+        </div>
+
+        <div class="card final-cta reveal">
+          <h3>Ready to find where revenue is leaking?</h3>
+          <p>Book a free Growth Audit and get a clear breakdown of what is working, what is leaking revenue, and what to fix first.</p>
+          <a href="#booking-section" class="btn btn-primary" data-scroll-target="#calendly-container">Book my free Growth Audit <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================ FOOTER (ink close) ============================================================ -->
+  <footer class="site-footer on-dark">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Lumyx Consulting</h3>
+          <p>Strategic marketing consulting and implementation. We develop winning strategies, then execute with performance ads and AI workflows to enhance your profits.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#growth-method">Growth Method</a></li>
+            <li><a href="#booking-section">Contact</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="/terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Connect with us</h3>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/lumyxgrowth" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram" /></svg></a>
+            <a href="https://www.linkedin.com/company/lumyx-agency" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin" /></svg></a>
+          </div>
+          <div class="footer-contact">
+            <p><span class="footer-contact__tag">Tel</span> <a href="tel:+12482382704">(248) 238-2704</a></p>
+            <p><span class="footer-contact__tag">Eml</span> <a href="mailto:Lumyxagency@gmail.com">Lumyxagency@gmail.com</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Lumyx Consulting. All rights reserved.</p>
+        <p><a href="#booking-section" data-scroll-target="#calendly-container">Book your free call →</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       Scripts — deferred, exact set per BLUEPRINT §4.3.
+       Conversion + tracking are shared (upward paths); motion is B-only.
+       ============================================================ -->
+  <script defer src="../js/utm-tracking.js"></script>
+  <script defer src="../js/google-conversion-events.js"></script>
+  <script defer src="../js/ghl-booking-tracker.js"></script>
+  <script defer src="../js/hero-form.js"></script>
+  <script defer src="../js/analytics.js"></script>
+  <script defer src="../js/meta-pixel-events.js"></script>
+  <script defer src="../js/form-validation.js"></script>
+  <script defer src="./js/b-motion.js"></script>
+</body>
+</html>

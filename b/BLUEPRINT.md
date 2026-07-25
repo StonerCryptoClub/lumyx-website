@@ -90,7 +90,7 @@ The PROOF BAND is A's `hero-stats` data promoted into a full-bleed section — B
 
 ### 4.2 Head instrumentation (copy verbatim from A)
 
-- gtag.js `G-N8CNQ6Y358` + `AW-17052600393` config block
+- gtag.js `G-N8CNQ6Y358` + `AW-17852608393` config block
 - Meta/CSP-relevant meta tags; canonical → `https://lumyx.co/b/` + `<meta name="robots" content="noindex">` **while testing** (avoid duplicate-content SEO hit; remove if B wins and replaces A)
 - Font Awesome 6 CDN (icons reused), Montserrat Google Fonts (add weight 800 for display)
 
