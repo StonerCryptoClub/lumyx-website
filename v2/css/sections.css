@@ -223,7 +223,21 @@
   /* =========================================================
      BOOKING (#booking-section)
      ========================================================= */
-  .booking__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(32px, 4vw, 64px); align-items: start; }
+  /* The calendar column hosts a third-party GHL iframe with its own internal
+     7-day week grid; we can't reach into its CSS (cross-origin), so the fix is
+     giving it real room instead of guessing its breakpoints. At the previous
+     1:1.05 split the iframe only got ~545px at 1440px wide, tight enough that
+     GHL's own day-of-week header truncated "Saturday". The prose column reads
+     fine narrower; the rigid calendar widget does not. */
+  .booking__grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(32px, 4vw, 64px); align-items: start; }
+  /* Stack earlier than the page's other 2-col sections (980px): between ~981
+     and 1360px the split still only gave the iframe ~440-555px, which is why
+     "Saturday" truncated. Stacked, the calendar gets the FULL content width
+     at any viewport, which is always wider than a split can offer at the same
+     width — so this floor can only help the widget, never hurt it. */
+  @media (max-width: 1400px) {
+    .booking__grid { grid-template-columns: 1fr; }
+  }
   .booking__head .status-chip { margin-bottom: var(--sp-3); }
   .booking__head h2 { margin-bottom: var(--sp-3); }
   .booking__head p { color: var(--ink-body); margin-bottom: var(--sp-4); }
@@ -711,7 +725,6 @@
     .case-cards { grid-template-columns: 1fr; }
     .method__grid { grid-template-columns: 1fr; gap: var(--sp-4); }
     .method__aside { position: static; }
-    .booking__grid { grid-template-columns: 1fr; }
     .services__grid, .services__grid--4 { grid-template-columns: 1fr 1fr; }
     .service--featured { grid-column: 1 / -1; grid-row: auto; }
     .testi-grid { grid-template-columns: 1fr; }
