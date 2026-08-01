@@ -854,7 +854,18 @@
     .contact-route { padding-inline: 0; }
     .contact-route + .contact-route { border-left: none; border-top: 1px solid var(--border); }
     .footer-grid { grid-template-columns: 1fr; }
-    .hf-row { grid-template-columns: 1fr; }
+    /* Was 1fr here, stacking Name/Email and Business/Service into 4 full-width
+       rows instead of 2 paired ones — the main reason the lead form ran so
+       long on a phone. 2 columns still fits (~160px/field at 375px), so keep
+       the pairing and only condense the fields themselves below. */
+    .hf-row { gap: var(--sp-1); }
+    /* Condense the lead-form fields themselves: 52px fields with 12px group
+       gaps read "fat" stacked eight-deep on a phone. 44px is still the a11y
+       touch-target floor; the primary CTA (.hf-submit) is untouched. */
+    .field { min-height: 44px; padding: 10px 14px; }
+    .field-label { margin-bottom: 4px; }
+    .hf-group { margin-bottom: 8px; }
+    .form-subheading { margin-bottom: var(--sp-2); }
     .buildsheet__card { flex-basis: 88vw; padding: var(--sp-3); }
     .ind-strip { grid-template-columns: 1fr; }
     .blog-grid:not([data-filtered]) .blog-card:first-child { flex-direction: column; }
@@ -864,7 +875,10 @@
     .memo__cta { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 400px) {
-    .hero-proof-strip { grid-template-columns: 1fr; }
+    /* Was 1fr here, collapsing the 4 metrics to a stacked column on most
+       phones (this breakpoint covers the iPhone SE/mini class, not just tiny
+       screens). 2 columns fits comfortably at 320px+ and reads as the "4
+       squares" grid the metrics are meant to be. */
     .page-hero .hero-proof-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tl { width: min(100% - 32px, 1080px); }
     .tl-event { column-gap: 14px; }
