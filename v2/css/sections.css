@@ -83,12 +83,15 @@
   .hero:hover .hero__spotlight { opacity: 1; }
   .hero > .container { position: relative; z-index: 1; }
 
-  .hero-viz { position: absolute; inset: 0 0 auto 0; height: 78%; width: 100%; z-index: 0; pointer-events: none; opacity: 0.9; }
+  /* The curve art is authored 1200x500 and mounted with `slice`. Left at 78% of
+     a tall stacked hero it scales ~2.9x, which zooms the plot into an unreadable
+     fragment. Capping the band keeps the aspect near the artwork's own so the
+     full rise stays legible. */
+  .hero-viz { position: absolute; inset: 0 0 auto 0; height: min(78%, 560px); width: 100%; z-index: 0; pointer-events: none; opacity: 0.9; }
   .hero-viz svg { width: 100%; height: 100%; display: block; }
   .hero-viz__area { fill: url(#viz-fill); }
   .hero-viz__curve { fill: none; stroke: var(--accent-fill); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
   .hero-viz__node { fill: var(--surface); stroke: var(--accent-text); stroke-width: 2; }
-  .hero-viz__axislabel { fill: var(--accent-deep); font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.02em; text-transform: uppercase; opacity: 0.72; }
 
   .hero-top { max-width: 940px; margin-inline: auto; text-align: center; margin-bottom: var(--sp-4); }
   .hero-top .status-chip { margin-bottom: var(--sp-3); }
@@ -289,8 +292,26 @@
      RESULT-CHIP MARQUEE
      ========================================================= */
   .marquee { overflow: hidden; padding-block: var(--sp-4); background: var(--bg); border-block: 1px solid var(--border); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .marquee__track { display: flex; gap: var(--sp-3); width: max-content; animation: marquee-scroll 40s linear infinite; }
+  .marquee__track { display: flex; width: max-content; animation: marquee-scroll 40s linear infinite; }
+  /* Floor each set at the viewport so one set always spans the band. A set
+     narrower than the band would leave dead space on the right at the end of
+     the cycle, which reads as the marquee stalling and snapping back.
+     space-around absorbs the stretch; padding-right keeps the seam spacing
+     equal to the internal gap when the set is at its natural width. */
+  .marquee__set {
+    display: flex; align-items: center; flex: none;
+    gap: var(--sp-3); padding-right: var(--sp-3);
+    min-width: 100vw; justify-content: space-around;
+  }
   .marquee:hover .marquee__track, .marquee:focus-within .marquee__track { animation-play-state: paused; }
+  /* Hold the chips clear of the fixed meridian rail: fade to opaque only past
+     the longest station label instead of the default 8%. */
+  @media (min-width: 1080px) {
+    .has-thread .marquee {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 180px, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent 0, #000 180px, #000 92%, transparent);
+    }
+  }
   .marquee .mono-tag { font-size: 0.9rem; }
 
   /* =========================================================

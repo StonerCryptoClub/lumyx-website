@@ -60,7 +60,7 @@
   --section-pad: clamp(72px, 5vw + 40px, 128px);
   --gutter: clamp(20px, 4vw, 48px);
   --measure: 65ch;
-  --maxw: 1200px;
+  --maxw: 1760px;           /* wide desktop shell; prose still capped by --measure */
   --rail-w: 72px;            /* reserved left rail for the meridian thread (desktop) */
 
   /* ---- Radii / motion ---- */

@@ -65,7 +65,10 @@
   /* Reserve the left rail for the meridian on wide viewports — ONLY on pages
      that actually render the thread (the index). Subpages stay symmetric. */
   @media (min-width: 1080px) {
-    .has-thread .container { padding-left: calc(var(--rail-w) + var(--gutter)); }
+    /* The longest station label ("T-0 · today") overruns --rail-w, so floor the
+       reservation at that real extent plus a gap. Without the floor, a
+       full-width shell leaves the thread almost touching the content edge. */
+    .has-thread .container { padding-left: max(calc(var(--rail-w) + var(--gutter)), 152px); }
   }
 
   /* A11y utilities */

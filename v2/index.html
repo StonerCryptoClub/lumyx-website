@@ -110,8 +110,6 @@
           <circle class="hero-viz__node" cx="660" cy="244" r="7" />
           <circle class="hero-viz__node" cx="900" cy="144" r="7" />
           <circle class="hero-viz__node" cx="1090" cy="74" r="9" />
-          <text class="hero-viz__axislabel" x="120" y="410">t₀ · audit</text>
-          <text class="hero-viz__axislabel" x="1044" y="58">revenue ▲</text>
         </svg>
       </div>
 
@@ -476,23 +474,30 @@
 
     <!-- ===== RESULT-CHIP MARQUEE ===== -->
     <div class="marquee" aria-label="Client results">
+      <!-- Two identical sets. Each set is floored at 100vw in CSS so a single
+           set always spans the band; translateX(-50%) then lands exactly on the
+           set boundary and the loop is seamless at any viewport width. -->
       <div class="marquee__track">
-        <span class="mono-tag mono-tag--lg"><span class="num">-43%</span>&nbsp;CPA</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">4.8x</span>&nbsp;ROAS</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">+133%</span>&nbsp;CVR</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">98%</span>&nbsp;Retention</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">&lt;2s</span>&nbsp;Load</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">-35%</span>&nbsp;Bounce</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">$2M+</span>&nbsp;Generated</span>
-        <span class="mono-tag mono-tag--lg"><span class="num">20+</span>&nbsp;Systems</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">-43%</span>&nbsp;CPA</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">4.8x</span>&nbsp;ROAS</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">+133%</span>&nbsp;CVR</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">98%</span>&nbsp;Retention</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">&lt;2s</span>&nbsp;Load</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">-35%</span>&nbsp;Bounce</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">$2M+</span>&nbsp;Generated</span>
-        <span class="mono-tag mono-tag--lg" aria-hidden="true"><span class="num">20+</span>&nbsp;Systems</span>
+        <div class="marquee__set">
+          <span class="mono-tag mono-tag--lg"><span class="num">-43%</span>&nbsp;CPA</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">4.8x</span>&nbsp;ROAS</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">+133%</span>&nbsp;CVR</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">98%</span>&nbsp;Retention</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">&lt;2s</span>&nbsp;Load</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">-35%</span>&nbsp;Bounce</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">$2M+</span>&nbsp;Generated</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">20+</span>&nbsp;Systems</span>
+        </div>
+        <div class="marquee__set" aria-hidden="true">
+          <span class="mono-tag mono-tag--lg"><span class="num">-43%</span>&nbsp;CPA</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">4.8x</span>&nbsp;ROAS</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">+133%</span>&nbsp;CVR</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">98%</span>&nbsp;Retention</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">&lt;2s</span>&nbsp;Load</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">-35%</span>&nbsp;Bounce</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">$2M+</span>&nbsp;Generated</span>
+          <span class="mono-tag mono-tag--lg"><span class="num">20+</span>&nbsp;Systems</span>
+        </div>
       </div>
     </div>
 

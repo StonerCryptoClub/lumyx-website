@@ -32,8 +32,27 @@ Serve locally (`npx serve -l 5510 .`) and load `/v2/`. In DevTools console at a
 - `.hero-viz` height ≈ 313px (not ~2200)
 - All `a,button` visible → height ≥ 24px for links, ≥ 44px for real controls
 
-Then widen to 1280px and confirm `.hero-viz` is ~78% of the hero again
-(desktop unchanged).
+Then widen to 1280px and confirm the mobile-only rules drop away (hero grid
+returns to 2 columns, meridian thread visible, `--section-pad` back to
+`clamp(72px, 5vw + 40px, 128px)`).
+
+## Desktop pass (added after the mobile pass)
+
+Separate from the mobile work above, the desktop shell was widened and the hero
+backdrop tamed:
+
+- `--maxw` 1200px → 1760px. Content at 1920px went 1032px → 1560px (54% → 81%
+  of screen).
+- `.has-thread .container` left padding is now floored at 152px, because the
+  longest meridian station label ("T-0 · today") overruns `--rail-w` and was
+  landing 6px from the content edge.
+- `.hero-viz` capped at `min(78%, 560px)`. The art is authored 1200x500 and
+  mounted with `slice`; uncapped it scaled ~2.85x and cropped the plot to a
+  fragment. Its two axis labels were removed (the `t₀ · audit` one rendered at
+  ~43px, reading as a stray giant "AUDIT").
+- Marquee sets are floored at `100vw` so one set always spans the band.
+  Previously a set (~1225px) was narrower than the screen, so the loop ran out
+  of chips and snapped back instead of cycling.
 
 ## If extending further (optional, same guarded pattern)
 
