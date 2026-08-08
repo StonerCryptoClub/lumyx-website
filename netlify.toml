@@ -1,5 +1,5 @@
 [build]
-  command = "mkdir -p dist/js dist/css dist/v2 && cp *.html dist/ && cp sitemap.xml dist/sitemap.xml && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp -r v2/. dist/v2/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
+  command = "mkdir -p dist/js dist/css dist/images dist/v1 && cp *.html dist/ && cp *.png dist/ && cp *.ico dist/ && cp *.webmanifest dist/ && cp robots.txt dist/robots.txt && cp sitemap.xml dist/sitemap.xml && cp contentful-loader.js contentful-helpers.js calendly-integration.js portfolio-manager.js service-worker.js dist/ && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp -r images/. dist/images/ && cp -r v1/. dist/v1/ && cp netlify.toml dist/netlify.toml"
   publish = "dist"
 
 # Disable Next.js plugin completely
@@ -8,7 +8,7 @@
 
 # Production context
 [context.production]
-  command = "mkdir -p dist/js dist/css dist/v2 && cp *.html dist/ && cp sitemap.xml dist/sitemap.xml && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp -r v2/. dist/v2/ && cp netlify.toml dist/netlify.toml && cp google-search-logo.png dist/google-search-logo.png"
+  command = "mkdir -p dist/js dist/css dist/images dist/v1 && cp *.html dist/ && cp *.png dist/ && cp *.ico dist/ && cp *.webmanifest dist/ && cp robots.txt dist/robots.txt && cp sitemap.xml dist/sitemap.xml && cp contentful-loader.js contentful-helpers.js calendly-integration.js portfolio-manager.js service-worker.js dist/ && cp -r js/. dist/js/ && cp -r css/. dist/css/ && cp -r images/. dist/images/ && cp -r v1/. dist/v1/ && cp netlify.toml dist/netlify.toml"
   publish = "dist"
 
 [[headers]]
@@ -98,26 +98,44 @@
   status = 301
   force = true
 
-# Semantic URL structure - Clean URLs without .html
+# v2 promoted to root (2026-08-07): old /v2/* URLs and bookmarks forward to
+# the equivalent root path.
+[[redirects]]
+  from = "/v2/*"
+  to = "/:splat"
+  status = 301
+
+# ai-lead-generation retired in favor of lead-follow-up-automation (v2's
+# equivalent nav item). All old aliases now point to the new page.
 [[redirects]]
   from = "/ai-agents-and-workflows"
-  to = "/ai-lead-generation"
+  to = "/lead-follow-up-automation"
   status = 301
 
 [[redirects]]
   from = "/ai-lead-generation.html"
-  to = "/ai-lead-generation"
+  to = "/lead-follow-up-automation"
   status = 301
 
 [[redirects]]
   from = "/ai-lead-generation"
-  to = "/ai-lead-generation.html"
-  status = 200
+  to = "/lead-follow-up-automation"
+  status = 301
 
 [[redirects]]
   from = "/ai-agents"
-  to = "/ai-lead-generation"
+  to = "/lead-follow-up-automation"
   status = 301
+
+[[redirects]]
+  from = "/lead-follow-up-automation.html"
+  to = "/lead-follow-up-automation"
+  status = 301
+
+[[redirects]]
+  from = "/lead-follow-up-automation"
+  to = "/lead-follow-up-automation.html"
+  status = 200
 
 [[redirects]]
   from = "/ppc-management.html"

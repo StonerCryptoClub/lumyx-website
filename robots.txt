@@ -15,6 +15,10 @@ Disallow: /logs/
 Disallow: /.env
 Disallow: /.env.*
 
+# Archived pre-2026-08-07 design, kept live for reference only - would
+# otherwise duplicate the current site's content under a different URL.
+Disallow: /v1/
+
 # Allow images, CSS, JS for proper indexing - Google needs these
 # Removed blocking of: images, css, js, png, jpg, svg, xml
 

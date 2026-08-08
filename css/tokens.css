@@ -1,0 +1,75 @@
+@layer tokens, base, components, sections, motion;
+
+@layer tokens {
+:root {
+  /* ---- Ground: daylight paper (warm-tinted toward amber hue; NOT cream) ---- */
+  --bg:             oklch(0.975 0.004 75);  /* page ground ≈ #F8F7F4 */
+  --surface:        oklch(0.995 0.002 75);  /* cards ≈ #FEFEFD */
+  --surface-sunken: oklch(0.955 0.005 75);  /* alt-section ground */
+
+  /* ---- Console: the page's dark punctuation (form card, newsletter, footer ONLY) ---- */
+  --console:        oklch(0.205 0.012 60);  /* ≈ #1C1815 */
+  --console-2:      oklch(0.255 0.014 60);  /* raised surface on console */
+
+  /* ---- Ink ramp (warm near-black; never pure gray) ---- */
+  --ink:            oklch(0.235 0.012 60);  /* headings */
+  --ink-body:       oklch(0.32 0.010 60);   /* body — 9.5:1 on --bg */
+  --ink-muted:      oklch(0.45 0.008 60);   /* captions — 5.2:1 (AA floor is the floor) */
+  --ink-on-dark:    oklch(0.97 0.004 75);
+  --ink-on-dark-2:  oklch(0.74 0.006 75);
+
+  /* ---- Amber system (the inversion rule: bright amber is FILL, never text-on-light) ---- */
+  --accent-fill:    #FFA500;                /* fills/surfaces only */
+  --accent-bright:  #FFD700;
+  --accent-text:    oklch(0.50 0.13 65);    /* links/annotations — 4.6:1 on --bg */
+  --accent-deep:    oklch(0.42 0.12 60);    /* hover — 6:1 */
+  --accent-gradient: linear-gradient(135deg, #FFD700, #FFA500); /* PRIMARY CTA ONLY — the page's single gradient */
+  --accent-wash:    oklch(0.94 0.035 80);   /* chip/hover ground */
+  --accent-on-dark: oklch(0.86 0.14 80);    /* amber that reads on console */
+
+  /* ---- Drench (used by EXACTLY one section: the proof band) ---- */
+  --drench-bg:      oklch(0.78 0.155 75);
+  --drench-ink:     oklch(0.22 0.05 60);    /* 7.8:1 on drench */
+  --drench-line:    oklch(0.66 0.14 70);
+
+  /* ---- Error (must NOT look like brand amber) ---- */
+  --error:          oklch(0.55 0.16 25);
+  --error-on-dark:  oklch(0.78 0.13 25);
+
+  /* ---- Structure ---- */
+  --border:         oklch(0.88 0.006 75);
+  --border-strong:  oklch(0.78 0.008 75);
+  --border-on-dark: oklch(0.32 0.010 60);
+  --shadow-sm:  0 1px 2px oklch(0.2 0.01 60 / 0.06);
+  --shadow-md:  0 6px 24px -8px oklch(0.2 0.01 60 / 0.14);
+  --shadow-lg:  0 24px 60px -20px oklch(0.2 0.01 60 / 0.22);
+  --shadow-cta: 0 10px 28px -6px oklch(0.72 0.15 75 / 0.45);
+
+  /* ---- Type ---- */
+  --font-display: 'Montserrat', system-ui, sans-serif;              /* 800 only, display */
+  --font-body:    system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'Spline Sans Mono', ui-monospace, Menlo, monospace; /* telemetry voice */
+  --text-xs: 0.8125rem;  --text-sm: 0.9375rem;  --text-base: 1.0625rem;
+  --text-lg: 1.36rem;    --text-xl: 1.74rem;
+  --text-2xl: clamp(2.1rem, 1.4rem + 2.2vw, 3rem);
+  --text-hero: clamp(2.4rem, 1.6rem + 3.4vw, 4.2rem);   /* ceiling < 6rem ban */
+  --lh-tight: 1.08; --lh-snug: 1.25; --lh-body: 1.65;
+
+  /* ---- Space (24px rhythm) ---- */
+  --sp-1: 6px; --sp-2: 12px; --sp-3: 24px; --sp-4: 48px; --sp-5: 96px;
+  --section-pad: clamp(72px, 5vw + 40px, 128px);
+  --gutter: clamp(20px, 4vw, 48px);
+  --measure: 65ch;
+  --maxw: 1760px;           /* wide desktop shell; prose still capped by --measure */
+  --rail-w: 72px;            /* reserved left rail for the meridian thread (desktop) */
+
+  /* ---- Radii / motion ---- */
+  --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);   /* out-quint. THE easing. No bounce, ever. */
+  --dur-fast: 180ms; --dur-base: 420ms; --dur-slow: 700ms;
+  --rise: 20px;
+
+  /* ---- Z scale (semantic; never 999/9999) ---- */
+  --z-thread: 50; --z-nav: 100; --z-overlay: 200; --z-drawer: 300;
+}
+}

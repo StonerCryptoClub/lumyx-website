@@ -1,0 +1,106 @@
+/* ============================================================
+   MERIDIAN — Layer 5: motion
+   Initial hidden states apply ONLY under html.js-motion, so a JS
+   failure ships a fully readable page. transform/opacity/clip-path/
+   stroke-dash only. One easing. Ref: MERIDIAN-BUILD §9.
+   ============================================================ */
+@layer tokens, base, components, sections, motion;
+
+/* Keyframes (global by name) */
+@keyframes caret-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+@keyframes marquee-scroll { to { transform: translateX(-50%); } }
+@keyframes tl-type { 0%, 100% { opacity: 0.3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+@layer motion {
+
+  /* ---------- Scroll reveals (M5) ---------- */
+  .js-motion .reveal {
+    opacity: 0; transform: translateY(var(--rise));
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    transition-delay: calc(var(--stagger-i, 0) * 60ms);
+  }
+  .js-motion .reveal.is-in { opacity: 1; transform: none; }
+
+  /* ---------- Timeline events: rise from the spine side (M-tl) ---------- */
+  .js-motion .tl-event__card { opacity: 0; transform: translateX(16px); transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
+  .js-motion .tl-event--l .tl-event__card { transform: translateX(-16px); }
+  .js-motion .tl-event.is-in .tl-event__card { opacity: 1; transform: none; }
+  .js-motion .tl-note { opacity: 0; transition: opacity var(--dur-base) var(--ease-out); }
+  .js-motion .tl-note.is-in { opacity: 1; }
+
+  @media (max-width: 640px) {
+    .js-motion .tl-event__card,
+    .js-motion .tl-event--l .tl-event__card {
+      transform: translateY(12px);
+    }
+    .js-motion .tl-event.is-in .tl-event__card {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-motion .tl-event__card, .js-motion .tl-note { opacity: 1; transform: none; transition: opacity 150ms linear; }
+  }
+
+  /* ---------- Hero load choreography (M1) ---------- */
+  .js-motion .hero .status-chip,
+  .js-motion .hero h1 .hl-line,
+  .js-motion .hero-sub,
+  .js-motion .audit-line,
+  .js-motion .hero-vsl-col,
+  .js-motion .hero-form-col,
+  .js-motion .hero-proof-strip { opacity: 0; transform: translateY(22px); }
+
+  .js-motion.hero-ready .hero .status-chip,
+  .js-motion.hero-ready .hero h1 .hl-line,
+  .js-motion.hero-ready .hero-sub,
+  .js-motion.hero-ready .audit-line,
+  .js-motion.hero-ready .hero-vsl-col,
+  .js-motion.hero-ready .hero-form-col,
+  .js-motion.hero-ready .hero-proof-strip {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  }
+  .js-motion.hero-ready .hero .status-chip { transition-delay: 60ms; }
+  .js-motion.hero-ready .hero h1 .hl-line:nth-child(1) { transition-delay: 120ms; }
+  .js-motion.hero-ready .hero h1 .hl-line:nth-child(2) { transition-delay: 200ms; }
+  .js-motion.hero-ready .hero-sub { transition-delay: 280ms; }
+  .js-motion.hero-ready .audit-line { transition-delay: 340ms; }
+  .js-motion.hero-ready .hero-vsl-col { transition-delay: 400ms; }
+  .js-motion.hero-ready .hero-form-col { transition-delay: 460ms; }
+  .js-motion.hero-ready .hero-proof-strip { transition-delay: 520ms; }
+
+  /* ---------- Hero curve self-draws (M2) ---------- */
+  .js-motion .hero-viz__curve { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .js-motion .hero-viz__node, .js-motion .hero-viz__area { opacity: 0; }
+  .js-motion.hero-ready .hero-viz__curve { stroke-dashoffset: 0; transition: stroke-dashoffset 1500ms var(--ease-out) 200ms; }
+  .js-motion.hero-ready .hero-viz__area { opacity: 1; transition: opacity 900ms var(--ease-out) 900ms; }
+  .js-motion.hero-ready .hero-viz__node { opacity: 1; transition: opacity 400ms var(--ease-out); }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(1) { transition-delay: 700ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(2) { transition-delay: 1000ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(3) { transition-delay: 1300ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(4) { transition-delay: 1550ms; }
+  .js-motion.hero-ready .hero-viz__node:nth-of-type(5) { transition-delay: 1750ms; }
+
+  /* ---------- Proof band wipe (M6) ---------- */
+  .js-motion .proof-band__inner { clip-path: inset(0 0 100% 0); transition: clip-path var(--dur-slow) var(--ease-out); }
+  .js-motion .proof-band.is-in .proof-band__inner { clip-path: inset(0 0 0 0); }
+
+  /* ---------- Reduced motion (C8) ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .js-motion .reveal,
+    .js-motion .hero .status-chip,
+    .js-motion .hero h1 .hl-line,
+    .js-motion .hero-sub,
+    .js-motion .audit-line,
+    .js-motion .hero-vsl-col,
+    .js-motion .hero-form-col,
+    .js-motion .hero-proof-strip { transform: none; transition: opacity 150ms linear; }
+    .js-motion .proof-band__inner { clip-path: none; transition: opacity 150ms linear; }
+    .js-motion .hero-viz__curve { stroke-dashoffset: 0; transition: none; }
+    .js-motion .hero-viz__node, .js-motion .hero-viz__area { opacity: 1; transition: none; }
+    .rail__fill { transition: none; }
+    .marquee__track { animation-play-state: paused; }
+    .btn, .btn-primary:hover, .hf-submit:hover, .card--interactive:hover, .service:hover { transition: none; transform: none; }
+  }
+}

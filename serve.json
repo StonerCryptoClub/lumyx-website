@@ -1,7 +1,9 @@
 {
   "rewrites": [
-    { "source": "/v2", "destination": "/v2/index.html" },
-    { "source": "/v2/blog", "destination": "/v2/blog.html" },
+    { "source": "/v1", "destination": "/v1/index.html" },
+    { "source": "/lead-follow-up-automation", "destination": "/lead-follow-up-automation.html" },
+    { "source": "/ppc-management", "destination": "/ppc-management.html" },
+    { "source": "/blog", "destination": "/blog.html" },
     { "source": "/blog.html", "destination": "/blog.html" },
     { "source": "/mailchimp-form-custom.html", "destination": "/mailchimp-form-custom.html" },
     { "source": "/case-study.html", "destination": "/case-study.html" },
