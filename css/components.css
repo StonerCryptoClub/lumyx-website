@@ -185,6 +185,15 @@
     transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
   }
   .site-header.scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow-sm); }
+  /* The header's own background already goes full-bleed, but its .container
+     was inheriting both the body content's --maxw cap (1760px) AND the
+     .has-thread rail-reservation padding (152px) meant to keep body content
+     clear of the meridian thread. The thread's track starts at top:96px,
+     below the header entirely (it never runs behind it), so that padding was
+     pure dead space on the left with nothing balancing it on the right —
+     logo and nav were centered in a narrower box instead of spanning the bar
+     the way a header conventionally does. Reset both. */
+  .site-header .container { max-width: none; padding-left: var(--gutter); }
   .nav-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); min-height: 72px; }
   .brand { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
   .brand img { height: 34px; width: auto; }

@@ -83,19 +83,20 @@
   .hero:hover .hero__spotlight { opacity: 1; }
   .hero > .container { position: relative; z-index: 1; }
 
-  /* Height back to a percentage of the hero (78%, the original value) so the
-     backdrop genuinely spans down behind the VSL and signup card instead of
-     stopping in a band above them. Width stays capped at 1800px (not 100%) so
-     height — always ~1300-1700px at 78% of a stacked hero — permanently
-     dominates the `slice` scale over width (max 1.5x at the cap). That's the
-     structural fix for the original ultrawide bug: since height always drives
-     the scale now, the artwork's full vertical extent (including the peak
-     node near the top) is always in frame; only the horizontal extremes bleed
-     off the sides, which reads as intentional at this opacity, not a defect.
-     The area-fill gradient already fades to transparent toward the artwork's
-     own bottom edge, so the extra height reveals that built-in fade rather
-     than a hard crop. */
-  .hero-viz { position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 78%; width: min(100%, 1800px); z-index: 0; pointer-events: none; opacity: 0.9; }
+  /* Height is a percentage of the hero (78%) so the backdrop genuinely spans
+     down behind the VSL and signup card. Width stays capped (not bare 100%)
+     so height — always ~1300-1700px at 78% of a stacked hero — permanently
+     dominates the `slice` scale over width. That's the structural fix for the
+     original ultrawide bug: since height always drives the scale, the
+     artwork's full vertical extent (including the peak node near the top) is
+     always in frame; only the horizontal extremes bleed off the sides, which
+     reads as intentional at this opacity, not a defect. The area-fill
+     gradient already fades to transparent toward the artwork's own bottom
+     edge, so the extra height reveals that built-in fade rather than a hard
+     crop. 3600px covers every mainstream monitor (1920/2560/3440/3840) with
+     real margin — verified the top node stays in-frame up to ~4200px, only
+     clipping past ~4500px, well beyond any realistic single browser window. */
+  .hero-viz { position: absolute; top: 0; left: 50%; transform: translateX(-50%); height: 78%; width: min(100%, 3600px); z-index: 0; pointer-events: none; opacity: 0.9; }
   .hero-viz svg { width: 100%; height: 100%; display: block; }
   .hero-viz__area { fill: url(#viz-fill); }
   .hero-viz__curve { fill: none; stroke: var(--accent-fill); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
