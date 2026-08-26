@@ -195,8 +195,17 @@
      the way a header conventionally does. Reset both. */
   .site-header .container { max-width: none; padding-left: var(--gutter); }
   .nav-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); min-height: 72px; }
-  .brand { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
-  .brand img { height: 34px; width: auto; }
+  /* Logo.png ships with the "L" mark centered in a huge transparent canvas
+     (glyph was only ~15% of the source width) — height:auto rendered a wide,
+     mostly-invisible box, which read as "a big gap before the wordmark" even
+     though the CSS gap itself was already tight. Trimmed the source file to
+     the glyph's real bounds (Logo-original-backup.png keeps the untrimmed
+     original), so this gap and size now apply to the visible mark itself.
+     24px sits close to the wordmark's own 18.4px font-size, reading as
+     paired with the text rather than dominating it (40px measured taller
+     than the wordmark's own 30px line box — genuinely oversized). */
+  .brand { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+  .brand img { height: 24px; width: auto; }
   .brand__word { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: var(--ink); letter-spacing: -0.02em; }
 
   .nav-links { display: flex; align-items: center; gap: 2px; }
@@ -232,8 +241,8 @@
 
   @media (max-width: 360px) {
     .nav-bar { gap: var(--sp-2); min-height: 64px; }
-    .brand { gap: 8px; }
-    .brand img { height: 28px; }
+    .brand { gap: 6px; }
+    .brand img { height: 20px; }
     .brand__word { font-size: 0.98rem; white-space: nowrap; }
   }
 
