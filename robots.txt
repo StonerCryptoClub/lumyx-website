@@ -19,6 +19,16 @@ Disallow: /.env.*
 # otherwise duplicate the current site's content under a different URL.
 Disallow: /v1/
 
+# HTML fragment injected into other pages, not a standalone document. It has
+# no <head>, so it cannot carry a noindex meta tag - blocked here instead.
+Disallow: /portfolio-section.html
+
+# NOTE: the retired /ai-lead-generation.html and /ppc-services.html pages are
+# deliberately NOT disallowed here. They 301 to their current equivalents, and
+# a crawler blocked from fetching a URL never sees its redirect - which would
+# strand whatever ranking signals those old pages still hold instead of
+# passing them to /lead-follow-up-automation and /ppc-management.
+
 # Allow images, CSS, JS for proper indexing - Google needs these
 # Removed blocking of: images, css, js, png, jpg, svg, xml
 

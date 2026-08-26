@@ -19,6 +19,27 @@
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://lumyx.co/ppc-management" />
 
+  <!-- Service node linked by @id to the Organization defined on the homepage,
+       so this page reinforces the same entity instead of creating a second
+       ambiguous one. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://lumyx.co/ppc-management#service",
+    "name": "PPC Management & Google Ads",
+    "serviceType": "Pay-per-click advertising management",
+    "url": "https://lumyx.co/ppc-management",
+    "description": "Google Ads and Meta Ads management with landing page, tracking, CRM, and follow-up work included, so paid traffic converts into booked revenue instead of stopping at the click.",
+    "provider": { "@id": "https://lumyx.co/#organization" },
+    "areaServed": { "@type": "Country", "name": "United States" },
+    "audience": {
+      "@type": "BusinessAudience",
+      "name": "E-commerce brands, local service businesses, coaches and course creators"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />

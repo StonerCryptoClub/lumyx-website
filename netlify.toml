@@ -112,15 +112,36 @@
   to = "/lead-follow-up-automation"
   status = 301
 
+# force = true is required here: ai-lead-generation.html still exists on disk,
+# and Netlify serves an existing static file BEFORE applying a non-forced
+# redirect. Without force, this 301 never fired and the retired page kept
+# serving near-duplicate content competing with /lead-follow-up-automation,
+# splitting ranking signals between two URLs for the same topic.
 [[redirects]]
   from = "/ai-lead-generation.html"
   to = "/lead-follow-up-automation"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/ai-lead-generation"
   to = "/lead-follow-up-automation"
   status = 301
+  force = true
+
+# Same problem: ppc-services.html is the retired v1 PPC page, still live and
+# competing with /ppc-management for the same intent.
+[[redirects]]
+  from = "/ppc-services.html"
+  to = "/ppc-management"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ppc-services"
+  to = "/ppc-management"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/ai-agents"
