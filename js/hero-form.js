@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typeof window.lumyxTrackLeadConversion === 'function') {
       window.lumyxTrackLeadConversion('lead_form', {
         service: service,
-        email: email,
+        eventId: createTrackingEventId('lead'),
         form_location: window.location.pathname
       });
     }
@@ -249,6 +249,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function isValidPhone(phone) {
     return phone.replace(/\D/g, '').length >= 10;
+  }
+
+  function createTrackingEventId(prefix) {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return prefix + '-' + window.crypto.randomUUID();
+    }
+    return prefix + '-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
   }
 
   async function submitLeadToGhl(payload) {

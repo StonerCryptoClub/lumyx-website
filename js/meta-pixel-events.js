@@ -1,127 +1,129 @@
-// Meta Pixel Event Tracking
+(function () {
+    'use strict';
 
-// Track when someone starts the booking process
-function trackBookingStart() {
-    console.log('Tracking booking start');
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', {
-            content_category: 'Booking',
-            content_name: 'Strategy Call'
-        });
-    }
-}
+    var META_PIXEL_ID = '914274674738131';
+    var BOOKING_START_KEY = 'lumyx_meta_booking_start_fired';
 
-// Track when a booking is completed
-async function trackBookingComplete(eventData) {
-    console.log('Tracking booking completion:', eventData);
-    
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Schedule', {
-            content_category: 'Booking',
-            content_name: 'Strategy Call',
-            currency: 'USD',
-            value: 0.00,
-            predicted_ltv: 0.00
-        });
+    function installMetaPixel() {
+        if (window.fbq) return;
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
     }
 
-    // Store booking in database
-    if (eventData && eventData.event) {
-        const event = eventData.event;
-        const invitee = eventData.invitee || {};
-        
-        try {
-            const bookingData = {
-                email: invitee.email,
-                name: invitee.name,
-                phone: invitee.phone || null,
-                date: new Date(event.start_time).toISOString().split('T')[0],
-                time: new Date(event.start_time).toLocaleTimeString('en-US', { hour12: false }),
-                callType: 'Strategy Call',
-                eventId: event.uuid,
-                notes: invitee.questions_and_responses || null
-            };
+    function initializeMetaPixel() {
+        installMetaPixel();
+        if (typeof window.fbq !== 'function') return false;
 
-            console.log('Storing booking data:', bookingData);
-            
-            if (typeof window.addBooking === 'function') {
-                const result = await window.addBooking(bookingData);
-                console.log('Booking storage result:', result);
-                
-                if (!result.success) {
-                    console.error('Failed to store booking:', result.error);
-                }
-            } else {
-                console.error('addBooking function not available');
-            }
-        } catch (error) {
-            console.error('Error processing booking:', error);
+        if (!window.__lumyxMetaPixelInitialized) {
+            window.fbq('init', META_PIXEL_ID);
+            window.fbq('track', 'PageView');
+            window.__lumyxMetaPixelInitialized = true;
         }
-    } else {
-        console.error('Invalid event data:', eventData);
-    }
-}
 
-// Track when contact form is submitted
-function trackContactSubmit() {
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Contact');
+        return true;
     }
-}
 
-// Track when someone views the pricing section
-function trackPricingView() {
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'ViewContent', {
+    function safeSessionGet(key) {
+        try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function safeSessionSet(key, value) {
+        try { window.sessionStorage.setItem(key, value); } catch (e) {}
+    }
+
+    function getVariant() {
+        return window.location.pathname.indexOf('/v2') === 0 ? 'v2' : 'main';
+    }
+
+    function trackMeta(eventName, payload, options) {
+        if (!initializeMetaPixel()) return false;
+
+        window.fbq('track', eventName, payload || {}, options || {});
+        return true;
+    }
+
+    window.lumyxTrackMetaConversion = function (source, metadata) {
+        var details = metadata || {};
+        var conversionSource = source || 'lead';
+        var eventName = conversionSource === 'booking' ? 'Schedule' : 'Lead';
+        var dedupeKey = 'lumyx_meta_' + eventName.toLowerCase() + '_conversion_fired';
+        var eventId = details.transaction_id || details.eventId || details.email || '';
+
+        if (safeSessionGet(dedupeKey)) return false;
+        safeSessionSet(dedupeKey, String(Date.now()));
+
+        var payload = {
+            content_name: details.event_label || details.service || (conversionSource === 'booking' ? 'Growth Audit Booking' : 'Growth Audit Lead Form'),
+            content_category: conversionSource === 'booking' ? 'Booking' : 'Lead Generation',
+            source_channel: details.source_channel || 'website',
+            form_location: details.form_location || window.location.pathname,
+            variant: details.variant || getVariant()
+        };
+
+        var options = eventId ? { eventID: String(eventId) } : {};
+        return trackMeta(eventName, payload, options);
+    };
+
+    window.trackBookingStart = function () {
+        if (safeSessionGet(BOOKING_START_KEY)) return false;
+        safeSessionSet(BOOKING_START_KEY, String(Date.now()));
+
+        return trackMeta('InitiateCheckout', {
+            content_category: 'Booking',
+            content_name: 'Growth Audit Booking',
+            form_location: window.location.pathname,
+            variant: getVariant()
+        });
+    };
+
+    window.trackContactSubmit = function () {
+        return window.lumyxTrackMetaConversion('lead_form', {
+            event_label: 'Contact Form',
+            form_location: window.location.pathname,
+            variant: getVariant()
+        });
+    };
+
+    window.trackPricingView = function () {
+        return trackMeta('ViewContent', {
             content_category: 'Pricing',
-            content_name: 'Services Pricing'
+            content_name: 'Services Pricing',
+            variant: getVariant()
         });
-    }
-}
+    };
 
-// Initialize event listeners
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Initializing event listeners');
-    
-    // Track booking events
-    const calendlyContainer = document.getElementById('calendly-container');
-    if (calendlyContainer) {
-        console.log('Found Calendly container, setting up event listeners');
-        
-        // Track when Calendly widget loads
-        window.addEventListener('calendly.event_scheduled', function(e) {
-            console.log('Calendly event scheduled:', e.data);
-            trackBookingComplete(e.data);
-        });
+    initializeMetaPixel();
 
-        // Track when someone clicks to start booking
-        calendlyContainer.addEventListener('click', function() {
-            trackBookingStart();
-        });
-    } else {
-        console.error('Calendly container not found');
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendlyContainer = document.getElementById('calendly-container');
+        if (calendlyContainer) {
+            calendlyContainer.addEventListener('click', window.trackBookingStart);
+        }
 
-    // Track contact form submission
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            trackContactSubmit();
-        });
-    }
+        var contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', window.trackContactSubmit);
+        }
 
-    // Track pricing section view
-    const pricingSection = document.querySelector('.pricing-section');
-    if (pricingSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    trackPricingView();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+        var pricingSection = document.querySelector('.pricing-section');
+        if (pricingSection && 'IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        window.trackPricingView();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
 
-        observer.observe(pricingSection);
-    }
-}); 
+            observer.observe(pricingSection);
+        }
+    });
+})();

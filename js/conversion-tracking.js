@@ -8,7 +8,7 @@ class ConversionTracker {
     constructor() {
         this.trackingId = 'G-YOUR_GA4_ID'; // Replace with actual GA4 ID
         this.gtmId = 'GTM-XXXXXXX'; // Replace with actual GTM ID
-        this.fbPixelId = '1361608738369835'; // Your existing Facebook Pixel
+        this.fbPixelId = '914274674738131'; // Your existing Facebook Pixel
         this.linkedinPartnerId = 'YOUR_LINKEDIN_ID'; // Replace with LinkedIn Partner ID
         
         this.isLoaded = false;

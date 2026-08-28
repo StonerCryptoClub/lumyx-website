@@ -35,21 +35,52 @@
 
   var fired = false; // Only fire once per page load.
 
-  function isBookingMessage(data) {
-    if (!data || typeof data !== 'object') return false;
+  function getBookingDetails(data) {
+    if (!data) return null;
+
+    // Current GHL calendar widgets send:
+    // ['msgsndr-booking-complete', { calendarId, appointmentId, ... }]
+    if (Array.isArray(data)) {
+      if (String(data[0] || '').toLowerCase() === 'msgsndr-booking-complete') {
+        return data[1] && typeof data[1] === 'object' ? data[1] : {};
+      }
+      return null;
+    }
+
+    if (typeof data !== 'object') return null;
+
     var vals = [data.event, data.type, data.message, data.action, data.name]
       .map(function (v) { return String(v || '').toLowerCase(); });
-    return BOOKING_SIGNALS.some(function (signal) {
+
+    var matched = BOOKING_SIGNALS.some(function (signal) {
       return vals.some(function (v) { return v.indexOf(signal) !== -1; });
     });
+
+    return matched ? data : null;
   }
 
-  function fireBookingConversion() {
+  function createEventId(details) {
+    var suppliedId = details && (
+      details.appointmentId ||
+      details.appointment_id ||
+      details.eventId ||
+      details.id
+    );
+
+    if (suppliedId) return String(suppliedId);
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    return 'ghl-booking-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+  }
+
+  function fireBookingConversion(details) {
     if (fired) return;
     fired = true;
 
     if (typeof window.lumyxTrackLeadConversion === 'function') {
       window.lumyxTrackLeadConversion('booking', {
+        eventId: createEventId(details),
         event_label: 'ghl_calendar',
         form_location: window.location.pathname
       });
@@ -67,8 +98,9 @@
       try { data = JSON.parse(data); } catch (e) { return; }
     }
 
-    if (isBookingMessage(data)) {
-      fireBookingConversion();
+    var bookingDetails = getBookingDetails(data);
+    if (bookingDetails) {
+      fireBookingConversion(bookingDetails);
     }
   }, false);
 

@@ -5,7 +5,7 @@
  * Lead conversions should fire only after a successful form submission or
  * confirmed booking signal.
  *
- * All events now include 'variant' parameter for A/B testing (v1 vs v2)
+ * All events include a 'variant' parameter for legacy /v2 traffic vs the main site.
  */
 (function () {
   'use strict';
@@ -13,13 +13,13 @@
   var GOOGLE_ADS_LEAD_SEND_TO = 'AW-17852608393/5N5kCO_t3MocEInf5MBC';
   var SESSION_DEDUPE_KEY = 'lumyx_google_lead_conversion_fired';
 
-  // Detect which variant user is viewing (v1 = current, v2 = new)
+  // Detect legacy /v2 traffic separately; the improved site is now the main root.
   function getVariant() {
     const pathname = window.location.pathname;
     if (pathname.startsWith('/v2')) {
-      return 'v2'; // New design version
+      return 'v2';
     }
-    return 'v1'; // Original live version
+    return 'main';
   }
 
   function safeSessionGet(key) {
@@ -44,34 +44,49 @@
     var conversionSource = source || 'lead';
     var transactionId = details.transaction_id || details.eventId || details.email || '';
     var variant = getVariant();
+    var googleTracked = false;
+    var metaTracked = false;
 
-    if (typeof window.gtag !== 'function') return false;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', conversionSource === 'booking' ? 'book_appointment' : 'generate_lead', {
+        event_category: conversionSource === 'booking' ? 'booking' : 'lead_form',
+        event_label: details.event_label || details.service || conversionSource,
+        source_channel: details.source_channel || getAttributionChannel(),
+        form_location: details.form_location || window.location.pathname,
+        variant: variant
+      });
 
-    window.gtag('event', conversionSource === 'booking' ? 'book_appointment' : 'generate_lead', {
-      event_category: conversionSource === 'booking' ? 'booking' : 'lead_form',
-      event_label: details.event_label || details.service || conversionSource,
-      source_channel: details.source_channel || getAttributionChannel(),
-      form_location: details.form_location || window.location.pathname,
-      variant: variant
-    });
+      // Avoid counting the same visitor twice if they submit the form and book
+      // in the same session. Google Ads can still count repeat sessions normally.
+      if (!safeSessionGet(SESSION_DEDUPE_KEY)) {
+        safeSessionSet(SESSION_DEDUPE_KEY, String(Date.now()));
 
-    // Avoid counting the same visitor twice if they submit the form and book
-    // in the same session. Google Ads can still count repeat sessions normally.
-    if (safeSessionGet(SESSION_DEDUPE_KEY)) return false;
+        var conversionPayload = {
+          send_to: GOOGLE_ADS_LEAD_SEND_TO,
+          variant: variant
+        };
 
-    safeSessionSet(SESSION_DEDUPE_KEY, String(Date.now()));
+        if (transactionId) {
+          conversionPayload.transaction_id = String(transactionId);
+        }
 
-    var conversionPayload = {
-      send_to: GOOGLE_ADS_LEAD_SEND_TO,
-      variant: variant
-    };
-
-    if (transactionId) {
-      conversionPayload.transaction_id = String(transactionId);
+        window.gtag('event', 'conversion', conversionPayload);
+        googleTracked = true;
+      }
     }
 
-    window.gtag('event', 'conversion', conversionPayload);
-    return true;
+    if (typeof window.lumyxTrackMetaConversion === 'function') {
+      metaTracked = window.lumyxTrackMetaConversion(conversionSource, {
+        transaction_id: transactionId,
+        event_label: details.event_label,
+        service: details.service,
+        source_channel: details.source_channel || getAttributionChannel(),
+        form_location: details.form_location || window.location.pathname,
+        variant: variant
+      });
+    }
+
+    return googleTracked || metaTracked;
   };
 
   console.log('A/B Variant:', getVariant());

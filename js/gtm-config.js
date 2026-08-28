@@ -7,7 +7,7 @@ const GTMConfig = {
     // Replace these with your actual IDs
     GTM_ID: 'GTM-XXXXXXX',
     GA4_ID: 'G-YOUR_GA4_ID',
-    FB_PIXEL_ID: '1361608738369835',
+    FB_PIXEL_ID: '914274674738131',
     LINKEDIN_PARTNER_ID: 'YOUR_LINKEDIN_ID',
 
     /**
@@ -50,7 +50,7 @@ const GTMConfig = {
             {
                 name: 'Facebook Pixel ID',
                 type: 'Constant',
-                value: '1361608738369835'
+                value: '914274674738131'
             },
             {
                 name: 'LinkedIn Partner ID',
