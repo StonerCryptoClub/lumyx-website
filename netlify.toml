@@ -220,15 +220,23 @@
   to = "/newsletter.html"
   status = 301
 
+# seo-services.html retired: broken layout in production (CSS wasn't
+# applying, page rendered as raw unstyled text). No replacement page exists
+# yet, so it 301s to the homepage rather than a specific successor. force is
+# required here for the same reason as ai-lead-generation.html and
+# ppc-services.html above: the file still exists on disk, and Netlify serves
+# an existing static file before a non-forced redirect.
 [[redirects]]
   from = "/seo-services.html"
-  to = "/seo-services"
+  to = "/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/seo-services"
-  to = "/seo-services.html"
-  status = 200
+  to = "/"
+  status = 301
+  force = true
 
 # Redirect old domain variations
 [[redirects]]
