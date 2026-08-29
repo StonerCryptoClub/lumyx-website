@@ -1,0 +1,440 @@
+/* ============================================================
+   LUMYX — web-development page (page-scoped layer)
+
+   Deliberately shares NOTHING structural with ppc-management or
+   lead-follow-up-automation. Those pages argue by running a
+   scroll-hijacked audit terminal into a buildsheet carousel.
+   This one argues by demonstrating itself: a live instrument
+   measuring the very page you're reading, then a click-driven
+   anatomy instead of a scroll-driven one.
+
+   Same tokens, same brand. Different structure, different
+   interaction model, different signature moment.
+   ============================================================ */
+@layer tokens, base, components, sections, motion, webdev;
+
+@layer webdev {
+
+  /* =========================================================
+     1. HERO — asymmetric split. Headline argues; the instrument
+        beside it proves. Nothing like page-hero__solo.
+     ========================================================= */
+  .wd-hero {
+    position: relative;
+    padding-block: clamp(28px, 4vw, 64px) clamp(48px, 6vw, 96px);
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .wd-hero__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(32px, 4vw, 72px);
+    align-items: center;
+  }
+  .wd-hero__eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent-deep); margin-bottom: var(--sp-3);
+  }
+  .wd-hero__eyebrow::before {
+    content: ""; width: 22px; height: 1px; background: var(--accent-fill);
+  }
+  .wd-hero h1 {
+    font-size: clamp(2.4rem, 1.4rem + 3.2vw, 4rem);
+    line-height: 1.02; letter-spacing: -0.032em;
+    margin-bottom: var(--sp-3); text-wrap: balance;
+  }
+  .wd-hero h1 em { font-style: normal; color: var(--accent-text); }
+  .wd-hero__lead {
+    color: var(--ink-body); font-size: var(--text-lg);
+    max-width: 46ch; margin-bottom: var(--sp-4);
+  }
+  .wd-hero__actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
+
+  /* =========================================================
+     2. THE LIVE INSTRUMENT — the page measuring itself.
+        This is the signature moment and the proof substitute.
+     ========================================================= */
+  .wd-gauge {
+    background: var(--console); color: var(--ink-on-dark);
+    border: 1px solid var(--border-on-dark); border-radius: var(--r-lg);
+    padding: clamp(18px, 2vw, 26px);
+    box-shadow: var(--shadow-lg);
+  }
+  .wd-gauge__top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: var(--sp-3); padding-bottom: var(--sp-3);
+    border-bottom: 1px solid var(--border-on-dark); margin-bottom: var(--sp-2);
+  }
+  .wd-gauge__title {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: var(--text-base); color: var(--ink-on-dark);
+  }
+  .wd-gauge__sub {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-on-dark-2); margin-top: 3px;
+  }
+
+  .wd-metric {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "name value" "bar bar";
+    gap: 4px var(--sp-2); align-items: baseline;
+    padding-block: var(--sp-2);
+  }
+  .wd-metric + .wd-metric { border-top: 1px solid oklch(1 0 0 / 0.07); }
+  .wd-metric__name {
+    grid-area: name;
+    font-family: var(--font-mono); font-size: 0.7rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-on-dark-2);
+  }
+  .wd-metric__name span { display: block; text-transform: none; letter-spacing: 0; opacity: 0.65; font-size: 0.66rem; margin-top: 2px; }
+  .wd-metric__value {
+    grid-area: value; justify-self: end;
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 1.5rem; line-height: 1;
+    font-variant-numeric: tabular-nums;   /* stops jitter as values stream in */
+    color: var(--ink-on-dark);
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .wd-metric__value.is-pending { color: var(--ink-on-dark-2); font-size: 1.1rem; }
+  .wd-metric__value.is-pass { color: var(--accent-on-dark); }
+  .wd-metric__value.is-warn { color: var(--error-on-dark); }
+  .wd-metric__unit { font-size: 0.62em; opacity: 0.7; margin-left: 1px; }
+
+  .wd-metric__bar {
+    grid-area: bar; position: relative; height: 3px; border-radius: 2px;
+    background: oklch(1 0 0 / 0.09); overflow: hidden; margin-top: 6px;
+  }
+  .wd-metric__fill {
+    position: absolute; inset: 0 auto 0 0; width: 0;
+    background: var(--accent-fill); border-radius: 2px;
+    transition: width 900ms var(--ease-out), background var(--dur-base) var(--ease-out);
+  }
+  .wd-metric__fill.is-warn { background: var(--error-on-dark); }
+
+  .wd-gauge__foot {
+    margin-top: var(--sp-3); padding-top: var(--sp-3);
+    border-top: 1px solid var(--border-on-dark);
+    font-family: var(--font-mono); font-size: 0.7rem; line-height: 1.55;
+    color: var(--ink-on-dark-2);
+  }
+  .wd-gauge__foot b { color: var(--accent-on-dark); font-weight: 600; }
+
+  /* =========================================================
+     3. ANATOMY — click-driven, not scroll-driven. The visitor
+        drives it; nothing is hijacked.
+     ========================================================= */
+  .wd-anatomy { padding-block: var(--section-pad); background: var(--surface-sunken); }
+  .wd-anatomy__grid {
+    display: grid; grid-template-columns: 0.92fr 1.08fr;
+    gap: clamp(28px, 4vw, 64px); align-items: start; margin-top: var(--sp-4);
+  }
+
+  /* the abstract wireframe — structural blocks only, never a
+     screenshot or a mock of anyone's real site */
+  .wd-frame {
+    position: relative; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--r-md);
+    padding: 14px; box-shadow: var(--shadow-sm);
+  }
+  .wd-frame__bar {
+    display: flex; gap: 5px; padding-bottom: 12px; margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .wd-frame__bar i { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); }
+  .wd-frame__body { display: flex; flex-direction: column; gap: 9px; }
+  .wd-block { background: var(--surface-sunken); border-radius: 5px; position: relative; }
+  .wd-block--hero { height: 74px; }
+  .wd-block--line { height: 9px; }
+  .wd-block--line.is-short { width: 52%; }
+  .wd-block--media { height: 96px; background: var(--accent-wash); }
+  .wd-block--form { height: 60px; }
+  .wd-block--row { display: flex; gap: 9px; }
+  .wd-block--row > * { flex: 1; }
+
+  /* numbered hotspots sit on the wireframe */
+  .wd-pin {
+    position: absolute; z-index: 2;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--surface); color: var(--ink-muted);
+    border: 1.5px solid var(--border-strong);
+    font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer; padding: 0;
+    transition: background var(--dur-fast) var(--ease-out),
+                color var(--dur-fast) var(--ease-out),
+                border-color var(--dur-fast) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out);
+  }
+  .wd-pin:hover { border-color: var(--accent-text); color: var(--accent-deep); }
+  .wd-pin[aria-selected="true"] {
+    background: var(--accent-gradient); color: var(--ink);
+    border-color: transparent; transform: scale(1.12);
+    box-shadow: var(--shadow-cta);
+  }
+  /* touch target stays 44px even though the visible mark is 26px */
+  .wd-pin::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; }
+
+  .wd-pin--1 { top: 30px; left: 16px; }
+  .wd-pin--2 { top: 120px; right: 16px; }
+  .wd-pin--3 { top: 196px; left: 16px; }
+  .wd-pin--4 { bottom: 74px; right: 16px; }
+  .wd-pin--5 { bottom: 18px; left: 16px; }
+
+  /* the detail panel that swaps as pins are chosen */
+  .wd-detail { min-height: 320px; }
+  .wd-detail__panel { display: none; }
+  .wd-detail__panel.is-active { display: block; }
+  .wd-detail__idx {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent-deep); display: block; margin-bottom: var(--sp-2);
+  }
+  .wd-detail h3 { font-size: var(--text-xl); margin-bottom: var(--sp-2); }
+  .wd-detail p { color: var(--ink-body); margin-bottom: var(--sp-3); max-width: 54ch; }
+  .wd-detail__cost {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--r-sm); padding: 10px 14px;
+    font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-body);
+  }
+  .wd-detail__cost b { color: var(--ink); font-weight: 600; }
+
+  /* =========================================================
+     4. ROUTER — the three offers as a chooser, not three cards
+     ========================================================= */
+  .wd-router { padding-block: var(--section-pad); }
+  .wd-router__tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    margin-top: var(--sp-4); margin-bottom: var(--sp-4);
+  }
+  .wd-tab {
+    appearance: none; background: transparent; border: none;
+    padding: 12px 4px; margin-right: var(--sp-3);
+    font-family: var(--font-display); font-weight: 800;
+    font-size: var(--text-lg); color: var(--ink-muted);
+    cursor: pointer; position: relative; min-height: 44px;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .wd-tab::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+    background: var(--accent-fill); transform: scaleX(0); transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .wd-tab:hover { color: var(--ink); }
+  .wd-tab[aria-selected="true"] { color: var(--ink); }
+  .wd-tab[aria-selected="true"]::after { transform: scaleX(1); }
+
+  .wd-panel { display: none; }
+  .wd-panel.is-active { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 56px); }
+  .wd-panel__lead p { color: var(--ink-body); margin-bottom: var(--sp-3); max-width: 50ch; }
+  .wd-panel__for {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--accent-deep); display: block; margin-bottom: var(--sp-2);
+  }
+  .wd-panel h3 { font-size: var(--text-2xl); line-height: 1.1; margin-bottom: var(--sp-3); }
+  .wd-panel__list { display: flex; flex-direction: column; gap: 2px; }
+  .wd-panel__list li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--sp-2);
+    align-items: baseline; padding-block: 11px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-body); font-size: var(--text-sm);
+  }
+  .wd-panel__list li span:first-child {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    color: var(--accent-deep); font-variant-numeric: tabular-nums;
+  }
+
+  /* =========================================================
+     5. SPEC SHEET — standards as a hardware-style spec table
+     ========================================================= */
+  .wd-spec { padding-block: var(--section-pad); background: var(--console); color: var(--ink-on-dark); }
+  .wd-spec .sec-head h2 { color: var(--ink-on-dark); }
+  .wd-spec .sec-head p { color: var(--ink-on-dark-2); }
+  .wd-spec .kicker { color: var(--accent-on-dark); }
+  .wd-spec__table { margin-top: var(--sp-4); border-top: 1px solid var(--border-on-dark); }
+  .wd-spec__row {
+    display: grid; grid-template-columns: 168px 1fr auto;
+    gap: var(--sp-3); align-items: start;
+    padding-block: var(--sp-3);
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+  .wd-spec__k {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent-on-dark); padding-top: 3px;
+  }
+  .wd-spec__v h3 { font-size: var(--text-base); color: var(--ink-on-dark); margin-bottom: 5px; }
+  .wd-spec__v p { color: var(--ink-on-dark-2); font-size: var(--text-sm); max-width: 60ch; }
+  .wd-spec__badge {
+    font-family: var(--font-mono); font-size: 0.66rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-on-dark-2); border: 1px solid var(--border-on-dark);
+    border-radius: var(--r-pill); padding: 5px 11px; white-space: nowrap;
+  }
+  .wd-spec__badge.is-live { color: var(--accent-on-dark); border-color: var(--accent-on-dark); }
+
+  /* =========================================================
+     6. PRODUCT-PAGE TEARDOWN — vertical annotated stack
+     ========================================================= */
+  .wd-pdp { padding-block: var(--section-pad); }
+  .wd-pdp__stack { margin-top: var(--sp-4); display: flex; flex-direction: column; }
+  .wd-pdp__row {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: var(--sp-3); align-items: start;
+    padding-block: var(--sp-3); border-top: 1px solid var(--border);
+    position: relative;
+  }
+  .wd-pdp__row:last-child { border-bottom: 1px solid var(--border); }
+  .wd-pdp__n {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--accent-deep);
+    padding-top: 4px;
+  }
+  .wd-pdp__row h3 { font-size: var(--text-base); margin-bottom: 5px; }
+  .wd-pdp__row p { color: var(--ink-body); font-size: var(--text-sm); max-width: 62ch; }
+  .wd-pdp__plat {
+    display: inline-flex; gap: 6px; margin-top: var(--sp-2); flex-wrap: wrap;
+  }
+  .wd-pdp__plat span {
+    font-family: var(--font-mono); font-size: 0.64rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    background: var(--accent-wash); color: var(--accent-deep);
+    border-radius: var(--r-pill); padding: 4px 10px;
+  }
+
+  /* =========================================================
+     7. SEQUENCE RAIL — horizontal numbered rail, no carousel
+     ========================================================= */
+  .wd-rail { padding-block: var(--section-pad); background: var(--surface-sunken); }
+  .wd-rail__track {
+    margin-top: var(--sp-4);
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: var(--sp-3); position: relative;
+  }
+  .wd-rail__track::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 13px;
+    height: 1px; background: var(--border);
+  }
+  .wd-step { position: relative; padding-top: 40px; }
+  .wd-step::before {
+    content: ""; position: absolute; top: 7px; left: 0;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--border-strong);
+  }
+  .wd-step--now::before { background: var(--accent-fill); border-color: var(--accent-fill); }
+  .wd-step__k {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-muted); display: block; margin-bottom: 6px;
+  }
+  .wd-step h3 { font-size: var(--text-base); margin-bottom: 6px; }
+  .wd-step p { color: var(--ink-body); font-size: var(--text-sm); }
+  .wd-rail__note {
+    margin-top: var(--sp-4); padding-top: var(--sp-3);
+    border-top: 1px solid var(--border);
+    color: var(--ink-muted); font-size: var(--text-sm); max-width: 70ch;
+  }
+
+  /* =========================================================
+     8. CLOSE — single dark band, not the shared audit-panel
+     ========================================================= */
+  .wd-close { padding-block: var(--section-pad); }
+  .wd-close__card {
+    background: var(--accent-gradient); color: var(--ink);
+    border-radius: var(--r-lg); padding: clamp(28px, 4vw, 56px);
+    display: grid; grid-template-columns: 1.25fr 1fr;
+    gap: clamp(24px, 3vw, 56px); align-items: center;
+    box-shadow: var(--shadow-cta);
+  }
+  .wd-close__card h2 { font-size: var(--text-2xl); line-height: 1.08; margin-bottom: var(--sp-2); color: var(--ink); }
+  .wd-close__card p { color: oklch(0.28 0.05 60); max-width: 46ch; }
+  .wd-close__list { display: flex; flex-direction: column; gap: 9px; }
+  .wd-close__list li {
+    display: grid; grid-template-columns: auto 1fr; gap: 10px;
+    align-items: baseline; font-size: var(--text-sm);
+    color: oklch(0.26 0.05 60); font-weight: 500;
+  }
+  .wd-close__list li::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: oklch(0.3 0.06 60); transform: translateY(-2px);
+  }
+  .wd-close .btn-primary {
+    background: var(--console); color: var(--ink-on-dark);
+    box-shadow: none; margin-top: var(--sp-3);
+  }
+  .wd-close .btn-primary:hover { background: var(--console-2); color: var(--ink-on-dark); }
+
+  /* =========================================================
+     9. Q&A — native <details>, no shared faq-item chrome
+     ========================================================= */
+  .wd-qa { padding-block: 0 var(--section-pad); }
+  .wd-qa__list { margin-top: var(--sp-3); border-top: 1px solid var(--border); }
+  .wd-qa__item { border-bottom: 1px solid var(--border); }
+  .wd-qa__item summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+    padding-block: var(--sp-3); min-height: 44px;
+    font-family: var(--font-display); font-weight: 700;
+    font-size: var(--text-base); color: var(--ink);
+  }
+  .wd-qa__item summary::-webkit-details-marker { display: none; }
+  .wd-qa__item summary::after {
+    content: ""; flex: none; width: 11px; height: 11px;
+    border-right: 2px solid var(--accent-text);
+    border-bottom: 2px solid var(--accent-text);
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .wd-qa__item[open] summary::after { transform: rotate(-135deg) translateY(-3px); }
+  .wd-qa__item summary:hover { color: var(--accent-deep); }
+  .wd-qa__item p {
+    color: var(--ink-body); font-size: var(--text-sm);
+    max-width: 74ch; padding-bottom: var(--sp-3); margin: 0;
+  }
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width: 980px) {
+    .wd-hero__inner { grid-template-columns: 1fr; gap: var(--sp-4); }
+    .wd-anatomy__grid { grid-template-columns: 1fr; }
+    .wd-panel.is-active { grid-template-columns: 1fr; }
+    .wd-spec__row { grid-template-columns: 140px 1fr; }
+    .wd-spec__badge { grid-column: 2; justify-self: start; margin-top: 6px; }
+    .wd-rail__track { grid-template-columns: 1fr 1fr; gap: var(--sp-4) var(--sp-3); }
+    .wd-rail__track::before { content: none; }
+    .wd-close__card { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .wd-hero h1 { font-size: clamp(2rem, 8vw, 2.6rem); }
+    .wd-hero__lead { font-size: var(--text-base); }
+    .wd-metric__value { font-size: 1.3rem; }
+    .wd-spec__row { grid-template-columns: 1fr; gap: 6px; }
+    .wd-spec__k { padding-top: 0; }
+    .wd-spec__badge { grid-column: 1; }
+    .wd-rail__track { grid-template-columns: 1fr; }
+    .wd-tab { font-size: var(--text-base); margin-right: var(--sp-2); }
+    .wd-detail { min-height: 0; }
+    /* pins get pulled to the frame edges so they never cover content */
+    .wd-pin--2, .wd-pin--4 { right: 10px; }
+    .wd-pin--1, .wd-pin--3, .wd-pin--5 { left: 10px; }
+  }
+
+  /* Motion is opt-in only; every transition above degrades to instant. */
+  @media (prefers-reduced-motion: reduce) {
+    .wd-metric__fill,
+    .wd-metric__value,
+    .wd-pin,
+    .wd-tab,
+    .wd-tab::after { transition: none; }
+  }
+}

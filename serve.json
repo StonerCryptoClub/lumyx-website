@@ -3,6 +3,7 @@
     { "source": "/v1", "destination": "/v1/index.html" },
     { "source": "/lead-follow-up-automation", "destination": "/lead-follow-up-automation.html" },
     { "source": "/ppc-management", "destination": "/ppc-management.html" },
+    { "source": "/web-development", "destination": "/web-development.html" },
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/blog.html", "destination": "/blog.html" },
     { "source": "/mailchimp-form-custom.html", "destination": "/mailchimp-form-custom.html" },
