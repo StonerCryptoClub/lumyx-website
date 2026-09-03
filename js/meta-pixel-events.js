@@ -53,11 +53,10 @@
         var details = metadata || {};
         var conversionSource = source || 'lead';
         var eventName = conversionSource === 'booking' ? 'Schedule' : 'Lead';
-        var dedupeKey = 'lumyx_meta_' + eventName.toLowerCase() + '_conversion_fired';
+        var dedupeKey = 'lumyx_meta_v2_' + eventName.toLowerCase() + '_conversion_fired';
         var eventId = details.transaction_id || details.eventId || details.email || '';
 
         if (safeSessionGet(dedupeKey)) return false;
-        safeSessionSet(dedupeKey, String(Date.now()));
 
         var payload = {
             content_name: details.event_label || details.service || (conversionSource === 'booking' ? 'Growth Audit Booking' : 'Growth Audit Lead Form'),
@@ -68,7 +67,11 @@
         };
 
         var options = eventId ? { eventID: String(eventId) } : {};
-        return trackMeta(eventName, payload, options);
+        var tracked = trackMeta(eventName, payload, options);
+        if (tracked) {
+            safeSessionSet(dedupeKey, String(Date.now()));
+        }
+        return tracked;
     };
 
     window.trackBookingStart = function () {

@@ -1,0 +1,246 @@
+/* ============================================================
+   LUMYX — faq page (page-scoped layer)
+
+   This page is Read mode, not Persuade. Every other page on the
+   site argues toward a booking; this one exists so a skeptical
+   visitor can find one specific answer fast and leave satisfied.
+   That's the whole design brief: findability over persuasion,
+   scanning over scrolling, a reference index over a pitch.
+
+   Deliberately shares no signature component with the service
+   pages (no .page-hero, .wd-hero/.wd-gauge, .desk terminal,
+   .buildsheet carousel, .audit-panel). Hairline rules instead of
+   cards; numbered mono questions instead of icon grids; a sticky
+   category rail instead of a scroll-hijacked scene. Same tokens,
+   same brand, deliberately different grammar.
+   ============================================================ */
+@layer tokens, base, components, sections, motion, faq;
+
+@layer faq {
+
+  /* =========================================================
+     1. MASTHEAD — compact. This is a reference page, not a
+        marketing hero. The search field IS the hero element.
+     ========================================================= */
+  .faq-mast {
+    padding-block: clamp(40px, 5vw, 72px) clamp(28px, 3vw, 44px);
+    background: var(--bg);
+  }
+  .faq-mast__kicker {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent-deep); margin-bottom: var(--sp-3);
+  }
+  .faq-mast__kicker::before { content: ""; width: 22px; height: 1px; background: var(--accent-fill); }
+  .faq-mast h1 {
+    font-size: clamp(2rem, 1.3rem + 2.4vw, 3.1rem);
+    line-height: 1.06; letter-spacing: -0.028em;
+    max-width: 18ch; margin-bottom: var(--sp-2);
+  }
+  .faq-mast__sub {
+    color: var(--ink-body); font-size: var(--text-lg);
+    max-width: 56ch; margin-bottom: var(--sp-4);
+  }
+
+  /* the search field: full-width, prominent, the actual interface */
+  .faq-search {
+    position: relative; max-width: 640px;
+  }
+  .faq-search__icon {
+    position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+    width: 18px; height: 18px; color: var(--ink-muted); pointer-events: none;
+  }
+  .faq-search input {
+    width: 100%; min-height: 56px;
+    padding: 0 48px 0 48px;
+    background: var(--surface); color: var(--ink);
+    border: 1.5px solid var(--border); border-radius: var(--r-md);
+    font-family: var(--font-body); font-size: var(--text-base);
+    transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .faq-search input::placeholder { color: var(--ink-muted); }
+  .faq-search input:focus {
+    outline: none; border-color: var(--accent-fill);
+    box-shadow: 0 0 0 3px oklch(0.78 0.15 75 / 0.3);
+  }
+  .faq-search__clear {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; display: none; align-items: center; justify-content: center;
+    background: transparent; border: none; border-radius: var(--r-sm);
+    color: var(--ink-muted); cursor: pointer;
+  }
+  .faq-search__clear:hover { color: var(--ink); background: var(--surface-sunken); }
+  .faq-search.has-value .faq-search__clear { display: inline-flex; }
+
+  .faq-count {
+    margin-top: var(--sp-2); font-family: var(--font-mono); font-size: 0.78rem;
+    letter-spacing: 0.02em; color: var(--ink-muted);
+  }
+  .faq-count b { color: var(--ink); font-weight: 600; }
+
+  /* =========================================================
+     2. BODY LAYOUT — sticky rail (desktop) + index
+     ========================================================= */
+  .faq-body { padding-block: 0 var(--section-pad); background: var(--bg); }
+  .faq-body__grid {
+    display: grid; grid-template-columns: 220px 1fr;
+    gap: clamp(28px, 4vw, 64px); align-items: start;
+  }
+
+  /* =========================================================
+     3. CATEGORY RAIL
+     ========================================================= */
+  .faq-rail {
+    position: sticky; top: 96px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .faq-rail__btn {
+    appearance: none; background: transparent; border: none;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2);
+    width: 100%; min-height: 44px; padding: 9px 12px;
+    border-radius: var(--r-sm); text-align: left; cursor: pointer;
+    font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm);
+    color: var(--ink-body);
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+  .faq-rail__btn:hover { background: var(--surface-sunken); color: var(--ink); }
+  .faq-rail__btn[aria-pressed="true"] { background: var(--accent-wash); color: var(--accent-deep); }
+  .faq-rail__count {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--ink-muted); font-variant-numeric: tabular-nums;
+  }
+  .faq-rail__btn[aria-pressed="true"] .faq-rail__count { color: var(--accent-deep); }
+
+  /* =========================================================
+     4. THE INDEX — hairline rules, mono numbers, no cards
+     ========================================================= */
+  .faq-cat { margin-bottom: var(--sp-5); }
+  .faq-cat:last-child { margin-bottom: 0; }
+  .faq-cat__head {
+    position: sticky; top: 73px; z-index: 2;
+    background: var(--bg);
+    display: flex; align-items: baseline; gap: 10px;
+    padding-block: 10px; margin-bottom: 4px;
+    border-bottom: 1px solid var(--border-strong);
+    font-family: var(--font-mono); font-size: 0.76rem;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink);
+  }
+  .faq-cat__head span { color: var(--ink-muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-q { border-bottom: 1px solid var(--border); }
+  .faq-q summary {
+    list-style: none; cursor: pointer;
+    display: grid; grid-template-columns: 44px 1fr 20px;
+    align-items: baseline; gap: var(--sp-2);
+    padding-block: 18px; min-height: 44px;
+  }
+  .faq-q summary::-webkit-details-marker { display: none; }
+  .faq-q summary:focus-visible {
+    outline: 2px solid var(--accent-fill); outline-offset: 3px; border-radius: 4px;
+  }
+  .faq-q__n {
+    font-family: var(--font-mono); font-size: 0.76rem; font-weight: 600;
+    color: var(--ink-muted); font-variant-numeric: tabular-nums;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .faq-q[open] .faq-q__n { color: var(--accent-deep); }
+  .faq-q__text {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: var(--text-base); line-height: 1.35; color: var(--ink);
+  }
+  .faq-q__chev {
+    width: 11px; height: 11px; justify-self: end; align-self: center;
+    border-right: 2px solid var(--accent-text); border-bottom: 2px solid var(--accent-text);
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .faq-q[open] .faq-q__chev { transform: rotate(-135deg) translateY(1px); }
+
+  .faq-q__a {
+    grid-column: 2 / 3; margin-left: 0;
+    padding: 0 20px var(--sp-3) 0;
+    max-width: 68ch;
+    color: var(--ink-body); font-size: var(--text-base); line-height: var(--lh-body);
+  }
+  /* grid-in-details: the answer sits in its own row, indented to align
+     under the question text (past the number column) */
+  .faq-q__a-wrap { display: grid; grid-template-columns: 44px 1fr 20px; }
+  .faq-q__a-wrap .faq-q__a { grid-column: 2 / 3; }
+
+  .faq-q__a p { margin: 0 0 10px; }
+  .faq-q__a p:last-child { margin-bottom: 0; }
+  .faq-q__a a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 2px; }
+  .faq-q__a a:hover { color: var(--accent-deep); }
+
+  /* motion: fade the answer in, never animate height (fights <details>) */
+  .faq-q__a-wrap { opacity: 0; transform: translateY(-4px); }
+  .faq-q[open] .faq-q__a-wrap {
+    animation: faq-reveal var(--dur-base) var(--ease-out) forwards;
+  }
+  @keyframes faq-reveal { to { opacity: 1; transform: none; } }
+
+  /* search/filter hide state */
+  .faq-q.is-hidden, .faq-cat.is-hidden { display: none; }
+
+  /* =========================================================
+     5. EMPTY STATE
+     ========================================================= */
+  .faq-empty { display: none; padding-block: var(--sp-5); text-align: center; }
+  .faq-empty.is-visible { display: block; }
+  .faq-empty p { color: var(--ink-body); margin-bottom: var(--sp-3); }
+  .faq-empty__query { color: var(--ink); font-weight: 600; }
+  .faq-empty__actions { display: flex; gap: var(--sp-2); justify-content: center; flex-wrap: wrap; }
+
+  /* =========================================================
+     6. CLOSE — quiet, bordered, not a drench band
+     ========================================================= */
+  .faq-close { padding-block: 0 var(--section-pad); }
+  .faq-close__panel {
+    border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: clamp(24px, 3vw, 40px);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--sp-4); flex-wrap: wrap;
+    background: var(--surface);
+  }
+  .faq-close__panel h2 { font-size: var(--text-xl); margin-bottom: 6px; }
+  .faq-close__panel p { color: var(--ink-body); font-size: var(--text-sm); max-width: 46ch; }
+  .faq-close__actions { display: flex; gap: var(--sp-2); flex: none; }
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width: 980px) {
+    .faq-body__grid { grid-template-columns: 1fr; }
+    .faq-rail {
+      position: static; flex-direction: row; overflow-x: auto;
+      gap: 8px; padding-bottom: 4px; margin-bottom: var(--sp-3);
+      scrollbar-width: none;
+    }
+    .faq-rail::-webkit-scrollbar { display: none; }
+    .faq-rail__btn {
+      width: auto; white-space: nowrap; flex: none;
+      border: 1px solid var(--border); border-radius: var(--r-pill);
+      padding: 9px 14px;
+    }
+    .faq-rail__btn[aria-pressed="true"] { border-color: var(--accent-fill); }
+    .faq-cat__head { top: 65px; }
+  }
+
+  @media (max-width: 640px) {
+    .faq-mast h1 { font-size: clamp(1.7rem, 7vw, 2.2rem); max-width: none; }
+    .faq-search input { min-height: 50px; font-size: 16px; } /* 16px prevents iOS zoom-on-focus */
+    .faq-q summary { grid-template-columns: 28px 1fr 18px; gap: 10px; padding-block: 15px; }
+    .faq-q__a-wrap { grid-template-columns: 28px 1fr 18px; }
+    .faq-q__text { font-size: 0.96rem; }
+    .faq-close__panel { flex-direction: column; align-items: flex-start; }
+    .faq-close__actions { width: 100%; }
+    .faq-close__actions .btn { flex: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-q__chev, .faq-search input, .faq-rail__btn { transition: none; }
+    .faq-q__a-wrap { animation: none !important; opacity: 1; transform: none; }
+  }
+}
