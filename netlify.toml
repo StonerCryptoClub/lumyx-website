@@ -205,10 +205,16 @@
   to = "/blog.html"
   status = 200
 
+# force = true required: index.html exists on disk (it's the homepage file
+# itself), and Netlify serves an existing static file before a non-forced
+# redirect fires — same root cause as the ai-lead-generation.html and
+# ppc-services.html bugs above. Without force, Google could keep crawling
+# /index.html as a live 200 duplicate of / instead of being redirected.
 [[redirects]]
   from = "/index.html"
   to = "/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/mailchimp-form-custom.html"

@@ -193,7 +193,10 @@
   .hf-submit.success { background: oklch(0.7 0.15 145); }
   .hf-disclaimer { color: var(--ink-on-dark-2); font-size: var(--text-xs); margin-top: var(--sp-2); text-align: center; }
 
-  .hero-proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-3); margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+  /* Three metrics, not four: the "98% retention" stat was removed sitewide as
+     an unverifiable claim. Three specific numbers read as more credible than
+     four round ones anyway. */
+  .hero-proof-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
   .hero-proof-strip .metric__num { font-size: var(--text-xl); }
   .hero-proof-strip .metric { position: relative; }
   .hero-proof-strip .metric + .metric::before { content: ""; position: absolute; left: calc(var(--sp-3) / -2); top: 4px; bottom: 4px; width: 1px; background: var(--border); }
@@ -235,7 +238,7 @@
   .proof-band__grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--drench-line) 1px, transparent 1px), linear-gradient(90deg, var(--drench-line) 1px, transparent 1px); background-size: 44px 44px; opacity: 0.18; }
   .proof-band__inner { position: relative; }
   .proof-band__lead { color: var(--drench-ink); font-weight: 700; font-family: var(--font-display); font-size: var(--text-lg); margin-bottom: var(--sp-4); max-width: 60ch; }
-  .proof-band__metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-3); }
+  .proof-band__metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); }
   .proof-band .metric__num { color: var(--drench-ink); font-size: clamp(2.4rem, 1.6rem + 2.6vw, 3.6rem); }
   .proof-band .metric__label { color: oklch(0.32 0.06 60); font-weight: 600; }
   .proof-band .metric + .metric { border-left: 1px solid var(--drench-line); padding-left: var(--sp-3); }
@@ -776,12 +779,12 @@
        appear, and its ~2.5s type-in reads as sluggish at arm's length. */
     .audit-line { display: none; }
     .pillars { grid-template-columns: 1fr; }
-    .proof-band__metrics { grid-template-columns: 1fr 1fr; gap: var(--sp-4) var(--sp-3); }
-    .proof-band .metric + .metric { border-left: none; padding-left: 0; }
-    .proof-band__metrics .metric:nth-child(even) { border-left: 1px solid var(--drench-line); padding-left: var(--sp-3); }
+    /* 3 metrics fit one row at any phone width, so mobile now inherits the
+       desktop single-row layout (and its border-left dividers) instead of
+       wrapping to a 2-column grid. */
+    .proof-band__metrics { gap: var(--sp-2); }
     .services__grid { grid-template-columns: 1fr; }
-    .hero-proof-strip { grid-template-columns: 1fr 1fr; gap: var(--sp-3) var(--sp-2); }
-    .hero-proof-strip .metric + .metric::before { content: none; }
+    .hero-proof-strip { gap: var(--sp-2); }
     .page-hero { padding-block: clamp(34px, 8vw, 48px) clamp(42px, 10vw, 60px); }
     .page-hero__grid { gap: var(--sp-4); }
     .page-hero__code { width: 100%; justify-content: space-between; gap: 10px; margin-bottom: var(--sp-2); }
@@ -800,7 +803,7 @@
     }
     .page-hero__cta .btn .icon { flex: none; }
     .page-hero .hero-proof-strip {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0;
       max-width: none;
       margin-top: var(--sp-3);
@@ -813,10 +816,9 @@
     }
     .page-hero .hero-proof-strip .metric {
       min-width: 0;
-      padding: 13px 14px 12px;
+      padding: 13px 12px 12px;
     }
-    .page-hero .hero-proof-strip .metric:nth-child(odd) { border-right: 1px solid var(--border); }
-    .page-hero .hero-proof-strip .metric:nth-child(-n + 2) { border-bottom: 1px solid var(--border); }
+    .page-hero .hero-proof-strip .metric:not(:last-child) { border-right: 1px solid var(--border); }
     .page-hero .hero-proof-strip .metric__num {
       display: block;
       font-size: clamp(1.38rem, 7vw, 1.75rem);
@@ -898,11 +900,6 @@
     .memo__cta { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 400px) {
-    /* Was 1fr here, collapsing the 4 metrics to a stacked column on most
-       phones (this breakpoint covers the iPhone SE/mini class, not just tiny
-       screens). 2 columns fits comfortably at 320px+ and reads as the "4
-       squares" grid the metrics are meant to be. */
-    .page-hero .hero-proof-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tl { width: min(100% - 32px, 1080px); }
     .tl-event { column-gap: 14px; }
     .tl-card { padding: 16px; }
